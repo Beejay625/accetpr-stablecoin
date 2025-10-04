@@ -1,16 +1,6 @@
 import { Response } from 'express';
 
 /**
- * Standard API success response structure
- */
-export interface ApiSuccessResponse<T = any> {
-  success: true;
-  message: string;
-  data?: T | undefined;
-  timestamp: string;
-}
-
-/**
  * Success response helper - Express handles status codes
  */
 export class ApiSuccess {
@@ -18,35 +8,39 @@ export class ApiSuccess {
    * Send a successful response with optional data
    * Express will handle the status code
    */
-  static success<T>(res: Response, message: string, data?: T, statusCode = 200): Response<any, Record<string, any>> {
-    const response: ApiSuccessResponse<T> = {
+  static success(
+    res: Response,
+    message: string,
+    data?: any,
+    statusCode: number = 200
+  ): Response {
+    const response = {
       success: true,
       message,
       data,
       timestamp: new Date().toISOString(),
     };
-    
     return res.status(statusCode).json(response);
   }
 
   /**
    * Send a created response (201)
    */
-  static created<T>(res: Response, message: string, data?: T): Response<any, Record<string, any>> {
+  static created(res: Response, message: string, data?: any): Response {
     return this.success(res, message, data, 201);
   }
 
   /**
-   * Send an accepted response (202) 
+   * Send an accepted response (202)
    */
-  static accepted(res: Response, message: string): Response<any, Record<string, any>> {
+  static accepted(res: Response, message: string): Response {
     return this.success(res, message, undefined, 202);
   }
 
   /**
    * Send response with user data
    */
-  static user(res: Response, message: string, user: any): Response<any, Record<string, any>> {
+  static user(res: Response, message: string, user: any): Response {
     return this.success(res, message, {
       user: {
         id: user.id,
@@ -63,7 +57,7 @@ export class ApiSuccess {
   /**
    * Send response with list data (with pagination)
    */
-  static list<T>(res: Response, message: string, items: T[], meta?: any): Response<any, Record<string, any>> {
+  static list(res: Response, message: string, items: any[], meta?: any): Response {
     return this.success(res, message, {
       items,
       meta: meta || { total: items.length },
@@ -73,7 +67,7 @@ export class ApiSuccess {
   /**
    * Send a count response
    */
-  static count(res: Response, message: string, count: number): Response<any, Record<string, any>> {
+  static count(res: Response, message: string, count: number): Response {
     return this.success(res, message, { count });
   }
 }
@@ -89,4 +83,4 @@ export const SuccessMessages = {
   AUTHENTICATION_SUCCESS: 'Authentication successful',
   VALIDATION_SUCCESS: 'Validation passed',
   OPERATION_SUCCESS: 'Operation completed successfully',
-} as const;
+};

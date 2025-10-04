@@ -1,6 +1,6 @@
 {
   "watch": ["src"],
   "ext": "ts,js,json",
-  "exec": "node -r dotenv/config --loader ts-node/esm src/server.ts",
+  "exec": "node -r dotenv/config -r ts-node/register src/server.ts",
   "ignore": ["dist", "node_modules"]
 }

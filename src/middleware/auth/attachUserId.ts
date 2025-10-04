@@ -1,3 +1,4 @@
+/// <reference path="../../types/auth.d.ts" />
 import { Request, Response, NextFunction } from 'express';
 import { getAuth } from '@clerk/express';
 import { ApiError } from '../../utils/apiError';
@@ -20,11 +21,12 @@ export const attachUserId = (req: Request, res: Response, next: NextFunction) =>
  * Middleware that requires authentication and attaches userId
  * This combines requireAuth() + attachUserId() functionality
  */
-export const requireAuthWithUserId = (req: Request, res: Response, next: NextFunction) => {
+export const requireAuthWithUserId = (req: Request, res: Response, next: NextFunction): void => {
   const { isAuthenticated, userId } = getAuth(req);
   
   if (!isAuthenticated || !userId) {
-    return ApiError.unauthorized(res, 'Authentication required');
+    ApiError.unauthorized(res, 'Authentication required');
+    return;
   }
   
   // Attach auth info directly to request 

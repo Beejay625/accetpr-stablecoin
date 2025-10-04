@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import testAuthRouter from './test/test-auth';
 
-const router = Router();
+export const protectedRouter = Router();
 
 // All protected routes require authentication
 // Add your protected endpoints here
 
 // Test authentication endpoint
-router.use('/', testAuthRouter);
+protectedRouter.use('/', testAuthRouter);
 
-export default router;
+export default protectedRouter;

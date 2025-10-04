@@ -1,30 +1,48 @@
-import { z } from 'zod';
+import { validateEnv } from 'env-core';
 
-const EnvSchema = z.object({
-  NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
-  PORT: z.coerce.number().int().positive().default(3000),
-  LOG_LEVEL: z.enum(['fatal','error','warn','info','debug','trace']).default('info'),
-  CORS_ORIGIN: z.string().default('*'),
-  JWT_SECRET: z.string().min(16).optional(),
-  RATE_LIMIT_WINDOW_MS: z.coerce.number().int().positive().default(60000),
-  RATE_LIMIT_MAX: z.coerce.number().int().positive().default(100),
-  DATABASE_URL: z.string().url().optional(),
-  DB_POOL_MIN: z.coerce.number().int().min(0).default(0),
-  DB_POOL_MAX: z.coerce.number().int().min(1).default(10),
-  DB_IDLE_TIMEOUT_MS: z.coerce.number().int().min(0).default(30000),
-  DB_CONNECTION_TIMEOUT_MS: z.coerce.number().int().min(0).default(2000),
-  // Clerk authentication
-  CLERK_SECRET_KEY: z.string().min(1),
-  CLERK_PUBLISHABLE_KEY: z.string().min(1).optional(),
-  // BlockRadar wallet operations API
-  BLOCKRADAR_API_KEY: z.string().min(1).optional(),
-});
+// Environment schema with env-core for startup validation
+const envSchema = {
+  // Core application settings
+  NODE_ENV: { type: String, default: 'development', required: false },
+  PORT: { type: Number, default: 3000, required: false },
+  LOG_LEVEL: { type: String, default: 'info', required: false },
+  CORS_ORIGIN: { type: String, default: '*', required: false },
+  
+  // JWT configuration (optional for Clerk-based auth)
+  JWT_SECRET: { type: String, required: false },
+  
+  // Rate limiting
+  RATE_LIMIT_WINDOW_MS: { type: Number, default: 60000, required: false },
+  RATE_LIMIT_MAX: { type: Number, default: 100, required: false },
+  
+  // Database configuration
+  DATABASE_URL: { type: String, required: false },
+  DB_POOL_MIN: { type: Number, default: 0, required: false },
+  DB_POOL_MAX: { type: Number, default: 10, required: false },
+  DB_IDLE_TIMEOUT_MS: { type: Number, default: 30000, required: false },
+  DB_CONNECTION_TIMEOUT_MS: { type: Number, default: 2000, required: false },
+  
+  // Clerk authentication (REQUIRED)
+  CLERK_SECRET_KEY: { type: String, required: true },
+  CLERK_PUBLISHABLE_KEY: { type: String, required: false },
+  
+  // BlockRadar wallet operations API (optional)
+  BLOCKRADAR_API_KEY: { type: String, required: false },
+  
+  // Cache configuration
+  CACHE_PROVIDER: { type: String, default: 'memory', required: false },
+  CACHE_HOST: { type: String, default: 'localhost', required: false },
+  CACHE_PORT: { type: Number, default: 6379, required: false },
+  CACHE_PASSWORD: { type: String, required: false },
+  CACHE_TLS: { type: Boolean, default: false, required: false },
+  CACHE_CLUSTER_NODES: { type: String, required: false },
+  CACHE_POOL_MIN: { type: Number, default: 2, required: false },
+  CACHE_POOL_MAX: { type: Number, default: 10, required: false },
+  CACHE_CONNECT_TIMEOUT: { type: Number, default: 10000, required: false },
+  CACHE_TIMEOUT: { type: Number, default: 5000, required: false },
+  CACHE_DEFAULT_TTL: { type: Number, default: 3600, required: false },
+};
 
-const parsed = EnvSchema.safeParse(process.env);
-
-if (!parsed.success) {
-  console.error('Invalid environment variables:', parsed.error.flatten().fieldErrors);
-  process.exit(1);
-}
-
-export const env = parsed.data;
+// Validate environment variables on startup
+// This will throw an error and exit if required variables are missing
+export const env = validateEnv(envSchema);
