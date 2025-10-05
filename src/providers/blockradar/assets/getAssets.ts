@@ -20,8 +20,6 @@ export type { Asset } from './getAssets.interface';
  */
 export async function getAssets(): Promise<Asset[]> {
   try {
-    BlockRadarBase.validateConfiguration();
-    
     const response = await BlockRadarBase.request('assets', 'GET');
     
     // Transform the response to our simplified format

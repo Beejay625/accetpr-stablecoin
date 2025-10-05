@@ -51,7 +51,7 @@ const router = Router();
  *                 example: { "id": "0001" }
  *               reference:
  *                 type: string
- *                 description: Reference for the transaction
+ *                 description: Optional reference note for the withdrawal
  *                 example: "single withdraw"
  *             example:
  *               chain: "base"
@@ -198,7 +198,7 @@ router.post('/withdraw/single', requireAuthWithUserId, WithdrawController.execut
  *                       example: { "id": "0001" }
  *                     reference:
  *                       type: string
- *                       description: Reference for the transaction
+ *                       description: Optional reference note for the transaction
  *                       example: "batch withdraw 1"
  *                 description: Array of assets for batch withdrawal
  *                 minItems: 1

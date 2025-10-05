@@ -44,8 +44,6 @@ export async function withdrawFromAddress(
   withdrawRequest: WithdrawRequest
 ): Promise<WithdrawResponse> {
   try {
-    BlockRadarBase.validateConfiguration();
-    
     // Normalize the request to the API format
     const apiRequest = normalizeWithdrawRequest(withdrawRequest);
     
