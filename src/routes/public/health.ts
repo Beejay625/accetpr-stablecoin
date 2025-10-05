@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { PublicController } from '../../controllers/publicController';
+import { PublicController } from '../../controllers/test/publicController';
 
 export const healthRouter = Router();
 

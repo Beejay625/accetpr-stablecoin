@@ -13,6 +13,8 @@ import { prisma, testDatabaseConnection } from './db/prisma';
 import { ServerStartup } from './server/startup';
 import { ServiceInitializer } from './server/initialize';
 import { ServiceShutdown } from './server/shutdown';
+import { clerkMiddlewareHandler } from './middleware/auth/clerk';
+import { attachUserId } from './middleware/auth/attachUserId';
 
 // Load environment variables
 config();
@@ -81,6 +83,15 @@ app.use(pinoHttp({
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// 🔐 AUTHENTICATION MIDDLEWARE (CRITICAL: Must be before routes)
+// 1. Clerk middleware validates JWT tokens and attaches auth to request
+app.use(clerkMiddlewareHandler);
+
+// 2. Attach user ID to request for easy access
+app.use(attachUserId);
+
+// Note: User sync is handled on-demand in requireAuthWithUserId middleware
 
 // API Documentation
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));

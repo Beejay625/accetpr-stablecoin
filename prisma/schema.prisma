@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(cuid())
+  clerkUserId String   @unique
+  email       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  walletAddresses WalletAddress[]
+
+  @@map("users")
+}
+
+model WalletAddress {
+  id          String   @id @default(cuid())
+  userId      String
+  address     String
+  addressId   String   // BlockRadar's internal address ID
+  addressName String
+  chain       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Unique constraints
+  @@unique([userId, chain])
+  @@unique([addressId])
+  @@map("wallet_addresses")
+}

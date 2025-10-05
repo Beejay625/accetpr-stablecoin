@@ -1,7 +1,7 @@
 import { Response } from 'express';
-import { ApiSuccess } from '../utils/apiSuccess';
-import { ApiError } from '../utils/apiError';
-import { prisma } from '../db/prisma';
+import { ApiSuccess } from '../../utils/apiSuccess';
+import { ApiError } from '../../utils/apiError';
+import { prisma } from '../../db/prisma';
 
 /**
  * Public Controller

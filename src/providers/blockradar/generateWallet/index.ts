@@ -1,11 +1,3 @@
-import { BlockRadarBase } from '../base';
-
-/**
- * Generate wallet address
- */
-export async function generateAddress(walletId: string, addressName: string): Promise<any> {
-  return await BlockRadarBase.request(`/wallets/${walletId}/addresses`, 'POST', { name: addressName });
-}
-
-// Export types
+// Export the main generateAddress function and types
+export { generateAddress } from './generateWallet';
 export * from './generateWallet.interface';

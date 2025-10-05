@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { PublicController } from '../../controllers/publicController';
+import { PublicController } from '../../controllers/test/publicController';
 
 export const statusRouter = Router();
 
@@ -33,4 +33,3 @@ export const statusRouter = Router();
 statusRouter.get('/', PublicController.status);
 
 export default statusRouter;
-

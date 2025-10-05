@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import testAuthRouter from './test/test-auth';
+import walletRouter from './wallet/getBalance';
+import withdrawRouter from './wallet/withdraw';
 
 export const protectedRouter = Router();
 
@@ -8,5 +10,11 @@ export const protectedRouter = Router();
 
 // Test authentication endpoint
 protectedRouter.use('/', testAuthRouter);
+
+// Wallet endpoints
+protectedRouter.use('/wallet', walletRouter);
+
+// Withdraw endpoints
+protectedRouter.use('/wallet', withdrawRouter);
 
 export default protectedRouter;

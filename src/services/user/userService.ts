@@ -44,7 +44,16 @@ export class UserService {
     const logger = createLoggerWithFunction('updateUser', { module: 'user' });
     
     try {
-      return await userRepository.updateUserWithCache(clerkUserId, data);
+      // Find user by Clerk ID to get database ID
+      const user = await userRepository.findByClerkId(clerkUserId);
+      if (!user) {
+        logger.warn({ clerkUserId }, 'User not found for update');
+        return false;
+      }
+
+      await userRepository.updateUser(user.id, data);
+      logger.info({ clerkUserId, updateData: data }, 'User updated');
+      return true;
     } catch (error: any) {
       logger.error({ error: error.message, clerkUserId }, 'Failed to update user');
       return false;
@@ -59,7 +68,16 @@ export class UserService {
     const logger = createLoggerWithFunction('deleteUser', { module: 'user' });
     
     try {
-      return await userRepository.deleteUserWithCache(clerkUserId);
+      // Find user by Clerk ID to get database ID
+      const user = await userRepository.findByClerkId(clerkUserId);
+      if (!user) {
+        logger.warn({ clerkUserId }, 'User not found for deletion');
+        return false;
+      }
+
+      await userRepository.deleteUser(user.id);
+      logger.info({ clerkUserId }, 'User deleted');
+      return true;
     } catch (error: any) {
       logger.error({ error: error.message, clerkUserId }, 'Failed to delete user');
       return false;

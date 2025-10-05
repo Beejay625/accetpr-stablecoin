@@ -1,5 +1,7 @@
 import { createLoggerWithFunction } from '../logger';
 import { testDatabaseConnection } from '../db/prisma';
+import { registerAllEventHandlers } from '../events/handlers';
+import { CacheAssetsOnStartup } from './cacheAssetsOnStartup';
 
 /**
  * Service Initializer
@@ -22,6 +24,12 @@ export class ServiceInitializer {
       
       // Initialize cache service
       await this.initializeCache();
+      
+      // Initialize event handlers
+      await this.initializeEventHandlers();
+      
+      // Initialize asset cache
+      await this.initializeAssetCache();
       
       // Initialize other services as needed
       await this.initializeOtherServices();
@@ -63,6 +71,36 @@ export class ServiceInitializer {
       logger.info('Cache service initialized');
     } catch (error: any) {
       logger.error({ error: error.message }, 'Cache initialization failed');
+      throw error;
+    }
+  }
+
+  /**
+   * Initialize event handlers
+   */
+  private static async initializeEventHandlers(): Promise<void> {
+    const logger = createLoggerWithFunction('initializeEventHandlers', { module: 'server' });
+    
+    try {
+      registerAllEventHandlers();
+      logger.info('Event handlers initialized');
+    } catch (error: any) {
+      logger.error({ error: error.message }, 'Event handlers initialization failed');
+      throw error;
+    }
+  }
+
+  /**
+   * Initialize asset cache
+   */
+  private static async initializeAssetCache(): Promise<void> {
+    const logger = createLoggerWithFunction('initializeAssetCache', { module: 'server' });
+    
+    try {
+      await CacheAssetsOnStartup.loadAssetsOnStartup();
+      logger.info('Asset cache initialized');
+    } catch (error: any) {
+      logger.error({ error: error.message }, 'Asset cache initialization failed');
       throw error;
     }
   }

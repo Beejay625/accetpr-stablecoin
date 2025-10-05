@@ -28,6 +28,7 @@ const envSchema = {
   
   // BlockRadar wallet operations API (optional)
   BLOCKRADAR_API_KEY: { type: String, required: false },
+  BLOCKRADAR_WALLET_ID: { type: String, required: false },
   
   // Cache configuration
   CACHE_PROVIDER: { type: String, default: 'memory', required: false },

@@ -3,4 +3,3 @@ export { generateAddress } from './generateWallet';
 export { getAddressBalance } from './balance/walletBalance';
 export { getAddressTransactions } from './transactions/walletTransactions';
 export { withdrawFromAddress } from './withdraw/walletWithdraw';
-export { getWalletId } from './walletIdManagement/walletIdManagement';

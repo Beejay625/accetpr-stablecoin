@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { createLoggerWithFunction } from '../../../logger';
 import { prisma } from '../../../db/prisma';
+import { eventManager } from '../../../events';
 
 /**
  * User Repository
@@ -106,74 +107,19 @@ export class UserRepository {
     
     // Create new user if not found
     logger.info({ clerkUserId }, 'Creating new user in database');
-    return await this.createWithRaceProtection({ clerkUserId, ...(email && { email }) });
+    const newUser = await this.createWithRaceProtection({ clerkUserId, ...(email && { email }) });
+    
+    // Emit wallet generation event for new user (asynchronous)
+    logger.info({ clerkUserId, userId: newUser.id }, 'Emitting multi-chain wallet generation event for new user');
+    eventManager.emit('user:wallet:generate', {
+      userId: newUser.id
+    }).catch((error: any) => {
+      logger.error({ clerkUserId, userId: newUser.id, error: error.message }, 'Failed to emit wallet generation event');
+    });
+    
+    return newUser;
   }
 
-  /**
-   * Get database user ID by Clerk ID
-   */
-  async getDatabaseUserId(clerkUserId: string): Promise<string | null> {
-    const logger = createLoggerWithFunction('getDatabaseUserId', { module: 'repository' });
-    try {
-      const user = await this.findByClerkId(clerkUserId);
-      return user?.id || null;
-    } catch (error: any) {
-      logger.error({ clerkUserId, error: error.message }, 'Failed to get database user ID');
-      return null;
-    }
-  }
-
-  /**
-   * Create user from Clerk data
-   */
-  async createUserFromClerk(clerkUserId: string, email?: string): Promise<{ id: string; clerkUserId: string }> {
-    const logger = createLoggerWithFunction('createUserFromClerk', { module: 'repository' });
-    return await this.createWithRaceProtection({ clerkUserId, ...(email && { email }) });
-  }
-
-  /**
-   * Update user with cache invalidation
-   */
-  async updateUserWithCache(clerkUserId: string, updateData: { email?: string }): Promise<boolean> {
-    const logger = createLoggerWithFunction('updateUserWithCache', { module: 'repository' });
-    try {
-      // First find the user by Clerk ID to get the database ID
-      const user = await this.findByClerkId(clerkUserId);
-      if (!user) {
-        logger.warn({ clerkUserId }, 'User not found for update');
-        return false;
-      }
-
-      await this.updateUser(user.id, updateData);
-      logger.info({ clerkUserId, updateData }, 'User updated with cache invalidation');
-      return true;
-    } catch (error: any) {
-      logger.error({ clerkUserId, error: error.message }, 'Failed to update user with cache');
-      return false;
-    }
-  }
-
-  /**
-   * Delete user with cache invalidation
-   */
-  async deleteUserWithCache(clerkUserId: string): Promise<boolean> {
-    const logger = createLoggerWithFunction('deleteUserWithCache', { module: 'repository' });
-    try {
-      // First find the user by Clerk ID to get the database ID
-      const user = await this.findByClerkId(clerkUserId);
-      if (!user) {
-        logger.warn({ clerkUserId }, 'User not found for deletion');
-        return false;
-      }
-
-      await this.deleteUser(user.id);
-      logger.info({ clerkUserId }, 'User deleted with cache invalidation');
-      return true;
-    } catch (error: any) {
-      logger.error({ clerkUserId, error: error.message }, 'Failed to delete user with cache');
-      return false;
-    }
-  }
 }
 
 export const userRepository = new UserRepository();
