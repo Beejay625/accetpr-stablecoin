@@ -296,6 +296,6 @@ router.post('/withdraw/single', WithdrawController.executeSingleWithdraw);
  *       500:
  *         description: Internal server error
  */
-router.post('/withdraw/batch', requireAuthWithUserId, WithdrawController.executeBatchWithdraw);
+router.post('/withdraw/batch', WithdrawController.executeBatchWithdraw);
 
 export default router;
