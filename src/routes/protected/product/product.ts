@@ -253,7 +253,7 @@ router.post('/', uploadPaymentImage, handleUploadError, ProductController.create
  *       401:
  *         description: Unauthorized
  */
-router.get('/', requireAuthWithUserId, ProductController.getUserProducts);
+router.get('/', ProductController.getUserProducts);
 
 /**
  * @swagger
@@ -352,7 +352,7 @@ router.get('/', requireAuthWithUserId, ProductController.getUserProducts);
  *       404:
  *         description: Product not found
  */
-router.put('/:productId', requireAuthWithUserId, uploadPaymentImage, handleUploadError, ProductController.updateProduct);
+router.put('/:productId', uploadPaymentImage, handleUploadError, ProductController.updateProduct);
 
 
 /**
