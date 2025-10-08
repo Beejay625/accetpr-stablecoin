@@ -5,6 +5,7 @@ import { TransactionsController } from '../../../controllers/wallet/transactions
 const router = Router();
 
 // All transaction routes require authentication
+router.use(requireAuthWithUserId);
 
 /**
  * @swagger
