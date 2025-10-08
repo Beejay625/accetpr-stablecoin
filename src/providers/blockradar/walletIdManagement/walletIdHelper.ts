@@ -28,7 +28,7 @@ export function getWalletIdForChain(chain: string = 'default'): string {
   
   // If explicitly requesting default, use any available wallet ID
   if (chainLower === 'default') {
-    const walletId = Object.values(CHAIN_WALLET_MAP).find(id => id);
+    const walletId = Object.values(CHAIN_WALLET_MAP)[0];
     
     if (!walletId) {
       throw new Error(`No wallet ID configured. Please set at least one chain-specific wallet ID in environment`);
@@ -40,11 +40,15 @@ export function getWalletIdForChain(chain: string = 'default'): string {
   const walletId = CHAIN_WALLET_MAP[chainLower];
   
   if (!walletId) {
-    const supportedChains = Object.keys(CHAIN_WALLET_MAP).join(', ');
+    const configuredChains = Object.keys(CHAIN_WALLET_MAP);
+    const supportedChains = configuredChains.length > 0 
+      ? configuredChains.join(', ')
+      : 'none configured';
+    
     throw new Error(
       `${chainLower.charAt(0).toUpperCase() + chainLower.slice(1)} wallet ID not configured. ` +
       `Please set BLOCKRADAR_${chainLower.toUpperCase()}_WALLET_ID in environment. ` +
-      `Supported chains: ${supportedChains}, or use 'default'`
+      `Currently configured chains: ${supportedChains}`
     );
   }
   
