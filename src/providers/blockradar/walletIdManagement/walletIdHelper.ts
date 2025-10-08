@@ -28,63 +28,63 @@ export function getWalletIdForChain(chain: string = 'default'): string {
   
   // Base chain
   if (chainLower === 'base') {
-    const walletId = env.BLOCKRADAR_BASE_WALLET_ID || env.BLOCKRADAR_WALLET_ID;
+    const walletId = env.BLOCKRADAR_BASE_WALLET_ID;
     if (!walletId) {
-      throw new Error(`Base wallet ID not configured. Please set BLOCKRADAR_BASE_WALLET_ID or BLOCKRADAR_WALLET_ID in environment`);
+      throw new Error(`Base wallet ID not configured. Please set BLOCKRADAR_BASE_WALLET_ID in environment`);
     }
     return walletId as string;
   }
   
   // Arbitrum chain
   if (chainLower === 'arbitrum') {
-    const walletId = env.BLOCKRADAR_ARBITRUM_WALLET_ID || env.BLOCKRADAR_WALLET_ID;
+    const walletId = env.BLOCKRADAR_ARBITRUM_WALLET_ID;
     if (!walletId) {
-      throw new Error(`Arbitrum wallet ID not configured. Please set BLOCKRADAR_ARBITRUM_WALLET_ID or BLOCKRADAR_WALLET_ID in environment`);
+      throw new Error(`Arbitrum wallet ID not configured. Please set BLOCKRADAR_ARBITRUM_WALLET_ID in environment`);
     }
     return walletId as string;
   }
   
   // Ethereum chain
   if (chainLower === 'ethereum') {
-    const walletId = env.BLOCKRADAR_ETHEREUM_WALLET_ID || env.BLOCKRADAR_WALLET_ID;
+    const walletId = env.BLOCKRADAR_ETHEREUM_WALLET_ID;
     if (!walletId) {
-      throw new Error(`Ethereum wallet ID not configured. Please set BLOCKRADAR_ETHEREUM_WALLET_ID or BLOCKRADAR_WALLET_ID in environment`);
+      throw new Error(`Ethereum wallet ID not configured. Please set BLOCKRADAR_ETHEREUM_WALLET_ID in environment`);
     }
     return walletId as string;
   }
   
   // Polygon chain
   if (chainLower === 'polygon') {
-    const walletId = env.BLOCKRADAR_POLYGON_WALLET_ID || env.BLOCKRADAR_WALLET_ID;
+    const walletId = env.BLOCKRADAR_POLYGON_WALLET_ID;
     if (!walletId) {
-      throw new Error(`Polygon wallet ID not configured. Please set BLOCKRADAR_POLYGON_WALLET_ID or BLOCKRADAR_WALLET_ID in environment`);
+      throw new Error(`Polygon wallet ID not configured. Please set BLOCKRADAR_POLYGON_WALLET_ID in environment`);
     }
     return walletId as string;
   }
   
   // Optimism chain
   if (chainLower === 'optimism') {
-    const walletId = env.BLOCKRADAR_OPTIMISM_WALLET_ID || env.BLOCKRADAR_WALLET_ID;
+    const walletId = env.BLOCKRADAR_OPTIMISM_WALLET_ID;
     if (!walletId) {
-      throw new Error(`Optimism wallet ID not configured. Please set BLOCKRADAR_OPTIMISM_WALLET_ID or BLOCKRADAR_WALLET_ID in environment`);
+      throw new Error(`Optimism wallet ID not configured. Please set BLOCKRADAR_OPTIMISM_WALLET_ID in environment`);
     }
     return walletId as string;
   }
   
   // Solana chain
   if (chainLower === 'solana') {
-    const walletId = env.BLOCKRADAR_SOLANA_WALLET_ID || env.BLOCKRADAR_WALLET_ID;
+    const walletId = env.BLOCKRADAR_SOLANA_WALLET_ID;
     if (!walletId) {
-      throw new Error(`Solana wallet ID not configured. Please set BLOCKRADAR_SOLANA_WALLET_ID or BLOCKRADAR_WALLET_ID in environment`);
+      throw new Error(`Solana wallet ID not configured. Please set BLOCKRADAR_SOLANA_WALLET_ID in environment`);
     }
     return walletId as string;
   }
   
   // Tron chain
   if (chainLower === 'tron') {
-    const walletId = env.BLOCKRADAR_TRON_WALLET_ID || env.BLOCKRADAR_WALLET_ID;
+    const walletId = env.BLOCKRADAR_TRON_WALLET_ID;
     if (!walletId) {
-      throw new Error(`Tron wallet ID not configured. Please set BLOCKRADAR_TRON_WALLET_ID or BLOCKRADAR_WALLET_ID in environment`);
+      throw new Error(`Tron wallet ID not configured. Please set BLOCKRADAR_TRON_WALLET_ID in environment`);
     }
     return walletId as string;
   }
