@@ -12,7 +12,7 @@ import { userService } from '../../services/user/userService';
  */
 export const attachUserId = (req: Request, _res: Response, next: NextFunction) => {
   // 🧪 TESTING MODE: Bypass authentication
-  if (process.env.TESTING_MODE === 'true') {
+  if (process.env['TESTING_MODE'] === 'true') {
     console.log('🧪 TESTING MODE: Using static userId');
     req.authUserId = 'test_user_123'; // Static test user ID
     req.isAuthenticated = true;
@@ -42,7 +42,7 @@ export const requireAuthWithUserId = async (
   const logger = createLoggerWithFunction('requireAuthWithUserId', { module: 'middleware' });
 
   // 🧪 TESTING MODE: Bypass authentication
-  if (process.env.TESTING_MODE === 'true') {
+  if (process.env['TESTING_MODE'] === 'true') {
     console.log('🧪 TESTING MODE: Bypassing authentication for protected routes');
     req.authUserId = 'test_user_123'; // Static test user ID
     req.isAuthenticated = true;
