@@ -40,6 +40,17 @@ export const requireAuthWithUserId = async (
   next: NextFunction
 ): Promise<void> => {
   const logger = createLoggerWithFunction('requireAuthWithUserId', { module: 'middleware' });
+
+  // 🧪 TESTING MODE: Bypass authentication
+  if (process.env.TESTING_MODE === 'true') {
+    console.log('🧪 TESTING MODE: Bypassing authentication for protected routes');
+    req.authUserId = 'test_user_123'; // Static test user ID
+    req.isAuthenticated = true;
+    req.localUserId = 'test_local_user_123'; // Static local user ID
+    next();
+    return;
+  }
+
   const { isAuthenticated, userId } = getAuth(req);
 
   if (!isAuthenticated || !userId) {
