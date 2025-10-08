@@ -41,12 +41,23 @@ export const requireAuthWithUserId = async (
 ): Promise<void> => {
   const logger = createLoggerWithFunction('requireAuthWithUserId', { module: 'middleware' });
 
-  // 🧪 TESTING MODE: Bypass authentication
+  // 🧪 TESTING MODE: Bypass authentication but still sync user
   if (process.env['TESTING_MODE'] === 'true') {
     console.log('🧪 TESTING MODE: Bypassing authentication for protected routes');
     req.authUserId = 'test_user_123'; // Static test user ID
     req.isAuthenticated = true;
-    req.localUserId = 'test_local_user_123'; // Static local user ID
+    
+    try {
+      // Sync test user to database and trigger wallet generation
+      const user = await userService.ensureUserExists('test_user_123', 'test@example.com');
+      req.localUserId = user.id;
+      logger.debug({ testUser: user.id }, 'Test user synced to database');
+    } catch (error: any) {
+      logger.error({ error: error.message }, 'Failed to sync test user');
+      // Use fallback ID if sync fails
+      req.localUserId = 'test_local_user_123';
+    }
+    
     next();
     return;
   }
