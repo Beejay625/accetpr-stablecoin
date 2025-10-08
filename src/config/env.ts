@@ -28,9 +28,8 @@ const envSchema = {
   
   // BlockRadar wallet operations API (optional)
   BLOCKRADAR_API_KEY: { type: String, required: false },
-  BLOCKRADAR_WALLET_ID: { type: String, required: false },
   
-  // BlockRadar wallet IDs per chain (optional - fallback to BLOCKRADAR_WALLET_ID)
+  // BlockRadar wallet IDs per chain (optional)
   BLOCKRADAR_BASE_WALLET_ID: { type: String, required: false },
   BLOCKRADAR_ARBITRUM_WALLET_ID: { type: String, required: false },
   BLOCKRADAR_ETHEREUM_WALLET_ID: { type: String, required: false },
