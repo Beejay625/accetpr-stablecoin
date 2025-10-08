@@ -5,6 +5,7 @@ import { WithdrawController } from '../../../controllers/wallet/withdrawControll
 const router = Router();
 
 // All withdraw routes require authentication
+router.use(requireAuthWithUserId);
 
 /**
  * @swagger
