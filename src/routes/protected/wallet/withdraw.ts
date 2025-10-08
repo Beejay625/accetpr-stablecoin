@@ -5,7 +5,6 @@ import { WithdrawController } from '../../../controllers/wallet/withdrawControll
 const router = Router();
 
 // All withdraw routes require authentication
-router.use(requireAuthWithUserId);
 
 /**
  * @swagger
@@ -145,7 +144,7 @@ router.use(requireAuthWithUserId);
  *       500:
  *         description: Internal server error
  */
-router.post('/withdraw/single', WithdrawController.executeSingleWithdraw);
+router.post('/withdraw/single', requireAuthWithUserId, WithdrawController.executeSingleWithdraw);
 
 /**
  * @swagger
@@ -296,6 +295,6 @@ router.post('/withdraw/single', WithdrawController.executeSingleWithdraw);
  *       500:
  *         description: Internal server error
  */
-router.post('/withdraw/batch', WithdrawController.executeBatchWithdraw);
+router.post('/withdraw/batch', requireAuthWithUserId, WithdrawController.executeBatchWithdraw);
 
 export default router;

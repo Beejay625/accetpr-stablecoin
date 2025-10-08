@@ -5,7 +5,6 @@ import { TransactionsController } from '../../../controllers/wallet/transactions
 const router = Router();
 
 // All transaction routes require authentication
-router.use(requireAuthWithUserId);
 
 /**
  * @swagger
@@ -118,6 +117,6 @@ router.use(requireAuthWithUserId);
  *       500:
  *         description: Internal server error
  */
-router.get('/transactions/:chain', TransactionsController.getUserTransactions);
+router.get('/transactions/:chain', requireAuthWithUserId, TransactionsController.getUserTransactions);
 
 export default router;

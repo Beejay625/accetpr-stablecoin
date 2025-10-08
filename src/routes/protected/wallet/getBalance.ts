@@ -5,7 +5,6 @@ import { WalletController } from '../../../controllers/wallet/getBalance';
 const router = Router();
 
 // All wallet routes require authentication
-router.use(requireAuthWithUserId);
 // Add your wallet endpoints here
 
 /**
@@ -96,6 +95,6 @@ router.use(requireAuthWithUserId);
  *       500:
  *         description: Internal server error
  */
-router.get('/balance', WalletController.getBalance);
+router.get('/balance', requireAuthWithUserId, WalletController.getBalance);
 
 export default router;
