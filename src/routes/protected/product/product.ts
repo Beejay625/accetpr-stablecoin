@@ -6,6 +6,7 @@ import { ProductController } from '../../../controllers/product/productControlle
 const router = Router();
 
 // All product routes require authentication
+router.use(requireAuthWithUserId);
 
 /**
  * @swagger
@@ -198,7 +199,7 @@ const router = Router();
  *       500:
  *         description: Internal server error
  */
-router.post('/', requireAuthWithUserId, uploadPaymentImage, handleUploadError, ProductController.createProduct);
+router.post('/', uploadPaymentImage, handleUploadError, ProductController.createProduct);
 
 /**
  * @swagger
@@ -252,7 +253,7 @@ router.post('/', requireAuthWithUserId, uploadPaymentImage, handleUploadError, P
  *       401:
  *         description: Unauthorized
  */
-router.get('/', requireAuthWithUserId, ProductController.getUserProducts);
+router.get('/', ProductController.getUserProducts);
 
 /**
  * @swagger
@@ -351,7 +352,7 @@ router.get('/', requireAuthWithUserId, ProductController.getUserProducts);
  *       404:
  *         description: Product not found
  */
-router.put('/:productId', requireAuthWithUserId, uploadPaymentImage, handleUploadError, ProductController.updateProduct);
+router.put('/:productId', uploadPaymentImage, handleUploadError, ProductController.updateProduct);
 
 
 /**
@@ -410,7 +411,7 @@ router.put('/:productId', requireAuthWithUserId, uploadPaymentImage, handleUploa
  *       404:
  *         description: Product not found
  */
-router.get('/:productId/payment-counts', requireAuthWithUserId, ProductController.getProductPaymentCounts);
+router.get('/:productId/payment-counts', ProductController.getProductPaymentCounts);
 
 /**
  * @swagger
@@ -474,7 +475,7 @@ router.get('/:productId/payment-counts', requireAuthWithUserId, ProductControlle
  *       404:
  *         description: Product not found
  */
-router.get('/:productId/payment-amounts', requireAuthWithUserId, ProductController.getProductPaymentAmounts);
+router.get('/:productId/payment-amounts', ProductController.getProductPaymentAmounts);
 
 /**
  * @swagger
@@ -517,6 +518,6 @@ router.get('/:productId/payment-amounts', requireAuthWithUserId, ProductControll
  *       401:
  *         description: Unauthorized
  */
-router.get('/stats', requireAuthWithUserId, ProductController.getUserProductStats);
+router.get('/stats', ProductController.getUserProductStats);
 
 export default router;
