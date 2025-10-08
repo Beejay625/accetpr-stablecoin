@@ -6,6 +6,7 @@ import { ProductController } from '../../../controllers/product/productControlle
 const router = Router();
 
 // All product routes require authentication
+router.use(requireAuthWithUserId);
 
 /**
  * @swagger
