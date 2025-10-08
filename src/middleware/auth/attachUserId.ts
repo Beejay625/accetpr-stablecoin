@@ -11,6 +11,15 @@ import { userService } from '../../services/user/userService';
  * Updated to fix linting issues
  */
 export const attachUserId = (req: Request, _res: Response, next: NextFunction) => {
+  // 🧪 TESTING MODE: Bypass authentication
+  if (process.env.TESTING_MODE === 'true') {
+    console.log('🧪 TESTING MODE: Using static userId');
+    req.authUserId = 'test_user_123'; // Static test user ID
+    req.isAuthenticated = true;
+    next();
+    return;
+  }
+
   const { userId, isAuthenticated } = getAuth(req);
 
   // Attach auth info directly to request for easy access
