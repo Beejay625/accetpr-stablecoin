@@ -145,7 +145,7 @@ router.use(requireAuthWithUserId);
  *       500:
  *         description: Internal server error
  */
-router.post('/withdraw/single', requireAuthWithUserId, WithdrawController.executeSingleWithdraw);
+router.post('/withdraw/single', WithdrawController.executeSingleWithdraw);
 
 /**
  * @swagger
