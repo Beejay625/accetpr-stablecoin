@@ -29,14 +29,8 @@ const envSchema = {
   // BlockRadar wallet operations API (optional)
   BLOCKRADAR_API_KEY: { type: String, required: false },
   
-  // BlockRadar wallet IDs per chain (optional)
+  // BlockRadar wallet ID for Base chain (optional)
   BLOCKRADAR_BASE_WALLET_ID: { type: String, required: false },
-  BLOCKRADAR_ARBITRUM_WALLET_ID: { type: String, required: false },
-  BLOCKRADAR_ETHEREUM_WALLET_ID: { type: String, required: false },
-  BLOCKRADAR_POLYGON_WALLET_ID: { type: String, required: false },
-  BLOCKRADAR_OPTIMISM_WALLET_ID: { type: String, required: false },
-  BLOCKRADAR_SOLANA_WALLET_ID: { type: String, required: false },
-  BLOCKRADAR_TRON_WALLET_ID: { type: String, required: false },
   
   // Cloudinary image storage (optional)
   CLOUDINARY_CLOUD_NAME: { type: String, required: false },
