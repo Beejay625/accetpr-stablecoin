@@ -12,8 +12,7 @@ export function getWalletIdForChain(chain: string = 'default'): string {
   
   // If explicitly requesting default, use any available wallet ID
   if (chainLower === 'default') {
-    const walletId = env.BLOCKRADAR_WALLET_ID || 
-                     env.BLOCKRADAR_BASE_WALLET_ID || 
+    const walletId = env.BLOCKRADAR_BASE_WALLET_ID || 
                      env.BLOCKRADAR_ARBITRUM_WALLET_ID || 
                      env.BLOCKRADAR_ETHEREUM_WALLET_ID ||
                      env.BLOCKRADAR_POLYGON_WALLET_ID ||
