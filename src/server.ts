@@ -131,6 +131,23 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // 2. Attach user ID to request for easy access
 // app.use(attachUserId);
 
+// 🧪 TESTING MIDDLEWARE - Mock authentication for testing
+app.use((req: any, res: any, next: any) => {
+  // Mock Clerk auth for testing
+  req.auth = {
+    userId: 'test_user_123',
+    sessionId: 'test_session_123',
+    isAuthenticated: true
+  };
+  
+  // Mock user ID attachment
+  req.authUserId = 'test_user_123';
+  req.isAuthenticated = true;
+  req.localUserId = 'test_user_123'; // Mock local user ID
+  
+  next();
+});
+
 // Note: User sync is handled on-demand in requireAuthWithUserId middleware
 
 // API Documentation
