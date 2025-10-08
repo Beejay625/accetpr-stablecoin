@@ -124,29 +124,12 @@ app.use(pinoHttp({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// 🔐 AUTHENTICATION MIDDLEWARE (TEMPORARILY DISABLED FOR TESTING)
+// 🔐 AUTHENTICATION MIDDLEWARE (CRITICAL: Must be before routes)
 // 1. Clerk middleware validates JWT tokens and attaches auth to request
-// app.use(clerkMiddlewareHandler);
+app.use(clerkMiddlewareHandler);
 
 // 2. Attach user ID to request for easy access
-// app.use(attachUserId);
-
-// 🧪 TESTING MIDDLEWARE - Mock authentication for testing
-app.use((req: any, res: any, next: any) => {
-  // Mock Clerk auth for testing
-  req.auth = {
-    userId: 'test_user_123',
-    sessionId: 'test_session_123',
-    isAuthenticated: true
-  };
-  
-  // Mock user ID attachment
-  req.authUserId = 'test_user_123';
-  req.isAuthenticated = true;
-  req.localUserId = 'test_user_123'; // Mock local user ID
-  
-  next();
-});
+app.use(attachUserId);
 
 // Note: User sync is handled on-demand in requireAuthWithUserId middleware
 
