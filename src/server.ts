@@ -9,7 +9,6 @@ import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './config/swagger';
 import { env } from './config/env';
 import { createLoggerWithFunction } from './logger';
-import { prisma, testDatabaseConnection } from './db/prisma';
 import { ServerStartup } from './server/startup';
 import { ServiceInitializer } from './server/initialize';
 import { ServiceShutdown } from './server/shutdown';
@@ -42,41 +41,82 @@ app.use(helmet({
 
 // CORS configuration
 app.use(cors({
-  origin: env.CORS_ORIGIN === '*' ? true : env.CORS_ORIGIN.split(','),
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, Postman, curl)
+    if (!origin) return callback(null, true);
+    
+    // If CORS_ORIGIN is *, allow all origins
+    if (env.CORS_ORIGIN === '*') {
+      return callback(null, origin);
+    }
+    
+    // Check if origin is in allowed list
+    const allowedOrigins = env.CORS_ORIGIN.split(',').map(o => o.trim());
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, origin);
+    }
+    
+    // Reject other origins
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Clerk-Auth-Token'],
 }));
 
 // Compression middleware
 app.use(compression());
 
-// Request logging middleware
+// Request logging middleware - Clean logs with full error details
 app.use(pinoHttp({
-  logger: pino({ level: env.LOG_LEVEL }),
-  customLogLevel: (req, res, err) => {
+  logger: pino({ 
+    level: env.LOG_LEVEL,
+    formatters: {
+      level: (label) => {
+        return { level: label };
+      },
+    },
+  }),
+  // Don't log these routes
+  autoLogging: {
+    ignore: (req) => {
+      return req.url?.includes('/health') || 
+             req.url?.includes('.css') || 
+             req.url?.includes('.js') ||
+             req.url?.includes('.map') ||
+             req.url?.includes('favicon');
+    }
+  },
+  customLogLevel: (_req, res, err) => {
     if (res.statusCode >= 400 && res.statusCode < 500) {
       return 'warn';
     } else if (res.statusCode >= 500 || err) {
       return 'error';
-    } else if (res.statusCode >= 300 && res.statusCode < 400) {
-      return 'silent';
     }
-    return 'info';
+    return 'silent'; // Don't log successful requests in detail
   },
-  customSuccessMessage: (req, res) => {
-    if (res.statusCode === 404) {
-      return 'resource not found';
-    }
-    return `${req.method} ${req.url}`;
+  customSuccessMessage: (req, _res) => {
+    return `✅ ${req.method} ${req.url}`;
   },
   customErrorMessage: (req, res, err) => {
-    return `${req.method} ${req.url}`;
+    if (err) {
+      return `❌ ${req.method} ${req.url} - ${res.statusCode} - ${err.message}`;
+    }
+    return `⚠️  ${req.method} ${req.url} - ${res.statusCode}`;
   },
-  customAttributeKeys: {
-    req: 'request',
-    res: 'response',
-    err: 'error',
+  // Include full error details
+  serializers: {
+    err: pino.stdSerializers.err, // Full stack trace
+    req: (req) => ({
+      method: req.method,
+      url: req.url,
+      // Include useful headers for debugging
+      authorization: req.headers.authorization ? '***' : undefined,
+      contentType: req.headers['content-type'],
+    }),
+    res: (res) => ({
+      statusCode: res.statusCode,
+    }),
   },
 }));
 
@@ -120,13 +160,33 @@ app.use('*', (req, res) => {
 });
 
 // Global error handler
-app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
-  logger.error({ error: err.message, stack: err.stack }, 'Unhandled error');
+app.use((err: any, req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  const statusCode = err.status || err.statusCode || 500;
   
-  res.status(err.status || 500).json({
+  // Log full error details
+  logger.error({
+    error: {
+      message: err.message,
+      stack: err.stack,
+      code: err.code,
+      name: err.name,
+    },
+    request: {
+      method: req.method,
+      url: req.url,
+      body: req.body,
+      params: req.params,
+      query: req.query,
+    }
+  }, `❌ Unhandled Error: ${err.message}`);
+  
+  res.status(statusCode).json({
     success: false,
     message: err.message || 'Internal server error',
-    ...(env.NODE_ENV === 'development' && { stack: err.stack }),
+    ...(env.NODE_ENV === 'development' && { 
+      stack: err.stack,
+      details: err.details || err.data,
+    }),
   });
 });
 

@@ -35,13 +35,31 @@ export class ServiceShutdown {
 
     process.on('uncaughtException', (error: Error) => {
       const logger = createLoggerWithFunction('uncaughtException', { module: 'server' });
-      logger.error({ error: error.message }, 'Uncaught Exception');
+      logger.error({ 
+        error: {
+          message: error.message,
+          stack: error.stack,
+          name: error.name,
+        }
+      }, '💥 Uncaught Exception - Server will shut down');
+      console.error('\n🔥 UNCAUGHT EXCEPTION 🔥');
+      console.error('Message:', error.message);
+      console.error('Stack:', error.stack);
       this.shutdown('SIGTERM');
     });
 
-    process.on('unhandledRejection', (reason: any) => {
+    process.on('unhandledRejection', (reason: any, promise: Promise<any>) => {
       const logger = createLoggerWithFunction('unhandledRejection', { module: 'server' });
-      logger.error({ reason }, 'Unhandled Rejection');
+      logger.error({ 
+        reason: reason?.message || reason,
+        stack: reason?.stack,
+        promise: String(promise),
+      }, '💥 Unhandled Promise Rejection - Server will shut down');
+      console.error('\n🔥 UNHANDLED PROMISE REJECTION 🔥');
+      console.error('Reason:', reason);
+      if (reason?.stack) {
+        console.error('Stack:', reason.stack);
+      }
       this.shutdown('SIGTERM');
     });
   }

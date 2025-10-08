@@ -1,16 +1,18 @@
 import { Response } from 'express';
-import { createLoggerWithFunction } from '../../../logger';
-import { ApiSuccess, ApiError } from '../../../utils';
-import { TransactionsService } from '../../../services/wallet/transactionsService';
-import { DEFAULT_CHAINS } from '../../../types/chains';
+import { createLoggerWithFunction } from '../../logger';
+import { ApiSuccess } from '../../utils/apiSuccess';
+import { ApiError } from '../../utils/apiError';
+import { TransactionsService } from '../../services/wallet/transactionsService';
+import { DEFAULT_CHAINS } from '../../types/chains';
 
 /**
  * Transactions Controller
  * 
  * Handles all transaction-related HTTP requests.
  */
+const logger = createLoggerWithFunction('TransactionsController', { module: 'controller' });
+
 export class TransactionsController {
-  private static logger = createLoggerWithFunction('TransactionsController', { module: 'controller' });
 
   /**
    * Get transactions for authenticated user's wallet on a specific chain
@@ -21,7 +23,7 @@ export class TransactionsController {
       const userId = req.authUserId!; // Guaranteed by requireAuthWithUserId middleware
       const { chain } = req.params;
 
-      this.logger.info({ userId, chain }, 'Processing get transactions request');
+      logger.info('getUserTransactions', { userId, chain }, 'Processing get transactions request');
 
       // Validate chain parameter
       if (!chain || typeof chain !== 'string') {
@@ -38,7 +40,7 @@ export class TransactionsController {
       // Get transactions using TransactionsService
       const transactions = await TransactionsService.getUserTransactions(userId, chain);
 
-      this.logger.info({
+      logger.info('getUserTransactions', {
         userId,
         chain,
         transactionCount: transactions.length
@@ -52,7 +54,7 @@ export class TransactionsController {
       });
 
     } catch (error: any) {
-      this.logger.error({
+      logger.error('getUserTransactions', {
         userId: req.authUserId,
         chain: req.params.chain,
         error: error.message

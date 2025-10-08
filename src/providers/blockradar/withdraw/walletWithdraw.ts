@@ -1,5 +1,6 @@
 import { BlockRadarBase } from '../base';
 import { WithdrawRequest, WithdrawResponse, WithdrawError, SingleWithdrawRequest, BatchWithdrawRequest } from './withdraw.interface';
+import { getWalletIdForChain } from '../walletIdManagement';
 
 /**
  * Withdraw assets from wallet address
@@ -40,6 +41,7 @@ import { WithdrawRequest, WithdrawResponse, WithdrawError, SingleWithdrawRequest
  * ```
  */
 export async function withdrawFromAddress(
+  chain: string,
   addressId: string, 
   withdrawRequest: WithdrawRequest
 ): Promise<WithdrawResponse> {
@@ -47,7 +49,9 @@ export async function withdrawFromAddress(
     // Normalize the request to the API format
     const apiRequest = normalizeWithdrawRequest(withdrawRequest);
     
+    const walletId = getWalletIdForChain(chain);
     const response = await BlockRadarBase.request(
+      walletId,
       `addresses/${addressId}/withdraw`, 
       'POST', 
       apiRequest

@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { requireAuthWithUserId } from '../../../middleware/auth';
 import { TransactionsController } from '../../../controllers/wallet/transactionsController';
-import { DEFAULT_CHAINS } from '../../../types/chains';
 
 const router = Router();
 
@@ -22,7 +21,7 @@ const router = Router();
  *         required: true
  *         schema:
  *           type: string
- *           enum: [${DEFAULT_CHAINS.join(', ')}]
+ *           enum: [base, arbitrum, ethereum, polygon, optimism, solana, tron]
  *         description: Blockchain chain to get transactions for
  *         example: "base"
  *     responses:
@@ -99,7 +98,7 @@ const router = Router();
  *                     missing_chain:
  *                       value: "Chain parameter is required"
  *                     invalid_chain:
- *                       value: "Invalid chain: invalid-chain. Supported chains: ${DEFAULT_CHAINS.join(', ')}"
+ *                       value: "Invalid chain: invalid-chain. Supported chains: base, arbitrum, ethereum, polygon, optimism, solana, tron"
  *       401:
  *         description: Authentication required
  *       404:

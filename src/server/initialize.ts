@@ -2,6 +2,9 @@ import { createLoggerWithFunction } from '../logger';
 import { testDatabaseConnection } from '../db/prisma';
 import { registerAllEventHandlers } from '../events/handlers';
 import { CacheAssetsOnStartup } from './cacheAssetsOnStartup';
+import { ImageStorageService } from '../providers/cloudinary/imageStorage';
+import { StripePaymentProvider } from '../providers/stripe/paymentIntent';
+import { WebhookController } from '../controllers/payment/webhookController';
 
 /**
  * Service Initializer
@@ -30,6 +33,15 @@ export class ServiceInitializer {
       
       // Initialize asset cache
       await this.initializeAssetCache();
+      
+      // Initialize image storage
+      await this.initializeImageStorage();
+      
+      // Initialize Stripe payment provider
+      await this.initializeStripeProvider();
+      
+      // Initialize webhook controller
+      await this.initializeWebhookController();
       
       // Initialize other services as needed
       await this.initializeOtherServices();
@@ -101,6 +113,51 @@ export class ServiceInitializer {
       logger.info('Asset cache initialized');
     } catch (error: any) {
       logger.error({ error: error.message }, 'Asset cache initialization failed');
+      throw error;
+    }
+  }
+
+  /**
+   * Initialize image storage
+   */
+  private static async initializeImageStorage(): Promise<void> {
+    const logger = createLoggerWithFunction('initializeImageStorage', { module: 'server' });
+    
+    try {
+      ImageStorageService.initialize();
+      logger.info('Image storage (Cloudinary) initialized');
+    } catch (error: any) {
+      logger.error({ error: error.message }, 'Image storage initialization failed');
+      throw error;
+    }
+  }
+
+  /**
+   * Initialize Stripe payment provider
+   */
+  private static async initializeStripeProvider(): Promise<void> {
+    const logger = createLoggerWithFunction('initializeStripeProvider', { module: 'server' });
+    
+    try {
+      StripePaymentProvider.initialize();
+      logger.info('Stripe payment provider initialized');
+    } catch (error: any) {
+      logger.error({ error: error.message }, 'Stripe payment provider initialization failed');
+      throw error;
+    }
+  }
+
+  /**
+   * Initialize webhook controller
+   */
+  private static async initializeWebhookController(): Promise<void> {
+    const logger = createLoggerWithFunction('initializeWebhookController', { module: 'server' });
+    
+    try {
+      WebhookController.initialize();
+      logger.info('Webhook controller initialized');
+    } catch (error: any) {
+      logger.error({ error: error.message }, 'Webhook controller initialization failed');
       throw error;
     }
   }

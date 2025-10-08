@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { requireAuthWithUserId } from '../../../middleware/auth';
 import { WithdrawController } from '../../../controllers/wallet/withdrawController';
-import { DEFAULT_CHAINS } from '../../../types/chains';
 
 const router = Router();
 
@@ -30,7 +29,7 @@ const router = Router();
  *             properties:
  *               chain:
  *                 type: string
- *                 enum: [${DEFAULT_CHAINS.join(', ')}]
+ *                 enum: [base, arbitrum, ethereum, polygon, optimism, solana, tron]
  *                 description: Blockchain chain for the withdraw operation
  *                 example: "base"
  *               asset:
@@ -118,7 +117,7 @@ const router = Router();
  *                     missing_chain:
  *                       value: "Chain parameter is required"
  *                     invalid_chain:
- *                       value: "Invalid chain. Supported chains: ${DEFAULT_CHAINS.join(', ')}"
+ *                       value: "Invalid chain. Supported chains: base, arbitrum, ethereum, polygon, optimism, solana, tron"
  *                     missing_fields:
  *                       value: "Chain, asset, amount, and address are required for single withdrawal"
  *                     invalid_amount:
@@ -177,7 +176,7 @@ router.post('/withdraw/single', requireAuthWithUserId, WithdrawController.execut
  *                   properties:
  *                     chain:
  *                       type: string
- *                       enum: [${DEFAULT_CHAINS.join(', ')}]
+ *                       enum: [base, arbitrum, ethereum, polygon, optimism, solana, tron]
  *                       description: Blockchain chain for the asset
  *                       example: "base"
  *                     asset:

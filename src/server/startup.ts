@@ -1,6 +1,5 @@
 import { Server } from 'http';
 import { createLoggerWithFunction } from '../logger';
-import { testDatabaseConnection } from '../db/prisma';
 
 /**
  * Server Startup

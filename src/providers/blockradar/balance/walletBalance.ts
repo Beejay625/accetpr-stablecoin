@@ -1,11 +1,14 @@
 import { BlockRadarBase } from '../base';
 import { WalletBalanceResponse } from './walletBalance.interface';
+import { getWalletIdForChain } from '../walletIdManagement';
 
 /**
  * Get wallet address balance
+ * Uses default wallet ID since balance queries work with any wallet ID
  */
 export async function getAddressBalance(addressId: string): Promise<{ convertedBalance: string; chain: string; asset: string }> {
-  const response = await BlockRadarBase.request(`addresses/${addressId}/balance`) as WalletBalanceResponse;
+  const walletId = getWalletIdForChain('default');
+  const response = await BlockRadarBase.request(walletId, `addresses/${addressId}/balance`) as WalletBalanceResponse;
   
   return {
     convertedBalance: response.data.convertedBalance,

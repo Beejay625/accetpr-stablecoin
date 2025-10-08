@@ -8,7 +8,14 @@
     "build": "rimraf dist && tsc",
     "start": "node dist/server.js",
     "lint": "eslint . --ext .ts",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "commit": "node auto-commit.js",
+    "commit:interactive": "node auto-commit.js --interactive",
+    "commit:dry": "node auto-commit.js --dry-run",
+    "commit:watch": "node auto-commit.js --watch",
+    "commit:simple": "./auto-commit.sh",
+    "commit:simple:interactive": "./auto-commit.sh -i",
+    "commit:simple:watch": "./auto-commit.sh -w"
   },
   "keywords": [
     "express",
@@ -24,7 +31,10 @@
   "dependencies": {
     "@clerk/express": "^1.7.35",
     "@prisma/client": "^6.16.3",
+    "@types/multer": "^2.0.0",
+    "@types/stripe": "^8.0.416",
     "body-parser": "^1.20.3",
+    "cloudinary": "^2.7.0",
     "compression": "^1.8.1",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
@@ -33,10 +43,12 @@
     "express-rate-limit": "^8.1.0",
     "helmet": "^7.2.0",
     "morgan": "^1.10.1",
+    "multer": "^2.0.2",
     "pino": "^9.12.0",
     "pino-http": "^10.5.0",
     "prisma": "^5.22.0",
     "redis": "^5.8.3",
+    "stripe": "^19.1.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "zod": "^4.1.11"
@@ -56,6 +68,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^7.2.1",
     "nodemon": "^3.1.10",
+    "pino-pretty": "^13.1.1",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",

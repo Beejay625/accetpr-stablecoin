@@ -1,8 +1,10 @@
 import { BlockRadarBase } from '../base';
 import { TransactionsResponse, TransactionsError } from './transactions.interface';
+import { getWalletIdForChain } from '../walletIdManagement';
 
 /**
  * Get wallet address transactions
+ * Uses default wallet ID since transaction queries work with any wallet ID
  * 
  * @param addressId - The address ID to get transactions for
  * @returns Promise<TransactionsResponse> - The transactions response
@@ -15,7 +17,8 @@ import { TransactionsResponse, TransactionsError } from './transactions.interfac
  */
 export async function getAddressTransactions(addressId: string): Promise<TransactionsResponse> {
   try {
-    const response = await BlockRadarBase.request(`addresses/${addressId}/transactions`);
+    const walletId = getWalletIdForChain('default');
+    const response = await BlockRadarBase.request(walletId, `addresses/${addressId}/transactions`);
     
     return response as TransactionsResponse;
   } catch (error: any) {

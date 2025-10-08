@@ -20,7 +20,8 @@ export type { Asset } from './getAssets.interface';
  */
 export async function getAssets(): Promise<Asset[]> {
   try {
-    const response = await BlockRadarBase.request('assets', 'GET');
+    // Assets endpoint doesn't require wallet ID
+    const response = await BlockRadarBase.requestPublic('assets', 'GET');
     
     // Transform the response to our simplified format
     const assets: Asset[] = response.data.map((asset: BlockRadarAsset) => ({

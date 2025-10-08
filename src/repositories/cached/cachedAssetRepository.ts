@@ -9,7 +9,6 @@ import { cacheService } from '../../services/cache';
  * Assets are stored in Redis without expiration for fast access.
  */
 export class CachedAssetRepository {
-  private static logger = createLoggerWithFunction('CachedAssetRepository', { module: 'repository' });
   private static readonly CACHE_KEY = 'blockradar:assets:all';
 
 

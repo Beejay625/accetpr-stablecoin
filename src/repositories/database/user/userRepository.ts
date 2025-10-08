@@ -1,6 +1,5 @@
-import { PrismaClient } from '@prisma/client';
 import { createLoggerWithFunction } from '../../../logger';
-import { prisma } from '../../../db/prisma';
+import { DatabaseOperations } from '../../../db/databaseOperations';
 import { eventManager } from '../../../events';
 
 /**
@@ -17,15 +16,29 @@ export class UserRepository {
   async findByClerkId(clerkUserId: string): Promise<{ id: string; clerkUserId: string } | null> {
     const logger = createLoggerWithFunction('findByClerkId', { module: 'repository' });
     try {
-      const user = await prisma.user.findUnique({
-        where: { clerkUserId },
-        select: { id: true, clerkUserId: true }
-      });
+      const user = await DatabaseOperations.findUnique<{ id: string; clerkUserId: string }>('user', { clerkUserId });
       
       logger.debug({ clerkUserId, found: !!user }, 'User lookup by Clerk ID');
       return user;
     } catch (error: any) {
       logger.error({ clerkUserId, error: error.message }, 'Failed to find user by Clerk ID');
+      throw error;
+    }
+  }
+
+
+  /**
+   * Find user by unique name
+   */
+  async findByUniqueName(uniqueName: string): Promise<{ id: string; clerkUserId: string; uniqueName: string | null } | null> {
+    const logger = createLoggerWithFunction('findByUniqueName', { module: 'repository' });
+    try {
+      const user = await DatabaseOperations.findUnique<{ id: string; clerkUserId: string; uniqueName: string | null }>('user', { uniqueName });
+      
+      logger.debug({ uniqueName, found: !!user }, 'User lookup by unique name');
+      return user;
+    } catch (error: any) {
+      logger.error({ uniqueName, error: error.message }, 'Failed to find user by unique name');
       throw error;
     }
   }
@@ -37,15 +50,15 @@ export class UserRepository {
     const logger = createLoggerWithFunction('createWithRaceProtection', { module: 'repository' });
     try {
       // Use upsert to handle race conditions
-      const user = await prisma.user.upsert({
-        where: { clerkUserId: userData.clerkUserId },
-        update: {},
-        create: {
+      const user = await DatabaseOperations.upsert<{ id: string; clerkUserId: string }>(
+        'user',
+        { clerkUserId: userData.clerkUserId },
+        {
           clerkUserId: userData.clerkUserId,
           email: userData.email || null
         },
-        select: { id: true, clerkUserId: true }
-      });
+        {}
+      );
       
       logger.info({ clerkUserId: userData.clerkUserId, userId: user.id }, 'User created/updated');
       return user;
@@ -61,11 +74,7 @@ export class UserRepository {
   async updateUser(userId: string, updateData: { email?: string }): Promise<{ id: string; clerkUserId: string }> {
     const logger = createLoggerWithFunction('updateUser', { module: 'repository' });
     try {
-      const user = await prisma.user.update({
-        where: { id: userId },
-        data: updateData,
-        select: { id: true, clerkUserId: true }
-      });
+      const user = await DatabaseOperations.update<{ id: string; clerkUserId: string }>('user', { id: userId }, updateData);
       
       logger.info({ userId, updateData }, 'User updated');
       return user;
@@ -76,14 +85,28 @@ export class UserRepository {
   }
 
   /**
+   * Update user unique name
+   */
+  async updateUserUniqueName(userId: string, uniqueName: string | null): Promise<{ id: string; clerkUserId: string }> {
+    const logger = createLoggerWithFunction('updateUserUniqueName', { module: 'repository' });
+    try {
+      const user = await DatabaseOperations.update<{ id: string; clerkUserId: string }>('user', { id: userId }, { uniqueName });
+      
+      logger.info({ userId, uniqueName }, 'User unique name updated');
+      return user;
+    } catch (error: any) {
+      logger.error({ userId, uniqueName, error: error.message }, 'Failed to update user unique name');
+      throw error;
+    }
+  }
+
+  /**
    * Delete user
    */
   async deleteUser(userId: string): Promise<void> {
     const logger = createLoggerWithFunction('deleteUser', { module: 'repository' });
     try {
-      await prisma.user.delete({
-        where: { id: userId }
-      });
+      await DatabaseOperations.delete('user', { id: userId });
       
       logger.info({ userId }, 'User deleted');
     } catch (error: any) {
@@ -93,7 +116,7 @@ export class UserRepository {
   }
 
   /**
-   * Sync user to database (create if not exists)
+   * Sync user to database (create if not exists, update email if exists)
    */
   async syncUserToDatabase(clerkUserId: string, email?: string): Promise<{ id: string; clerkUserId: string }> {
     const logger = createLoggerWithFunction('syncUserToDatabase', { module: 'repository' });
@@ -101,12 +124,26 @@ export class UserRepository {
     // First try to find existing user
     const existingUser = await this.findByClerkId(clerkUserId);
     if (existingUser) {
-      logger.debug({ clerkUserId }, 'User already exists in database');
+      logger.debug({ clerkUserId, email }, 'User already exists in database');
+      
+      // Update email if provided and different from existing
+      if (email) {
+        try {
+          await DatabaseOperations.update('user', 
+            { clerkUserId: clerkUserId },
+            { email: email }
+          );
+          logger.debug({ clerkUserId, email }, 'Updated user email');
+        } catch (error: any) {
+          logger.warn({ clerkUserId, error: error.message }, 'Failed to update user email (non-critical)');
+        }
+      }
+      
       return existingUser;
     }
     
     // Create new user if not found
-    logger.info({ clerkUserId }, 'Creating new user in database');
+    logger.info({ clerkUserId, email }, 'Creating new user in database');
     const newUser = await this.createWithRaceProtection({ clerkUserId, ...(email && { email }) });
     
     // Emit wallet generation event for new user (asynchronous)

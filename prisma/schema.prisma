@@ -14,11 +14,14 @@ model User {
   id          String   @id @default(cuid())
   clerkUserId String   @unique
   email       String?
+  uniqueName  String?  @unique
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   // Relations
   walletAddresses WalletAddress[]
+  products        Product[]
+  paymentIntents  PaymentIntent[]
 
   @@map("users")
 }
@@ -40,4 +43,61 @@ model WalletAddress {
   @@unique([userId, chain])
   @@unique([addressId])
   @@map("wallet_addresses")
+}
+
+model Product {
+  id             String   @id                    // Custom product ID (pr_xxx)
+  userId         String
+  image          String?
+  productName    String
+  description    String
+  amount         String
+  payoutChain    String   // Chain for payout (e.g., 'base', 'solana', 'tron')
+  payoutToken    String   // Token for payout (e.g., 'USDC', 'USDT')
+  paymentLink    String
+  slug           String
+  linkExpiration String   // 'never' or 'custom_days'
+  customDays     Int?
+  expiresAt      DateTime?
+  status         String   @default("active") // 'active', 'expired', 'cancelled'
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Unique constraints
+  @@unique([userId, slug])
+  @@map("products")
+}
+
+enum PaymentIntentStatus {
+  INITIATED
+  PROCESSING
+  PENDING
+  SUCCEEDED
+  FAILED
+  CANCELLED
+}
+
+model PaymentIntent {
+  id                String                @id @default(cuid())   // Auto-generated database ID
+  userId            String
+  productId         String                // Product ID (pr_xxx) - reference to the product
+  slug              String                // Product slug - used to find the product
+  userUniqueName    String                // User's unique name - for payment link generation
+  paymentIntentId   String                @unique               // Our payment intent ID (unique)
+  clientSecret      String                // Stripe client secret for payment confirmation
+  amount            Int                   // Amount in cents
+  currency          String                // Currency code (USD, EUR, etc.)
+  status            PaymentIntentStatus   @default(INITIATED)       // Payment intent status
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Unique constraints
+  @@unique([userId, slug, paymentIntentId])
+  @@map("payment_intents")
 }

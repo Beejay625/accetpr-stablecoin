@@ -3,6 +3,7 @@ import { walletRepository } from '../../repositories/database/wallet';
 import { withdrawFromAddress } from '../../providers/blockradar/withdraw/walletWithdraw';
 import { WithdrawResponse, SingleWithdrawRequest, BatchWithdrawRequest } from '../../providers/blockradar/withdraw/withdraw.interface';
 import { DEFAULT_CHAINS } from '../../types/chains';
+import { validateSingleWithdrawRequest, validateBatchWithdrawRequest } from './helpers/validateWithdrawal';
 
 /**
  * Single Withdraw Service
@@ -19,7 +20,7 @@ export class SingleWithdrawService {
     userId: string,
     singleWithdrawRequest: SingleWithdrawRequest
   ): Promise<WithdrawResponse> {
-    this.logger.info({ userId, chain: singleWithdrawRequest.chain, asset: singleWithdrawRequest.asset, amount: singleWithdrawRequest.amount }, 'Executing single withdraw');
+    this.logger.info('executeSingleWithdraw', { userId, chain: singleWithdrawRequest.chain, asset: singleWithdrawRequest.asset, amount: singleWithdrawRequest.amount }, 'Executing single withdraw');
 
     try {
       // Validate chain
@@ -28,7 +29,7 @@ export class SingleWithdrawService {
       }
 
       // Validate single withdraw request
-      this.validateSingleWithdrawRequest(singleWithdrawRequest);
+      validateSingleWithdrawRequest(singleWithdrawRequest);
 
       // Get asset ID from chain and asset
       const assetId = await walletRepository.findAssetId(singleWithdrawRequest.chain, singleWithdrawRequest.asset);
@@ -39,9 +40,9 @@ export class SingleWithdrawService {
       // Get address ID and execute withdraw
       const addressId = await walletRepository.getAddressId(userId, singleWithdrawRequest.chain);
       
-      const withdrawResponse = await withdrawFromAddress(addressId, singleWithdrawRequest);
+      const withdrawResponse = await withdrawFromAddress(singleWithdrawRequest.chain, addressId, singleWithdrawRequest);
 
-      this.logger.info({
+      this.logger.info('executeSingleWithdraw', {
         userId,
         chain: singleWithdrawRequest.chain,
         asset: singleWithdrawRequest.asset,
@@ -53,36 +54,11 @@ export class SingleWithdrawService {
 
       return withdrawResponse;
     } catch (error: any) {
-      this.logger.error({ userId, chain: singleWithdrawRequest.chain, asset: singleWithdrawRequest.asset, error: error.message }, 'Single withdraw execution failed');
+      this.logger.error('executeSingleWithdraw', { userId, chain: singleWithdrawRequest.chain, asset: singleWithdrawRequest.asset, error: error.message }, 'Single withdraw execution failed');
       throw error;
     }
   }
 
-  /**
-   * Validate single withdraw request
-   */
-  private static validateSingleWithdrawRequest(request: SingleWithdrawRequest): void {
-    if (!request.chain || typeof request.chain !== 'string') {
-      throw new Error('Chain is required and must be a string');
-    }
-
-    if (!request.asset || typeof request.asset !== 'string') {
-      throw new Error('Asset is required and must be a string');
-    }
-
-    if (!request.amount || typeof request.amount !== 'string') {
-      throw new Error('Amount is required and must be a string');
-    }
-
-    if (!request.address || typeof request.address !== 'string') {
-      throw new Error('Address is required and must be a string');
-    }
-
-    const amount = parseFloat(request.amount);
-    if (isNaN(amount) || amount <= 0) {
-      throw new Error('Amount must be a positive number');
-    }
-  }
 }
 
 /**
@@ -100,11 +76,11 @@ export class BatchWithdrawService {
     userId: string,
     batchWithdrawRequest: BatchWithdrawRequest
   ): Promise<WithdrawResponse> {
-    this.logger.info({ userId, assetCount: batchWithdrawRequest.assets.length }, 'Executing batch withdraw');
+    this.logger.info('executeBatchWithdraw', { userId, assetCount: batchWithdrawRequest.assets.length }, 'Executing batch withdraw');
 
     try {
       // Validate batch withdraw request
-      this.validateBatchWithdrawRequest(batchWithdrawRequest);
+      validateBatchWithdrawRequest(batchWithdrawRequest);
 
       // Get unique chains from assets
       const chains = [...new Set(batchWithdrawRequest.assets.map(asset => asset.chain))];
@@ -144,9 +120,9 @@ export class BatchWithdrawService {
       const addressId = await walletRepository.getAddressId(userId, primaryChain);
       
       const apiRequest = { assets: apiAssets };
-      const withdrawResponse = await withdrawFromAddress(addressId, apiRequest);
+      const withdrawResponse = await withdrawFromAddress(primaryChain, addressId, apiRequest);
 
-      this.logger.info({
+      this.logger.info('executeBatchWithdraw', {
         userId,
         chains,
         transactionId: withdrawResponse.data.id,
@@ -157,44 +133,9 @@ export class BatchWithdrawService {
 
       return withdrawResponse;
     } catch (error: any) {
-      this.logger.error({ userId, error: error.message }, 'Batch withdraw execution failed');
+      this.logger.error('executeBatchWithdraw', { userId, error: error.message }, 'Batch withdraw execution failed');
       throw error;
     }
   }
 
-  /**
-   * Validate batch withdraw request
-   */
-  private static validateBatchWithdrawRequest(request: BatchWithdrawRequest): void {
-    if (!request.assets || !Array.isArray(request.assets)) {
-      throw new Error('Assets array is required');
-    }
-
-    if (request.assets.length === 0) {
-      throw new Error('At least one asset is required');
-    }
-
-    for (const asset of request.assets) {
-      if (!asset.chain || typeof asset.chain !== 'string') {
-        throw new Error('Asset chain is required and must be a string');
-      }
-
-      if (!asset.asset || typeof asset.asset !== 'string') {
-        throw new Error('Asset symbol is required and must be a string');
-      }
-
-      if (!asset.address || typeof asset.address !== 'string') {
-        throw new Error('Asset address is required and must be a string');
-      }
-
-      if (!asset.amount || typeof asset.amount !== 'string') {
-        throw new Error('Asset amount is required and must be a string');
-      }
-
-      const amount = parseFloat(asset.amount);
-      if (isNaN(amount) || amount <= 0) {
-        throw new Error('Asset amount must be a positive number');
-      }
-    }
-  }
 }

@@ -1,6 +1,6 @@
 /// <reference path="../../types/auth.d.ts" />
 import { Request, Response, NextFunction } from 'express';
-import { getAuth } from '@clerk/express';
+import { getAuth, clerkClient } from '@clerk/express';
 import { ApiError } from '../../utils/apiError';
 import { createLoggerWithFunction } from '../../logger';
 import { userService } from '../../services/user/userService';
@@ -10,7 +10,7 @@ import { userService } from '../../services/user/userService';
  * so you don't need to call getAuth(req) in every route handler
  * Updated to fix linting issues
  */
-export const attachUserId = (req: Request, res: Response, next: NextFunction) => {
+export const attachUserId = (req: Request, _res: Response, next: NextFunction) => {
   const { userId, isAuthenticated } = getAuth(req);
 
   // Attach auth info directly to request for easy access
@@ -41,12 +41,17 @@ export const requireAuthWithUserId = async (
   // Attach auth info directly to request
   req.authUserId = userId;
   req.isAuthenticated = isAuthenticated;
-
   try {
     // Sync user to database only when needed
     logger.debug({ userId }, 'Syncing user to database');
-    const user = await userService.ensureUserExists(userId);
 
+    // Fetch user details from Clerk to get email
+    const clerkUser = await clerkClient.users.getUser(userId);
+    const email = clerkUser.primaryEmailAddress?.emailAddress;
+
+    logger.debug({ userId, email }, 'Fetched Clerk user details');
+
+    const user = await userService.ensureUserExists(userId, email);
     // Attach the local database user ID to the request
     req.localUserId = user.id;
 
@@ -54,6 +59,7 @@ export const requireAuthWithUserId = async (
       {
         clerkUserId: userId,
         localUserId: user.id,
+        email,
       },
       'User sync completed'
     );

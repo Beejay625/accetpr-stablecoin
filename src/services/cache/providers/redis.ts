@@ -13,10 +13,6 @@ export class RedisCacheProvider implements CacheProvider {
 
   constructor(config: CacheConfig) {
     this.config = config;
-    const logger = createLoggerWithFunction('RedisCacheProvider', {
-      module: 'cache',
-      provider: 'redis'
-    });
     this.initializeClient();
   }
 

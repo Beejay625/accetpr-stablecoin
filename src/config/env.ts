@@ -30,6 +30,28 @@ const envSchema = {
   BLOCKRADAR_API_KEY: { type: String, required: false },
   BLOCKRADAR_WALLET_ID: { type: String, required: false },
   
+  // BlockRadar wallet IDs per chain (optional - fallback to BLOCKRADAR_WALLET_ID)
+  BLOCKRADAR_BASE_WALLET_ID: { type: String, required: false },
+  BLOCKRADAR_ARBITRUM_WALLET_ID: { type: String, required: false },
+  BLOCKRADAR_ETHEREUM_WALLET_ID: { type: String, required: false },
+  BLOCKRADAR_POLYGON_WALLET_ID: { type: String, required: false },
+  BLOCKRADAR_OPTIMISM_WALLET_ID: { type: String, required: false },
+  BLOCKRADAR_SOLANA_WALLET_ID: { type: String, required: false },
+  BLOCKRADAR_TRON_WALLET_ID: { type: String, required: false },
+  
+  // Cloudinary image storage (optional)
+  CLOUDINARY_CLOUD_NAME: { type: String, required: false },
+  CLOUDINARY_API_KEY: { type: String, required: false },
+  CLOUDINARY_API_SECRET: { type: String, required: false },
+  
+  // Stripe payment processing (optional)
+  STRIPE_SECRET_KEY: { type: String, required: false },
+  STRIPE_PUBLISHABLE_KEY: { type: String, required: false },
+  STRIPE_WEBHOOK_SECRET: { type: String, required: false },
+  
+  // Payment configuration (optional)
+  PAYMENT_BASE_URL: { type: String, default: 'https://pay.stablestack.com', required: false },
+  
   // Cache configuration
   CACHE_PROVIDER: { type: String, default: 'memory', required: false },
   CACHE_HOST: { type: String, default: 'localhost', required: false },

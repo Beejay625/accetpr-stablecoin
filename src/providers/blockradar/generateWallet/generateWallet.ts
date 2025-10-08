@@ -1,12 +1,14 @@
 import { BlockRadarBase } from '../base';
 import { GenerateWalletResponse } from './generateWallet.interface';
+import { getWalletIdForChain } from '../walletIdManagement';
 
 /**
  * Simple wallet address generation
  */
 export class GenerateWalletProvider extends BlockRadarBase {
-  static async generateAddress(name: string): Promise<{ address: string; addressId: string }> {
-    const response = await this.request('addresses', 'POST', { name }) as GenerateWalletResponse;
+  static async generateAddress(chain: string, name: string): Promise<{ address: string; addressId: string }> {
+    const walletId = getWalletIdForChain(chain);
+    const response = await this.request(walletId, 'addresses', 'POST', { name }) as GenerateWalletResponse;
     
     return {
       address: response.data.address,
@@ -17,7 +19,8 @@ export class GenerateWalletProvider extends BlockRadarBase {
 
 /**
  * Generate wallet address function
+ * Automatically selects the correct wallet ID based on chain
  */
-export async function generateAddress(name: string): Promise<{ address: string; addressId: string }> {
-  return await GenerateWalletProvider.generateAddress(name);
+export async function generateAddress(chain: string, name: string): Promise<{ address: string; addressId: string }> {
+  return await GenerateWalletProvider.generateAddress(chain, name);
 }

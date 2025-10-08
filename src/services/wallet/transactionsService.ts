@@ -23,7 +23,7 @@ export class TransactionsService {
     userId: string,
     chain: string
   ): Promise<SimplifiedTransaction[]> {
-    this.logger.info({ userId, chain }, 'Fetching user transactions');
+    this.logger.info('getUserTransactions', { userId, chain }, 'Fetching user transactions');
 
     try {
       // Validate chain
@@ -34,7 +34,7 @@ export class TransactionsService {
       // Get address ID for the user and chain
       const addressId = await walletRepository.getAddressId(userId, chain);
       
-      // Fetch transactions from BlockRadar
+      // Fetch transactions from BlockRadar (uses default wallet ID)
       const transactionsResponse: TransactionsResponse = await getAddressTransactions(addressId);
       
       // Transform transactions to simplified format
@@ -49,7 +49,7 @@ export class TransactionsService {
         transactionTime: transaction.createdAt
       }));
 
-      this.logger.info({
+      this.logger.info('getUserTransactions', {
         userId,
         chain,
         transactionCount: simplifiedTransactions.length
@@ -57,7 +57,7 @@ export class TransactionsService {
 
       return simplifiedTransactions;
     } catch (error: any) {
-      this.logger.error({ userId, chain, error: error.message }, 'Failed to fetch transactions');
+      this.logger.error('getUserTransactions', { userId, chain, error: error.message }, 'Failed to fetch transactions');
       throw error;
     }
   }

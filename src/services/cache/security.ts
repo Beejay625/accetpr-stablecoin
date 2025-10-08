@@ -91,7 +91,7 @@ export class CacheSecurity {
   /**
    * Clean up potentially compromised cache entries
    */
-  static async cleanupCompromisedEntries(cacheService: any, userId: string): Promise<void> {
+  static async cleanupCompromisedEntries(_cacheService: any, userId: string): Promise<void> {
     try {
       const patterns = [
         `user_auth_${userId}_*`,

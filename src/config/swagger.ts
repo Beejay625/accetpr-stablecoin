@@ -1,5 +1,15 @@
 import swaggerJsdoc from 'swagger-jsdoc';
 
+// Build servers list dynamically
+const servers = [
+  { url: 'http://localhost:3000', description: 'Local Development' },
+];
+
+// Add ngrok URL if available
+if (process.env['NGROK_URL']) {
+  servers.unshift({ url: process.env['NGROK_URL'], description: 'ngrok (Production)' });
+}
+
 export const swaggerSpec = swaggerJsdoc({
   definition: {
     openapi: '3.1.0',
@@ -7,9 +17,7 @@ export const swaggerSpec = swaggerJsdoc({
       title: 'Stablestack Backend API',
       version: '1.0.0',
     },
-    servers: [
-      { url: 'http://localhost:3000', description: 'Local' },
-    ],
+    servers,
     components: {
       securitySchemes: {
         bearerAuth: {

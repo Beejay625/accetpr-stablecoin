@@ -12,8 +12,9 @@ import { walletRepository } from '../../repositories/database/wallet';
  * 
  * Handles all withdraw-related HTTP requests for both single and batch withdrawals.
  */
+const logger = createLoggerWithFunction('WithdrawController', { module: 'controller' });
+
 export class WithdrawController {
-  private static logger = createLoggerWithFunction('WithdrawController', { module: 'controller' });
 
   /**
    * Execute a single asset withdraw operation for authenticated user
@@ -24,7 +25,7 @@ export class WithdrawController {
       const userId = req.authUserId!; // Guaranteed by requireAuthWithUserId middleware
       const { chain, asset, amount, address, metadata, reference } = req.body;
 
-      this.logger.info({ userId, chain, asset, amount, address }, 'Processing single withdraw request');
+      logger.info('executeSingleWithdraw', { userId, chain, asset, amount, address }, 'Processing single withdraw request');
 
       // Validate required fields
       if (!chain || !asset || !amount || !address) {
@@ -71,7 +72,7 @@ export class WithdrawController {
       // Execute withdraw using SingleWithdrawService
       const withdrawResponse = await SingleWithdrawService.executeSingleWithdraw(userId, singleRequest);
 
-      this.logger.info({
+      logger.info('executeSingleWithdraw', {
         userId,
         chain,
         asset,
@@ -92,7 +93,7 @@ export class WithdrawController {
       });
 
     } catch (error: any) {
-      this.logger.error({
+      logger.error('executeSingleWithdraw', {
         userId: req.authUserId,
         chain: req.body.chain,
         asset: req.body.asset,
@@ -132,7 +133,7 @@ export class WithdrawController {
       const userId = req.authUserId!; // Guaranteed by requireAuthWithUserId middleware
       const { assets } = req.body;
 
-      this.logger.info({ userId, assetCount: assets?.length }, 'Processing batch withdraw request');
+      logger.info('executeBatchWithdraw', { userId, assetCount: assets?.length }, 'Processing batch withdraw request');
 
       // Validate assets array
       if (!assets || !Array.isArray(assets) || assets.length === 0) {
@@ -213,7 +214,7 @@ export class WithdrawController {
       // Execute withdraw using BatchWithdrawService
       const withdrawResponse = await BatchWithdrawService.executeBatchWithdraw(userId, batchRequest);
 
-      this.logger.info({
+      logger.info('executeBatchWithdraw', {
         userId,
         transactionId: withdrawResponse.data.id,
         hash: withdrawResponse.data.hash,
@@ -233,7 +234,7 @@ export class WithdrawController {
       });
 
     } catch (error: any) {
-      this.logger.error({
+      logger.error('executeBatchWithdraw', {
         userId: req.authUserId,
         error: error.message
       }, 'Batch withdraw execution failed');

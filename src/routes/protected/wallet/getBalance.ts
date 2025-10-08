@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { requireAuthWithUserId } from '../../../middleware/auth';
 import { WalletController } from '../../../controllers/wallet/getBalance';
-import { DEFAULT_CHAINS } from '../../../types/chains';
 
 const router = Router();
 
@@ -22,7 +21,7 @@ const router = Router();
  *         name: chain
  *         schema:
  *           type: string
- *           enum: [${DEFAULT_CHAINS.join(', ')}]
+ *           enum: [base, arbitrum, ethereum, polygon, optimism, solana, tron]
  *         description: Blockchain chain to get balance for
  *         required: true
  *     responses:
@@ -77,7 +76,7 @@ const router = Router();
  *                     missing:
  *                       value: "Chain parameter is required"
  *                     invalid:
- *                       value: "Invalid chain. Supported chains: ${DEFAULT_CHAINS.join(', ')}"
+ *                       value: "Invalid chain. Supported chains: base, arbitrum, ethereum, polygon, optimism, solana, tron"
  *       401:
  *         description: Authentication required
  *       404:

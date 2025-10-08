@@ -3,7 +3,7 @@ import { WalletService } from '../../services/wallet/walletService';
 import { ApiSuccess } from '../../utils/apiSuccess';
 import { ApiError } from '../../utils/apiError';
 import { createLoggerWithFunction } from '../../logger';
-import { DEFAULT_CHAINS, EVM_CHAINS } from '../../types/chains';
+import { DEFAULT_CHAINS } from '../../types/chains';
 
 /**
  * Wallet Controller
@@ -11,8 +11,9 @@ import { DEFAULT_CHAINS, EVM_CHAINS } from '../../types/chains';
  * Handles all wallet-related HTTP requests including balance checking,
  * wallet generation, and transaction operations.
  */
+const logger = createLoggerWithFunction('WalletController', { module: 'controller' });
+
 export class WalletController {
-  private static logger = createLoggerWithFunction('WalletController', { module: 'controller' });
 
   /**
    * Get wallet balance for authenticated user
@@ -23,7 +24,7 @@ export class WalletController {
       const userId = req.authUserId!; // Guaranteed by requireAuthWithUserId middleware
       const chain = req.query.chain as string;
       
-      this.logger.info({ userId, chain }, 'Getting wallet balance');
+      logger.info('getBalance', { userId, chain }, 'Getting wallet balance');
 
       // Validate chain parameter is provided
       if (!chain) {
@@ -41,7 +42,7 @@ export class WalletController {
       // Get wallet balance using WalletService
       const balanceData = await WalletService.getWalletBalance(userId, chain);
 
-      this.logger.info({ 
+      logger.info('getBalance', { 
         userId, 
         chain, 
         balance: balanceData.convertedBalance 
@@ -57,7 +58,7 @@ export class WalletController {
       });
 
     } catch (error: any) {
-      this.logger.error({ 
+      logger.error('getBalance', { 
         userId: req.authUserId, 
         chain: req.query.chain,
         error: error.message 
