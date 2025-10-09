@@ -46,9 +46,8 @@ export class ProductService {
       // Fail fast: Validate request first
       validateProductRequest(productRequest);
 
-      // Get local user ID for database operations
-      const user = await userService.ensureUserExists(clerkUserId);
-      const localUserId = user.id;
+      // Get local user ID for database operations (also ensures user exists)
+      const localUserId = await this.getLocalUserId(clerkUserId);
 
       // Run parallel operations for better performance
       const [userUniqueNameResult, imageUrl] = await Promise.all([
