@@ -175,8 +175,30 @@ export class ApiError {
         handler: () => this.database(res, error),
       },
       {
-        condition: (err: any) => err.code === 'CONFLICT' || err.message?.includes('unique'),
-        handler: () => this.conflict(res, 'Resource already exists'),
+        condition: (err: any) => err.code === 'CONFLICT' || err.message?.includes('unique') || err.code === 'P2002',
+        handler: () => {
+          const isDev = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev';
+          
+          // Extract conflict details from Prisma error
+          let message = 'Resource already exists';
+          let details = undefined;
+          
+          if (err.code === 'P2002' && err.meta?.target) {
+            const fields = Array.isArray(err.meta.target) ? err.meta.target.join(', ') : err.meta.target;
+            message = `Duplicate entry. A record with this ${fields} already exists.`;
+            
+            if (isDev) {
+              details = {
+                constraint: 'unique',
+                fields: err.meta.target,
+                prismaCode: err.code,
+                fullError: err.message
+              };
+            }
+          }
+          
+          return this.conflict(res, message, details);
+        },
       },
     ];
 
