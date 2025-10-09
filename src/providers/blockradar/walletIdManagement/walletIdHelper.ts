@@ -42,7 +42,9 @@ export function getWalletIdForChain(chain: string = 'default'): string {
   // Fallback: if chain is a testnet variant (e.g., base-sepolia), try the mainnet version (base)
   if (!walletId && chainLower.includes('-')) {
     const mainnetChain = chainLower.split('-')[0]; // e.g., 'base-sepolia' -> 'base'
-    walletId = CHAIN_WALLET_MAP[mainnetChain];
+    if (mainnetChain) {
+      walletId = CHAIN_WALLET_MAP[mainnetChain];
+    }
   }
   
   if (!walletId) {
