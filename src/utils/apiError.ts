@@ -160,7 +160,7 @@ export class ApiError {
    * Smart error handler - automatically determines error type
    */
   static handle(res: Response, error: any): Response {
-    // Define error handlers (order matters!)
+    // Define error handlers (order matters! More specific first)
     const handlers = [
       {
         condition: (err: any) => err.status === 401 || err.name?.includes('clerk'),
@@ -171,18 +171,7 @@ export class ApiError {
         handler: () => this.error(res, 'Service unavailable', 503, 'SERVICE_UNAVAILABLE'),
       },
       {
-        // Business validation errors - return as 400 Bad Request
-        condition: (err: any) => 
-          err.message?.includes('required') ||
-          err.message?.includes('must have') ||
-          err.message?.includes('must be') ||
-          err.message?.includes('Invalid') ||
-          err.message?.includes('not supported') ||
-          err.message?.includes('Supported'),
-        handler: () => this.validation(res, error.message),
-      },
-      {
-        // Check for Prisma unique constraint violation first (P2002)
+        // Prisma unique constraint violation (P2002) - MUST come before business validation
         condition: (err: any) => err.code === 'P2002',
         handler: () => {
           const isDev = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev';
