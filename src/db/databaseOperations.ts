@@ -40,7 +40,10 @@ export class DatabaseOperations {
           whereClause = { [compoundKey]: compoundValue };
         } else {
           // Single unique field
-          whereClause = { [uniqueFields[0]]: data[uniqueFields[0]] };
+          const firstField = uniqueFields[0];
+          if (firstField) {
+            whereClause = { [firstField]: data[firstField] };
+          }
         }
 
         const result = await (prisma[model] as any).upsert({
