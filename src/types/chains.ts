@@ -2,27 +2,36 @@ import {
   DEV_EVM_CHAINS,
   DEV_NON_EVM_CHAINS,
   PROD_EVM_CHAINS,
-  PROD_NON_EVM_CHAINS,
-  DEV_SUPPORTED_TOKENS,
-  PROD_SUPPORTED_TOKENS
+  PROD_NON_EVM_CHAINS
 } from '../providers/blockradar/walletIdManagement/configuration';
+
+/**
+ * Extract chain names from chain-token configuration
+ */
+const getChainNames = (chainConfig: Record<string, readonly string[]>): readonly string[] => {
+  return Object.keys(chainConfig) as readonly string[];
+};
 
 /**
  * Combined chains for each environment
  */
 export const DEV_CHAINS = [
-  DEV_EVM_CHAINS,
-  ...DEV_NON_EVM_CHAINS
+  getChainNames(DEV_EVM_CHAINS),
+  ...getChainNames(DEV_NON_EVM_CHAINS)
 ] as const;
 
 export const PROD_CHAINS = [
-  PROD_EVM_CHAINS,
-  ...PROD_NON_EVM_CHAINS
+  getChainNames(PROD_EVM_CHAINS),
+  ...getChainNames(PROD_NON_EVM_CHAINS)
 ] as const;
 
-// Re-export for convenience
-export const EVM_CHAINS_DEV = DEV_EVM_CHAINS;
-export const EVM_CHAINS_PROD = PROD_EVM_CHAINS;
+// Export chain names only (for backward compatibility)
+export const EVM_CHAINS_DEV = getChainNames(DEV_EVM_CHAINS);
+export const EVM_CHAINS_PROD = getChainNames(PROD_EVM_CHAINS);
+
+// Export supported tokens
+export const DEV_SUPPORTED_TOKENS = { ...DEV_EVM_CHAINS, ...DEV_NON_EVM_CHAINS };
+export const PROD_SUPPORTED_TOKENS = { ...PROD_EVM_CHAINS, ...PROD_NON_EVM_CHAINS };
 
 /**
  * Get EVM chains based on environment
