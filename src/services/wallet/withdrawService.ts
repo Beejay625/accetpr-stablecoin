@@ -2,7 +2,7 @@ import { createLoggerWithFunction } from '../../logger';
 import { walletRepository } from '../../repositories/database/wallet';
 import { withdrawFromAddress } from '../../providers/blockradar/withdraw/walletWithdraw';
 import { WithdrawResponse, SingleWithdrawRequest, BatchWithdrawRequest } from '../../providers/blockradar/withdraw/withdraw.interface';
-import { DEFAULT_CHAINS } from '../../providers/blockradar/walletIdManagement/chainsAndTokens';
+import { DEFAULT_CHAINS } from '../../providers/blockradar/walletIdAndTokenManagement/chainsAndTokens';
 import { validateSingleWithdrawRequest, validateBatchWithdrawRequest } from './helpers/validateWithdrawal';
 
 /**

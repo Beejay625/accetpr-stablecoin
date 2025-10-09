@@ -1,6 +1,6 @@
 import { BlockRadarBase } from '../base';
 import { TransactionsResponse, TransactionsError } from './transactions.interface';
-import { getWalletIdForChain } from '../walletIdManagement';
+import { getWalletIdForChain } from '../walletIdAndTokenManagement';
 
 /**
  * Get wallet address transactions

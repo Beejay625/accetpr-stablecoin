@@ -5,7 +5,7 @@
  */
 
 import { LinkExpiration, ProductRequest } from '../product.interface';
-import { DEFAULT_CHAINS, isTokenSupportedOnChain, getSupportedTokensForChain } from '../../../providers/blockradar/walletIdManagement/chainsAndTokens';
+import { DEFAULT_CHAINS, isTokenSupportedOnChain, getSupportedTokensForChain } from '../../../providers/blockradar/walletIdAndTokenManagement/chainsAndTokens';
 import { env } from '../../../config/env';
 
 /**

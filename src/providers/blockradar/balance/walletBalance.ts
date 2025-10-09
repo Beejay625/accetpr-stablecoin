@@ -1,6 +1,6 @@
 import { BlockRadarBase } from '../base';
 import { WalletBalanceResponse } from './walletBalance.interface';
-import { getWalletIdForChain } from '../walletIdManagement';
+import { getWalletIdForChain } from '../walletIdAndTokenManagement';
 
 /**
  * Get wallet address balance

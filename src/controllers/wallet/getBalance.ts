@@ -3,7 +3,7 @@ import { WalletService } from '../../services/wallet/walletService';
 import { ApiSuccess } from '../../utils/apiSuccess';
 import { ApiError } from '../../utils/apiError';
 import { createLoggerWithFunction } from '../../logger';
-import { DEFAULT_CHAINS } from '../../providers/blockradar/walletIdManagement/chainsAndTokens';
+import { DEFAULT_CHAINS } from '../../providers/blockradar/walletIdAndTokenManagement/chainsAndTokens';
 
 /**
  * Wallet Controller

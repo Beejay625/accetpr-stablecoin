@@ -1,6 +1,6 @@
 import { BlockRadarBase } from '../base';
 import { WithdrawRequest, WithdrawResponse, WithdrawError, SingleWithdrawRequest, BatchWithdrawRequest } from './withdraw.interface';
-import { getWalletIdForChain } from '../walletIdManagement';
+import { getWalletIdForChain } from '../walletIdAndTokenManagement';
 
 /**
  * Withdraw assets from wallet address

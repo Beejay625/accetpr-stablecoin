@@ -1,6 +1,6 @@
 import { BlockRadarBase } from '../base';
 import { GenerateWalletResponse } from './generateWallet.interface';
-import { getWalletIdForChain } from '../walletIdManagement';
+import { getWalletIdForChain } from '../walletIdAndTokenManagement';
 
 /**
  * Simple wallet address generation
