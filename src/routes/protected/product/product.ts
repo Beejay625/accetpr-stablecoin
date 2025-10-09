@@ -1,11 +1,10 @@
 import { Router } from 'express';
-import { requireAuthWithUserId } from '../../../middleware/auth';
 import { uploadPaymentImage, handleUploadError } from '../../../middleware/fileUpload';
 import { ProductController } from '../../../controllers/product/productController';
 
 const router = Router();
 
-// All product routes require authentication
+// Authentication handled globally in protected/index.ts
 
 /**
  * @swagger
