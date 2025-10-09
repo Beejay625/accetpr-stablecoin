@@ -20,6 +20,9 @@ import { setupGlobalExceptionHandlers } from './server/exceptionHandlers';
 // Load environment variables
 config();
 
+// Setup global exception handlers (must be early in startup)
+setupGlobalExceptionHandlers();
+
 // Create logger
 const logger = createLoggerWithFunction('server', { module: 'server' });
 
