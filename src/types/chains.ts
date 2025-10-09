@@ -59,10 +59,3 @@ export function getAllSupportedTokenChains(): Array<{ chain: string; token: stri
  * Default asset to use for wallet generation
  */
 export const DEFAULT_ASSET = 'USDC';
-
-// Re-export for backward compatibility
-export const DEV_CHAINS = DEFAULT_CHAINS;
-export const PROD_CHAINS = DEFAULT_CHAINS;
-export const EVM_CHAINS_DEV = EVM_CHAINS;
-export const EVM_CHAINS_PROD = EVM_CHAINS;
-export const SUPPORTED_TOKENS = ALL_CHAINS_WITH_TOKENS;
