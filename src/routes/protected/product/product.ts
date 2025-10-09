@@ -473,7 +473,7 @@ router.get('/:productId/payment-counts', ProductController.getProductPaymentCoun
  *       404:
  *         description: Product not found
  */
-router.get('/:productId/payment-amounts', requireAuthWithUserId, ProductController.getProductPaymentAmounts);
+router.get('/:productId/payment-amounts', ProductController.getProductPaymentAmounts);
 
 /**
  * @swagger
