@@ -32,25 +32,31 @@ export class ApiError {
    * Handle Clerk-specific errors
    */
   static clerkError(res: Response, error: any): Response {
+    const isDev = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev';
+    
     if (error.status === 401) {
       return this.error(res, 'Invalid authentication token', 401, 'INVALID_TOKEN', {
         clerkError: error.message || 'Unknown Clerk error',
         clerkStatus: error.status,
+        ...(isDev && { stack: error.stack, fullError: error }),
       });
     } else if (error.status === 404) {
       return this.error(res, 'User not found', 404, 'USER_NOT_FOUND', {
         clerkError: error.message || 'Unknown Clerk error',
         clerkStatus: error.status,
+        ...(isDev && { stack: error.stack }),
       });
     } else if (error.status === 403) {
       return this.error(res, 'Access denied', 403, 'ACCESS_DENIED', {
         clerkError: error.message || 'Unknown Clerk error',
         clerkStatus: error.status,
+        ...(isDev && { stack: error.stack }),
       });
     } else {
       return this.error(res, 'Authentication service error', 500, 'CLERK_ERROR', {
         clerkError: error.message || 'Unknown Clerk error',
         clerkStatus: error.status,
+        ...(isDev && { stack: error.stack, fullError: error }),
       });
     }
   }
