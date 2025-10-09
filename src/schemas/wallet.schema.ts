@@ -45,7 +45,7 @@ export const singleWithdrawSchema = z.object({
     .min(1, 'Destination address is required')
     .trim(),
   
-  metadata: z.record(z.any()).optional(),
+  metadata: z.record(z.string(), z.any()).optional(),
   
   reference: z.string().optional()
 });
@@ -80,7 +80,7 @@ export const batchWithdrawSchema = z.object({
         .min(1, 'Destination address is required')
         .trim(),
       
-      metadata: z.record(z.any()).optional(),
+      metadata: z.record(z.string(), z.any()).optional(),
       
       reference: z.string().optional()
     })
