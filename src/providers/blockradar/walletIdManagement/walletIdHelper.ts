@@ -38,7 +38,12 @@ export function getWalletIdForChain(chain: string = 'default'): string {
   }
   
   // Get wallet ID for specific chain
-  const walletId = CHAIN_WALLET_MAP[chainLower];
+  let walletId = CHAIN_WALLET_MAP[chainLower];
+  
+  // Special case: base-sepolia uses the same wallet ID as base
+  if (!walletId && chainLower === 'base-sepolia') {
+    walletId = CHAIN_WALLET_MAP['base'];
+  }
   
   if (!walletId) {
     const configuredChains = Object.keys(CHAIN_WALLET_MAP);
