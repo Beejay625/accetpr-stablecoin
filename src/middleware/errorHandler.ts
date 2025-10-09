@@ -121,8 +121,9 @@ function handlePrismaError(error: Prisma.PrismaClientKnownRequestError, isDev: b
     statusCode = 409;
     errorCode = 'CONFLICT';
     
-    if (error.meta?.target) {
-      const fields = Array.isArray(error.meta.target) ? error.meta.target.join(', ') : error.meta.target;
+    if (error.meta && error.meta['target']) {
+      const target = error.meta['target'];
+      const fields = Array.isArray(target) ? target.join(', ') : String(target);
       
       // User-friendly messages for specific conflicts
       if (fields.includes('slug')) {
@@ -138,7 +139,7 @@ function handlePrismaError(error: Prisma.PrismaClientKnownRequestError, isDev: b
       if (isDev) {
         details = {
           constraint: 'unique',
-          fields: error.meta.target,
+          fields: target,
           prismaCode: error.code,
           prismaMessage: error.message
         };
