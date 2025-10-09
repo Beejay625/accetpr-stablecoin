@@ -53,10 +53,10 @@ export class ProductController {
       }
 
       // Create product using ProductService
-      const product = await ProductService.createProduct(userId, productRequest, uploadedFile);
+      const product = await ProductService.createProduct(clerkUserId, productRequest, uploadedFile);
 
       logger.info('createProduct', {
-        userId,
+        clerkUserId,
         productId: product.id,
         slug: product.slug,
         paymentLink: product.paymentLink,
