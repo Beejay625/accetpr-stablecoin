@@ -7,6 +7,7 @@ import { env } from '../../../config/env';
 const CHAIN_WALLET_MAP: Record<string, string> = Object.fromEntries(
   Object.entries({
     base: env.BLOCKRADAR_BASE_WALLET_ID,
+    'base-sepolia': env.BLOCKRADAR_BASE_WALLET_ID,
     // arbitrum: env.BLOCKRADAR_ARBITRUM_WALLET_ID,
     // ethereum: env.BLOCKRADAR_ETHEREUM_WALLET_ID,
     // polygon: env.BLOCKRADAR_POLYGON_WALLET_ID,
@@ -37,15 +38,7 @@ export function getWalletIdForChain(chain: string = 'default'): string {
   }
   
   // Get wallet ID for specific chain
-  let walletId = CHAIN_WALLET_MAP[chainLower];
-  
-  // Fallback: if chain is a testnet variant (e.g., base-sepolia), try the mainnet version (base)
-  if (!walletId && chainLower.includes('-')) {
-    const mainnetChain = chainLower.split('-')[0]; // e.g., 'base-sepolia' -> 'base'
-    if (mainnetChain) {
-      walletId = CHAIN_WALLET_MAP[mainnetChain];
-    }
-  }
+  const walletId = CHAIN_WALLET_MAP[chainLower];
   
   if (!walletId) {
     const configuredChains = Object.keys(CHAIN_WALLET_MAP);
@@ -55,7 +48,7 @@ export function getWalletIdForChain(chain: string = 'default'): string {
     
     throw new Error(
       `${chainLower.charAt(0).toUpperCase() + chainLower.slice(1)} wallet ID not configured. ` +
-      `Please set BLOCKRADAR_${chainLower.toUpperCase().replace('-', '_')}_WALLET_ID in environment. ` +
+      `Please set BLOCKRADAR_${chainLower.toUpperCase()}_WALLET_ID in environment. ` +
       `Currently configured chains: ${supportedChains}`
     );
   }
