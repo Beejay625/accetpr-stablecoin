@@ -49,8 +49,8 @@ export class ProductRepository {
         productId: product.id, 
         error: error.message 
       }, 'Failed to save product to database');
-      // Re-throw original error to preserve error code (e.g., P2002 for unique constraint)
-      throw error;
+      // Map Prisma errors to AppError (e.g., P2002 → 409 CONFLICT)
+      mapPrismaError(error);
     }
   }
 
