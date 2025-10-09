@@ -26,9 +26,12 @@ export class TransactionsService {
     this.logger.info('getUserTransactions', { userId, chain }, 'Fetching user transactions');
 
     try {
-      // Validate chain
-      if (!DEFAULT_CHAINS.includes(chain)) {
-        throw new Error(`Invalid chain: ${chain}. Supported chains: ${DEFAULT_CHAINS.join(', ')}`);
+      // Fail fast: Validate chain is supported
+      if (!isChainSupported(chain)) {
+        const envType = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev' ? 'development' : 'production';
+        throw new Error(
+          `Invalid chain: ${chain}. Supported chains in ${envType}: ${DEFAULT_CHAINS.join(', ')}`
+        );
       }
 
       // Get address ID for the user and chain
