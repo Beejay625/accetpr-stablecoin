@@ -1,13 +1,14 @@
 import swaggerJsdoc from 'swagger-jsdoc';
+import { env } from './env';
 
 // Build servers list dynamically
 const servers = [
   { url: 'http://localhost:3000', description: 'Local Development' },
 ];
 
-// Add ngrok URL if available
-if (process.env['NGROK_URL']) {
-  servers.unshift({ url: process.env['NGROK_URL'], description: 'ngrok (Production)' });
+// Add base URL if different from localhost
+if (env.BASE_URL && !env.BASE_URL.includes('localhost')) {
+  servers.unshift({ url: env.BASE_URL, description: 'Public URL' });
 }
 
 export const swaggerSpec = swaggerJsdoc({
