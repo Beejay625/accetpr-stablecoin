@@ -52,7 +52,7 @@ const router = Router();
  *                 description: Optional reference note for the withdrawal
  *                 example: "single withdraw"
  *             example:
- *               chain: "base"
+ *               chain: "base-sepolia"
  *               asset: "USDC"
  *               amount: "0.5"
  *               address: "0x451dEFC27B45808078e875556AF06bCFdC697BA4"
