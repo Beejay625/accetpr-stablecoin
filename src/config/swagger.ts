@@ -130,3 +130,14 @@ ${chainDescription}
   },
   apis: ['src/routes/**/*.ts'],
 });
+
+// Export dynamic values for use in route documentation
+export const swaggerDynamicValues = {
+  environment: envName,
+  supportedChains,
+  supportedTokens: ['USDC'],
+  chainTokenCombinations: Object.entries(chainTokenDesc).map(([chain, tokens]) => ({ chain, tokens })),
+  exampleChain: supportedChains[0] || 'base-sepolia',
+  exampleToken: 'USDC',
+  chainDescription,
+};
