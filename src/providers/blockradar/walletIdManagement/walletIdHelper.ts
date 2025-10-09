@@ -2,12 +2,11 @@ import { env } from '../../../config/env';
 
 /**
  * Map of chain names to their environment variable wallet IDs
- * Currently only Base chain is supported
+ * Currently only Base chain is supported (works for both base and base-sepolia)
  */
 const CHAIN_WALLET_MAP: Record<string, string> = Object.fromEntries(
   Object.entries({
     base: env.BLOCKRADAR_BASE_WALLET_ID,
-    'base-sepolia': env.BLOCKRADAR_BASE_WALLET_ID, // Use same wallet ID for testnet
     // arbitrum: env.BLOCKRADAR_ARBITRUM_WALLET_ID,
     // ethereum: env.BLOCKRADAR_ETHEREUM_WALLET_ID,
     // polygon: env.BLOCKRADAR_POLYGON_WALLET_ID,
