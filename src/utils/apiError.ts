@@ -94,7 +94,14 @@ export class ApiError {
   /**
    * Handle conflict errors (409 Conflict)
    */
-  static conflict(res: Response, message: string): Response {
+  static conflict(res: Response, message: string, details?: any): Response {
+    const isDev = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev';
+    
+    // In development: Show conflict details
+    if (isDev && details) {
+      return this.error(res, message, 409, 'CONFLICT', details);
+    }
+    
     return this.error(res, message, 409, 'CONFLICT');
   }
 
