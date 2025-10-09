@@ -86,8 +86,8 @@ export class ProductController {
         error: error.message
       }, 'Failed to create product');
 
-      // Generic error handling
-      ApiError.handle(res, error);
+      // Pass error to centralized error handler
+      next(error);
     }
   }
 
