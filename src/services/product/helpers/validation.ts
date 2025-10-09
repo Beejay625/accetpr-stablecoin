@@ -89,7 +89,7 @@ export function generateSlug(productName: string): string {
  * Generate payment link from user unique name and slug
  */
 export function generatePaymentLink(userUniqueName: string, slug: string): string {
-  return `${env.PAYMENT_BASE_URL}/${userUniqueName}/${slug}`;
+  return `${env.BASE_URL}/${userUniqueName}/${slug}`;
 }
 
 /**
