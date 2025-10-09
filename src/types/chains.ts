@@ -66,7 +66,7 @@ export const DEV_SUPPORTED_TOKENS = {
  * Supported tokens per chain for production
  */
 export const PROD_SUPPORTED_TOKENS = {
-  'base-sepolia': ['USDC']
+  'base': ['USDC']
 } as const;
 
 /**
