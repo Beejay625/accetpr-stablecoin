@@ -3,7 +3,7 @@ import { generateAddress } from '../../providers/blockradar/generateWallet';
 import { getAddressBalance } from '../../providers/blockradar/balance/walletBalance';
 import { walletRepository } from '../../repositories/database/wallet';
 import { cacheService } from '../../services/cache';
-import { DEFAULT_CHAINS, EVM_CHAINS } from '../../types/chainsAndTokens';
+import { DEFAULT_CHAINS, EVM_CHAINS } from '../../../chainsAndTokens';
 
 /**
  * Wallet Service

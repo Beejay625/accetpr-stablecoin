@@ -3,7 +3,7 @@ import { createLoggerWithFunction } from '../../logger';
 import { ApiSuccess } from '../../utils/apiSuccess';
 import { ApiError } from '../../utils/apiError';
 import { TransactionsService } from '../../services/wallet/transactionsService';
-import { DEFAULT_CHAINS } from '../../types/chainsAndTokens';
+import { DEFAULT_CHAINS } from '../../../chainsAndTokens';
 
 /**
  * Transactions Controller

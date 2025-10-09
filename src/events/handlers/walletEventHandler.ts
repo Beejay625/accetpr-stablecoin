@@ -1,6 +1,6 @@
 import { createLoggerWithFunction } from '../../logger';
 import { WalletService } from '../../services/wallet/walletService';
-import { DEFAULT_CHAINS } from '../../types/chainsAndTokens';
+import { DEFAULT_CHAINS } from '../../../chainsAndTokens';
 
 /**
  * Wallet Event Data Types
