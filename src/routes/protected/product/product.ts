@@ -251,7 +251,7 @@ router.post('/', uploadPaymentImage, handleUploadError, ProductController.create
  *       401:
  *         description: Unauthorized
  */
-router.get('/', requireAuthWithUserId, ProductController.getUserProducts);
+router.get('/', ProductController.getUserProducts);
 
 /**
  * @swagger
