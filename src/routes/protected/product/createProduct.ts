@@ -15,13 +15,10 @@ const router = Router();
  *       Create a new product with details and payment configuration.
  *       
  *       **Supported Token-Chain Combinations (Development):**
- *       - **base**: USDC
- *       - **arbitrum**: USDC, USDT
- *       - **solana**: USDC, USDT
- *       - **tron**: USDT
+ *       - **base-sepolia**: USDC
  *       
  *       **Supported Token-Chain Combinations (Production):**
- *       - **base-sepolia**: USDC
+ *       - **base**: USDC
  *       
  *       **Note:** The available chains and tokens depend on your current environment (NODE_ENV).
  *     tags: [Product]
