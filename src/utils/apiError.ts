@@ -216,6 +216,17 @@ export class ApiError {
         condition: (err: any) => err.code === 'CONFLICT',
         handler: () => this.conflict(res, error.message || 'Resource already exists'),
       },
+      {
+        // Business validation errors - return as 400 Bad Request (AFTER P2002 check)
+        condition: (err: any) => 
+          err.message?.includes('required') ||
+          err.message?.includes('must have') ||
+          err.message?.includes('must be') ||
+          err.message?.includes('Invalid') ||
+          err.message?.includes('not supported') ||
+          err.message?.includes('Supported'),
+        handler: () => this.validation(res, error.message),
+      },
     ];
 
     // Find and execute the first matching handler
