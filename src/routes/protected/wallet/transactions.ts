@@ -1,10 +1,9 @@
 import { Router } from 'express';
-import { requireAuthWithUserId } from '../../../middleware/auth';
 import { TransactionsController } from '../../../controllers/wallet/transactionsController';
 
 const router = Router();
 
-// All transaction routes require authentication
+// Authentication handled globally in protected/index.ts
 
 /**
  * @swagger
