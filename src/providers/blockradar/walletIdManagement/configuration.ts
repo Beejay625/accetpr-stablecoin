@@ -1,35 +1,45 @@
 import { env } from '../../../config/env';
 
 /**
- * EVM compatible chains for development
+ * Development Chains Configuration
  */
-export const EVM_CHAINS_DEV = [
+export const DEV_EVM_CHAINS = [
   'base-sepolia',
   // 'arbitrum'
 ] as const;
 
-/**
- * EVM compatible chains for production
- */
-export const EVM_CHAINS_PROD = [
-  'base'
-] as const;
-
-/**
- * Development chains with nested EVM chains
- */
-export const DEV_CHAINS = [
-  EVM_CHAINS_DEV,
+export const DEV_NON_EVM_CHAINS = [
   // 'solana', 
   // 'tron'
 ] as const;
 
 /**
- * Production chains with nested EVM chains
+ * Production Chains Configuration
  */
-export const PROD_CHAINS = [
-  EVM_CHAINS_PROD
+export const PROD_EVM_CHAINS = [
+  'base'
 ] as const;
+
+export const PROD_NON_EVM_CHAINS = [
+  // No non-EVM chains in production yet
+] as const;
+
+/**
+ * Combined chains for each environment
+ */
+export const DEV_CHAINS = [
+  DEV_EVM_CHAINS,
+  ...DEV_NON_EVM_CHAINS
+] as const;
+
+export const PROD_CHAINS = [
+  PROD_EVM_CHAINS,
+  ...PROD_NON_EVM_CHAINS
+] as const;
+
+// Re-export for backward compatibility
+export const EVM_CHAINS_DEV = DEV_EVM_CHAINS;
+export const EVM_CHAINS_PROD = PROD_EVM_CHAINS;
 
 /**
  * Chain to Wallet ID Configuration
