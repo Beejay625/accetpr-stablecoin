@@ -61,8 +61,8 @@ export class TransactionsController {
         error: error.message
       }, 'Failed to get transactions');
 
-      // Generic error handling
-      ApiError.handle(res, error);
+      // Distributed error handling
+      return handleDistributedError(res, error);
     }
   }
 }
