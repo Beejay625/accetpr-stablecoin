@@ -96,8 +96,21 @@ export class ApiError {
    * Handle database errors (500 Internal Server Error)
    */
   static database(res: Response, error: any): Response {
+    const isDev = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev';
+    
+    // In development: Show full error details
+    if (isDev) {
+      return this.error(res, error.message || 'Database operation failed', 500, 'DATABASE_ERROR', {
+        error: error.message,
+        code: error.code,
+        meta: error.meta,
+        stack: error.stack,
+      });
+    }
+    
+    // In production: Hide sensitive database details
     return this.error(res, 'Database operation failed', 500, 'DATABASE_ERROR', {
-      error: error.message,
+      error: 'A database error occurred',
     });
   }
 
