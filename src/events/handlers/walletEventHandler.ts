@@ -1,6 +1,6 @@
 import { createLoggerWithFunction } from '../../logger';
 import { WalletService } from '../../services/wallet/walletService';
-import { DEFAULT_CHAINS } from '../../providers/blockradar/walletIdAndTokenManagement/chainsAndTokens';
+import { DEFAULT_CHAINS } from '../../providers/blockradar/walletIdAndTokenManagement/chainsAndTokensHelpers';
 
 /**
  * Wallet Event Data Types
