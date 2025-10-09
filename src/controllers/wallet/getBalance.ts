@@ -59,7 +59,7 @@ export class WalletController {
 
     } catch (error: any) {
       logger.error('getBalance', { 
-        userId: req.authUserId, 
+        userId: req.localUserId, clerkUserId: req.authUserId, 
         chain: req.query.chain,
         error: error.message 
       }, 'Failed to get wallet balance');

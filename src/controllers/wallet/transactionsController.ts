@@ -55,7 +55,7 @@ export class TransactionsController {
 
     } catch (error: any) {
       logger.error('getUserTransactions', {
-        userId: req.authUserId,
+        userId: req.localUserId, clerkUserId: req.authUserId,
         chain: req.params.chain,
         error: error.message
       }, 'Failed to get transactions');

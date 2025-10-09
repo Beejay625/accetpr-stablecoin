@@ -135,7 +135,7 @@ export class ProductController {
 
     } catch (error: any) {
       logger.error('getUserProducts', {
-        userId: req.authUserId,
+        userId: req.localUserId, clerkUserId: req.authUserId,
         error: error.message
       }, 'Failed to get user products');
 
@@ -177,7 +177,7 @@ export class ProductController {
 
     } catch (error: any) {
       logger.error('getProductPaymentCounts', {
-        userId: req.authUserId,
+        userId: req.localUserId, clerkUserId: req.authUserId,
         productId: req.params.productId,
         error: error.message
       }, 'Failed to get product payment counts');
@@ -220,7 +220,7 @@ export class ProductController {
 
     } catch (error: any) {
       logger.error('getProductPaymentAmounts', {
-        userId: req.authUserId,
+        userId: req.localUserId, clerkUserId: req.authUserId,
         productId: req.params.productId,
         error: error.message
       }, 'Failed to get product payment amounts');
@@ -252,7 +252,7 @@ export class ProductController {
 
     } catch (error: any) {
       logger.error('getUserProductStats', {
-        userId: req.authUserId,
+        userId: req.localUserId, clerkUserId: req.authUserId,
         error: error.message
       }, 'Failed to get user product statistics');
 
@@ -315,7 +315,7 @@ export class ProductController {
 
     } catch (error: any) {
       logger.error('updateProduct', {
-        userId: req.authUserId,
+        userId: req.localUserId, clerkUserId: req.authUserId,
         productId: req.params.productId,
         error: error.message
       }, 'Failed to update product');

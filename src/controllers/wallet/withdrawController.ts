@@ -94,7 +94,7 @@ export class WithdrawController {
 
     } catch (error: any) {
       logger.error('executeSingleWithdraw', {
-        userId: req.authUserId,
+        userId: req.localUserId, clerkUserId: req.authUserId,
         chain: req.body.chain,
         asset: req.body.asset,
         error: error.message
@@ -235,7 +235,7 @@ export class WithdrawController {
 
     } catch (error: any) {
       logger.error('executeBatchWithdraw', {
-        userId: req.authUserId,
+        userId: req.localUserId, clerkUserId: req.authUserId,
         error: error.message
       }, 'Batch withdraw execution failed');
 
