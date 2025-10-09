@@ -66,6 +66,9 @@ export class WalletService {
     try {
       this.logger.info('generateMultiChainWallets', { userId, addressName, chains }, 'Generating multi-chain wallets');
       
+      // Fail fast: Validate all chains are supported before making any API calls
+      validateChains(chains);
+      
       const results: { address: string; addressId: string; id: string; chain: string }[] = [];
       
       // Separate EVM and non-EVM chains
