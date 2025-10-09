@@ -2,7 +2,6 @@ import { Response } from 'express';
 import { SingleWithdrawService, BatchWithdrawService } from '../../services/wallet/withdrawService';
 import { ApiSuccess } from '../../utils/apiSuccess';
 import { ApiError } from '../../utils/apiError';
-import { handleDistributedError } from '../../utils/errorHandler';
 import { createLoggerWithFunction } from '../../logger';
 import { DEFAULT_CHAINS } from '../../providers/blockradar/walletIdAndTokenManagement/chainsAndTokensHelpers';
 import { SingleWithdrawRequest, BatchWithdrawRequest } from '../../providers/blockradar/withdraw/withdraw.interface';
@@ -120,8 +119,8 @@ export class WithdrawController {
         return;
       }
 
-      // Distributed error handling
-      return handleDistributedError(res, error);
+      // Generic error handling
+      ApiError.handle(res, error);
     }
   }
 
@@ -258,8 +257,8 @@ export class WithdrawController {
         return;
       }
 
-      // Distributed error handling
-      return handleDistributedError(res, error);
+      // Generic error handling
+      ApiError.handle(res, error);
     }
   }
 

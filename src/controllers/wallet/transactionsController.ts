@@ -2,7 +2,6 @@ import { Response } from 'express';
 import { createLoggerWithFunction } from '../../logger';
 import { ApiSuccess } from '../../utils/apiSuccess';
 import { ApiError } from '../../utils/apiError';
-import { handleDistributedError } from '../../utils/errorHandler';
 import { TransactionsService } from '../../services/wallet/transactionsService';
 import { DEFAULT_CHAINS } from '../../providers/blockradar/walletIdAndTokenManagement/chainsAndTokensHelpers';
 
@@ -61,8 +60,8 @@ export class TransactionsController {
         error: error.message
       }, 'Failed to get transactions');
 
-      // Distributed error handling
-      return handleDistributedError(res, error);
+      // Generic error handling
+      ApiError.handle(res, error);
     }
   }
 }

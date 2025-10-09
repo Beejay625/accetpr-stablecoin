@@ -2,7 +2,6 @@ import { Response } from 'express';
 import { createLoggerWithFunction } from '../../logger';
 import { ApiSuccess } from '../../utils/apiSuccess';
 import { ApiError } from '../../utils/apiError';
-import { handleDistributedError } from '../../utils/errorHandler';
 import { ProductService } from '../../services/product/productService';
 import { ProductRepository } from '../../repositories/database/product/productRepository';
 import { ProductRequest, LinkExpiration } from '../../services/product/product.interface';
@@ -87,12 +86,11 @@ export class ProductController {
     } catch (error: any) {
       logger.error('createProduct', {
         clerkUserId: req.authUserId,
-        error: error.message,
-        errorCode: error.code
+        error: error.message
       }, 'Failed to create product');
 
-      // Distributed error handling - explicit but DRY
-      return handleDistributedError(res, error);
+      // Generic error handling
+      ApiError.handle(res, error);
     }
   }
 
@@ -139,7 +137,7 @@ export class ProductController {
         error: error.message
       }, 'Failed to get user products');
 
-      return handleDistributedError(res, error);
+      return ApiError.handle(res, error);
     }
   }
 
@@ -182,7 +180,7 @@ export class ProductController {
         error: error.message
       }, 'Failed to get product payment counts');
 
-      return handleDistributedError(res, error);
+      return ApiError.handle(res, error);
     }
   }
 
@@ -225,7 +223,7 @@ export class ProductController {
         error: error.message
       }, 'Failed to get product payment amounts');
 
-      return handleDistributedError(res, error);
+      return ApiError.handle(res, error);
     }
   }
 
@@ -256,7 +254,7 @@ export class ProductController {
         error: error.message
       }, 'Failed to get user product statistics');
 
-      return handleDistributedError(res, error);
+      return ApiError.handle(res, error);
     }
   }
 
@@ -320,7 +318,7 @@ export class ProductController {
         error: error.message
       }, 'Failed to update product');
 
-      return handleDistributedError(res, error);
+      return ApiError.handle(res, error);
     }
   }
 
@@ -374,7 +372,7 @@ export class ProductController {
         error: error.message
       }, 'Failed to get product by payment link');
 
-      return handleDistributedError(res, error);
+      return ApiError.handle(res, error);
     }
   }
 }

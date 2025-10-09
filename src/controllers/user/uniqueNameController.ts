@@ -1,7 +1,6 @@
 import { Response } from 'express';
 import { ApiSuccess } from '../../utils/apiSuccess';
 import { ApiError } from '../../utils/apiError';
-import { handleDistributedError } from '../../utils/errorHandler';
 import { userService } from '../../services/user/userService';
 import { isUniqueNameAvailable } from '../../services/user/helpers/uniqueNameValidation';
 
@@ -37,7 +36,7 @@ export class UniqueNameController {
         });
       }
     } catch (error: any) {
-      return handleDistributedError(res, error);
+      return ApiError.handle(res, error);
     }
   }
 
@@ -74,7 +73,7 @@ export class UniqueNameController {
         return ApiError.validation(res, result.error || 'Failed to set/update unique name');
       }
     } catch (error: any) {
-      return handleDistributedError(res, error);
+      return ApiError.handle(res, error);
     }
   }
 
@@ -101,7 +100,7 @@ export class UniqueNameController {
         });
       }
     } catch (error: any) {
-      return handleDistributedError(res, error);
+      return ApiError.handle(res, error);
     }
   }
 
