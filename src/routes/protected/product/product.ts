@@ -1,6 +1,13 @@
 import { Router } from 'express';
 import { uploadPaymentImage, handleUploadError } from '../../../middleware/fileUpload';
 import { ProductController } from '../../../controllers/product/productController';
+import { validate } from '../../../middleware/validate';
+import { 
+  createProductSchema, 
+  updateProductSchema, 
+  productStatusSchema,
+  productIdSchema 
+} from '../../../schemas';
 
 const router = Router();
 
