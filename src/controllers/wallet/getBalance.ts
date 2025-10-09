@@ -39,20 +39,20 @@ export class WalletController {
         return;
       }
 
-      // Get wallet balance using WalletService
-      const balanceData = await WalletService.getWalletBalance(userId, chain);
+      // Get wallet balances using WalletService (returns array of all assets)
+      const balances = await WalletService.getWalletBalance(userId, chain);
 
       logger.info('getBalance', { 
         userId, 
         chain, 
-        balance: balanceData.convertedBalance 
-      }, 'Wallet balance retrieved successfully');
+        balanceCount: balances.length,
+        balances: balances.map(b => ({ asset: b.asset, balance: b.convertedBalance }))
+      }, 'Wallet balances retrieved successfully');
 
-      // Return success response
-      ApiSuccess.success(res, 'Wallet balance retrieved successfully', {
-        balance: balanceData.convertedBalance,
-        chain: balanceData.chain,
-        asset: balanceData.asset,
+      // Return success response with all asset balances
+      ApiSuccess.success(res, 'Wallet balances retrieved successfully', {
+        balances: balances,
+        chain: chain,
         userId: userId,
         timestamp: new Date().toISOString()
       });
