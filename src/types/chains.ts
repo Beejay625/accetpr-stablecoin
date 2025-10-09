@@ -10,7 +10,7 @@ export const EVM_CHAINS = [
  * Development chains with nested EVM chains
  */
 export const DEV_CHAINS = [
-  // EVM_CHAINS,
+  EVM_CHAINS,
   // 'solana', 
   // 'tron'
 ] as const;
