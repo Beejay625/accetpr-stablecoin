@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import { createLoggerWithFunction } from '../../logger';
 import { ApiSuccess } from '../../utils/apiSuccess';
 import { ApiError } from '../../utils/apiError';
