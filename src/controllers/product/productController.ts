@@ -1,7 +1,7 @@
-import { Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { createLoggerWithFunction } from '../../logger';
 import { ApiSuccess } from '../../utils/apiSuccess';
-import { ApiError } from '../../utils/apiError';
+import { AppError } from '../../utils/AppError';
 import { ProductService } from '../../services/product/productService';
 import { ProductRepository } from '../../repositories/database/product/productRepository';
 import { ProductRequest, LinkExpiration } from '../../services/product/product.interface';
