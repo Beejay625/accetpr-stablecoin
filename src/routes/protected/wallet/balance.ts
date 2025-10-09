@@ -19,8 +19,8 @@ const router = Router();
  *         name: chain
  *         schema:
  *           type: string
- *           enum: [base, arbitrum, ethereum, polygon, optimism, solana, tron]
- *         description: Blockchain chain to get balance for
+ *           enum: [base, base-sepolia]
+ *         description: Blockchain chain to get balance for (base for prod, base-sepolia for dev)
  *         required: true
  *     responses:
  *       200:
