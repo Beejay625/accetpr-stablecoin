@@ -9,6 +9,7 @@
     "start": "node dist/server.js",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
+    "test:blockradar": "node test-blockradar.js",
     "commit": "node auto-commit.js",
     "commit:interactive": "node auto-commit.js --interactive",
     "commit:dry": "node auto-commit.js --dry-run",
