@@ -1,4 +1,4 @@
-import { CHAIN_WALLET_CONFIG } from '../../../config/configuration';
+import { CHAIN_WALLET_CONFIG } from '../../../config/walletAndChain';
 
 /**
  * Process the configuration to create a lookup map
