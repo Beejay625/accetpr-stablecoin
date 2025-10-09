@@ -18,8 +18,8 @@ export const EVM_CHAINS_PROD = [
  */
 export const DEV_CHAINS = [
   EVM_CHAINS_DEV,
-  // 'solana', 
-  // 'tron'
+  'solana', 
+  'tron'
 ] as const;
 
 /**
