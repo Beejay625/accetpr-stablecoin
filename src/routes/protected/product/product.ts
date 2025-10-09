@@ -516,6 +516,6 @@ router.get('/:productId/payment-amounts', ProductController.getProductPaymentAmo
  *       401:
  *         description: Unauthorized
  */
-router.get('/stats', requireAuthWithUserId, ProductController.getUserProductStats);
+router.get('/stats', ProductController.getUserProductStats);
 
 export default router;
