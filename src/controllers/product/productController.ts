@@ -21,12 +21,13 @@ export class ProductController {
    */
   static async createProduct(req: any, res: Response): Promise<void> {
     try {
-      const userId = req.authUserId!; // Guaranteed by requireAuthWithUserId middleware
+      const userId = req.localUserId!; // Local database user ID (guaranteed by requireAuthWithUserId middleware)
       const productRequest: ProductRequest = req.body;
       const uploadedFile = req.file; // From multer middleware
 
       logger.info('createProduct', { 
         userId, 
+        clerkUserId: req.authUserId,
         productName: productRequest.productName,
         amount: productRequest.amount,
         payoutChain: productRequest.payoutChain,
