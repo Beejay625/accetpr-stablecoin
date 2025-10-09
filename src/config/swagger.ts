@@ -1,15 +1,15 @@
 import swaggerJsdoc from 'swagger-jsdoc';
 import { env } from './env';
 
-// Build servers list dynamically
+// Build servers list dynamically with /api/v1 base path
 const servers = [
-  { url: 'http://localhost:3000', description: 'Local Development' },
+  { url: 'http://localhost:3000/api/v1', description: 'Local Development' },
 ];
 
 // Add base URL if different from localhost
 const baseUrl = env.BASE_URL as string;
 if (baseUrl && !baseUrl.includes('localhost')) {
-  servers.unshift({ url: baseUrl, description: 'Public URL' });
+  servers.unshift({ url: `${baseUrl}/api/v1`, description: 'Public URL' });
 }
 
 export const swaggerSpec = swaggerJsdoc({
