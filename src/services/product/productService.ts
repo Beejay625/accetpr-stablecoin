@@ -21,29 +21,33 @@ export class ProductService {
   /**
    * Create a new product
    * 
-   * @param userId - The user ID creating the product
+   * @param clerkUserId - The Clerk user ID creating the product
    * @param productRequest - The product request data
    * @param uploadedFile - Optional uploaded image file
    * @returns Promise<Product> - The created product
    */
   static async createProduct(
-    userId: string,
+    clerkUserId: string,
     productRequest: ProductRequest,
     uploadedFile?: Express.Multer.File
   ): Promise<Product> {
-    this.logger.info('createProduct', { userId, productName: productRequest.productName }, 'Creating product');
+    this.logger.info('createProduct', { clerkUserId, productName: productRequest.productName }, 'Creating product');
 
     try {
       // Fail fast: Validate request first
       validateProductRequest(productRequest);
 
+      // Get local user ID for database operations
+      const user = await userService.ensureUserExists(clerkUserId);
+      const localUserId = user.id;
+
       // Run parallel operations for better performance
       const [userUniqueNameResult, imageUrl] = await Promise.all([
         // Get user's unique name (required for payment link)
-        userService.getUserUniqueName(userId),
+        userService.getUserUniqueName(clerkUserId),
         // Handle image upload if provided
         uploadedFile 
-          ? ImageStorageService.saveImage(uploadedFile, userId)
+          ? ImageStorageService.saveImage(uploadedFile, localUserId)
           : Promise.resolve(productRequest.image)
       ]);
 
