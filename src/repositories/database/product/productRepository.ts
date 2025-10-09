@@ -380,7 +380,8 @@ export class ProductRepository {
         productId,
         error: error.message
       }, 'Failed to update product in database');
-      throw new Error(`Failed to update product: ${error.message}`);
+      // Re-throw original error to preserve error code
+      throw error;
     }
   }
 }
