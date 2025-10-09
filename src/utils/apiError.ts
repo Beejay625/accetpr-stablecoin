@@ -106,8 +106,24 @@ export class ApiError {
    */
   static server(res: Response, error: any): Response {
     const errorId = `ERR_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    // Log the full error but don't expose it to client
+    const isDev = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev';
+    
+    // Log the full error
     console.error(`[${errorId}] Server Error:`, error);
+    
+    // In development: Show full error details
+    if (isDev) {
+      return this.error(res, error.message || 'Internal server error', 500, 'INTERNAL_ERROR', {
+        errorId,
+        stack: error.stack,
+        name: error.name,
+        code: error.code,
+        cause: error.cause,
+        originalError: error.toString(),
+      });
+    }
+    
+    // In production: Hide sensitive details
     return this.error(res, 'Internal server error', 500, 'INTERNAL_ERROR', {
       errorId,
       message: 'An unexpected error occurred. Please try again later.',
