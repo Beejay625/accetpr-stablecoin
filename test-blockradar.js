@@ -78,16 +78,20 @@ async function testWalletId() {
   logSection('TEST 2: Verify Wallet ID');
   
   try {
-    const result = await makeRequest(`/wallets/${BLOCKRADAR_BASE_WALLET_ID}`);
+    // Try to list addresses for this wallet (better test than getting wallet details)
+    const result = await makeRequest(`/wallets/${BLOCKRADAR_BASE_WALLET_ID}/addresses`);
     
     if (result.ok) {
       log('✅ Wallet ID is valid', colors.green);
-      log(`   Wallet Name: ${result.data.data?.name || 'N/A'}`, colors.blue);
       log(`   Wallet ID: ${BLOCKRADAR_BASE_WALLET_ID}`, colors.blue);
+      const addresses = result.data.data || [];
+      log(`   Existing Addresses: ${addresses.length}`, colors.blue);
       return true;
     } else {
-      log('❌ Wallet ID is invalid', colors.red);
-      log(`   Error: ${result.data.message || result.data.error}`, colors.red);
+      log('❌ Wallet ID is invalid or unauthorized', colors.red);
+      log(`   Status: ${result.status}`, colors.red);
+      log(`   Error: ${result.data.message || result.data.error || 'Unknown error'}`, colors.red);
+      log(`   Wallet ID: ${BLOCKRADAR_BASE_WALLET_ID}`, colors.yellow);
       return false;
     }
   } catch (error) {
@@ -126,10 +130,11 @@ async function testGenerateAddress() {
   }
 }
 
-async function testGetBalance(addressId) {
+async function testGetBalance(addressId, address) {
   logSection('TEST 4: Get Address Balance');
   
   try {
+    // Get balance for the address
     const result = await makeRequest(
       `/wallets/${BLOCKRADAR_BASE_WALLET_ID}/addresses/${addressId}/balance`
     );
@@ -235,7 +240,7 @@ async function runTests() {
     log('\n⚠️  Address generation failed. Cannot test balance and transactions.', colors.yellow);
   } else {
     // Test 4: Get Balance
-    results.getBalance = await testGetBalance(addressResult.addressId);
+    results.getBalance = await testGetBalance(addressResult.addressId, addressResult.address);
     
     // Test 5: Get Transactions
     results.getTransactions = await testGetTransactions(addressResult.addressId);
