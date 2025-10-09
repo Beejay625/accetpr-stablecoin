@@ -19,15 +19,6 @@ export class ProductService {
   private static logger = createLoggerWithFunction('ProductService', { module: 'service' });
 
   /**
-   * Helper: Get local user ID from Clerk user ID
-   * Internal method to translate Clerk ID to database ID
-   */
-  private static async getLocalUserId(clerkUserId: string): Promise<string> {
-    const user = await userService.ensureUserExists(clerkUserId);
-    return user.id;
-  }
-
-  /**
    * Create a new product
    * 
    * @param clerkUserId - The Clerk user ID creating the product
