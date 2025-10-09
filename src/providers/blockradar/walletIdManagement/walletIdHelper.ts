@@ -1,4 +1,16 @@
-import { CHAIN_WALLET_MAP } from './configuration';
+import { CHAIN_WALLET_CONFIG } from './configuration';
+
+/**
+ * Process the configuration to create a lookup map
+ * Expands comma-separated chains into individual entries
+ */
+const CHAIN_WALLET_MAP: Record<string, string> = Object.fromEntries(
+  Object.entries(CHAIN_WALLET_CONFIG)
+    .flatMap(([chains, walletId]) => 
+      chains.split(',').map(chain => [chain.trim(), walletId])
+    )
+    .filter(([_, value]) => value !== undefined)
+) as Record<string, string>;
 
 /**
  * Get the appropriate BlockRadar wallet ID based on chain
