@@ -22,7 +22,7 @@ export class WithdrawController {
    */
   static async executeSingleWithdraw(req: any, res: Response): Promise<void> {
     try {
-      const userId = req.authUserId!; // Guaranteed by requireAuthWithUserId middleware
+      const userId = req.localUserId!; // Guaranteed by requireAuthWithUserId middleware
       const { chain, asset, amount, address, metadata, reference } = req.body;
 
       logger.info('executeSingleWithdraw', { userId, chain, asset, amount, address }, 'Processing single withdraw request');
@@ -130,7 +130,7 @@ export class WithdrawController {
    */
   static async executeBatchWithdraw(req: any, res: Response): Promise<void> {
     try {
-      const userId = req.authUserId!; // Guaranteed by requireAuthWithUserId middleware
+      const userId = req.localUserId!; // Guaranteed by requireAuthWithUserId middleware
       const { assets } = req.body;
 
       logger.info('executeBatchWithdraw', { userId, assetCount: assets?.length }, 'Processing batch withdraw request');

@@ -21,7 +21,7 @@ export class WalletController {
    */
   static async getBalance(req: any, res: Response): Promise<void> {
     try {
-      const userId = req.authUserId!; // Guaranteed by requireAuthWithUserId middleware
+      const userId = req.localUserId!; // Guaranteed by requireAuthWithUserId middleware
       const chain = req.query.chain as string;
       
       logger.info('getBalance', { userId, chain }, 'Getting wallet balance');

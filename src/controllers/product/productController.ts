@@ -102,7 +102,7 @@ export class ProductController {
    */
   static async getUserProducts(req: any, res: Response): Promise<Response | void> {
     try {
-      const userId = req.authUserId!; // Guaranteed by requireAuthWithUserId middleware
+      const userId = req.localUserId!; // Guaranteed by requireAuthWithUserId middleware
       const { status } = req.query;
 
       logger.info('getUserProducts', { 
@@ -149,7 +149,7 @@ export class ProductController {
    */
   static async getProductPaymentCounts(req: any, res: Response): Promise<Response | void> {
     try {
-      const userId = req.authUserId!;
+      const userId = req.localUserId!;
       const { productId } = req.params;
 
       if (!productId) {
@@ -192,7 +192,7 @@ export class ProductController {
    */
   static async getProductPaymentAmounts(req: any, res: Response): Promise<Response | void> {
     try {
-      const userId = req.authUserId!;
+      const userId = req.localUserId!;
       const { productId } = req.params;
 
       if (!productId) {
@@ -235,7 +235,7 @@ export class ProductController {
    */
   static async getUserProductStats(req: any, res: Response): Promise<Response | void> {
     try {
-      const userId = req.authUserId!; // Guaranteed by requireAuthWithUserId middleware
+      const userId = req.localUserId!; // Guaranteed by requireAuthWithUserId middleware
 
       logger.info('getUserProductStats', { userId }, 'Processing get user product stats request');
 
@@ -266,7 +266,7 @@ export class ProductController {
    */
   static async updateProduct(req: any, res: Response): Promise<Response | void> {
     try {
-      const userId = req.authUserId!;
+      const userId = req.localUserId!;
       const { productId } = req.params;
       const updateData = req.body;
       const uploadedFile = req.file;

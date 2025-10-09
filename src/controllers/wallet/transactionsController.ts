@@ -20,7 +20,7 @@ export class TransactionsController {
    */
   static async getUserTransactions(req: any, res: Response): Promise<void> {
     try {
-      const userId = req.authUserId!; // Guaranteed by requireAuthWithUserId middleware
+      const userId = req.localUserId!; // Guaranteed by requireAuthWithUserId middleware
       const { chain } = req.params;
 
       logger.info('getUserTransactions', { userId, chain }, 'Processing get transactions request');
