@@ -1,11 +1,9 @@
 import { Router } from 'express';
-import { requireAuthWithUserId } from '../../../middleware/auth';
 import { WalletController } from '../../../controllers/wallet/getBalance';
 
 const router = Router();
 
-// All wallet routes require authentication
-// Add your wallet endpoints here
+// Authentication handled globally in protected/index.ts
 
 /**
  * @swagger
