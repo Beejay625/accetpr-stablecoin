@@ -20,29 +20,24 @@ export class WalletService {
   static async getWalletBalance(
     userId: string,
     chain: string = 'base'
-  ): Promise<{ convertedBalance: string; chain: string; asset: string }> {
+  ): Promise<{ convertedBalance: string; chain: string; asset: string }[]> {
     try {
       this.logger.debug('getWalletBalance', { userId, chain }, 'Getting wallet balance');
       
       // Get address ID using the repository method
       const addressId = await walletRepository.getAddressId(userId, chain);
       
-      // Get balance using BlockRadar (provider handles wallet ID selection)
-      const balanceData = await getAddressBalance(addressId);
+      // Get all balances for this address (returns array of all assets)
+      const balances = await getAddressBalance(addressId);
       
       this.logger.debug('getWalletBalance', { 
         userId, 
         addressId,
-        convertedBalance: balanceData.convertedBalance,
-        chain: balanceData.chain,
-        asset: balanceData.asset
-      }, 'Wallet balance retrieved');
+        balanceCount: balances.length,
+        balances: balances.map(b => ({ asset: b.asset, balance: b.convertedBalance }))
+      }, 'Wallet balances retrieved');
       
-      return {
-        convertedBalance: balanceData.convertedBalance,
-        chain: balanceData.chain,
-        asset: balanceData.asset
-      };
+      return balances;
     } catch (error: any) {
       this.logger.error('getWalletBalance', { 
         userId, 
