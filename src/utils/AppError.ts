@@ -12,13 +12,13 @@ export class AppError extends Error {
   public readonly statusCode: number;
   public readonly isOperational: boolean;
   public readonly details?: any;
-  public readonly code?: string;
+  public readonly code: string;
 
   constructor(
     message: string,
     statusCode: number = 500,
     details?: any,
-    code?: string
+    code: string = 'INTERNAL_ERROR'
   ) {
     super(message);
     
