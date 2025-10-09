@@ -74,7 +74,7 @@ function performGracefulShutdown(signal: string, shouldExit: boolean = true): vo
   // Import shutdown function dynamically to avoid circular dependency
   import('./shutdown')
     .then((module) => {
-      return module.ServiceShutdown.shutdown(signal);
+      return module.ServiceShutdown.shutdown(signal as NodeJS.Signals);
     })
     .then(() => {
       logger.info('Graceful shutdown completed');
