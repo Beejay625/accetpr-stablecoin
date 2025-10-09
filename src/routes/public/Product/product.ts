@@ -5,7 +5,7 @@ const router = Router();
 
 /**
  * @swagger
- * /api/v1/public/p/{uniqueName}/{slug}:
+ * /public/p/{uniqueName}/{slug}:
  *   get:
  *     summary: Get product by payment link (Public)
  *     description: |

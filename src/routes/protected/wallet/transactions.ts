@@ -9,7 +9,7 @@ const router = Router();
 
 /**
  * @swagger
- * /api/v1/protected/wallet/transactions/{chain}:
+ * /protected/wallet/transactions/{chain}:
  *   get:
  *     summary: Get wallet transactions for a specific chain
  *     description: Retrieve all transactions for the authenticated user's wallet on the specified blockchain chain

@@ -7,7 +7,7 @@ const router = Router();
 
 /**
  * @swagger
- * /api/v1/protected/wallet/balance:
+ * /protected/wallet/balance:
  *   get:
  *     summary: Get wallet balance
  *     description: Retrieve the balance for the authenticated user's wallet on a specific chain

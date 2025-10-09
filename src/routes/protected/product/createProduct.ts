@@ -8,7 +8,7 @@ const router = Router();
 
 /**
  * @swagger
- * /api/v1/protected/product:
+ * /protected/product:
  *   post:
  *     summary: Create a new product
  *     description: |

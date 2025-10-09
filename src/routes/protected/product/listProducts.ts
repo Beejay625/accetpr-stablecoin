@@ -7,7 +7,7 @@ const router = Router();
 
 /**
  * @swagger
- * /api/v1/protected/product:
+ * /protected/product:
  *   get:
  *     summary: Get all products for authenticated user
  *     description: Retrieve all products created by the authenticated user with optional status filtering (basic info only, use separate endpoints for payment statistics)

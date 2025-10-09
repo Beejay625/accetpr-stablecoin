@@ -7,7 +7,7 @@ const router = Router();
 
 /**
  * @swagger
- * /api/v1/protected/product/{productId}/payment-counts:
+ * /protected/product/{productId}/payment-counts:
  *   get:
  *     summary: Get payment intent counts for a specific product
  *     description: Get the count of payment intents by status for a specific product
@@ -68,7 +68,7 @@ router.get('/:productId/payment-counts',
 
 /**
  * @swagger
- * /api/v1/protected/product/{productId}/payment-amounts:
+ * /protected/product/{productId}/payment-amounts:
  *   get:
  *     summary: Get payment intent amounts for a specific product
  *     description: Get the total amounts (in dollars) of payment intents by status for a specific product
@@ -135,7 +135,7 @@ router.get('/:productId/payment-amounts',
 
 /**
  * @swagger
- * /api/v1/protected/product/stats:
+ * /protected/product/stats:
  *   get:
  *     summary: Get product statistics for authenticated user
  *     description: Get aggregate statistics for all products owned by the authenticated user

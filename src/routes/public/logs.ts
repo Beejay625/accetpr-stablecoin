@@ -5,7 +5,7 @@ export const logsRouter = Router();
 
 /**
  * @swagger
- * /api/v1/public/logs:
+ * /public/logs:
  *   get:
  *     summary: Get application logs from in-memory buffer
  *     description: |

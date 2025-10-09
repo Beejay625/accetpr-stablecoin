@@ -7,7 +7,7 @@ const router = Router();
 
 /**
  * @swagger
- * /api/v1/protected/wallet/withdraw/single:
+ * /protected/wallet/withdraw/single:
  *   post:
  *     summary: Execute single asset withdrawal
  *     description: Execute a single asset withdrawal for the authenticated user's wallet

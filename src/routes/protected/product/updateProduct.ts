@@ -8,7 +8,7 @@ const router = Router();
 
 /**
  * @swagger
- * /api/v1/protected/product/{productId}:
+ * /protected/product/{productId}:
  *   put:
  *     summary: Update a product
  *     description: |

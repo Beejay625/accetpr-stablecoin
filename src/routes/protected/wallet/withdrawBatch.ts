@@ -7,7 +7,7 @@ const router = Router();
 
 /**
  * @swagger
- * /api/v1/protected/wallet/withdraw/batch:
+ * /protected/wallet/withdraw/batch:
  *   post:
  *     summary: Execute batch asset withdrawal
  *     description: Execute a batch asset withdrawal for the authenticated user's wallet
