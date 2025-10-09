@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import createRouter from './createProducts';
+import createRouter from './createProduct';
 import listRouter from './listProducts';
 import updateRouter from './updateProduct';
 import statsRouter from './stats';
