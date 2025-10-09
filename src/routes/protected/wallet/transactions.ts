@@ -22,9 +22,9 @@ const router = Router();
  *         required: true
  *         schema:
  *           type: string
- *           enum: [base, arbitrum, ethereum, polygon, optimism, solana, tron]
- *         description: Blockchain chain to get transactions for
- *         example: "base"
+ *           enum: [base, base-sepolia]
+ *         description: Blockchain chain to get transactions for (base for prod, base-sepolia for dev)
+ *         example: "base-sepolia"
  *     responses:
  *       200:
  *         description: Transactions retrieved successfully
