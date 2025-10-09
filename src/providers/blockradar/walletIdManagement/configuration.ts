@@ -2,44 +2,28 @@ import { env } from '../../../config/env';
 
 /**
  * Development Chains Configuration
+ * Format: { chain: [tokens] }
  */
-export const DEV_EVM_CHAINS = [
-  'base-sepolia',
-  // 'arbitrum'
-] as const;
-
-export const DEV_NON_EVM_CHAINS = [
-  // 'solana', 
-  // 'tron'
-] as const;
-
-/**
- * Production Chains Configuration
- */
-export const PROD_EVM_CHAINS = [
-  'base':['USDC']
-] as const;
-
-export const PROD_NON_EVM_CHAINS = [
-  // No non-EVM chains in production yet
-] as const;
-
-/**
- * Supported tokens per chain for development
- */
-export const DEV_SUPPORTED_TOKENS = {
+export const DEV_EVM_CHAINS = {
   'base-sepolia': ['USDC'],
-  // base: ['USDC'],
-  // arbitrum: ['USDC', 'USDT'],
-  // solana: ['USDC', 'USDT'],
-  // tron: ['USDT']
+  // 'arbitrum': ['USDC', 'USDT'],
+} as const;
+
+export const DEV_NON_EVM_CHAINS = {
+  // 'solana': ['USDC', 'USDT'], 
+  // 'tron': ['USDT']
 } as const;
 
 /**
- * Supported tokens per chain for production
+ * Production Chains Configuration
+ * Format: { chain: [tokens] }
  */
-export const PROD_SUPPORTED_TOKENS = {
+export const PROD_EVM_CHAINS = {
   'base': ['USDC']
+} as const;
+
+export const PROD_NON_EVM_CHAINS = {
+  // No non-EVM chains in production yet
 } as const;
 
 /**
