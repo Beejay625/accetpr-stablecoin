@@ -18,7 +18,7 @@ const logger = createLoggerWithFunction('PaymentLinkHelpers', { module: 'payment
  * @returns { userUniqueName: string; slug: string }
  */
 export function extractUserAndSlugFromLink(paymentLink: string): { userUniqueName: string; slug: string } {
-  const baseUrl = env.PAYMENT_BASE_URL;
+  const baseUrl = env.BASE_URL;
   
   // Remove base URL and extract path
   const path = paymentLink.replace(baseUrl, '');
