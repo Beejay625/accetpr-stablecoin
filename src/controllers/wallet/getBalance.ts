@@ -2,6 +2,7 @@ import { Response } from 'express';
 import { WalletService } from '../../services/wallet/walletService';
 import { ApiSuccess } from '../../utils/apiSuccess';
 import { ApiError } from '../../utils/apiError';
+import { handleDistributedError } from '../../utils/errorHandler';
 import { createLoggerWithFunction } from '../../logger';
 import { DEFAULT_CHAINS } from '../../providers/blockradar/walletIdAndTokenManagement/chainsAndTokensHelpers';
 
