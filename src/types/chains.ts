@@ -55,10 +55,11 @@ export const DEFAULT_CHAINS = (() => {
  * Supported tokens per chain for development
  */
 export const DEV_SUPPORTED_TOKENS = {
-  base: ['USDC'],
-  arbitrum: ['USDC', 'USDT'],
-  solana: ['USDC', 'USDT'],
-  tron: ['USDT']
+  'base-sepolia': ['USDC'],
+  // base: ['USDC'],
+  // arbitrum: ['USDC', 'USDT'],
+  // solana: ['USDC', 'USDT'],
+  // tron: ['USDT']
 } as const;
 
 /**
