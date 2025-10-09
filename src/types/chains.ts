@@ -47,24 +47,6 @@ export const DEFAULT_CHAINS = (() => {
 })();
 
 /**
- * Supported tokens per chain for development
- */
-export const DEV_SUPPORTED_TOKENS = {
-  'base-sepolia': ['USDC'],
-  // base: ['USDC'],
-  // arbitrum: ['USDC', 'USDT'],
-  // solana: ['USDC', 'USDT'],
-  // tron: ['USDT']
-} as const;
-
-/**
- * Supported tokens per chain for production
- */
-export const PROD_SUPPORTED_TOKENS = {
-  'base': ['USDC']
-} as const;
-
-/**
  * Get supported tokens based on environment
  */
 export const SUPPORTED_TOKENS = (() => {
