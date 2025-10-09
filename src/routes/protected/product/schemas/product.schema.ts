@@ -56,11 +56,21 @@ export const createProductSchema = z.object({
   
   linkExpiration: LinkExpirationEnum,
   
-  customDays: z.number()
-    .int('Custom days must be a whole number')
-    .positive('Custom days must be positive')
-    .max(3650, 'Custom days must not exceed 10 years')
-    .optional()
+  customDays: z.preprocess(
+    (val) => {
+      // Handle multipart/form-data which sends everything as strings
+      if (typeof val === 'string') {
+        const num = parseInt(val, 10);
+        return isNaN(num) ? val : num;
+      }
+      return val;
+    },
+    z.number()
+      .int('Custom days must be a whole number')
+      .positive('Custom days must be positive')
+      .max(3650, 'Custom days must not exceed 10 years')
+      .optional()
+  )
 }).refine(
   (data) => {
     // If linkExpiration is 'custom_days', customDays must be provided
