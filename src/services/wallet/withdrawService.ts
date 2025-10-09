@@ -23,9 +23,12 @@ export class SingleWithdrawService {
     this.logger.info('executeSingleWithdraw', { userId, chain: singleWithdrawRequest.chain, asset: singleWithdrawRequest.asset, amount: singleWithdrawRequest.amount }, 'Executing single withdraw');
 
     try {
-      // Validate chain
-      if (!DEFAULT_CHAINS.includes(singleWithdrawRequest.chain)) {
-        throw new Error(`Invalid chain. Supported chains: ${DEFAULT_CHAINS.join(', ')}`);
+      // Fail fast: Validate chain is supported
+      if (!isChainSupported(singleWithdrawRequest.chain)) {
+        const envType = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev' ? 'development' : 'production';
+        throw new Error(
+          `Invalid chain: ${singleWithdrawRequest.chain}. Supported chains in ${envType}: ${DEFAULT_CHAINS.join(', ')}`
+        );
       }
 
       // Validate single withdraw request
