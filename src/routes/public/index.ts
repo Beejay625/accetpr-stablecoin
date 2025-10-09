@@ -4,7 +4,7 @@ import { statusRouter } from './status';
 import { paymentIntentRouter } from './payment/paymentIntent';
 import { webhookRouter } from './webhook';
 import { logsRouter } from './logs';
-import productRouter from './product';
+import productRouter from './Product/product';
 
 export const publicRouter = Router();
 
