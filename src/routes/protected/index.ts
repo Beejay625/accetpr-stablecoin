@@ -1,8 +1,6 @@
 import { Router } from 'express';
 import { requireAuthWithUserId } from '../../middleware/auth';
-import walletRouter from './wallet/getBalance';
-import withdrawRouter from './wallet/withdraw';
-import transactionsRouter from './wallet/transactions';
+import walletRouter from './wallet';
 import productRouter from './product';
 import uniqueNameRouter from './user/uniqueName';
 
@@ -13,8 +11,6 @@ protectedRouter.use(requireAuthWithUserId);
 
 // Wallet endpoints
 protectedRouter.use('/wallet', walletRouter);
-protectedRouter.use('/wallet', withdrawRouter);
-protectedRouter.use('/wallet', transactionsRouter);
 
 // Product endpoints
 protectedRouter.use('/product', productRouter);
