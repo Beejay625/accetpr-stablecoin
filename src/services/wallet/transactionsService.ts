@@ -2,7 +2,7 @@ import { createLoggerWithFunction } from '../../logger';
 import { walletRepository } from '../../repositories/database/wallet';
 import { getAddressTransactions } from '../../providers/blockradar/transactions/walletTransactions';
 import { TransactionsResponse, SimplifiedTransaction } from '../../providers/blockradar/transactions/transactions.interface';
-import { DEFAULT_CHAINS } from '../../../chainsAndTokens';
+import { DEFAULT_CHAINS } from '../../providers/stripe/chainsAndTokens';
 
 /**
  * Transactions Service

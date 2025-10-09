@@ -5,7 +5,7 @@
  */
 
 import { LinkExpiration, ProductRequest } from '../product.interface';
-import { DEFAULT_CHAINS, isTokenSupportedOnChain, getSupportedTokensForChain } from '../../../../chainsAndTokens';
+import { DEFAULT_CHAINS, isTokenSupportedOnChain, getSupportedTokensForChain } from '../../../providers/stripe/chainsAndTokens';
 import { env } from '../../../config/env';
 
 /**

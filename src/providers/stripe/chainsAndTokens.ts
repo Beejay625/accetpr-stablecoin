@@ -3,7 +3,7 @@ import {
   DEV_NON_EVM_CHAINS,
   PROD_EVM_CHAINS,
   PROD_NON_EVM_CHAINS
-} from './src/providers/blockradar/walletIdManagement/configuration';
+} from '../blockradar/walletIdManagement/configuration';
 
 // Helper to determine environment
 const isDev = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev';
