@@ -156,45 +156,11 @@ app.get('/health', (_req, res) => {
 app.use('/api/v1/public', require('./routes/public').default);
 app.use('/api/v1/protected', require('./routes/protected').default);
 
-// 404 handler
-app.use('*', (req, res) => {
-  res.status(404).json({
-    success: false,
-    message: 'Route not found',
-    path: req.originalUrl,
-  });
-});
+// 404 handler (MUST be after all routes, before error handler)
+app.use(notFound);
 
-// Global error handler
-app.use((err: any, req: express.Request, res: express.Response, _next: express.NextFunction) => {
-  const statusCode = err.status || err.statusCode || 500;
-  
-  // Log full error details
-  logger.error({
-    error: {
-      message: err.message,
-      stack: err.stack,
-      code: err.code,
-      name: err.name,
-    },
-    request: {
-      method: req.method,
-      url: req.url,
-      body: req.body,
-      params: req.params,
-      query: req.query,
-    }
-  }, `❌ Unhandled Error: ${err.message}`);
-  
-  res.status(statusCode).json({
-    success: false,
-    message: err.message || 'Internal server error',
-    ...(env.NODE_ENV === 'development' && { 
-      stack: err.stack,
-      details: err.details || err.data,
-    }),
-  });
-});
+// Central error handler (MUST be last middleware)
+app.use(errorHandler);
 
 // Initialize services
 const initializeServices = async () => {
