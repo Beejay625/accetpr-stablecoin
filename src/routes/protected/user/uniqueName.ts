@@ -45,39 +45,39 @@ const router = Router();
  *                     reason:
  *                       type: string
  */
-router.get('/check/:uniqueName', UniqueNameController.checkAvailability);
+router.get('/check/:uniqueName', asyncHandler(UniqueNameController.checkAvailability));
 
 /**
  * @swagger
  * /protected/unique-name/set:
- *   post:
- *     summary: Set or update unique name for user
- *     tags: [Unique Name]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - uniqueName
- *             properties:
- *               uniqueName:
- *                 type: string
- *                 minLength: 3
- *                 maxLength: 30
- *                 pattern: '^[a-zA-Z][a-zA-Z0-9_]*$'
- *                 description: Unique name (3-30 chars, alphanumeric + underscore, must start with letter)
- *     responses:
- *       200:
- *         description: Unique name set/updated successfully
- *       400:
- *         description: Bad request (validation error or name already taken)
- *       401:
- *         description: Unauthorized
- */
+   *   post:
+     *     summary: Set or update unique name for user
+     *     tags: [Unique Name]
+     *     security:
+       *       - bearerAuth: []
+       *     requestBody:
+         *       required: true
+         *       content:
+           *         application/json:
+             *           schema:
+               *             type: object
+               *             required:
+                 *               - uniqueName
+                 *             properties:
+                   *               uniqueName:
+                     *                 type: string
+                     *                 minLength: 3
+                     *                 maxLength: 30
+                     *                 pattern: '^[a-zA-Z][a-zA-Z0-9_]*$'
+                     *                 description: Unique name (3-30 chars, alphanumeric + underscore, must start with letter)
+                     *     responses:
+                       *       200:
+                         *         description: Unique name set/updated successfully
+                         *       400:
+                           *         description: Bad request (validation error or name already taken)
+                           *       401:
+                             *         description: Unauthorized
+                             */
 router.post('/set', 
   validate(z.object({
     uniqueName: z.string()
@@ -85,40 +85,40 @@ router.post('/set',
       .max(30, 'Unique name must not exceed 30 characters')
       .regex(/^[a-zA-Z][a-zA-Z0-9_]*$/, 'Unique name must start with a letter and contain only letters, numbers, and underscores')
   }), 'body'), 
-  UniqueNameController.setUniqueName
+  asyncHandler(UniqueNameController.setUniqueName)
 );
 
 
 /**
  * @swagger
  * /protected/unique-name:
- *   get:
- *     summary: Get user's unique name
- *     tags: [Unique Name]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: Unique name retrieved successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                 message:
- *                   type: string
- *                 data:
- *                   type: object
- *                   properties:
- *                     uniqueName:
- *                       type: string
- *                       nullable: true
- *       401:
- *         description: Unauthorized
- */
-router.get('/', UniqueNameController.getUniqueName);
+   *   get:
+     *     summary: Get user's unique name
+     *     tags: [Unique Name]
+     *     security:
+       *       - bearerAuth: []
+       *     responses:
+         *       200:
+           *         description: Unique name retrieved successfully
+           *         content:
+             *           application/json:
+               *             schema:
+                 *               type: object
+                 *               properties:
+                   *                 success:
+                     *                   type: boolean
+                     *                 message:
+                       *                   type: string
+                       *                 data:
+                         *                   type: object
+                         *                   properties:
+                           *                     uniqueName:
+                             *                       type: string
+                             *                       nullable: true
+                             *       401:
+                               *         description: Unauthorized
+                               */
+router.get('/', asyncHandler(UniqueNameController.getUniqueName));
 
 
 export default router;
