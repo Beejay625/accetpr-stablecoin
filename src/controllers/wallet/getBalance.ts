@@ -71,8 +71,8 @@ export class WalletController {
         return;
       }
       
-      // Generic error handling
-      ApiError.handle(res, error);
+      // Distributed error handling
+      return handleDistributedError(res, error);
     }
   }
 
