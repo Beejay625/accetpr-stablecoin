@@ -94,7 +94,7 @@ export class ProductService {
 
       return product;
     } catch (error: any) {
-      this.logger.error('createProduct', { userId, error: error.message }, 'Failed to create product');
+      this.logger.error('createProduct', { clerkUserId, error: error.message }, 'Failed to create product');
       throw error;
     }
   }
