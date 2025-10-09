@@ -80,11 +80,12 @@ export class ProductService {
         status: 'active'
       };
 
-      // Save to database and return product
-      await ProductRepository.saveProduct(product, userId);
+      // Save to database and return product (using local ID for foreign key)
+      await ProductRepository.saveProduct(product, localUserId);
 
       this.logger.info('createProduct', {
-        userId,
+        clerkUserId,
+        localUserId,
         productId: product.id,
         slug: product.slug,
         paymentLink: product.paymentLink,
