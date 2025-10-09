@@ -71,7 +71,7 @@ const router = Router();
  *                   amount: "0.5"
  *                   metadata: { "id": "0001" }
  *                   reference: "batch withdraw 1"
- *                 - chain: "base"
+ *                 - chain: "base-sepolia"
  *                   asset: "USDC"
  *                   address: "0x451dEFC27B45808078e875556AF06bCFdC697BA4"
  *                   amount: "0.3"
