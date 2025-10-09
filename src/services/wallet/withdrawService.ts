@@ -88,10 +88,13 @@ export class BatchWithdrawService {
       // Get unique chains from assets
       const chains = [...new Set(batchWithdrawRequest.assets.map(asset => asset.chain))];
       
-      // Validate all chains
+      // Fail fast: Validate all chains are supported
+      const envType = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev' ? 'development' : 'production';
       for (const chain of chains) {
-        if (!DEFAULT_CHAINS.includes(chain)) {
-          throw new Error(`Invalid chain: ${chain}. Supported chains: ${DEFAULT_CHAINS.join(', ')}`);
+        if (!isChainSupported(chain)) {
+          throw new Error(
+            `Invalid chain: ${chain}. Supported chains in ${envType}: ${DEFAULT_CHAINS.join(', ')}`
+          );
         }
       }
 
