@@ -24,6 +24,14 @@ export class WalletService {
     try {
       this.logger.debug('getWalletBalance', { userId, chain }, 'Getting wallet balance');
       
+      // Fail fast: Validate chain is supported
+      if (!isChainSupported(chain)) {
+        const envType = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev' ? 'development' : 'production';
+        throw new Error(
+          `Invalid chain: ${chain}. Supported chains in ${envType}: ${DEFAULT_CHAINS.join(', ')}`
+        );
+      }
+      
       // Get address ID using the repository method
       const addressId = await walletRepository.getAddressId(userId, chain);
       
