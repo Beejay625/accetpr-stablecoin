@@ -39,8 +39,8 @@ export const EVM_CHAINS = (() => {
 
 /**
  * Get chains based on environment
- * Development: base, arbitrum, solana, tron
- * Production: base-sepolia
+ * Development: base-sepolia
+ * Production: base
  */
 export const DEFAULT_CHAINS = (() => {
   const isDev = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev';
