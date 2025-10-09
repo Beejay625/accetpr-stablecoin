@@ -5,7 +5,7 @@
  */
 
 import { LinkExpiration, ProductRequest } from '../product.interface';
-import { DEFAULT_CHAINS, isTokenSupportedOnChain, getSupportedTokensForChain } from '../../../types/chains';
+import { DEFAULT_CHAINS, isTokenSupportedOnChain, getSupportedTokensForChain } from '../../../types/chainsAndTokens';
 import { env } from '../../../config/env';
 
 /**
