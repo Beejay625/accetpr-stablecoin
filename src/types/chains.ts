@@ -11,7 +11,8 @@ export const EVM_CHAINS = [
  */
 export const DEV_CHAINS = [
   EVM_CHAINS,
-  
+  'solana', 
+  'tron'
 ] as const;
 
 /**
