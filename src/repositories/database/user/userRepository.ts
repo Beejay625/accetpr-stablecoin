@@ -13,10 +13,10 @@ export class UserRepository {
   /**
    * Find user by Clerk ID
    */
-  async findByClerkId(clerkUserId: string): Promise<{ id: string; clerkUserId: string } | null> {
+  async findByClerkId(clerkUserId: string): Promise<{ id: string; clerkUserId: string; uniqueName?: string | null } | null> {
     const logger = createLoggerWithFunction('findByClerkId', { module: 'repository' });
     try {
-      const user = await DatabaseOperations.findUnique<{ id: string; clerkUserId: string }>('user', { clerkUserId });
+      const user = await DatabaseOperations.findUnique<{ id: string; clerkUserId: string; uniqueName?: string | null }>('user', { clerkUserId });
       
       logger.debug({ clerkUserId, found: !!user }, 'User lookup by Clerk ID');
       return user;
