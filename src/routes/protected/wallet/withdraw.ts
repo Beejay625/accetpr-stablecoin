@@ -1,10 +1,9 @@
 import { Router } from 'express';
-import { requireAuthWithUserId } from '../../../middleware/auth';
 import { WithdrawController } from '../../../controllers/wallet/withdrawController';
 
 const router = Router();
 
-// All withdraw routes require authentication
+// Authentication handled globally in protected/index.ts
 
 /**
  * @swagger
