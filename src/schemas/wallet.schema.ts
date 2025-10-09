@@ -73,7 +73,7 @@ export const batchWithdrawSchema = z.object({
             const num = parseFloat(val);
             return num > 0;
           },
-          'Amount must be greater than 0'
+          { message: 'Amount must be greater than 0' }
         ),
       
       address: z.string()
