@@ -48,7 +48,8 @@ export class ProductRepository {
         productId: product.id, 
         error: error.message 
       }, 'Failed to save product to database');
-      throw new Error(`Failed to save product: ${error.message}`);
+      // Re-throw original error to preserve error code (e.g., P2002 for unique constraint)
+      throw error;
     }
   }
 
