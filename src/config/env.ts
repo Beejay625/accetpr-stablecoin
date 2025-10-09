@@ -42,8 +42,8 @@ const envSchema = {
   STRIPE_PUBLISHABLE_KEY: { type: String, required: false },
   STRIPE_WEBHOOK_SECRET: { type: String, required: false },
   
-  // Base URL configuration (optional)
-  BASE_URL: { type: String, default: 'https://pay.stablestack.com', required: false },
+  // Base URL configuration (required for payment links and Swagger)
+  BASE_URL: { type: String, required: true },
   
   // Cache configuration
   CACHE_PROVIDER: { type: String, default: 'memory', required: false },
