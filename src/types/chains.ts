@@ -39,7 +39,7 @@ export const EVM_CHAINS = (() => {
 
 /**
  * Get chains based on environment
- * Development: base-sepolia
+ * Development: base-sepolia, solana, tron
  * Production: base
  */
 export const DEFAULT_CHAINS = (() => {
