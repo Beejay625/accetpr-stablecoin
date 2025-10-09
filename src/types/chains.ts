@@ -3,7 +3,7 @@
  */
 export const EVM_CHAINS = [
   'base',
-  'arbitrum'
+  // 'arbitrum'
 ] as const;
 
 /**
