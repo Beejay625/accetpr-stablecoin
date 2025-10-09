@@ -7,8 +7,9 @@ const servers = [
 ];
 
 // Add base URL if different from localhost
-if (env.BASE_URL && !env.BASE_URL.includes('localhost')) {
-  servers.unshift({ url: env.BASE_URL, description: 'Public URL' });
+const baseUrl = env.BASE_URL as string;
+if (baseUrl && !baseUrl.includes('localhost')) {
+  servers.unshift({ url: baseUrl, description: 'Public URL' });
 }
 
 export const swaggerSpec = swaggerJsdoc({
