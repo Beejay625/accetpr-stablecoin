@@ -409,7 +409,7 @@ router.put('/:productId', uploadPaymentImage, handleUploadError, ProductControll
  *       404:
  *         description: Product not found
  */
-router.get('/:productId/payment-counts', requireAuthWithUserId, ProductController.getProductPaymentCounts);
+router.get('/:productId/payment-counts', ProductController.getProductPaymentCounts);
 
 /**
  * @swagger
