@@ -35,9 +35,9 @@ const router = Router();
  *                   properties:
  *                     chain:
  *                       type: string
- *                       enum: [base, arbitrum, ethereum, polygon, optimism, solana, tron]
- *                       description: Blockchain chain for the asset
- *                       example: "base"
+ *                       enum: [base, base-sepolia]
+ *                       description: Blockchain chain for the asset (base for prod, base-sepolia for dev)
+ *                       example: "base-sepolia"
  *                     asset:
  *                       type: string
  *                       description: Asset symbol
