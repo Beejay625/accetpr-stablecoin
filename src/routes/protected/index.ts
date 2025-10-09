@@ -3,7 +3,7 @@ import { requireAuthWithUserId } from '../../middleware/auth';
 import walletRouter from './wallet/getBalance';
 import withdrawRouter from './wallet/withdraw';
 import transactionsRouter from './wallet/transactions';
-import productRouter from './product/product';
+import productRouter from './product';
 import uniqueNameRouter from './user/uniqueName';
 
 export const protectedRouter = Router();
