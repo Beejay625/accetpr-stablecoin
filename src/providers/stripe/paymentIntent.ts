@@ -119,60 +119,6 @@ export class StripePaymentProvider {
     }
   }
 
-  /**
-   * Retrieve a Stripe payment intent
-   * 
-   * @param paymentIntentId - The Stripe payment intent ID
-   * @returns Promise<Stripe.PaymentIntent>
-   */
-  static async getPaymentIntent(paymentIntentId: string): Promise<Stripe.PaymentIntent> {
-    this.logger.info('getPaymentIntent', { paymentIntentId }, 'Retrieving Stripe payment intent');
-
-    try {
-      const paymentIntent = await this.stripe.paymentIntents.retrieve(paymentIntentId);
-
-      this.logger.info('getPaymentIntent', { 
-        paymentIntentId: paymentIntent.id,
-        status: paymentIntent.status,
-        amount: paymentIntent.amount
-      }, 'Stripe payment intent retrieved successfully');
-
-      return paymentIntent;
-    } catch (error: any) {
-      this.logger.error('getPaymentIntent', { 
-        paymentIntentId, 
-        error: error.message 
-      }, 'Failed to retrieve Stripe payment intent');
-      throw new Error(`Failed to retrieve Stripe payment intent: ${error.message}`);
-    }
-  }
-
-  /**
-   * Cancel a Stripe payment intent
-   * 
-   * @param paymentIntentId - The Stripe payment intent ID
-   * @returns Promise<Stripe.PaymentIntent>
-   */
-  static async cancelPaymentIntent(paymentIntentId: string): Promise<Stripe.PaymentIntent> {
-    this.logger.info('cancelPaymentIntent', { paymentIntentId }, 'Cancelling Stripe payment intent');
-
-    try {
-      const paymentIntent = await this.stripe.paymentIntents.cancel(paymentIntentId);
-
-      this.logger.info('cancelPaymentIntent', { 
-        paymentIntentId: paymentIntent.id,
-        status: paymentIntent.status
-      }, 'Stripe payment intent cancelled successfully');
-
-      return paymentIntent;
-    } catch (error: any) {
-      this.logger.error('cancelPaymentIntent', { 
-        paymentIntentId, 
-        error: error.message 
-      }, 'Failed to cancel Stripe payment intent');
-      throw new Error(`Failed to cancel Stripe payment intent: ${error.message}`);
-    }
-  }
 
   /**
    * Create statement descriptor from product name
