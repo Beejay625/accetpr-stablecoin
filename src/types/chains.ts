@@ -30,6 +30,14 @@ export const PROD_CHAINS = [
 ] as const;
 
 /**
+ * Get EVM chains based on environment
+ */
+export const EVM_CHAINS = (() => {
+  const isDev = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev';
+  return isDev ? EVM_CHAINS_DEV : EVM_CHAINS_PROD;
+})();
+
+/**
  * Get chains based on environment
  * Development: base, arbitrum, solana, tron
  * Production: base-sepolia
