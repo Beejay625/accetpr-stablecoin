@@ -14,6 +14,8 @@ import { ServiceInitializer } from './server/initialize';
 import { ServiceShutdown } from './server/shutdown';
 import { clerkMiddlewareHandler } from './middleware/auth/clerk';
 import { attachUserId } from './middleware/auth/attachUserId';
+import { errorHandler } from './middleware/errorHandler';
+import { setupGlobalExceptionHandlers } from './server/exceptionHandlers';
 
 // Load environment variables
 config();
