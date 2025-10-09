@@ -117,7 +117,7 @@ async function testCreatePaymentIntent(userId, productId) {
       clientSecret: 'pi_test_secret_123',
       amount: 2999,
       currency: 'USD',
-      status: 'initiated',
+      status: 'INITIATED',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     };
@@ -154,7 +154,7 @@ async function testUpdatePaymentStatus(paymentIntentId, newStatus) {
     
     log('✅ Payment status updated', colors.green);
     log(`   Payment Intent ID: ${updated.paymentIntentId}`, colors.blue);
-    log(`   Old Status: initiated`, colors.blue);
+    log(`   Old Status: INITIATED`, colors.blue);
     log(`   New Status: ${updated.status}`, colors.blue);
     
     return { success: true };
@@ -280,12 +280,12 @@ async function runTests() {
     
     // Test 4: Update Payment Status
     if (testPayment) {
-      results.updateStatus = (await testUpdatePaymentStatus(testPayment.paymentIntentId, 'succeeded')).success;
+      results.updateStatus = (await testUpdatePaymentStatus(testPayment.paymentIntentId, 'SUCCEEDED')).success;
     }
     
     // Test 5: Get Payments by Status
     if (testPayment) {
-      results.getByStatus = (await testGetPaymentsByStatus(testUser.id, 'succeeded')).success;
+      results.getByStatus = (await testGetPaymentsByStatus(testUser.id, 'SUCCEEDED')).success;
     }
     
     // Test 6: Get Payments by Product

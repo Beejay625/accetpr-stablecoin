@@ -26,10 +26,22 @@ export class DatabaseOperations {
     try {
       if (uniqueFields && uniqueFields.length > 0) {
         // Use upsert for race condition protection
-        const whereClause = uniqueFields.reduce((acc, field) => {
-          acc[field] = data[field];
-          return acc;
-        }, {} as any);
+        let whereClause: any;
+        
+        if (uniqueFields.length > 1) {
+          // Compound unique constraint (e.g., userId + chain)
+          // Prisma expects the format: { userId_chain: { userId: "...", chain: "..." } }
+          const compoundKey = uniqueFields.join('_');
+          const compoundValue = uniqueFields.reduce((acc, field) => {
+            acc[field] = data[field];
+            return acc;
+          }, {} as any);
+          
+          whereClause = { [compoundKey]: compoundValue };
+        } else {
+          // Single unique field
+          whereClause = { [uniqueFields[0]]: data[uniqueFields[0]] };
+        }
 
         const result = await (prisma[model] as any).upsert({
           where: whereClause,
