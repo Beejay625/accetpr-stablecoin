@@ -89,7 +89,7 @@ export class WalletService {
         
         let addressData: { address: string; addressId: string };
         
-        if (evmChainsList.includes(chain)) {
+        if (evmChainsList.includes(chain as string)) {
           // Use the shared EVM address
           addressData = evmAddressData!;
           this.logger.debug('generateMultiChainWallets', { userId, chain }, 'Using shared EVM address');
