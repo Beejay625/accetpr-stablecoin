@@ -2,7 +2,9 @@ import {
   DEV_EVM_CHAINS,
   DEV_NON_EVM_CHAINS,
   PROD_EVM_CHAINS,
-  PROD_NON_EVM_CHAINS
+  PROD_NON_EVM_CHAINS,
+  DEV_SUPPORTED_TOKENS,
+  PROD_SUPPORTED_TOKENS
 } from '../providers/blockradar/walletIdManagement/configuration';
 
 /**
@@ -18,7 +20,7 @@ export const PROD_CHAINS = [
   ...PROD_NON_EVM_CHAINS
 ] as const;
 
-// Re-export for backward compatibility
+// Re-export for convenience
 export const EVM_CHAINS_DEV = DEV_EVM_CHAINS;
 export const EVM_CHAINS_PROD = PROD_EVM_CHAINS;
 
