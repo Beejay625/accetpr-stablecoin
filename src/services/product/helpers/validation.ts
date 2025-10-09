@@ -7,66 +7,77 @@
 import { LinkExpiration, ProductRequest } from '../product.interface';
 import { DEFAULT_CHAINS, isTokenSupportedOnChain, getSupportedTokensForChain } from '../../../providers/blockradar/walletIdAndTokenManagement/chainsAndTokensHelpers';
 import { env } from '../../../config/env';
+import { Err } from '../../../errors';
 
 /**
  * Validate product request
+ * Throws AppError (400/422) for validation failures
  */
 export function validateProductRequest(request: ProductRequest): void {
   if (!request.productName || typeof request.productName !== 'string') {
-    throw new Error('Product name is required and must be a string');
+    throw Err.validation('Product name is required and must be a string');
   }
 
   if (!request.description || typeof request.description !== 'string') {
-    throw new Error('Description is required and must be a string');
+    throw Err.validation('Description is required and must be a string');
   }
 
   if (!request.amount || typeof request.amount !== 'string') {
-    throw new Error('Amount is required and must be a string');
+    throw Err.validation('Amount is required and must be a string');
   }
 
   // Validate amount is a positive number
   const amount = parseFloat(request.amount);
   if (isNaN(amount) || amount <= 0) {
-    throw new Error('Amount must be a positive number');
+    throw Err.validation('Amount must be a positive number');
   }
 
   if (!request.payoutChain || typeof request.payoutChain !== 'string') {
-    throw new Error('Payout chain is required and must be a string');
+    throw Err.validation('Payout chain is required and must be a string');
   }
 
-  // Validate payout chain is supported
+  // Validate payout chain is supported (fail fast)
   if (!DEFAULT_CHAINS.includes(request.payoutChain)) {
-    throw new Error(`Invalid payout chain: ${request.payoutChain}. Supported chains: ${DEFAULT_CHAINS.join(', ')}`);
+    const envType = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev' ? 'development' : 'production';
+    throw Err.validation(
+      `Invalid payout chain: ${request.payoutChain}. Supported chains in ${envType}: ${DEFAULT_CHAINS.join(', ')}`,
+      { providedChain: request.payoutChain, supportedChains: DEFAULT_CHAINS }
+    );
   }
 
   if (!request.payoutToken || typeof request.payoutToken !== 'string') {
-    throw new Error('Payout token is required and must be a string');
+    throw Err.validation('Payout token is required and must be a string');
   }
 
   // Validate token is supported on the specified chain
   if (!isTokenSupportedOnChain(request.payoutChain, request.payoutToken)) {
     const supportedTokens = getSupportedTokensForChain(request.payoutChain);
-    throw new Error(`Token ${request.payoutToken} is not supported on chain ${request.payoutChain}. Supported tokens: ${supportedTokens.join(', ')}`);
+    throw Err.validation(
+      `Token ${request.payoutToken} is not supported on chain ${request.payoutChain}. Supported tokens: ${supportedTokens.join(', ')}`,
+      { providedToken: request.payoutToken, supportedTokens }
+    );
   }
 
   if (!request.slug || typeof request.slug !== 'string') {
-    throw new Error('Slug is required and must be a string');
+    throw Err.validation('Slug is required and must be a string');
   }
 
   if (!Object.values(LinkExpiration).includes(request.linkExpiration)) {
-    throw new Error(`Invalid link expiration: ${request.linkExpiration}. Supported values: ${Object.values(LinkExpiration).join(', ')}`);
+    throw Err.validation(
+      `Invalid link expiration: ${request.linkExpiration}. Supported values: ${Object.values(LinkExpiration).join(', ')}`
+    );
   }
 
   // If custom days is specified, validate it
   if (request.linkExpiration === LinkExpiration.CUSTOM_DAYS) {
     if (!request.customDays || typeof request.customDays !== 'number' || request.customDays <= 0) {
-      throw new Error('Custom days is required and must be a positive number when link expiration is custom_days');
+      throw Err.validation('Custom days is required and must be a positive number when link expiration is custom_days');
     }
   }
 
   // Validate image URL if provided
   if (request.image && typeof request.image !== 'string') {
-    throw new Error('Image must be a valid URL string');
+    throw Err.validation('Image must be a valid URL string');
   }
 }
 
