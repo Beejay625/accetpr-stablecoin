@@ -86,7 +86,7 @@ const router = Router();
  *               productName: "Premium Subscription"
  *               description: "Monthly premium subscription with advanced features"
  *               amount: "29.99"
- *               payoutChain: "base"
+ *               payoutChain: "base-sepolia"
  *               payoutToken: "USDC"
  *               slug: "premium-subscription"
  *               linkExpiration: "custom_days"
