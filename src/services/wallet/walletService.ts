@@ -66,8 +66,9 @@ export class WalletService {
       const results: { address: string; addressId: string; id: string; chain: string }[] = [];
       
       // Separate EVM and non-EVM chains
-      const evmChains = chains.filter(chain => EVM_CHAINS.includes(chain as any));
-      const nonEvmChains = chains.filter(chain => !EVM_CHAINS.includes(chain as any));
+      const evmChainsList = Array.from(EVM_CHAINS);
+      const evmChains = chains.filter(chain => evmChainsList.includes(chain));
+      const nonEvmChains = chains.filter(chain => !evmChainsList.includes(chain));
       
       this.logger.debug('generateMultiChainWallets', { userId, evmChains, nonEvmChains }, 'Separated chains by type');
       
