@@ -430,7 +430,10 @@ router.put('/:productId',
  *       404:
  *         description: Product not found
  */
-router.get('/:productId/payment-counts', ProductController.getProductPaymentCounts);
+router.get('/:productId/payment-counts', 
+  validate(productIdSchema, 'params'),
+  ProductController.getProductPaymentCounts
+);
 
 /**
  * @swagger
