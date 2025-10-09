@@ -5,69 +5,35 @@ import {
   PROD_NON_EVM_CHAINS
 } from '../providers/blockradar/walletIdManagement/configuration';
 
+// Helper to determine environment
+const isDev = () => process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev';
+
 /**
- * Extract chain names from chain-token configuration
+ * Get all chains with tokens for current environment
  */
-const getChainNames = (chainConfig: Record<string, readonly string[]>): readonly string[] => {
-  return Object.keys(chainConfig) as readonly string[];
-};
+const ALL_CHAINS_WITH_TOKENS = (() => {
+  return isDev() 
+    ? { ...DEV_EVM_CHAINS, ...DEV_NON_EVM_CHAINS }
+    : { ...PROD_EVM_CHAINS, ...PROD_NON_EVM_CHAINS };
+})();
 
 /**
- * Combined chains for each environment
- */
-export const DEV_CHAINS = [
-  getChainNames(DEV_EVM_CHAINS),
-  ...getChainNames(DEV_NON_EVM_CHAINS)
-] as const;
-
-export const PROD_CHAINS = [
-  getChainNames(PROD_EVM_CHAINS),
-  ...getChainNames(PROD_NON_EVM_CHAINS)
-] as const;
-
-// Export chain names only (for backward compatibility)
-export const EVM_CHAINS_DEV = getChainNames(DEV_EVM_CHAINS);
-export const EVM_CHAINS_PROD = getChainNames(PROD_EVM_CHAINS);
-
-// Export supported tokens
-export const DEV_SUPPORTED_TOKENS = { ...DEV_EVM_CHAINS, ...DEV_NON_EVM_CHAINS };
-export const PROD_SUPPORTED_TOKENS = { ...PROD_EVM_CHAINS, ...PROD_NON_EVM_CHAINS };
-
-/**
- * Get EVM chains based on environment
+ * Get EVM chains for current environment
  */
 export const EVM_CHAINS = (() => {
-  const isDev = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev';
-  return isDev ? EVM_CHAINS_DEV : EVM_CHAINS_PROD;
+  return Object.keys(isDev() ? DEV_EVM_CHAINS : PROD_EVM_CHAINS);
 })();
 
 /**
- * Get chains based on environment
- * Development: base-sepolia
- * Production: base
+ * Get all chains for current environment (flattened)
  */
-export const DEFAULT_CHAINS = (() => {
-  const isDev = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev';
-  
-  const chains = isDev ? DEV_CHAINS : PROD_CHAINS;
-  
-  // Flatten nested arrays
-  return chains.flat() as readonly string[];
-})();
-
-/**
- * Get supported tokens based on environment
- */
-export const SUPPORTED_TOKENS = (() => {
-  const isDev = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev';
-  return isDev ? DEV_SUPPORTED_TOKENS : PROD_SUPPORTED_TOKENS;
-})();
+export const DEFAULT_CHAINS = Object.keys(ALL_CHAINS_WITH_TOKENS);
 
 /**
  * Get supported tokens for a chain
  */
 export function getSupportedTokensForChain(chain: string): readonly string[] {
-  return SUPPORTED_TOKENS[chain as keyof typeof SUPPORTED_TOKENS] || [];
+  return ALL_CHAINS_WITH_TOKENS[chain as keyof typeof ALL_CHAINS_WITH_TOKENS] || [];
 }
 
 /**
@@ -84,7 +50,7 @@ export function isTokenSupportedOnChain(chain: string, token: string): boolean {
 export function getAllSupportedTokenChains(): Array<{ chain: string; token: string }> {
   const combinations: Array<{ chain: string; token: string }> = [];
   
-  Object.entries(SUPPORTED_TOKENS).forEach(([chain, tokens]) => {
+  Object.entries(ALL_CHAINS_WITH_TOKENS).forEach(([chain, tokens]) => {
     tokens.forEach(token => {
       combinations.push({ chain, token });
     });
@@ -97,3 +63,10 @@ export function getAllSupportedTokenChains(): Array<{ chain: string; token: stri
  * Default asset to use for wallet generation
  */
 export const DEFAULT_ASSET = 'USDC';
+
+// Re-export for backward compatibility
+export const DEV_CHAINS = DEFAULT_CHAINS;
+export const PROD_CHAINS = DEFAULT_CHAINS;
+export const EVM_CHAINS_DEV = EVM_CHAINS;
+export const EVM_CHAINS_PROD = EVM_CHAINS;
+export const SUPPORTED_TOKENS = ALL_CHAINS_WITH_TOKENS;
