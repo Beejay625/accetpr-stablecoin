@@ -2,7 +2,6 @@ import swaggerJsdoc from 'swagger-jsdoc';
 import { env } from './env';
 import { 
   DEFAULT_CHAINS, 
-  getSupportedTokensForChain,
   getAllSupportedTokenChains 
 } from '../providers/blockradar/walletIdAndTokenManagement/chainsAndTokensHelpers';
 
