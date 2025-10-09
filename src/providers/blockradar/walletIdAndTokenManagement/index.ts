@@ -12,4 +12,4 @@ export {
   DEV_NON_EVM_CHAINS,
   PROD_EVM_CHAINS,
   PROD_NON_EVM_CHAINS
-} from '../../../../configuration';
+} from '../../../config/configuration';
