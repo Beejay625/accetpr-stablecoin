@@ -193,5 +193,17 @@ const startServer = async () => {
   }
 };
 
+// Process-level error handlers (safety net)
+process.on('unhandledRejection', (reason: any) => {
+  logger.error({ reason }, '🔴 Unhandled Promise Rejection');
+  console.error('Unhandled Rejection:', reason);
+});
+
+process.on('uncaughtException', (error: Error) => {
+  logger.error({ error }, '🔴 Uncaught Exception');
+  console.error('Uncaught Exception:', error);
+  process.exit(1);
+});
+
 // Start the server
 startServer();
