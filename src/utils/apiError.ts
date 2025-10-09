@@ -160,7 +160,7 @@ export class ApiError {
    * Smart error handler - automatically determines error type
    */
   static handle(res: Response, error: any): Response {
-    // Define error handlers
+    // Define error handlers (order matters!)
     const handlers = [
       {
         condition: (err: any) => err.status === 401 || err.name?.includes('clerk'),
@@ -171,11 +171,8 @@ export class ApiError {
         handler: () => this.error(res, 'Service unavailable', 503, 'SERVICE_UNAVAILABLE'),
       },
       {
-        condition: (err: any) => err.name?.includes('prisma') || err.code?.startsWith('P'),
-        handler: () => this.database(res, error),
-      },
-      {
-        condition: (err: any) => err.code === 'CONFLICT' || err.message?.includes('unique') || err.code === 'P2002',
+        // Check for Prisma unique constraint violation first (P2002)
+        condition: (err: any) => err.code === 'P2002',
         handler: () => {
           const isDev = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev';
           
@@ -183,9 +180,19 @@ export class ApiError {
           let message = 'Resource already exists';
           let details = undefined;
           
-          if (err.code === 'P2002' && err.meta?.target) {
+          if (err.meta?.target) {
             const fields = Array.isArray(err.meta.target) ? err.meta.target.join(', ') : err.meta.target;
-            message = `Duplicate entry. A record with this ${fields} already exists.`;
+            
+            // User-friendly messages for specific conflicts
+            if (fields.includes('slug')) {
+              message = `A product with this slug already exists. Please use a different slug.`;
+            } else if (fields.includes('uniqueName')) {
+              message = `This unique name is already taken. Please choose a different one.`;
+            } else if (fields.includes('chain')) {
+              message = `A wallet for this chain already exists.`;
+            } else {
+              message = `Duplicate entry. A record with this ${fields} already exists.`;
+            }
             
             if (isDev) {
               details = {
@@ -199,6 +206,14 @@ export class ApiError {
           
           return this.conflict(res, message, details);
         },
+      },
+      {
+        condition: (err: any) => err.name?.includes('prisma') || err.code?.startsWith('P'),
+        handler: () => this.database(res, error),
+      },
+      {
+        condition: (err: any) => err.code === 'CONFLICT' || err.message?.includes('unique'),
+        handler: () => this.conflict(res, 'Resource already exists'),
       },
     ];
 
