@@ -6,5 +6,10 @@
  */
 
 export { getWalletIdForChain } from './walletIdHelper';
-export { CHAIN_WALLET_CONFIG } from './configuration';
-export { EVM_CHAINS, DEFAULT_CHAINS, getSupportedTokensForChain, isTokenSupportedOnChain, getAllSupportedTokenChains, DEFAULT_ASSET } from './chainsAndTokens';
+export { 
+  CHAIN_WALLET_CONFIG,
+  DEV_EVM_CHAINS,
+  DEV_NON_EVM_CHAINS,
+  PROD_EVM_CHAINS,
+  PROD_NON_EVM_CHAINS
+} from './configuration';
