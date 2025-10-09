@@ -7,7 +7,7 @@ import {
   updateProductSchema, 
   productStatusSchema,
   productIdSchema 
-} from '../../../schemas';
+} from './schemas/product.schema';
 
 const router = Router();
 
