@@ -6,3 +6,4 @@
  */
 
 export { getWalletIdForChain } from './walletIdHelper';
+
