@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { WithdrawController } from '../../../controllers/wallet/withdrawController';
 import { validate } from '../../../middleware/validate';
 import { batchWithdrawSchema } from './schemas/wallet.schema';
+import { asyncHandler } from '../../../errors';
 
 const router = Router();
 
@@ -126,7 +127,7 @@ const router = Router();
  */
 router.post('/withdraw/batch', 
   validate(batchWithdrawSchema, 'body'),
-  WithdrawController.executeBatchWithdraw
+  asyncHandler(WithdrawController.executeBatchWithdraw)
 );
 
 export default router;

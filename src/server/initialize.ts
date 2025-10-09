@@ -3,7 +3,9 @@ import { testDatabaseConnection } from '../db/prisma';
 import { registerAllEventHandlers } from '../events/handlers';
 import { CacheAssetsOnStartup } from './cacheAssetsOnStartup';
 import { ImageStorageService } from '../providers/cloudinary/imageStorage';
-import { StripePaymentProvider } from '../providers/stripe/paymentIntent';
+import { StripePaymentProvider } from '../providers/stripe/CreatePaymentIntent';
+import { StripeCancelPaymentProvider } from '../providers/stripe/cancelPaymentIntent';
+import { StripeVerifyMicrodepositsProvider } from '../providers/stripe/verifyMicrodeposits';
 import { WebhookController } from '../controllers/payment/webhookController';
 
 /**
@@ -140,7 +142,9 @@ export class ServiceInitializer {
     
     try {
       StripePaymentProvider.initialize();
-      logger.info('Stripe payment provider initialized');
+      StripeCancelPaymentProvider.initialize();
+      StripeVerifyMicrodepositsProvider.initialize();
+      logger.info('Stripe payment providers initialized');
     } catch (error: any) {
       logger.error({ error: error.message }, 'Stripe payment provider initialization failed');
       throw error;

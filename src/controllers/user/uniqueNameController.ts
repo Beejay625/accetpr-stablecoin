@@ -2,6 +2,7 @@ import { Response } from 'express';
 import { userService } from '../../services/user/userService';
 import { isUniqueNameAvailable } from '../../services/user/helpers/uniqueNameValidation';
 import { Err } from '../../errors';
+import { sendSuccess } from '../../utils/successResponse';
 
 /**
  * Unique Name Controller
@@ -17,13 +18,10 @@ export class UniqueNameController {
     
     const result = await isUniqueNameAvailable(uniqueName);
     
-    res.json({
-      ok: true,
-      data: {
-        uniqueName,
-        available: result.available,
-        ...(result.error && { reason: result.error })
-      }
+    sendSuccess(res, result.available ? 'Unique name is available' : 'Unique name is not available', {
+      uniqueName,
+      available: result.available,
+      ...(result.error && { reason: result.error })
     });
   }
 
@@ -45,15 +43,13 @@ export class UniqueNameController {
       throw Err.validation(result.error || 'Failed to set/update unique name');
     }
     
-    res.json({
-      ok: true,
-      data: {
-        uniqueName,
-        isUpdate: result.isUpdate,
-        message: result.isUpdate 
-          ? 'Unique name updated successfully' 
-          : 'Unique name set successfully'
-      }
+    const message = result.isUpdate 
+      ? 'Unique name updated successfully' 
+      : 'Unique name set successfully';
+    
+    sendSuccess(res, message, {
+      uniqueName,
+      isUpdate: result.isUpdate
     });
   }
 
@@ -74,11 +70,8 @@ export class UniqueNameController {
       throw Err.validation(result.error);
     }
     
-    res.json({
-      ok: true,
-      data: {
-        uniqueName: result.uniqueName || null
-      }
+    sendSuccess(res, 'Unique name retrieved successfully', {
+      uniqueName: result.uniqueName || null
     });
   }
 }

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import express from 'express';
 import { WebhookController } from '../../controllers/payment/webhookController';
+import { asyncHandler } from '../../errors';
 
 const router = Router();
 
@@ -43,7 +44,7 @@ const router = Router();
  */
 router.post('/stripe', 
   express.raw({ type: 'application/json' }),
-  WebhookController.handleWebhook
+  asyncHandler(WebhookController.handleWebhook)
 );
 
 export { router as webhookRouter };

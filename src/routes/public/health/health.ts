@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { PublicController } from '../../../controllers/publicController';
+import { asyncHandler } from '../../../errors';
 
 export const healthRouter = Router();
 
@@ -28,6 +29,6 @@ export const healthRouter = Router();
  *                     status:
  *                       type: string
  */
-healthRouter.get('/', PublicController.healthCheck);
+healthRouter.get('/', asyncHandler(PublicController.healthCheck));
 
 export default healthRouter;

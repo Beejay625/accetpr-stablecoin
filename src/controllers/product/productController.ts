@@ -4,6 +4,7 @@ import { ProductService } from '../../services/product/productService';
 import { ProductRepository } from '../../repositories/database/product/productRepository';
 import { ProductRequest } from '../../services/product/product.interface';
 import { Err } from '../../errors';
+import { sendSuccess } from '../../utils/successResponse';
 
 /**
  * Product Controller
@@ -44,27 +45,24 @@ export class ProductController {
       hasImage: !!product.image
     }, 'Product created successfully');
 
-    res.status(201).json({
-      ok: true,
-      data: {
-        product: {
-          id: product.id,
-          image: product.image,
-          productName: product.productName,
-          description: product.description,
-          amount: product.amount,
-          payoutChain: product.payoutChain,
-          payoutToken: product.payoutToken,
-          slug: product.slug,
-          paymentLink: product.paymentLink,
-          linkExpiration: product.linkExpiration,
-          customDays: product.customDays,
-          expiresAt: product.expiresAt,
-          status: product.status,
-          createdAt: product.createdAt
-        }
+    sendSuccess(res, 'Product created successfully', {
+      product: {
+        id: product.id,
+        image: product.image,
+        productName: product.productName,
+        description: product.description,
+        amount: product.amount,
+        payoutChain: product.payoutChain,
+        payoutToken: product.payoutToken,
+        slug: product.slug,
+        paymentLink: product.paymentLink,
+        linkExpiration: product.linkExpiration,
+        customDays: product.customDays,
+        expiresAt: product.expiresAt,
+        status: product.status,
+        createdAt: product.createdAt
       }
-    });
+    }, 201);
   }
 
   /**
@@ -91,12 +89,9 @@ export class ProductController {
       status: status || 'all'
     }, 'User products retrieved successfully');
 
-    res.json({
-      ok: true,
-      data: {
-        products,
-        count: products.length
-      }
+    sendSuccess(res, 'Products retrieved successfully', {
+      products,
+      count: products.length
     });
   }
 
@@ -115,22 +110,25 @@ export class ProductController {
       productId 
     }, 'Processing update product request');
 
-    const product = await ProductService.updateProduct(
+    const result = await ProductService.updateProduct(
       clerkUserId, 
       productId, 
       productRequest, 
       uploadedFile
     );
 
+    if (!result.success || !result.product) {
+      throw Err.internal(result.error || 'Failed to update product');
+    }
+
     logger.info('updateProduct', {
       clerkUserId,
       productId,
-      hasImage: !!product.image
+      hasImage: !!result.product.image
     }, 'Product updated successfully');
 
-    res.json({
-      ok: true,
-      data: { product }
+    sendSuccess(res, 'Product updated successfully', {
+      product: result.product
     });
   }
 
@@ -158,10 +156,7 @@ export class ProductController {
       ...counts
     }, 'Product payment counts retrieved successfully');
 
-    res.json({
-      ok: true,
-      data: counts
-    });
+    sendSuccess(res, 'Payment counts retrieved successfully', counts);
   }
 
   /**
@@ -188,10 +183,7 @@ export class ProductController {
       ...amounts
     }, 'Product payment amounts retrieved successfully');
 
-    res.json({
-      ok: true,
-      data: amounts
-    });
+    sendSuccess(res, 'Payment amounts retrieved successfully', amounts);
   }
 
   /**
@@ -207,13 +199,44 @@ export class ProductController {
 
     logger.info('getUserProductStats', {
       clerkUserId,
-      totalProducts: stats.totalProducts,
-      activeProducts: stats.activeProducts
+      totalProducts: stats.total,
+      activeProducts: stats.active
     }, 'User product stats retrieved successfully');
 
-    res.json({
-      ok: true,
-      data: stats
+    sendSuccess(res, 'Product statistics retrieved successfully', stats);
+  }
+
+  /**
+   * Get product by payment link (public endpoint)
+   * GET /api/v1/public/p/:uniqueName/:slug
+   */
+  static async getProductByPaymentLink(req: any, res: Response): Promise<void> {
+    const { uniqueName, slug } = req.params;
+
+    logger.info('getProductByPaymentLink', { uniqueName, slug }, 'Processing get product by payment link request');
+
+    const result = await ProductService.getProductByPaymentLink(uniqueName, slug);
+
+    if (result.error || !result.product) {
+      if (result.errorType === 'not_found') {
+        throw Err.notFound(result.error || 'Product not found');
+      } else if (result.errorType === 'expired') {
+        throw Err.badRequest(result.error || 'Product expired');
+      } else if (result.errorType === 'cancelled') {
+        throw Err.badRequest(result.error || 'Product cancelled');
+      }
+      throw Err.internal('Failed to retrieve product');
+    }
+
+    logger.info('getProductByPaymentLink', {
+      uniqueName,
+      slug,
+      productId: result.product.id,
+      productName: result.product.productName
+    }, 'Product retrieved successfully');
+
+    sendSuccess(res, 'Product retrieved successfully', {
+      product: result.product
     });
   }
 }

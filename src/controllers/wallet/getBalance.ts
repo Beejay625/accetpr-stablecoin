@@ -1,9 +1,7 @@
 import { Response } from 'express';
 import { WalletService } from '../../services/wallet/walletService';
-import { ApiSuccess } from '../../utils/apiSuccess';
-import { ApiError } from '../../utils/apiError';
 import { createLoggerWithFunction } from '../../logger';
-import { DEFAULT_CHAINS } from '../../providers/blockradar/walletIdAndTokenManagement/chainsAndTokensHelpers';
+import { sendSuccess } from '../../utils/successResponse';
 
 /**
  * Wallet Controller
@@ -20,59 +18,28 @@ export class WalletController {
    * GET /api/v1/protected/wallet/balance
    */
   static async getBalance(req: any, res: Response): Promise<void> {
-    try {
-      const userId = req.localUserId!; // Guaranteed by requireAuthWithUserId middleware
-      const chain = req.query.chain as string;
-      
-      logger.info('getBalance', { userId, chain }, 'Getting wallet balance');
+    const clerkUserId = req.authUserId!;
+    const chain = req.query.chain as string;
+    
+    logger.info('getBalance', { clerkUserId, chain }, 'Getting wallet balance');
 
-      // Validate chain parameter is provided
-      if (!chain) {
-        ApiError.validation(res, 'Chain parameter is required');
-        return;
-      }
+    // Get wallet balances using WalletService (returns array of all assets)
+    const balances = await WalletService.getWalletBalance(clerkUserId, chain);
 
-      // Validate chain parameter using environment-based chains
-      const validChains = DEFAULT_CHAINS;
-      if (!validChains.includes(chain)) {
-        ApiError.validation(res, `Invalid chain. Supported chains: ${validChains.join(', ')}`);
-        return;
-      }
+    logger.info('getBalance', { 
+      clerkUserId, 
+      chain, 
+      balanceCount: balances.length,
+      balances: balances.map(b => ({ asset: b.asset, balance: b.convertedBalance }))
+    }, 'Wallet balances retrieved successfully');
 
-      // Get wallet balances using WalletService (returns array of all assets)
-      const balances = await WalletService.getWalletBalance(userId, chain);
-
-      logger.info('getBalance', { 
-        userId, 
-        chain, 
-        balanceCount: balances.length,
-        balances: balances.map(b => ({ asset: b.asset, balance: b.convertedBalance }))
-      }, 'Wallet balances retrieved successfully');
-
-      // Return success response with all asset balances
-      ApiSuccess.success(res, 'Wallet balances retrieved successfully', {
-        balances: balances,
-        chain: chain,
-        userId: userId,
-        timestamp: new Date().toISOString()
-      });
-
-    } catch (error: any) {
-      logger.error('getBalance', { 
-        userId: req.localUserId, clerkUserId: req.authUserId, 
-        chain: req.query.chain,
-        error: error.message 
-      }, 'Failed to get wallet balance');
-      
-      // Handle specific error cases
-      if (error.message.includes('No wallet address found')) {
-        ApiError.notFound(res, 'Wallet not found for the specified chain. Wallet should be auto-created.');
-        return;
-      }
-      
-      // Generic error handling
-      ApiError.handle(res, error);
-    }
+    // Return success response with all asset balances
+    sendSuccess(res, 'Wallet balance retrieved successfully', {
+      balances,
+      chain,
+      userId: clerkUserId,
+      timestamp: new Date().toISOString()
+    });
   }
 
 }

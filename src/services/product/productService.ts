@@ -3,7 +3,7 @@ import { ProductRequest, Product } from './product.interface';
 import { ImageStorageService } from '../../providers/cloudinary/imageStorage';
 import { ProductRepository } from '../../repositories/database/product/productRepository';
 import { userService } from '../user/userService';
-import { Err, mapPrismaError } from '../../errors';
+import { Err } from '../../errors';
 import { 
   validateProductRequest, 
   generatePaymentLink,

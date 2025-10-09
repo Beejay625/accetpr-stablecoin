@@ -75,24 +75,27 @@ enum PaymentIntentStatus {
   INITIATED
   PROCESSING
   PENDING
+  REQUIRES_ACTION
+  MICRODEPOSITS_VERIFIED
   SUCCEEDED
   FAILED
   CANCELLED
 }
 
 model PaymentIntent {
-  id                String                @id @default(cuid())   // Auto-generated database ID
-  userId            String                // Now stores Clerk user ID
-  productId         String                // Product ID (pr_xxx) - reference to the product
-  slug              String                // Product slug - used to find the product
-  userUniqueName    String                // User's unique name - for payment link generation
-  paymentIntentId   String                @unique               // Our payment intent ID (unique)
-  clientSecret      String                // Stripe client secret for payment confirmation
-  amount            Int                   // Amount in cents
-  currency          String                // Currency code (USD, EUR, etc.)
-  status            PaymentIntentStatus   @default(INITIATED)       // Payment intent status
-  createdAt         DateTime              @default(now())
-  updatedAt         DateTime              @updatedAt
+  id                 String                @id @default(cuid())   // Auto-generated database ID
+  userId             String                // Now stores Clerk user ID
+  productId          String                // Product ID (pr_xxx) - reference to the product
+  slug               String                // Product slug - used to find the product
+  userUniqueName     String                // User's unique name - for payment link generation
+  paymentIntentId    String                @unique               // Stripe payment intent ID (unique)
+  clientSecret       String                @unique               // Stripe client secret (unique)
+  amount             Int                   // Amount in cents
+  currency           String                // Currency code (USD, EUR, etc.)
+  paymentMethodTypes String[]              @default([])          // Payment method types from Stripe (e.g., ["card", "link"] or ["us_bank_account"])
+  status             PaymentIntentStatus   @default(INITIATED)   // Payment intent status
+  createdAt          DateTime              @default(now())
+  updatedAt          DateTime              @updatedAt
 
   // Relations - Reference clerkUserId instead of id
   user User @relation(fields: [userId], references: [clerkUserId], onDelete: Cascade)

@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { PublicController } from '../../controllers/publicController';
+import { asyncHandler } from '../../errors';
 
 export const statusRouter = Router();
 
@@ -30,6 +31,6 @@ export const statusRouter = Router();
  *                 timestamp:
  *                   type: string
  */
-statusRouter.get('/', PublicController.status);
+statusRouter.get('/', asyncHandler(PublicController.status));
 
 export default statusRouter;

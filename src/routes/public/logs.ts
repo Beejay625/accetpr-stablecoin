@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { PublicController } from '../../controllers/publicController';
+import { asyncHandler } from '../../errors';
 
 export const logsRouter = Router();
 
@@ -94,7 +95,7 @@ export const logsRouter = Router();
  *       500:
  *         description: Internal server error
  */
-logsRouter.get('/', PublicController.getLogs);
+logsRouter.get('/', asyncHandler(PublicController.getLogs));
 
 export default logsRouter;
 

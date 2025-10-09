@@ -19,7 +19,11 @@ export const createPaymentIntentSchema = z.object({
         return link.includes('/');
       },
       'Invalid payment link format'
-    )
+    ),
+  clientSecret: z.string()
+    .trim()
+    .optional()
+    .describe('Optional: Existing client secret to retrieve payment intent instead of creating new one')
 });
 
 /**

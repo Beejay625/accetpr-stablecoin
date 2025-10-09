@@ -1,14 +1,12 @@
 import express from 'express';
-import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
-import pino from 'pino';
-import pinoHttp from 'pino-http';
 import { config } from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './config/swagger';
 import { env } from './config/env';
 import { createLoggerWithFunction } from './logger';
+import { requestLogger } from './middleware/requestLogger';
 import { ServerStartup } from './server/startup';
 import { ServiceInitializer } from './server/initialize';
 import { ServiceShutdown } from './server/shutdown';
@@ -17,6 +15,7 @@ import { attachUserId } from './middleware/auth/attachUserId';
 import { requestId } from './middleware/requestId';
 import { errorHandler } from './middleware/errorHandler';
 import { notFound } from './middleware/notFound';
+import { clerkCORS } from './middleware/cors';
 
 // Load environment variables
 config();
@@ -42,86 +41,14 @@ app.use(helmet({
   },
 }));
 
-// CORS configuration
-app.use(cors({
-  origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps, Postman, curl)
-    if (!origin) return callback(null, true);
-    
-    // If CORS_ORIGIN is *, allow all origins
-    if (env.CORS_ORIGIN === '*') {
-      return callback(null, origin);
-    }
-    
-    // Check if origin is in allowed list
-    const allowedOrigins = env.CORS_ORIGIN.split(',').map(o => o.trim());
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, origin);
-    }
-    
-    // Reject other origins
-    callback(new Error('Not allowed by CORS'));
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Clerk-Auth-Token'],
-}));
+// CORS configuration (Clerk-optimized)
+app.use(clerkCORS);
 
 // Compression middleware
 app.use(compression());
 
-// Request logging middleware - Clean logs with full error details
-app.use(pinoHttp({
-  logger: pino({ 
-    level: env.LOG_LEVEL,
-    formatters: {
-      level: (label) => {
-        return { level: label };
-      },
-    },
-  }),
-  // Don't log these routes
-  autoLogging: {
-    ignore: (req) => {
-      return req.url?.includes('/health') || 
-             req.url?.includes('.css') || 
-             req.url?.includes('.js') ||
-             req.url?.includes('.map') ||
-             req.url?.includes('favicon');
-    }
-  },
-  customLogLevel: (_req, res, err) => {
-    if (res.statusCode >= 400 && res.statusCode < 500) {
-      return 'warn';
-    } else if (res.statusCode >= 500 || err) {
-      return 'error';
-    }
-    return 'silent'; // Don't log successful requests in detail
-  },
-  customSuccessMessage: (req, _res) => {
-    return `✅ ${req.method} ${req.url}`;
-  },
-  customErrorMessage: (req, res, err) => {
-    if (err) {
-      return `❌ ${req.method} ${req.url} - ${res.statusCode} - ${err.message}`;
-    }
-    return `⚠️  ${req.method} ${req.url} - ${res.statusCode}`;
-  },
-  // Include full error details
-  serializers: {
-    err: pino.stdSerializers.err, // Full stack trace
-    req: (req) => ({
-      method: req.method,
-      url: req.url,
-      // Include useful headers for debugging
-      authorization: req.headers.authorization ? '***' : undefined,
-      contentType: req.headers['content-type'],
-    }),
-    res: (res) => ({
-      statusCode: res.statusCode,
-    }),
-  },
-}));
+// Request logging middleware (HTTP access logs)
+app.use(requestLogger);
 
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));

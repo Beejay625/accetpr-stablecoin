@@ -6,7 +6,6 @@
  */
 
 import { Prisma } from '@prisma/client';
-import { AppError } from './AppError';
 import { Err } from './factory';
 
 /**
@@ -21,7 +20,7 @@ export function mapPrismaError(error: any): never {
   // Unique constraint violation
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
     if (error.code === 'P2002') {
-      const fields = error.meta?.target as string[] | undefined;
+      const fields = error.meta?.['target'] as string[] | undefined;
       let message = 'Resource already exists';
       
       if (fields) {
@@ -38,7 +37,7 @@ export function mapPrismaError(error: any): never {
         }
       }
       
-      throw Err.conflict(message, {
+      throw Err.alreadyExists(message, {
         constraint: 'unique',
         fields,
         prismaCode: error.code,

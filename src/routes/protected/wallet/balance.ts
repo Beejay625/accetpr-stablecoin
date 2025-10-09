@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { WalletController } from '../../../controllers/wallet/getBalance';
 import { validate } from '../../../middleware/validate';
 import { chainQuerySchema } from './schemas/wallet.schema';
+import { asyncHandler } from '../../../errors';
 
 const router = Router();
 
@@ -69,7 +70,7 @@ const router = Router();
  */
 router.get('/balance', 
   validate(chainQuerySchema, 'query'),
-  WalletController.getBalance
+  asyncHandler(WalletController.getBalance)
 );
 
 export default router;

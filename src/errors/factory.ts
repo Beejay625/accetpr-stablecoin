@@ -3,7 +3,7 @@
  * 
  * Usage in services:
  *   throw Err.notFound('User not found');
- *   throw Err.conflict('Email already exists', { email: user.email });
+ *   throw Err.alreadyExists('Email already exists', { email: user.email });
  *   throw Err.badRequest('Invalid input', validationErrors);
  */
 
@@ -27,8 +27,8 @@ export const Err = {
     new AppError(message, 404, 'NOT_FOUND', details),
   
   // 409 Conflict - Resource already exists or constraint violation
-  conflict: (message = 'Conflict', details?: any) => 
-    new AppError(message, 409, 'CONFLICT', details),
+  alreadyExists: (message = 'Resource already exists', details?: any) => 
+    new AppError(message, 409, 'ALREADY_EXISTS', details),
   
   // 422 Unprocessable Entity - Validation failed
   validation: (message = 'Validation failed', details?: any) => 

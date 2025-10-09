@@ -44,22 +44,22 @@ const loggerOptions: pino.LoggerOptions = {
   level: env.LOG_LEVEL as pino.Level,
   formatters: {
     level: (label) => {
-      return { level: label };
+      return { level: label.toUpperCase() }; // INFO, WARN, ERROR
     },
   },
   timestamp: pino.stdTimeFunctions.isoTime,
 };
 
-// Add pretty printing in development
-if (env.NODE_ENV === 'development') {
+// Add pretty printing in development for readable output
+if (env.NODE_ENV === 'development' || env.NODE_ENV === 'dev') {
   loggerOptions.transport = {
     target: 'pino-pretty',
     options: {
       colorize: true,
       ignore: 'pid,hostname',
       translateTime: 'HH:MM:ss',
-      singleLine: false,
-      messageFormat: '{level} | {module} | {function} | {msg}',
+      singleLine: false, // Multi-line for readability
+      messageFormat: '{levelLabel} | {module} | {function} | {msg}',
     }
   };
 }
@@ -197,27 +197,5 @@ export function createLoggerWithFunction(
 export function createLogger(context: { [key: string]: any } = {}) {
   return baseLogger.child(context);
 }
-
-/**
- * Request logging middleware for HTTP requests
- * Uses pino-http for automatic request/response logging
- */
-export const requestLogger = require('pino-http')({
-  logger: baseLogger.child({ module: 'api', operation: 'request' }),
-  customLogLevel: (_req: any, res: any, _err: any) => {
-    if (res.statusCode >= 400 && res.statusCode < 500) {
-      return 'warn';
-    } else if (res.statusCode >= 500 || _err) {
-      return 'error';
-    }
-    return 'info';
-  },
-  customSuccessMessage: (req: any, res: any) => {
-    return `${req.method} ${req.url} ${res.statusCode}`;
-  },
-  customErrorMessage: (req: any, res: any, err: any) => {
-    return `${req.method} ${req.url} ${res.statusCode} - ${err.message}`;
-  },
-});
 
 export default baseLogger;

@@ -8,6 +8,8 @@ export enum PaymentIntentStatus {
   INITIATED = 'INITIATED',
   PROCESSING = 'PROCESSING',
   PENDING = 'PENDING',
+  REQUIRES_ACTION = 'REQUIRES_ACTION',
+  MICRODEPOSITS_VERIFIED = 'MICRODEPOSITS_VERIFIED',
   SUCCEEDED = 'SUCCEEDED',
   FAILED = 'FAILED',
   CANCELLED = 'CANCELLED'
@@ -23,6 +25,7 @@ export interface PaymentIntent {
   clientSecret: string;          // Stripe client secret for payment confirmation
   amount: number;                // Amount in cents
   currency: string;              // Currency code (USD, EUR, etc.)
+  paymentMethodTypes?: string[]; // Payment method types from Stripe (e.g., ["card", "link"] or ["us_bank_account"])
   status: PaymentIntentStatus;   // Payment intent status
   createdAt: string;             // ISO date string
   updatedAt: string;             // ISO date string

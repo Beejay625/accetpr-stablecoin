@@ -1,7 +1,6 @@
 /// <reference path="../../types/auth.d.ts" />
 import { Request, Response, NextFunction } from 'express';
 import { getAuth, clerkClient } from '@clerk/express';
-import { ApiError } from '../../utils/apiError';
 import { createLoggerWithFunction } from '../../logger';
 import { userService } from '../../services/user/userService';
 
@@ -34,7 +33,14 @@ export const requireAuthWithUserId = async (
   const { isAuthenticated, userId } = getAuth(req);
 
   if (!isAuthenticated || !userId) {
-    ApiError.unauthorized(res, 'Authentication required');
+    res.status(401).json({
+      ok: false,
+      error: {
+        code: 'UNAUTHORIZED',
+        message: 'Authentication required',
+        requestId: (req as any).id
+      }
+    });
     return;
   }
 

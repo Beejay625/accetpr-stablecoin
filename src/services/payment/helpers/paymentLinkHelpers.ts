@@ -1,7 +1,8 @@
-import { env } from '../../../config/env';
+
 import { userRepository } from '../../../repositories/database/user/userRepository';
 import { ProductRepository } from '../../../repositories/database/product/productRepository';
 import { createLoggerWithFunction } from '../../../logger';
+import { Err } from '../../../errors';
 
 /**
  * Payment Link Helper Functions
@@ -18,25 +19,39 @@ const logger = createLoggerWithFunction('PaymentLinkHelpers', { module: 'payment
  * @returns { userUniqueName: string; slug: string }
  */
 export function extractUserAndSlugFromLink(paymentLink: string): { userUniqueName: string; slug: string } {
-  const baseUrl = env.BASE_URL as string;
-  
-  // Remove base URL and extract path
-  const path = paymentLink.replace(baseUrl, '');
-  
-  // Remove leading slash and split by '/'
-  const pathParts = path.replace(/^\//, '').split('/');
-  
-  if (pathParts.length !== 2) {
-    throw new Error('Invalid payment link format. Expected: {baseUrl}/{userUniqueName}/{slug}');
-  }
+  try {
+    // Parse the payment link as a URL to extract pathname
+    const url = new URL(paymentLink);
+    const pathname = url.pathname;
+    
+    // Remove leading/trailing slashes and split by '/'
+    const pathParts = pathname.replace(/^\/|\/$/g, '').split('/');
+    
+    // We expect exactly 2 parts: userUniqueName and slug
+    if (pathParts.length !== 2) {
+      logger.warn({ paymentLink, pathParts, count: pathParts.length }, 'Invalid payment link format - expected 2 parts');
+      throw Err.badRequest(`Invalid payment link format. Expected: {baseUrl}/{userUniqueName}/{slug}, got ${pathParts.length} parts`);
+    }
 
-  const [userUniqueName, slug] = pathParts;
-  
-  if (!userUniqueName || !slug) {
-    throw new Error('Invalid payment link format. User unique name and slug are required');
-  }
+    const [userUniqueName, slug] = pathParts;
+    
+    if (!userUniqueName || !slug) {
+      logger.warn({ paymentLink, userUniqueName, slug }, 'Invalid payment link - missing parts');
+      throw Err.badRequest('Invalid payment link format. User unique name and slug are required');
+    }
 
-  return { userUniqueName, slug };
+    logger.debug({ paymentLink, userUniqueName, slug }, 'Successfully extracted user and slug from payment link');
+    
+    return { userUniqueName, slug };
+  } catch (error: any) {
+    // If it's already an AppError, re-throw it
+    if (error.name === 'AppError') {
+      throw error;
+    }
+    // If URL parsing failed, throw a bad request error
+    logger.error({ paymentLink, error: error.message }, 'Failed to parse payment link URL');
+    throw Err.badRequest('Invalid payment link format. Must be a valid URL');
+  }
 }
 
 /**
@@ -54,7 +69,7 @@ export async function findUserByUniqueName(userUniqueName: string) {
     return user;
   } catch (error: any) {
     logger.error({ userUniqueName, error: error.message }, 'Failed to find user by unique name');
-    throw new Error('Invalid payment link');
+    throw Err.notFound('Invalid payment link');
   }
 }
 
@@ -74,7 +89,7 @@ export async function findProductByUserAndSlug(userId: string, slug: string) {
     return product;
   } catch (error: any) {
     logger.error({ userId, slug, error: error.message }, 'Failed to find product by user and slug');
-    throw new Error('Invalid payment link');
+    throw Err.notFound('Invalid payment link');
   }
 }
 
@@ -86,11 +101,16 @@ export async function findProductByUserAndSlug(userId: string, slug: string) {
 export function validateProductStatus(product: any): void {
   // Check if product has expired first (more specific error)
   if (product.expiresAt && new Date(product.expiresAt) < new Date()) {
-    throw new Error('Link has expired');
+    throw Err.badRequest('Link has expired');
+  }
+
+  // Check if product is cancelled
+  if (product.status === 'cancelled') {
+    throw Err.badRequest('This product has been cancelled and is no longer available');
   }
 
   // Check if product is active
   if (product.status !== 'active') {
-    throw new Error('Invalid payment link');
+    throw Err.badRequest('Invalid payment link');
   }
 }

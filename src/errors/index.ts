@@ -10,4 +10,5 @@ export {
   mapBlockRadarError, 
   mapStripeError 
 } from './mappers';
+export { asyncHandler } from './asyncHandler';
 

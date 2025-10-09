@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { ProductController } from '../../../controllers/product/productController';
 import { validate } from '../../../middleware/validate';
 import { productStatusSchema } from './schemas/product.schema';
-import { asyncHandler } from '../../../utils/asyncHandler';
+import { asyncHandler } from '../../../errors';
 
 const router = Router();
 
@@ -31,7 +31,7 @@ const router = Router();
  *             schema:
  *               type: object
  *               properties:
- *                 success:
+ *                 ok:
  *                   type: boolean
  *                   example: true
  *                 message:
@@ -56,7 +56,68 @@ const router = Router();
  *                     count:
  *                       type: number
  *       401:
- *         description: Unauthorized
+ *         description: Unauthorized - Authentication required
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *                   example: false
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     code:
+ *                       type: string
+ *                       example: "UNAUTHORIZED"
+ *                     message:
+ *                       type: string
+ *                       example: "Authentication required"
+ *                     requestId:
+ *                       type: string
+ *       422:
+ *         description: Validation Error - Invalid status parameter
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *                   example: false
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     code:
+ *                       type: string
+ *                       example: "VALIDATION_ERROR"
+ *                     message:
+ *                       type: string
+ *                       example: "Validation failed"
+ *                     requestId:
+ *                       type: string
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *                   example: false
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     code:
+ *                       type: string
+ *                       example: "INTERNAL_ERROR"
+ *                     message:
+ *                       type: string
+ *                       example: "Something went wrong"
+ *                     requestId:
+ *                       type: string
  */
 router.get('/', 
   validate(productStatusSchema, 'query'),

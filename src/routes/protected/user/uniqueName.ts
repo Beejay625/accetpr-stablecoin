@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { z } from 'zod';
 import { UniqueNameController } from '../../../controllers/user/uniqueNameController';
 import { validate } from '../../../middleware/validate';
-import { asyncHandler } from '../../../utils/asyncHandler';
+import { asyncHandler } from '../../../errors';
 
 const router = Router();
 

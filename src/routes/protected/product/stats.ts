@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { ProductController } from '../../../controllers/product/productController';
 import { validate } from '../../../middleware/validate';
 import { productIdSchema } from './schemas/product.schema';
-import { asyncHandler } from '../../../utils/asyncHandler';
+import { asyncHandler } from '../../../errors';
 
 const router = Router();
 

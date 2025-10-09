@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { ProductController } from '../../../controllers/product/productController';
+import { asyncHandler } from '../../../errors';
 
 const router = Router();
 
@@ -107,7 +108,7 @@ const router = Router();
  *                   type: string
  *                   example: "Product not found or has expired"
  */
-router.get('/p/:uniqueName/:slug', ProductController.getProductByPaymentLink);
+router.get('/p/:uniqueName/:slug', asyncHandler(ProductController.getProductByPaymentLink));
 
 export default router;
 

@@ -17,17 +17,26 @@ export class WebhookService {
    * @param paymentIntent - Stripe payment intent object
    */
   static async handlePaymentIntentCreated(paymentIntent: Stripe.PaymentIntent): Promise<void> {
-    const paymentIntentId = paymentIntent.metadata['payment_intent_id'];
+    const paymentIntentId = paymentIntent.id; // Use Stripe's payment intent ID
 
-    if (!paymentIntentId) {
-      this.logger.warn('handlePaymentIntentCreated', { stripePaymentIntentId: paymentIntent.id }, 'Payment intent created without our payment_intent_id in metadata');
-      return;
+    try {
+      // Update payment method types if available
+      await PaymentRepository.updatePaymentIntentFromWebhook(
+        paymentIntentId,
+        PaymentIntentStatus.INITIATED,
+        paymentIntent.payment_method_types as string[]
+      );
+
+      this.logger.info('handlePaymentIntentCreated', {
+        paymentIntentId,
+        paymentMethodTypes: paymentIntent.payment_method_types
+      }, 'Payment intent created event processed');
+    } catch (error: any) {
+      this.logger.error('handlePaymentIntentCreated', {
+        paymentIntentId,
+        error: error.message
+      }, 'Failed to process payment intent created event');
     }
-
-    this.logger.info('handlePaymentIntentCreated', {
-      paymentIntentId,
-      stripePaymentIntentId: paymentIntent.id
-    }, 'Payment intent created event logged');
   }
 
   /**
@@ -36,18 +45,24 @@ export class WebhookService {
    * @param paymentIntent - Stripe payment intent object
    */
   static async handlePaymentIntentSucceeded(paymentIntent: Stripe.PaymentIntent): Promise<void> {
-    const paymentIntentId = paymentIntent.metadata['payment_intent_id'];
-
-    if (!paymentIntentId) {
-      this.logger.error('handlePaymentIntentSucceeded', { stripePaymentIntentId: paymentIntent.id }, 'Payment intent ID not found in metadata');
-      return;
-    }
+    const paymentIntentId = paymentIntent.id; // Use Stripe's payment intent ID
 
     try {
-      await PaymentRepository.updatePaymentIntentStatus(paymentIntentId, PaymentIntentStatus.SUCCEEDED);
-      this.logger.info('handlePaymentIntentSucceeded', { paymentIntentId }, 'Payment intent status updated to SUCCEEDED');
+      await PaymentRepository.updatePaymentIntentFromWebhook(
+        paymentIntentId,
+        PaymentIntentStatus.SUCCEEDED,
+        paymentIntent.payment_method_types as string[]
+      );
+
+      this.logger.info('handlePaymentIntentSucceeded', {
+        paymentIntentId,
+        paymentMethodTypes: paymentIntent.payment_method_types
+      }, 'Payment intent status updated to SUCCEEDED');
     } catch (error: any) {
-      this.logger.error('handlePaymentIntentSucceeded', { paymentIntentId, error: error.message }, 'Failed to update payment intent status to SUCCEEDED');
+      this.logger.error('handlePaymentIntentSucceeded', {
+        paymentIntentId,
+        error: error.message
+      }, 'Failed to update payment intent status to SUCCEEDED');
       throw error;
     }
   }
@@ -58,18 +73,25 @@ export class WebhookService {
    * @param paymentIntent - Stripe payment intent object
    */
   static async handlePaymentIntentFailed(paymentIntent: Stripe.PaymentIntent): Promise<void> {
-    const paymentIntentId = paymentIntent.metadata['payment_intent_id'];
-
-    if (!paymentIntentId) {
-      this.logger.error('handlePaymentIntentFailed', { stripePaymentIntentId: paymentIntent.id }, 'Payment intent ID not found in metadata');
-      return;
-    }
+    const paymentIntentId = paymentIntent.id; // Use Stripe's payment intent ID
 
     try {
-      await PaymentRepository.updatePaymentIntentStatus(paymentIntentId, PaymentIntentStatus.FAILED);
-      this.logger.info('handlePaymentIntentFailed', { paymentIntentId, error: paymentIntent.last_payment_error?.message }, 'Payment intent status updated to FAILED');
+      await PaymentRepository.updatePaymentIntentFromWebhook(
+        paymentIntentId,
+        PaymentIntentStatus.FAILED,
+        paymentIntent.payment_method_types as string[]
+      );
+
+      this.logger.info('handlePaymentIntentFailed', {
+        paymentIntentId,
+        error: paymentIntent.last_payment_error?.message,
+        paymentMethodTypes: paymentIntent.payment_method_types
+      }, 'Payment intent status updated to FAILED');
     } catch (error: any) {
-      this.logger.error('handlePaymentIntentFailed', { paymentIntentId, error: error.message }, 'Failed to update payment intent status to FAILED');
+      this.logger.error('handlePaymentIntentFailed', {
+        paymentIntentId,
+        error: error.message
+      }, 'Failed to update payment intent status to FAILED');
       throw error;
     }
   }
@@ -80,18 +102,24 @@ export class WebhookService {
    * @param paymentIntent - Stripe payment intent object
    */
   static async handlePaymentIntentCanceled(paymentIntent: Stripe.PaymentIntent): Promise<void> {
-    const paymentIntentId = paymentIntent.metadata['payment_intent_id'];
-
-    if (!paymentIntentId) {
-      this.logger.error('handlePaymentIntentCanceled', { stripePaymentIntentId: paymentIntent.id }, 'Payment intent ID not found in metadata');
-      return;
-    }
+    const paymentIntentId = paymentIntent.id; // Use Stripe's payment intent ID
 
     try {
-      await PaymentRepository.updatePaymentIntentStatus(paymentIntentId, PaymentIntentStatus.CANCELLED);
-      this.logger.info('handlePaymentIntentCanceled', { paymentIntentId }, 'Payment intent status updated to CANCELLED');
+      await PaymentRepository.updatePaymentIntentFromWebhook(
+        paymentIntentId,
+        PaymentIntentStatus.CANCELLED,
+        paymentIntent.payment_method_types as string[]
+      );
+
+      this.logger.info('handlePaymentIntentCanceled', {
+        paymentIntentId,
+        paymentMethodTypes: paymentIntent.payment_method_types
+      }, 'Payment intent status updated to CANCELLED');
     } catch (error: any) {
-      this.logger.error('handlePaymentIntentCanceled', { paymentIntentId, error: error.message }, 'Failed to update payment intent status to CANCELLED');
+      this.logger.error('handlePaymentIntentCanceled', {
+        paymentIntentId,
+        error: error.message
+      }, 'Failed to update payment intent status to CANCELLED');
       throw error;
     }
   }
@@ -102,18 +130,25 @@ export class WebhookService {
    * @param paymentIntent - Stripe payment intent object
    */
   static async handlePaymentIntentProcessing(paymentIntent: Stripe.PaymentIntent): Promise<void> {
-    const paymentIntentId = paymentIntent.metadata['payment_intent_id'];
-
-    if (!paymentIntentId) {
-      this.logger.error('handlePaymentIntentProcessing', { stripePaymentIntentId: paymentIntent.id }, 'Payment intent ID not found in metadata');
-      return;
-    }
+    const paymentIntentId = paymentIntent.id; // Use Stripe's payment intent ID
 
     try {
-      await PaymentRepository.updatePaymentIntentStatus(paymentIntentId, PaymentIntentStatus.PROCESSING);
-      this.logger.info('handlePaymentIntentProcessing', { paymentIntentId }, 'Payment intent status updated to PROCESSING');
+      await PaymentRepository.updatePaymentIntentFromWebhook(
+        paymentIntentId,
+        PaymentIntentStatus.PROCESSING,
+        paymentIntent.payment_method_types as string[]
+      );
+
+      this.logger.info('handlePaymentIntentProcessing', {
+        paymentIntentId,
+        paymentMethodTypes: paymentIntent.payment_method_types,
+        processing: paymentIntent.processing
+      }, 'Payment intent status updated to PROCESSING');
     } catch (error: any) {
-      this.logger.error('handlePaymentIntentProcessing', { paymentIntentId, error: error.message }, 'Failed to update payment intent status to PROCESSING');
+      this.logger.error('handlePaymentIntentProcessing', {
+        paymentIntentId,
+        error: error.message
+      }, 'Failed to update payment intent status to PROCESSING');
       throw error;
     }
   }
@@ -124,18 +159,25 @@ export class WebhookService {
    * @param paymentIntent - Stripe payment intent object
    */
   static async handlePaymentIntentRequiresAction(paymentIntent: Stripe.PaymentIntent): Promise<void> {
-    const paymentIntentId = paymentIntent.metadata['payment_intent_id'];
-
-    if (!paymentIntentId) {
-      this.logger.error('handlePaymentIntentRequiresAction', { stripePaymentIntentId: paymentIntent.id }, 'Payment intent ID not found in metadata');
-      return;
-    }
+    const paymentIntentId = paymentIntent.id; // Use Stripe's payment intent ID
 
     try {
-      await PaymentRepository.updatePaymentIntentStatus(paymentIntentId, PaymentIntentStatus.PENDING);
-      this.logger.info('handlePaymentIntentRequiresAction', { paymentIntentId, nextAction: paymentIntent.next_action?.type }, 'Payment intent status updated to PENDING');
+      await PaymentRepository.updatePaymentIntentFromWebhook(
+        paymentIntentId,
+        PaymentIntentStatus.REQUIRES_ACTION,
+        paymentIntent.payment_method_types as string[]
+      );
+
+      this.logger.info('handlePaymentIntentRequiresAction', {
+        paymentIntentId,
+        nextAction: paymentIntent.next_action?.type,
+        paymentMethodTypes: paymentIntent.payment_method_types
+      }, 'Payment intent status updated to REQUIRES_ACTION');
     } catch (error: any) {
-      this.logger.error('handlePaymentIntentRequiresAction', { paymentIntentId, error: error.message }, 'Failed to update payment intent status to PENDING');
+      this.logger.error('handlePaymentIntentRequiresAction', {
+        paymentIntentId,
+        error: error.message
+      }, 'Failed to update payment intent status to REQUIRES_ACTION');
       throw error;
     }
   }

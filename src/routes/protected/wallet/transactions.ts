@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { TransactionsController } from '../../../controllers/wallet/transactionsController';
 import { validate } from '../../../middleware/validate';
 import { chainParamSchema } from './schemas/wallet.schema';
+import { asyncHandler } from '../../../errors';
 
 const router = Router();
 
@@ -120,7 +121,7 @@ const router = Router();
  */
 router.get('/transactions/:chain', 
   validate(chainParamSchema, 'params'),
-  TransactionsController.getUserTransactions
+  asyncHandler(TransactionsController.getUserTransactions)
 );
 
 export default router;

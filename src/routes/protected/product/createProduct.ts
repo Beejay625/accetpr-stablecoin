@@ -3,7 +3,7 @@ import { uploadPaymentImage, handleUploadError } from '../../../middleware/fileU
 import { ProductController } from '../../../controllers/product/productController';
 import { validate } from '../../../middleware/validate';
 import { createProductSchema } from './schemas/product.schema';
-import { asyncHandler } from '../../../utils/asyncHandler';
+import { asyncHandler } from '../../../errors';
 
 const router = Router();
 
@@ -93,14 +93,144 @@ const router = Router();
  *               linkExpiration: "custom_days"
  *               customDays: 30
  *     responses:
- *       200:
+ *       201:
  *         description: Product created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Product created successfully"
+ *                 data:
+ *                   type: object
  *       400:
- *         description: Invalid request parameters
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *                   example: false
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     code:
+ *                       type: string
+ *                       enum: [BAD_REQUEST, VALIDATION_ERROR]
+ *                       example: "BAD_REQUEST"
+ *                     message:
+ *                       type: string
+ *                       example: "User must set a unique name before creating products"
+ *                     requestId:
+ *                       type: string
+ *             examples:
+ *               missingUniqueName:
+ *                 summary: User missing unique name
+ *                 value:
+ *                   ok: false
+ *                   error:
+ *                     code: "BAD_REQUEST"
+ *                     message: "User must set a unique name before creating products"
+ *                     requestId: "550e8400-e29b-41d4-a716-446655440000"
+ *               invalidChain:
+ *                 summary: Invalid payout chain
+ *                 value:
+ *                   ok: false
+ *                   error:
+ *                     code: "VALIDATION_ERROR"
+ *                     message: "Invalid chain: ethereum. Supported chains in development: base-sepolia"
+ *                     requestId: "550e8400-e29b-41d4-a716-446655440000"
  *       401:
- *         description: Authentication required
+ *         description: Unauthorized - Authentication required
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *                   example: false
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     code:
+ *                       type: string
+ *                       example: "UNAUTHORIZED"
+ *                     message:
+ *                       type: string
+ *                       example: "Authentication required"
+ *                     requestId:
+ *                       type: string
+ *       409:
+ *         description: Conflict - Resource already exists
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *                   example: false
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     code:
+ *                       type: string
+ *                       example: "ALREADY_EXISTS"
+ *                     message:
+ *                       type: string
+ *                       example: "A product with this slug already exists. Please use a different slug."
+ *                     requestId:
+ *                       type: string
+ *       422:
+ *         description: Validation Error - Invalid input format
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *                   example: false
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     code:
+ *                       type: string
+ *                       example: "VALIDATION_ERROR"
+ *                     message:
+ *                       type: string
+ *                       example: "Validation failed"
+ *                     requestId:
+ *                       type: string
  *       500:
- *         description: Internal server error
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *                   example: false
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     code:
+ *                       type: string
+ *                       example: "INTERNAL_ERROR"
+ *                     message:
+ *                       type: string
+ *                       example: "Something went wrong"
+ *                     requestId:
+ *                       type: string
  */
 router.post('/', 
   uploadPaymentImage, 

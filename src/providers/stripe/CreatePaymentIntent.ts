@@ -1,6 +1,7 @@
 import Stripe from 'stripe';
 import { createLoggerWithFunction } from '../../logger';
 import { StripeCurrency, validateAmount } from './currencies';
+import { StripePaymentIntent } from './interfaces/CreatepaymentIntent.interface';
 
 /**
  * Stripe Payment Provider
@@ -36,7 +37,7 @@ export class StripePaymentProvider {
    * @param productName - The product name (used for statement descriptor)
    * @param productId - The product ID for tracking
    * @param userId - The user ID for tracking
-   * @returns Promise<{ clientSecret: string; stripePaymentIntentId: string }>
+   * @returns Promise<StripePaymentIntent> - The full Stripe payment intent object
    */
   static async createPaymentIntent(
     amount: number,
@@ -44,7 +45,7 @@ export class StripePaymentProvider {
     productName: string,
     productId: string,
     userId: string
-  ): Promise<{ clientSecret: string; paymentIntentId: string }> {
+  ): Promise<StripePaymentIntent> {
     this.logger.info('createPaymentIntent', { 
       amount, 
       currency,
@@ -67,9 +68,6 @@ export class StripePaymentProvider {
         isZeroDecimal: currencyInfo.isZeroDecimal,
         supportsAmericanExpress: currencyInfo.supportsAmericanExpress
       }, 'Currency validation passed');
-
-      // Generate a unique payment intent ID for metadata
-      const paymentIntentId = this.generatePaymentIntentId();
       
       // Create statement descriptor from product name (max 22 characters, customer sees this)
       const statementDescriptor = this.createStatementDescriptor(productName);
@@ -78,8 +76,8 @@ export class StripePaymentProvider {
       const paymentIntent = await this.stripe.paymentIntents.create({
         amount: amount,
         currency: currency,
-        description: productName,                    // Description: Just the product name
-        statement_descriptor: statementDescriptor,  // Customer statement: "PREMIUM SUBSCRIPTION"
+        description: productName,                           // Description: Just the product name
+        statement_descriptor_suffix: statementDescriptor,  // Customer statement suffix (max 22 chars)
         
         // Enable automatic payment methods to accept all available payment methods
         automatic_payment_methods: {
@@ -90,13 +88,12 @@ export class StripePaymentProvider {
         // Metadata for tracking
         metadata: {
           user_id: userId,
-          product_id: productId,
-          payment_intent_id: paymentIntentId
+          product_id: productId
         }
       });
 
       this.logger.info('createPaymentIntent', { 
-        paymentIntentId: paymentIntentId,
+        paymentIntentId: paymentIntent.id,
         productId,
         amount: paymentIntent.amount,
         currency: paymentIntent.currency,
@@ -105,10 +102,8 @@ export class StripePaymentProvider {
         paymentMethodTypes: paymentIntent.payment_method_types
       }, 'Stripe payment intent created successfully');
 
-      return { 
-        clientSecret: paymentIntent.client_secret!,
-        paymentIntentId: paymentIntentId
-      };
+      // Return the full payment intent as StripePaymentIntent interface
+      return paymentIntent as StripePaymentIntent;
     } catch (error: any) {
       this.logger.error('createPaymentIntent', { 
         productId, 
@@ -119,6 +114,35 @@ export class StripePaymentProvider {
     }
   }
 
+
+  /**
+   * Retrieve an existing payment intent from Stripe
+   * 
+   * @param paymentIntentId - The payment intent ID
+   * @returns Promise<StripePaymentIntent>
+   */
+  static async retrievePaymentIntent(paymentIntentId: string): Promise<StripePaymentIntent> {
+    try {
+      this.logger.info('retrievePaymentIntent', { paymentIntentId }, 'Retrieving payment intent from Stripe');
+
+      const paymentIntent = await this.stripe.paymentIntents.retrieve(paymentIntentId);
+
+      this.logger.info('retrievePaymentIntent', {
+        paymentIntentId,
+        status: paymentIntent.status,
+        amount: paymentIntent.amount,
+        currency: paymentIntent.currency
+      }, 'Payment intent retrieved successfully');
+
+      return paymentIntent as StripePaymentIntent;
+    } catch (error: any) {
+      this.logger.error('retrievePaymentIntent', {
+        paymentIntentId,
+        error: error.message
+      }, 'Failed to retrieve payment intent from Stripe');
+      throw new Error(`Failed to retrieve payment intent: ${error.message}`);
+    }
+  }
 
   /**
    * Create statement descriptor from product name
@@ -141,17 +165,6 @@ export class StripePaymentProvider {
       // Truncate product name to fit 22 character limit
       return cleanName.substring(0, 22);
     }
-  }
-
-  /**
-   * Generate a unique payment intent ID
-   * 
-   * @returns string - Payment intent ID (pi_xxx format)
-   */
-  private static generatePaymentIntentId(): string {
-    const timestamp = Date.now();
-    const random = Math.random().toString(36).substring(2, 11);
-    return `pi_${timestamp}_${random}`;
   }
 
   /**

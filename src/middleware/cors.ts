@@ -14,6 +14,8 @@ const clerkRequiredHeaders = [
   'X-Forwarded-Host',
   'X-Forwarded-Proto',
   'CloudFront-Forwarded-Proto', // Alternative header
+  'X-Requested-With',
+  'X-Clerk-Auth-Token',
 ];
 
 // Enhanced CORS configuration for Clerk authentication
