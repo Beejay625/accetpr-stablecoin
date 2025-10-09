@@ -90,21 +90,31 @@ export class UserService {
   /**
    * Set or update unique name for user
    */
-  async setUniqueName(clerkUserId: string, uniqueName: string): Promise<{ success: boolean; error?: string }> {
+  async setUniqueName(clerkUserId: string, uniqueName: string): Promise<{ success: boolean; error?: string; isUpdate?: boolean }> {
     const logger = createLoggerWithFunction('setUniqueName', { module: 'user' });
     
     try {
-      // Run parallel checks for efficiency
-      const [user, availabilityCheck] = await Promise.all([
-        userRepository.findByClerkId(clerkUserId),
-        isUniqueNameAvailable(uniqueName)
-      ]);
+      // Get user first
+      const user = await userRepository.findByClerkId(clerkUserId);
       
       // Fail fast: User not found
       if (!user) {
         logger.warn({ clerkUserId }, 'User not found for unique name setting');
         return { success: false, error: 'User not found' };
       }
+      
+      // Check if this is an update (user already has a unique name)
+      const isUpdate = !!user.uniqueName;
+      const isSameName = user.uniqueName === uniqueName;
+      
+      // If it's the same name, no need to check availability or update
+      if (isSameName) {
+        logger.debug({ clerkUserId, uniqueName }, 'Unique name unchanged');
+        return { success: true, isUpdate: true };
+      }
+      
+      // Check if new name is available (only if changing to a different name)
+      const availabilityCheck = await isUniqueNameAvailable(uniqueName);
       
       // Fail fast: Name not available (format validation + uniqueness check)
       if (!availabilityCheck.available) {
@@ -114,9 +124,9 @@ export class UserService {
       // Set or update the unique name
       await DatabaseOperations.update('user', { id: user.id }, { uniqueName });
       
-      logger.info({ clerkUserId, uniqueName }, 'Unique name set/updated successfully');
+      logger.info({ clerkUserId, uniqueName, isUpdate }, isUpdate ? 'Unique name updated successfully' : 'Unique name set successfully');
       
-      return { success: true };
+      return { success: true, isUpdate };
     } catch (error: any) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
