@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { TransactionsController } from '../../../controllers/wallet/transactionsController';
 import { validate } from '../../../middleware/validate';
-import { chainParamSchema } from '../../../schemas';
+import { chainParamSchema } from './schemas/wallet.schema';
 
 const router = Router();
 
