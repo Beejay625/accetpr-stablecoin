@@ -180,8 +180,8 @@ export class ApiError {
           let message = 'Resource already exists';
           let details = undefined;
           
-          if (err.meta?.target) {
-            const fields = Array.isArray(err.meta.target) ? err.meta.target.join(', ') : err.meta.target;
+          if (error.meta?.target) {
+            const fields = Array.isArray(error.meta.target) ? error.meta.target.join(', ') : error.meta.target;
             
             // User-friendly messages for specific conflicts
             if (fields.includes('slug')) {
@@ -197,9 +197,9 @@ export class ApiError {
             if (isDev) {
               details = {
                 constraint: 'unique',
-                fields: err.meta.target,
-                prismaCode: err.code,
-                fullError: err.message
+                fields: error.meta.target,
+                prismaCode: error.code,
+                fullError: error.message
               };
             }
           }
