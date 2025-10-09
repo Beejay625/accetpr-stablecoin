@@ -82,7 +82,7 @@ enum PaymentIntentStatus {
 
 model PaymentIntent {
   id                String                @id @default(cuid())   // Auto-generated database ID
-  userId            String
+  userId            String                // Now stores Clerk user ID
   productId         String                // Product ID (pr_xxx) - reference to the product
   slug              String                // Product slug - used to find the product
   userUniqueName    String                // User's unique name - for payment link generation
@@ -94,8 +94,8 @@ model PaymentIntent {
   createdAt         DateTime              @default(now())
   updatedAt         DateTime              @updatedAt
 
-  // Relations
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // Relations - Reference clerkUserId instead of id
+  user User @relation(fields: [userId], references: [clerkUserId], onDelete: Cascade)
 
   // Unique constraints
   @@unique([userId, slug, paymentIntentId])
