@@ -60,12 +60,13 @@ const router = Router();
  *                 example: "29.99"
  *               payoutChain:
  *                 type: string
- *                 enum: [base, arbitrum, ethereum, polygon, optimism, solana, tron]
- *                 description: Chain for payout
- *                 example: "base"
+ *                 enum: [base, base-sepolia]
+ *                 description: Chain for payout (base for prod, base-sepolia for dev)
+ *                 example: "base-sepolia"
  *               payoutToken:
  *                 type: string
- *                 description: Token for payout (must be supported on the specified chain)
+ *                 enum: [USDC]
+ *                 description: Token for payout (only USDC supported)
  *                 example: "USDC"
  *               slug:
  *                 type: string
