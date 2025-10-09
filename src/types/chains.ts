@@ -1,33 +1,12 @@
-/**
- * EVM compatible chains for development
- */
-export const EVM_CHAINS_DEV = [
-  'base-sepolia',
-  // 'arbitrum'
-] as const;
+import { 
+  EVM_CHAINS_DEV, 
+  EVM_CHAINS_PROD, 
+  DEV_CHAINS, 
+  PROD_CHAINS 
+} from '../providers/blockradar/walletIdManagement/configuration';
 
-/**
- * EVM compatible chains for production
- */
-export const EVM_CHAINS_PROD = [
-  'base'
-] as const;
-
-/**
- * Development chains with nested EVM chains
- */
-export const DEV_CHAINS = [
-  EVM_CHAINS_DEV,
-  // 'solana', 
-  // 'tron'
-] as const;
-
-/**
- * Production chains with nested EVM chains
- */
-export const PROD_CHAINS = [
-  EVM_CHAINS_PROD
-] as const;
+// Re-export for convenience
+export { EVM_CHAINS_DEV, EVM_CHAINS_PROD, DEV_CHAINS, PROD_CHAINS };
 
 /**
  * Get EVM chains based on environment
