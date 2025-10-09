@@ -24,22 +24,6 @@ export const PROD_NON_EVM_CHAINS = [
   // No non-EVM chains in production yet
 ] as const;
 
-/**
- * Combined chains for each environment
- */
-export const DEV_CHAINS = [
-  DEV_EVM_CHAINS,
-  ...DEV_NON_EVM_CHAINS
-] as const;
-
-export const PROD_CHAINS = [
-  PROD_EVM_CHAINS,
-  ...PROD_NON_EVM_CHAINS
-] as const;
-
-// Re-export for backward compatibility
-export const EVM_CHAINS_DEV = DEV_EVM_CHAINS;
-export const EVM_CHAINS_PROD = PROD_EVM_CHAINS;
 
 /**
  * Chain to Wallet ID Configuration
