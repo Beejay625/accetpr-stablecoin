@@ -66,17 +66,8 @@ export class ProductController {
           status: product.status,
           createdAt: product.createdAt
         }
-      });
-
-    } catch (error: any) {
-      logger.error('createProduct', {
-        clerkUserId: req.authUserId,
-        error: error.message
-      }, 'Failed to create product');
-
-      // Generic error handling
-      ApiError.handle(res, error);
-    }
+      }
+    });
   }
 
   /**
