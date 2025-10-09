@@ -5,7 +5,7 @@ export const healthRouter = Router();
 
 /**
  * @swagger
- * /api/public/health:
+ * /public/health:
  *   get:
  *     summary: Service health check
  *     description: Public endpoint for monitoring service health

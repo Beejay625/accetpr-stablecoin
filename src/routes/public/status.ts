@@ -5,7 +5,7 @@ export const statusRouter = Router();
 
 /**
  * @swagger
- * /api/public/status:
+ * /public/status:
  *   get:
  *     summary: Get application status
  *     description: Returns the current status of the application

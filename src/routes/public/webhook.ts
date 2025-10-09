@@ -6,7 +6,7 @@ const router = Router();
 
 /**
  * @swagger
- * /api/public/webhook/stripe:
+ * /public/webhook/stripe:
  *   post:
  *     summary: Stripe webhook endpoint
  *     description: Handles Stripe webhook events for payment intent status updates

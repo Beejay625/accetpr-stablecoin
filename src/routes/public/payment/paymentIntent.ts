@@ -5,7 +5,7 @@ const router = Router();
 
 /**
  * @swagger
- * /api/public/payment/intent:
+ * /public/payment/intent:
  *   post:
  *     summary: Create payment intent from payment link
  *     description: Creates a Stripe payment intent from a product payment link. This is a public endpoint that uses the payment link to identify the product.

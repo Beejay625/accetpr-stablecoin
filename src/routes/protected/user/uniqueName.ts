@@ -9,7 +9,7 @@ const router = Router();
 
 /**
  * @swagger
- * /api/protected/unique-name/check/{uniqueName}:
+ * /protected/unique-name/check/{uniqueName}:
  *   get:
  *     summary: Check if unique name is available
  *     tags: [Unique Name]
@@ -48,7 +48,7 @@ router.get('/check/:uniqueName', UniqueNameController.checkAvailability);
 
 /**
  * @swagger
- * /api/protected/unique-name/set:
+ * /protected/unique-name/set:
  *   post:
  *     summary: Set or update unique name for user
  *     tags: [Unique Name]
@@ -90,7 +90,7 @@ router.post('/set',
 
 /**
  * @swagger
- * /api/protected/unique-name:
+ * /protected/unique-name:
  *   get:
  *     summary: Get user's unique name
  *     tags: [Unique Name]
