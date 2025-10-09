@@ -1,14 +1,25 @@
+/**
+ * Zod validation middleware
+ * 
+ * Validates request data (body, query, or params) against a Zod schema.
+ * Throws AppError if validation fails.
+ * 
+ * Usage:
+ *   router.post('/', validate(createUserSchema, 'body'), handler);
+ *   router.get('/:id', validate(idParamSchema, 'params'), handler);
+ */
+
 import { NextFunction, Request, Response } from 'express';
 import { ZodSchema } from 'zod';
-import { HttpError } from '../utils/httpError';
+import { Err } from '../errors/factory';
 
 export function validate(schema: ZodSchema, source: 'body' | 'query' | 'params' = 'body') {
   return (req: Request, _res: Response, next: NextFunction) => {
     const result = schema.safeParse(req[source]);
     if (!result.success) {
-      return next(new HttpError(400, 'Validation failed', result.error.flatten()));
+      return next(Err.validation('Validation failed', result.error.flatten()));
     }
-    // assign parsed data back for type safety consumers
+    // Assign parsed data back for type safety
     (req as any)[source] = result.data;
     next();
   };
