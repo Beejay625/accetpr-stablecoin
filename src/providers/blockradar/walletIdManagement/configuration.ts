@@ -24,6 +24,23 @@ export const PROD_NON_EVM_CHAINS = [
   // No non-EVM chains in production yet
 ] as const;
 
+/**
+ * Supported tokens per chain for development
+ */
+export const DEV_SUPPORTED_TOKENS = {
+  'base-sepolia': ['USDC'],
+  // base: ['USDC'],
+  // arbitrum: ['USDC', 'USDT'],
+  // solana: ['USDC', 'USDT'],
+  // tron: ['USDT']
+} as const;
+
+/**
+ * Supported tokens per chain for production
+ */
+export const PROD_SUPPORTED_TOKENS = {
+  'base': ['USDC']
+} as const;
 
 /**
  * Chain to Wallet ID Configuration
