@@ -145,7 +145,10 @@ const router = Router();
  *       500:
  *         description: Internal server error
  */
-router.post('/withdraw/single', WithdrawController.executeSingleWithdraw);
+router.post('/withdraw/single', 
+  validate(singleWithdrawSchema, 'body'),
+  WithdrawController.executeSingleWithdraw
+);
 
 /**
  * @swagger
