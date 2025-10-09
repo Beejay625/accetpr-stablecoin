@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { requireAuthWithUserId } from '../../middleware/auth';
 import walletRouter from './wallet/getBalance';
 import withdrawRouter from './wallet/withdraw';
 import transactionsRouter from './wallet/transactions';
@@ -7,16 +8,12 @@ import uniqueNameRouter from './user/uniqueName';
 
 export const protectedRouter = Router();
 
-// All protected routes require authentication
-// Add your protected endpoints here
+// Apply authentication middleware globally to ALL protected routes
+protectedRouter.use(requireAuthWithUserId);
 
 // Wallet endpoints
 protectedRouter.use('/wallet', walletRouter);
-
-// Withdraw endpoints
 protectedRouter.use('/wallet', withdrawRouter);
-
-// Transactions endpoints
 protectedRouter.use('/wallet', transactionsRouter);
 
 // Product endpoints
