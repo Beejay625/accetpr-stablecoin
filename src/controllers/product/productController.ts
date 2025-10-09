@@ -19,7 +19,7 @@ export class ProductController {
    * Create a new product
    * POST /api/v1/protected/payment/intent
    */
-  static async createProduct(req: any, res: Response): Promise<void> {
+  static async createProduct(req: any, res: Response, next: NextFunction): Promise<void> {
     try {
       const clerkUserId = req.authUserId!; // Clerk user ID (single source of truth)
       const productRequest: ProductRequest = req.body;
@@ -36,20 +36,17 @@ export class ProductController {
 
       // Validate required fields
       if (!productRequest.productName || !productRequest.description || !productRequest.amount || !productRequest.payoutChain || !productRequest.payoutToken || !productRequest.slug) {
-        ApiError.validation(res, 'Product name, description, amount, payout chain, payout token, and slug are required');
-        return;
+        throw AppError.badRequest('Product name, description, amount, payout chain, payout token, and slug are required');
       }
 
       // Validate link expiration
       if (!productRequest.linkExpiration) {
-        ApiError.validation(res, 'Link expiration is required');
-        return;
+        throw AppError.badRequest('Link expiration is required');
       }
 
       // Validate custom days if link expiration is custom_days
       if (productRequest.linkExpiration === LinkExpiration.CUSTOM_DAYS && !productRequest.customDays) {
-        ApiError.validation(res, 'Custom days is required when link expiration is custom_days');
-        return;
+        throw AppError.badRequest('Custom days is required when link expiration is custom_days');
       }
 
       // Create product using ProductService
