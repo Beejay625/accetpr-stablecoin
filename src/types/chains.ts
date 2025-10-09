@@ -1,25 +1,32 @@
 /**
- * EVM compatible chains
+ * EVM compatible chains for development
  */
-export const EVM_CHAINS = [
+export const EVM_CHAINS_DEV = [
   'base',
-  // 'arbitrum'
+  'arbitrum'
+] as const;
+
+/**
+ * EVM compatible chains for production
+ */
+export const EVM_CHAINS_PROD = [
+  'base-sepolia'
 ] as const;
 
 /**
  * Development chains with nested EVM chains
  */
 export const DEV_CHAINS = [
-  EVM_CHAINS,
-  // 'solana', 
-  // 'tron'
+  EVM_CHAINS_DEV,
+  'solana', 
+  'tron'
 ] as const;
 
 /**
  * Production chains with nested EVM chains
  */
 export const PROD_CHAINS = [
-  ['base-sepolia']
+  EVM_CHAINS_PROD
 ] as const;
 
 /**
