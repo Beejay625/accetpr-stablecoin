@@ -139,7 +139,7 @@ export class ProductController {
         error: error.message
       }, 'Failed to get user products');
 
-      return ApiError.handle(res, error);
+      return handleDistributedError(res, error);
     }
   }
 
@@ -182,7 +182,7 @@ export class ProductController {
         error: error.message
       }, 'Failed to get product payment counts');
 
-      return ApiError.handle(res, error);
+      return handleDistributedError(res, error);
     }
   }
 
@@ -225,7 +225,7 @@ export class ProductController {
         error: error.message
       }, 'Failed to get product payment amounts');
 
-      return ApiError.handle(res, error);
+      return handleDistributedError(res, error);
     }
   }
 
@@ -256,7 +256,7 @@ export class ProductController {
         error: error.message
       }, 'Failed to get user product statistics');
 
-      return ApiError.handle(res, error);
+      return handleDistributedError(res, error);
     }
   }
 
@@ -320,7 +320,7 @@ export class ProductController {
         error: error.message
       }, 'Failed to update product');
 
-      return ApiError.handle(res, error);
+      return handleDistributedError(res, error);
     }
   }
 
@@ -374,7 +374,7 @@ export class ProductController {
         error: error.message
       }, 'Failed to get product by payment link');
 
-      return ApiError.handle(res, error);
+      return handleDistributedError(res, error);
     }
   }
 }
