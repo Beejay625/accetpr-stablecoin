@@ -1,7 +1,5 @@
 import { Response } from 'express';
 import { createLoggerWithFunction } from '../../logger';
-import { ApiSuccess } from '../../utils/apiSuccess';
-import { ApiError } from '../../utils/apiError';
 import { ProductService } from '../../services/product/productService';
 import { ProductRepository } from '../../repositories/database/product/productRepository';
 import { ProductRequest, LinkExpiration } from '../../services/product/product.interface';
@@ -10,6 +8,7 @@ import { ProductRequest, LinkExpiration } from '../../services/product/product.i
  * Product Controller
  * 
  * Handles all product-related HTTP requests.
+ * Controllers should be thin - delegate to services and let errors bubble up.
  */
 const logger = createLoggerWithFunction('ProductController', { module: 'controller' });
 
@@ -17,54 +16,40 @@ export class ProductController {
 
   /**
    * Create a new product
-   * POST /api/v1/protected/payment/intent
+   * POST /api/v1/protected/product
+   * 
+   * Note: No try/catch needed! asyncHandler in routes wraps this and
+   * passes errors to central error handler.
    */
   static async createProduct(req: any, res: Response): Promise<void> {
-    try {
-      const clerkUserId = req.authUserId!; // Clerk user ID (single source of truth)
-      const productRequest: ProductRequest = req.body;
-      const uploadedFile = req.file; // From multer middleware
+    const clerkUserId = req.authUserId!; // Clerk user ID (single source of truth)
+    const productRequest: ProductRequest = req.body;
+    const uploadedFile = req.file; // From multer middleware
 
-      logger.info('createProduct', { 
-        clerkUserId,
-        productName: productRequest.productName,
-        amount: productRequest.amount,
-        payoutChain: productRequest.payoutChain,
-        payoutToken: productRequest.payoutToken,
-        hasFile: !!uploadedFile
-      }, 'Processing create product request');
+    logger.info('createProduct', { 
+      clerkUserId,
+      productName: productRequest.productName,
+      amount: productRequest.amount,
+      payoutChain: productRequest.payoutChain,
+      payoutToken: productRequest.payoutToken,
+      hasFile: !!uploadedFile
+    }, 'Processing create product request');
 
-      // Validate required fields
-      if (!productRequest.productName || !productRequest.description || !productRequest.amount || !productRequest.payoutChain || !productRequest.payoutToken || !productRequest.slug) {
-        ApiError.validation(res, 'Product name, description, amount, payout chain, payout token, and slug are required');
-        return;
-      }
+    // Create product using ProductService (validation happens in service)
+    const product = await ProductService.createProduct(clerkUserId, productRequest, uploadedFile);
 
-      // Validate link expiration
-      if (!productRequest.linkExpiration) {
-        ApiError.validation(res, 'Link expiration is required');
-        return;
-      }
+    logger.info('createProduct', {
+      clerkUserId,
+      productId: product.id,
+      slug: product.slug,
+      paymentLink: product.paymentLink,
+      hasImage: !!product.image
+    }, 'Product created successfully');
 
-      // Validate custom days if link expiration is custom_days
-      if (productRequest.linkExpiration === LinkExpiration.CUSTOM_DAYS && !productRequest.customDays) {
-        ApiError.validation(res, 'Custom days is required when link expiration is custom_days');
-        return;
-      }
-
-      // Create product using ProductService
-      const product = await ProductService.createProduct(clerkUserId, productRequest, uploadedFile);
-
-      logger.info('createProduct', {
-        clerkUserId,
-        productId: product.id,
-        slug: product.slug,
-        paymentLink: product.paymentLink,
-        hasImage: !!product.image
-      }, 'Product created successfully');
-
-      // Return success response
-      ApiSuccess.success(res, 'Product created successfully', {
+    // Return success response in new format
+    res.status(201).json({
+      ok: true,
+      data: {
         product: {
           id: product.id,
           image: product.image,
