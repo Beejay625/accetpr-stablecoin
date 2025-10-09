@@ -95,6 +95,9 @@ const router = Router();
  *       500:
  *         description: Internal server error
  */
-router.get('/balance', WalletController.getBalance);
+router.get('/balance', 
+  validate(chainQuerySchema, 'query'),
+  WalletController.getBalance
+);
 
 export default router;
