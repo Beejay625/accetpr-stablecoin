@@ -18,8 +18,8 @@ export const EVM_CHAINS_PROD = [
  */
 export const DEV_CHAINS = [
   EVM_CHAINS_DEV,
-  'solana', 
-  'tron'
+  // 'solana', 
+  // 'tron'
 ] as const;
 
 /**
@@ -39,7 +39,7 @@ export const EVM_CHAINS = (() => {
 
 /**
  * Get chains based on environment
- * Development: base-sepolia, solana, tron
+ * Development: base-sepolia
  * Production: base
  */
 export const DEFAULT_CHAINS = (() => {
