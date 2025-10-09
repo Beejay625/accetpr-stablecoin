@@ -28,12 +28,9 @@ const router = Router();
  *             properties:
  *               chain:
  *                 type: string
- *                 enum: [base-sepolia, base]
- *                 description: |
- *                   Blockchain chain for the withdraw operation.
- *                   **Development:** base-sepolia
- *                   **Production:** base
- *                 example: "base-sepolia"
+ *                 enum: [base, arbitrum, ethereum, polygon, optimism, solana, tron]
+ *                 description: Blockchain chain for the withdraw operation
+ *                 example: "base"
  *               asset:
  *                 type: string
  *                 description: Asset symbol to withdraw
@@ -55,7 +52,7 @@ const router = Router();
  *                 description: Optional reference note for the withdrawal
  *                 example: "single withdraw"
  *             example:
- *               chain: "base-sepolia"
+ *               chain: "base"
  *               asset: "USDC"
  *               amount: "0.5"
  *               address: "0x451dEFC27B45808078e875556AF06bCFdC697BA4"

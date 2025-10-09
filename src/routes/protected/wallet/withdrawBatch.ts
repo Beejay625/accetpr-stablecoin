@@ -35,12 +35,9 @@ const router = Router();
  *                   properties:
  *                     chain:
  *                       type: string
- *                       enum: [base-sepolia, base]
- *                       description: |
- *                         Blockchain chain for the asset.
- *                         **Development:** base-sepolia
- *                         **Production:** base
- *                       example: "base-sepolia"
+ *                       enum: [base, arbitrum, ethereum, polygon, optimism, solana, tron]
+ *                       description: Blockchain chain for the asset
+ *                       example: "base"
  *                     asset:
  *                       type: string
  *                       description: Asset symbol
@@ -65,13 +62,13 @@ const router = Router();
  *                 minItems: 1
  *             example:
  *               assets:
- *                 - chain: "base-sepolia"
+ *                 - chain: "base"
  *                   asset: "USDC"
  *                   address: "0x451dEFC27B45808078e875556AF06bCFdC697BA4"
  *                   amount: "0.5"
  *                   metadata: { "id": "0001" }
  *                   reference: "batch withdraw 1"
- *                 - chain: "base-sepolia"
+ *                 - chain: "base"
  *                   asset: "USDC"
  *                   address: "0x451dEFC27B45808078e875556AF06bCFdC697BA4"
  *                   amount: "0.3"

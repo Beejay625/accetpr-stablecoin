@@ -15,10 +15,13 @@ const router = Router();
  *       Create a new product with details and payment configuration.
  *       
  *       **Supported Token-Chain Combinations (Development):**
- *       - **base-sepolia**: USDC
+ *       - **base**: USDC
+ *       - **arbitrum**: USDC, USDT
+ *       - **solana**: USDC, USDT
+ *       - **tron**: USDT
  *       
  *       **Supported Token-Chain Combinations (Production):**
- *       - **base**: USDC
+ *       - **base-sepolia**: USDC
  *       
  *       **Note:** The available chains and tokens depend on your current environment (NODE_ENV).
  *     tags: [Product]
@@ -57,12 +60,9 @@ const router = Router();
  *                 example: "29.99"
  *               payoutChain:
  *                 type: string
- *                 enum: [base-sepolia, base]
- *                 description: |
- *                   Chain for payout.
- *                   **Development:** base-sepolia
- *                   **Production:** base
- *                 example: "base-sepolia"
+ *                 enum: [base, arbitrum, ethereum, polygon, optimism, solana, tron]
+ *                 description: Chain for payout
+ *                 example: "base"
  *               payoutToken:
  *                 type: string
  *                 description: Token for payout (must be supported on the specified chain)
@@ -85,7 +85,7 @@ const router = Router();
  *               productName: "Premium Subscription"
  *               description: "Monthly premium subscription with advanced features"
  *               amount: "29.99"
- *               payoutChain: "base-sepolia"
+ *               payoutChain: "base"
  *               payoutToken: "USDC"
  *               slug: "premium-subscription"
  *               linkExpiration: "custom_days"
