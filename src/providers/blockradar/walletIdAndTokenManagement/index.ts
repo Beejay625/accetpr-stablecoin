@@ -5,7 +5,7 @@
  * for different blockchain networks.
  */
 
-export { getWalletIdForChain } from './walletIdHelper';
+export { getWalletIdForChain } from './walletIdHelpers';
 export { 
   CHAIN_WALLET_CONFIG,
   DEV_EVM_CHAINS,
