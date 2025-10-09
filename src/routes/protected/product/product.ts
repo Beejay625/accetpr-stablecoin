@@ -263,7 +263,10 @@ router.post('/',
  *       401:
  *         description: Unauthorized
  */
-router.get('/', ProductController.getUserProducts);
+router.get('/', 
+  validate(productStatusSchema, 'query'),
+  ProductController.getUserProducts
+);
 
 /**
  * @swagger
