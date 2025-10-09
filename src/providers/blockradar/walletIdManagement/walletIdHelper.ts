@@ -37,7 +37,13 @@ export function getWalletIdForChain(chain: string = 'default'): string {
   }
   
   // Get wallet ID for specific chain
-  const walletId = CHAIN_WALLET_MAP[chainLower];
+  let walletId = CHAIN_WALLET_MAP[chainLower];
+  
+  // Fallback: if chain is a testnet variant (e.g., base-sepolia), try the mainnet version (base)
+  if (!walletId && chainLower.includes('-')) {
+    const mainnetChain = chainLower.split('-')[0]; // e.g., 'base-sepolia' -> 'base'
+    walletId = CHAIN_WALLET_MAP[mainnetChain];
+  }
   
   if (!walletId) {
     const configuredChains = Object.keys(CHAIN_WALLET_MAP);
@@ -47,7 +53,7 @@ export function getWalletIdForChain(chain: string = 'default'): string {
     
     throw new Error(
       `${chainLower.charAt(0).toUpperCase() + chainLower.slice(1)} wallet ID not configured. ` +
-      `Please set BLOCKRADAR_${chainLower.toUpperCase()}_WALLET_ID in environment. ` +
+      `Please set BLOCKRADAR_${chainLower.toUpperCase().replace('-', '_')}_WALLET_ID in environment. ` +
       `Currently configured chains: ${supportedChains}`
     );
   }
