@@ -7,6 +7,13 @@ import { env } from '../../../config/env';
 const CHAIN_WALLET_MAP: Record<string, string> = Object.fromEntries(
   Object.entries({
     base: env.BLOCKRADAR_BASE_WALLET_ID,
+    'base-sepolia': env.BLOCKRADAR_BASE_WALLET_ID, // Use same wallet ID for testnet
+    // arbitrum: env.BLOCKRADAR_ARBITRUM_WALLET_ID,
+    // ethereum: env.BLOCKRADAR_ETHEREUM_WALLET_ID,
+    // polygon: env.BLOCKRADAR_POLYGON_WALLET_ID,
+    // optimism: env.BLOCKRADAR_OPTIMISM_WALLET_ID,
+    // solana: env.BLOCKRADAR_SOLANA_WALLET_ID,
+    // tron: env.BLOCKRADAR_TRON_WALLET_ID,
   }).filter(([_, value]) => value !== undefined)
 ) as Record<string, string>;
 
