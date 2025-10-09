@@ -171,6 +171,17 @@ export class ApiError {
         handler: () => this.error(res, 'Service unavailable', 503, 'SERVICE_UNAVAILABLE'),
       },
       {
+        // Business validation errors - return as 400 Bad Request
+        condition: (err: any) => 
+          err.message?.includes('required') ||
+          err.message?.includes('must have') ||
+          err.message?.includes('must be') ||
+          err.message?.includes('Invalid') ||
+          err.message?.includes('not supported') ||
+          err.message?.includes('Supported'),
+        handler: () => this.validation(res, error.message),
+      },
+      {
         // Check for Prisma unique constraint violation first (P2002)
         condition: (err: any) => err.code === 'P2002',
         handler: () => {
