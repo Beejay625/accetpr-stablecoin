@@ -131,20 +131,30 @@ async function testGenerateAddress() {
 }
 
 async function testGetBalance(addressId, address) {
-  logSection('TEST 4: Get Address Balance');
+  logSection('TEST 4: Get Address Balances');
   
   try {
-    // Get balance for the address
+    // Get all balances for the address (returns array of assets)
     const result = await makeRequest(
-      `/wallets/${BLOCKRADAR_BASE_WALLET_ID}/addresses/${addressId}/balance`
+      `/wallets/${BLOCKRADAR_BASE_WALLET_ID}/addresses/${addressId}/balances`
     );
     
     if (result.ok) {
       log('✅ Balance retrieval works', colors.green);
-      log(`   Balance: ${result.data.data?.balance || '0'}`, colors.blue);
-      log(`   Converted Balance: ${result.data.data?.convertedBalance || '0'}`, colors.blue);
-      log(`   Asset: ${result.data.data?.asset?.asset?.symbol || 'N/A'}`, colors.blue);
-      log(`   Chain: ${result.data.data?.asset?.asset?.blockchain?.slug || 'N/A'}`, colors.blue);
+      const balances = result.data.data || [];
+      log(`   Total Assets: ${balances.length}`, colors.blue);
+      
+      if (balances.length > 0) {
+        balances.forEach((item, index) => {
+          log(`   Asset ${index + 1}:`, colors.blue);
+          log(`     - Symbol: ${item.asset?.asset?.symbol}`, colors.blue);
+          log(`     - Chain: ${item.asset?.asset?.blockchain?.slug}`, colors.blue);
+          log(`     - Balance: ${item.balance}`, colors.blue);
+          log(`     - Converted Balance: ${item.convertedBalance}`, colors.blue);
+        });
+      } else {
+        log('   No assets found (new address with zero balance)', colors.yellow);
+      }
       return true;
     } else {
       log('❌ Balance retrieval failed', colors.red);
