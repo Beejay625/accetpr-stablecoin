@@ -212,8 +212,9 @@ export class ApiError {
         handler: () => this.database(res, error),
       },
       {
-        condition: (err: any) => err.code === 'CONFLICT' || err.message?.includes('unique'),
-        handler: () => this.conflict(res, 'Resource already exists'),
+        // Generic conflict or business rule errors (but NOT Prisma unique constraints)
+        condition: (err: any) => err.code === 'CONFLICT',
+        handler: () => this.conflict(res, error.message || 'Resource already exists'),
       },
     ];
 
