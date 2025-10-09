@@ -47,7 +47,7 @@ model WalletAddress {
 
 model Product {
   id             String   @id                    // Custom product ID (pr_xxx)
-  userId         String
+  userId         String   // Now stores Clerk user ID
   image          String?
   productName    String
   description    String
@@ -63,8 +63,8 @@ model Product {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  // Relations
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // Relations - Reference clerkUserId instead of id
+  user User @relation(fields: [userId], references: [clerkUserId], onDelete: Cascade)
 
   // Unique constraints
   @@unique([userId, slug])
