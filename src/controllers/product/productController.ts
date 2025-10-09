@@ -1,8 +1,7 @@
-import { Response, NextFunction } from 'express';
+import { Response } from 'express';
 import { createLoggerWithFunction } from '../../logger';
 import { ApiSuccess } from '../../utils/apiSuccess';
 import { ApiError } from '../../utils/apiError';
-import { AppError } from '../../utils/AppError';
 import { ProductService } from '../../services/product/productService';
 import { ProductRepository } from '../../repositories/database/product/productRepository';
 import { ProductRequest, LinkExpiration } from '../../services/product/product.interface';
@@ -20,7 +19,7 @@ export class ProductController {
    * Create a new product
    * POST /api/v1/protected/payment/intent
    */
-  static async createProduct(req: any, res: Response, next: NextFunction): Promise<void> {
+  static async createProduct(req: any, res: Response): Promise<void> {
     try {
       const clerkUserId = req.authUserId!; // Clerk user ID (single source of truth)
       const productRequest: ProductRequest = req.body;
@@ -37,17 +36,20 @@ export class ProductController {
 
       // Validate required fields
       if (!productRequest.productName || !productRequest.description || !productRequest.amount || !productRequest.payoutChain || !productRequest.payoutToken || !productRequest.slug) {
-        throw AppError.badRequest('Product name, description, amount, payout chain, payout token, and slug are required');
+        ApiError.validation(res, 'Product name, description, amount, payout chain, payout token, and slug are required');
+        return;
       }
 
       // Validate link expiration
       if (!productRequest.linkExpiration) {
-        throw AppError.badRequest('Link expiration is required');
+        ApiError.validation(res, 'Link expiration is required');
+        return;
       }
 
       // Validate custom days if link expiration is custom_days
       if (productRequest.linkExpiration === LinkExpiration.CUSTOM_DAYS && !productRequest.customDays) {
-        throw AppError.badRequest('Custom days is required when link expiration is custom_days');
+        ApiError.validation(res, 'Custom days is required when link expiration is custom_days');
+        return;
       }
 
       // Create product using ProductService
@@ -87,8 +89,8 @@ export class ProductController {
         error: error.message
       }, 'Failed to create product');
 
-      // Pass error to centralized error handler
-      next(error);
+      // Generic error handling
+      ApiError.handle(res, error);
     }
   }
 

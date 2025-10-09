@@ -14,14 +14,9 @@ import { ServiceInitializer } from './server/initialize';
 import { ServiceShutdown } from './server/shutdown';
 import { clerkMiddlewareHandler } from './middleware/auth/clerk';
 import { attachUserId } from './middleware/auth/attachUserId';
-import { errorHandler } from './middleware/errorHandler';
-import { setupGlobalExceptionHandlers } from './server/exceptionHandlers';
 
 // Load environment variables
 config();
-
-// Setup global exception handlers (must be early in startup)
-setupGlobalExceptionHandlers();
 
 // Create logger
 const logger = createLoggerWithFunction('server', { module: 'server' });
@@ -155,22 +150,45 @@ app.get('/health', (_req, res) => {
 app.use('/api/v1/public', require('./routes/public').default);
 app.use('/api/v1/protected', require('./routes/protected').default);
 
-// 404 handler - Route not found
+// 404 handler
 app.use('*', (req, res) => {
   res.status(404).json({
     success: false,
     message: 'Route not found',
-    error: {
-      code: 'NOT_FOUND',
-      path: req.originalUrl
-    },
-    timestamp: new Date().toISOString(),
+    path: req.originalUrl,
   });
 });
 
-// Centralized error handling middleware (MUST be last)
-// Follows Express convention: (err, req, res, next)
-app.use(errorHandler);
+// Global error handler
+app.use((err: any, req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  const statusCode = err.status || err.statusCode || 500;
+  
+  // Log full error details
+  logger.error({
+    error: {
+      message: err.message,
+      stack: err.stack,
+      code: err.code,
+      name: err.name,
+    },
+    request: {
+      method: req.method,
+      url: req.url,
+      body: req.body,
+      params: req.params,
+      query: req.query,
+    }
+  }, `❌ Unhandled Error: ${err.message}`);
+  
+  res.status(statusCode).json({
+    success: false,
+    message: err.message || 'Internal server error',
+    ...(env.NODE_ENV === 'development' && { 
+      stack: err.stack,
+      details: err.details || err.data,
+    }),
+  });
+});
 
 // Initialize services
 const initializeServices = async () => {
