@@ -3,6 +3,7 @@ import { uploadPaymentImage, handleUploadError } from '../../../middleware/fileU
 import { ProductController } from '../../../controllers/product/productController';
 import { validate } from '../../../middleware/validate';
 import { updateProductSchema, productIdSchema } from './schemas/product.schema';
+import { asyncHandler } from '../../../utils/asyncHandler';
 
 const router = Router();
 
@@ -92,7 +93,7 @@ router.put('/:productId',
   handleUploadError,
   validate(productIdSchema, 'params'),
   validate(updateProductSchema, 'body'),
-  ProductController.updateProduct
+  asyncHandler(ProductController.updateProduct)
 );
 
 export default router;

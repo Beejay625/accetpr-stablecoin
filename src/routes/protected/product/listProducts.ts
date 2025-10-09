@@ -60,7 +60,7 @@ const router = Router();
  */
 router.get('/', 
   validate(productStatusSchema, 'query'),
-  ProductController.getUserProducts
+  asyncHandler(ProductController.getUserProducts)
 );
 
 export default router;
