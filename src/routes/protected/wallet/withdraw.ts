@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { WithdrawController } from '../../../controllers/wallet/withdrawController';
 import { validate } from '../../../middleware/validate';
-import { singleWithdrawSchema, batchWithdrawSchema } from '../../../schemas';
+import { singleWithdrawSchema, batchWithdrawSchema } from './schemas/wallet.schema';
 
 const router = Router();
 
