@@ -163,7 +163,7 @@ function handlePrismaError(error: Prisma.PrismaClientKnownRequestError, isDev: b
     if (isDev) {
       details = {
         prismaCode: error.code,
-        field: error.meta?.field_name,
+        field: error.meta ? error.meta['field_name'] : undefined,
         prismaMessage: error.message
       };
     }
