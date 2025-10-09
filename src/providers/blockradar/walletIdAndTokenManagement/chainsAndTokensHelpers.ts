@@ -41,6 +41,28 @@ export function isTokenSupportedOnChain(chain: string, token: string): boolean {
 }
 
 /**
+ * Check if a chain is supported in current environment
+ */
+export function isChainSupported(chain: string): boolean {
+  return DEFAULT_CHAINS.includes(chain);
+}
+
+/**
+ * Validate chains - throws error if any chain is not supported
+ */
+export function validateChains(chains: readonly string[]): void {
+  const unsupportedChains = chains.filter(chain => !isChainSupported(chain));
+  
+  if (unsupportedChains.length > 0) {
+    const envType = isDev ? 'development' : 'production';
+    throw new Error(
+      `Invalid chain(s): ${unsupportedChains.join(', ')}. ` +
+      `Supported chains in ${envType}: ${DEFAULT_CHAINS.join(', ')}`
+    );
+  }
+}
+
+/**
  * Get all supported token-chain combinations
  */
 export function getAllSupportedTokenChains(): Array<{ chain: string; token: string }> {
