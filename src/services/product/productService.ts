@@ -3,6 +3,7 @@ import { ProductRequest, Product } from './product.interface';
 import { ImageStorageService } from '../../providers/cloudinary/imageStorage';
 import { ProductRepository } from '../../repositories/database/product/productRepository';
 import { userService } from '../user/userService';
+import { Err, mapPrismaError } from '../../errors';
 import { 
   validateProductRequest, 
   generatePaymentLink,
@@ -49,7 +50,7 @@ export class ProductService {
 
       // Fail fast: User must have unique name
       if (!userUniqueNameResult.uniqueName) {
-        throw new Error('User must have a unique name to create products');
+        throw Err.badRequest('User must have a unique name to create products. Please set your unique name first.');
       }
 
       // Generate product data
