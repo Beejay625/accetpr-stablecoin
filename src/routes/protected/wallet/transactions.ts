@@ -116,6 +116,6 @@ const router = Router();
  *       500:
  *         description: Internal server error
  */
-router.get('/transactions/:chain', requireAuthWithUserId, TransactionsController.getUserTransactions);
+router.get('/transactions/:chain', TransactionsController.getUserTransactions);
 
 export default router;
