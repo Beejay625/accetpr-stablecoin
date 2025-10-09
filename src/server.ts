@@ -14,6 +14,9 @@ import { ServiceInitializer } from './server/initialize';
 import { ServiceShutdown } from './server/shutdown';
 import { clerkMiddlewareHandler } from './middleware/auth/clerk';
 import { attachUserId } from './middleware/auth/attachUserId';
+import { requestId } from './middleware/requestId';
+import { errorHandler } from './middleware/errorHandler';
+import { notFound } from './middleware/notFound';
 
 // Load environment variables
 config();
@@ -123,6 +126,9 @@ app.use(pinoHttp({
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Request ID middleware (for tracing and logging)
+app.use(requestId);
 
 // 🔐 AUTHENTICATION MIDDLEWARE (CRITICAL: Must be before routes)
 // 1. Clerk middleware validates JWT tokens and attaches auth to request
