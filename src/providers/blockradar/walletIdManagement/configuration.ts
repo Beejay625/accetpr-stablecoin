@@ -17,7 +17,7 @@ export const DEV_NON_EVM_CHAINS = [
  * Production Chains Configuration
  */
 export const PROD_EVM_CHAINS = [
-  'base'
+  'base':[]
 ] as const;
 
 export const PROD_NON_EVM_CHAINS = [
