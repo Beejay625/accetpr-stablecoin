@@ -86,7 +86,8 @@ export class ProductController {
 
     } catch (error: any) {
       logger.error('createProduct', {
-        userId: req.authUserId,
+        userId: req.localUserId,
+        clerkUserId: req.authUserId,
         error: error.message
       }, 'Failed to create product');
 
