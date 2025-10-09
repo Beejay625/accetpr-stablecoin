@@ -365,7 +365,13 @@ router.get('/',
  *       404:
  *         description: Product not found
  */
-router.put('/:productId', uploadPaymentImage, handleUploadError, ProductController.updateProduct);
+router.put('/:productId', 
+  uploadPaymentImage, 
+  handleUploadError,
+  validate(productIdSchema, 'params'),
+  validate(updateProductSchema, 'body'),
+  ProductController.updateProduct
+);
 
 
 /**
