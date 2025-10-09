@@ -197,7 +197,7 @@ const router = Router();
  *       500:
  *         description: Internal server error
  */
-router.post('/', requireAuthWithUserId, uploadPaymentImage, handleUploadError, ProductController.createProduct);
+router.post('/', uploadPaymentImage, handleUploadError, ProductController.createProduct);
 
 /**
  * @swagger
