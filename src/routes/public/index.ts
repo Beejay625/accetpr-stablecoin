@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { healthRouter } from './health';
+import { healthRouter } from './health/health';
 import { statusRouter } from './status';
 import { paymentIntentRouter } from './paymentIntent';
 import { webhookRouter } from './webhook';
