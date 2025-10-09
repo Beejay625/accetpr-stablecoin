@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import createRouter from './createProducts';
 import listRouter from './listProducts';
-import updateRouter from './update';
+import updateRouter from './updateProduct';
 import statsRouter from './stats';
 
 const router = Router();
