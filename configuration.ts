@@ -1,4 +1,4 @@
-import { env } from '../../../config/env';
+import { env } from './src/config/env';
 
 /**
  * Development Chains Configuration

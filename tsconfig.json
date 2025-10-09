@@ -38,7 +38,7 @@
   "include": [
     "src/**/*",
     "src/types/**/*"
-, "chainsAndTokens.ts"  ],
+, "configuration.ts", "chainsAndTokens.ts"  ],
   "exclude": [
     "node_modules",
     "dist",
