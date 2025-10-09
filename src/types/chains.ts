@@ -6,23 +6,19 @@ import {
 } from '../providers/blockradar/walletIdManagement/configuration';
 
 // Helper to determine environment
-const isDev = () => process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev';
+const isDev = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev';
 
 /**
  * Get all chains with tokens for current environment
  */
-const ALL_CHAINS_WITH_TOKENS = (() => {
-  return isDev() 
-    ? { ...DEV_EVM_CHAINS, ...DEV_NON_EVM_CHAINS }
-    : { ...PROD_EVM_CHAINS, ...PROD_NON_EVM_CHAINS };
-})();
+const ALL_CHAINS_WITH_TOKENS = isDev
+  ? { ...DEV_EVM_CHAINS, ...DEV_NON_EVM_CHAINS }
+  : { ...PROD_EVM_CHAINS, ...PROD_NON_EVM_CHAINS };
 
 /**
  * Get EVM chains for current environment
  */
-export const EVM_CHAINS = (() => {
-  return Object.keys(isDev() ? DEV_EVM_CHAINS : PROD_EVM_CHAINS);
-})();
+export const EVM_CHAINS = Object.keys(isDev ? DEV_EVM_CHAINS : PROD_EVM_CHAINS);
 
 /**
  * Get all chains for current environment (flattened)
