@@ -120,8 +120,8 @@ export class WithdrawController {
         return;
       }
 
-      // Generic error handling
-      ApiError.handle(res, error);
+      // Distributed error handling
+      return handleDistributedError(res, error);
     }
   }
 
@@ -258,8 +258,8 @@ export class WithdrawController {
         return;
       }
 
-      // Generic error handling
-      ApiError.handle(res, error);
+      // Distributed error handling
+      return handleDistributedError(res, error);
     }
   }
 
