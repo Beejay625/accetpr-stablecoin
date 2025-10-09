@@ -28,7 +28,7 @@ export function errorHandler(
   err: any,
   req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ): void {
   const isDev = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev';
 
