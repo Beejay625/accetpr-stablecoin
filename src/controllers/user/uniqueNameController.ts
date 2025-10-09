@@ -60,8 +60,14 @@ export class UniqueNameController {
       const result = await userService.setUniqueName(clerkUserId, uniqueName);
       
       if (result.success) {
-        return ApiSuccess.success(res, 'Unique name set/updated successfully', {
-          uniqueName
+        // Return different message based on whether it's create or update
+        const message = result.isUpdate 
+          ? 'Unique name updated successfully' 
+          : 'Unique name set successfully';
+        
+        return ApiSuccess.success(res, message, {
+          uniqueName,
+          isUpdate: result.isUpdate
         });
       } else {
         return ApiError.validation(res, result.error || 'Failed to set/update unique name');
