@@ -60,12 +60,12 @@ const router = Router();
  *                 description: Product price
  *               payoutChain:
  *                 type: string
- *                 enum: [base, solana, tron, arbitrum]
- *                 description: Blockchain for payout
+ *                 enum: [base, base-sepolia]
+ *                 description: Blockchain for payout (base for prod, base-sepolia for dev)
  *               payoutToken:
  *                 type: string
- *                 enum: [USDC, USDT]
- *                 description: Token for payout
+ *                 enum: [USDC]
+ *                 description: Token for payout (only USDC supported)
  *               linkExpiration:
  *                 type: string
  *                 enum: [never, custom_days]
