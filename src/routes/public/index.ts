@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { healthRouter } from './health/health';
 import { statusRouter } from './status';
-import { paymentIntentRouter } from './paymentIntent';
+import { paymentIntentRouter } from './payment/paymentIntent';
 import { webhookRouter } from './webhook';
 import { logsRouter } from './logs';
 import productRouter from './product';
