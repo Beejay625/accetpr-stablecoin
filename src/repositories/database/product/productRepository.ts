@@ -1,6 +1,7 @@
 import { DatabaseOperations } from '../../../db/databaseOperations';
 import { createLoggerWithFunction } from '../../../logger';
 import { Product } from '../../../services/product/product.interface';
+import { mapPrismaError } from '../../../errors';
 
 /**
  * Product Repository
