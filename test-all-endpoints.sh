@@ -91,20 +91,20 @@ print_section "🚀 TESTING ALL ENDPOINTS"
 # ============================================================
 print_section "PUBLIC ENDPOINTS"
 
-test_endpoint "GET" "/api/public/health" "Health Check"
-test_endpoint "GET" "/api/public/status" "Status Check"
+test_endpoint "GET" "/api/v1/public/health" "Health Check"
+test_endpoint "GET" "/api/v1/public/status" "Status Check"
 
 # ============================================================
 # USER ENDPOINTS
 # ============================================================
 print_section "USER ENDPOINTS"
 
-test_endpoint "GET" "/api/protected/unique-name" "Get Unique Name"
+test_endpoint "GET" "/api/v1/protected/unique-name" "Get Unique Name"
 
-test_endpoint "POST" "/api/protected/unique-name/set" "Set Unique Name" \
+test_endpoint "POST" "/api/v1/protected/unique-name/set" "Set Unique Name" \
     '{"uniqueName":"testuser123"}'
 
-test_endpoint "GET" "/api/protected/unique-name/check/testuser123" "Check Name Availability"
+test_endpoint "GET" "/api/v1/protected/unique-name/check/testuser123" "Check Name Availability"
 
 # ============================================================
 # PRODUCT ENDPOINTS
@@ -126,22 +126,22 @@ PRODUCT_DATA=$(cat <<EOF
 EOF
 )
 
-test_endpoint "POST" "/api/protected/product" "Create Product" "$PRODUCT_DATA"
+test_endpoint "POST" "/api/v1/protected/product" "Create Product" "$PRODUCT_DATA"
 
-test_endpoint "GET" "/api/protected/product" "List All Products"
+test_endpoint "GET" "/api/v1/protected/product" "List All Products"
 
-test_endpoint "GET" "/api/protected/product?status=active" "List Active Products"
+test_endpoint "GET" "/api/v1/protected/product?status=active" "List Active Products"
 
-test_endpoint "GET" "/api/protected/product/stats" "Get Product Stats"
+test_endpoint "GET" "/api/v1/protected/product/stats" "Get Product Stats"
 
 # ============================================================
 # WALLET ENDPOINTS
 # ============================================================
 print_section "WALLET ENDPOINTS"
 
-test_endpoint "GET" "/api/protected/wallet/balance?chain=base-sepolia" "Get Wallet Balance"
+test_endpoint "GET" "/api/v1/protected/wallet/balance?chain=base-sepolia" "Get Wallet Balance"
 
-test_endpoint "GET" "/api/protected/wallet/transactions/base-sepolia" "Get Transactions"
+test_endpoint "GET" "/api/v1/protected/wallet/transactions/base-sepolia" "Get Transactions"
 
 # ============================================================
 # SUMMARY
