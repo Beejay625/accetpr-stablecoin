@@ -14,16 +14,16 @@ const router = Router();
  *     description: |
  *       Create a new product with details and payment configuration.
  *       
- *       **Supported Token-Chain Combinations (Development):**
- *       - **base**: USDC
- *       - **arbitrum**: USDC, USDT
- *       - **solana**: USDC, USDT
- *       - **tron**: USDT
+ *       **Supported Chains & Tokens:**
+ *       - **Development (NODE_ENV=development):**
+ *         - Chain: `base-sepolia`
+ *         - Token: `USDC`
  *       
- *       **Supported Token-Chain Combinations (Production):**
- *       - **base-sepolia**: USDC
+ *       - **Production (NODE_ENV=production):**
+ *         - Chain: `base`
+ *         - Token: `USDC`
  *       
- *       **Note:** The available chains and tokens depend on your current environment (NODE_ENV).
+ *       **Note:** Use the correct chain for your environment or you'll get a validation error.
  *     tags: [Product]
  *     security:
  *       - bearerAuth: []
