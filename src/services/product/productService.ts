@@ -37,16 +37,13 @@ export class ProductService {
       // Fail fast: Validate request first
       validateProductRequest(productRequest);
 
-      // Get local user ID for database operations (also ensures user exists)
-      const localUserId = await this.getLocalUserId(clerkUserId);
-
       // Run parallel operations for better performance
       const [userUniqueNameResult, imageUrl] = await Promise.all([
         // Get user's unique name (required for payment link)
         userService.getUserUniqueName(clerkUserId),
         // Handle image upload if provided
         uploadedFile 
-          ? ImageStorageService.saveImage(uploadedFile, localUserId)
+          ? ImageStorageService.saveImage(uploadedFile, clerkUserId)
           : Promise.resolve(productRequest.image)
       ]);
 
