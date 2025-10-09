@@ -1,13 +1,11 @@
 import { Router } from 'express';
 import { z } from 'zod';
 import { UniqueNameController } from '../../../controllers/user/uniqueNameController';
-import { requireAuthWithUserId } from '../../../middleware/auth';
 import { validate } from '../../../middleware/validate';
 
 const router = Router();
 
-// Apply authentication middleware to all routes
-router.use(requireAuthWithUserId);
+// Authentication handled globally in protected/index.ts
 
 /**
  * @swagger
