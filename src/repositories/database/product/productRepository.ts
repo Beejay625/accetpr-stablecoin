@@ -87,13 +87,20 @@ export class ProductRepository {
   }
 
   /**
-   * Get all products for a user with optional status filter
+   * Get all products for a user with optional status filter and pagination
    * 
    * @param userId - The user ID
    * @param status - Optional status filter ('active', 'expired', 'cancelled')
-   * @returns Promise<Product[]>
+   * @param page - Page number (default: 1)
+   * @param limit - Items per page (default: 15)
+   * @returns Promise<{ products: Product[], total: number }>
    */
-  static async getUserProducts(userId: string, status?: 'active' | 'expired' | 'cancelled'): Promise<Product[]> {
+  static async getUserProducts(
+    userId: string,
+    status?: 'active' | 'expired' | 'cancelled',
+    page: number = 1,
+    limit: number = 15
+  ): Promise<{ products: Product[], total: number }> {
     try {
       const whereClause: any = { userId };
       
@@ -102,19 +109,34 @@ export class ProductRepository {
         whereClause.status = status;
       }
 
+      // Calculate skip value for pagination
+      const skip = (page - 1) * limit;
+
+      // Get total count
+      const total = await DatabaseOperations.count('product', whereClause);
+
+      // Get paginated products
       const products = await DatabaseOperations.findMany('product', whereClause, {
         orderBy: {
           createdAt: 'desc'
-        }
+        },
+        skip,
+        take: limit
       });
 
       this.logger.info('getUserProducts', { 
         userId, 
         status: status || 'all',
-        count: products.length 
+        page,
+        limit,
+        count: products.length,
+        total
       }, 'User products retrieved from database');
 
-      return products as Product[];
+      return {
+        products: products as Product[],
+        total
+      };
     } catch (error: any) {
       this.logger.error('getUserProducts', { 
         userId,

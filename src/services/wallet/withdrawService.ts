@@ -4,6 +4,7 @@ import { withdrawFromAddress } from '../../providers/blockradar/withdraw/walletW
 import { WithdrawResponse, SingleWithdrawRequest, BatchWithdrawRequest } from '../../providers/blockradar/withdraw/withdraw.interface';
 import { DEFAULT_CHAINS, isChainSupported } from '../../providers/blockradar/walletIdAndTokenManagement/chainsAndTokensHelpers';
 import { validateSingleWithdrawRequest, validateBatchWithdrawRequest } from './helpers/validateWithdrawal';
+import { Err } from '../../errors';
 
 /**
  * Single Withdraw Service
@@ -26,7 +27,7 @@ export class SingleWithdrawService {
       // Fail fast: Validate chain is supported
       if (!isChainSupported(singleWithdrawRequest.chain)) {
         const envType = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev' ? 'development' : 'production';
-        throw new Error(
+        throw Err.validation(
           `Invalid chain: ${singleWithdrawRequest.chain}. Supported chains in ${envType}: ${DEFAULT_CHAINS.join(', ')}`
         );
       }
@@ -37,7 +38,7 @@ export class SingleWithdrawService {
       // Get asset ID from chain and asset
       const assetId = await walletRepository.findAssetId(singleWithdrawRequest.chain, singleWithdrawRequest.asset);
       if (!assetId) {
-        throw new Error(`Asset ${singleWithdrawRequest.asset} not found on chain ${singleWithdrawRequest.chain}`);
+        throw Err.notFound(`Asset ${singleWithdrawRequest.asset} not found on chain ${singleWithdrawRequest.chain}`);
       }
 
       // Get address ID and execute withdraw
@@ -92,7 +93,7 @@ export class BatchWithdrawService {
       const envType = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev' ? 'development' : 'production';
       for (const chain of chains) {
         if (!isChainSupported(chain)) {
-          throw new Error(
+          throw Err.validation(
             `Invalid chain: ${chain}. Supported chains in ${envType}: ${DEFAULT_CHAINS.join(', ')}`
           );
         }
@@ -103,7 +104,7 @@ export class BatchWithdrawService {
       for (const asset of batchWithdrawRequest.assets) {
         const assetId = await walletRepository.findAssetId(asset.chain, asset.asset);
         if (!assetId) {
-          throw new Error(`Asset ${asset.asset} not found on chain ${asset.chain}`);
+          throw Err.notFound(`Asset ${asset.asset} not found on chain ${asset.chain}`);
         }
         
         apiAssets.push({

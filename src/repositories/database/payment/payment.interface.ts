@@ -27,6 +27,8 @@ export interface PaymentIntent {
   currency: string;              // Currency code (USD, EUR, etc.)
   paymentMethodTypes?: string[]; // Payment method types from Stripe (e.g., ["card", "link"] or ["us_bank_account"])
   status: PaymentIntentStatus;   // Payment intent status
+  customerName?: string;         // Customer billing name from Stripe
+  customerEmail?: string;        // Customer billing email from Stripe
   createdAt: string;             // ISO date string
   updatedAt: string;             // ISO date string
 }

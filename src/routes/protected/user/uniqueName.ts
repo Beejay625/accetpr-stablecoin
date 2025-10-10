@@ -52,6 +52,11 @@ router.get('/check/:uniqueName', asyncHandler(UniqueNameController.checkAvailabi
  * /protected/unique-name/set:
    *   post:
      *     summary: Set or update unique name for user
+     *     description: |
+       *       Set or update the user's unique name.
+       *       **Important:** On first-time set, this endpoint automatically generates multi-chain wallets synchronously.
+       *       On updates, only the unique name is changed (wallets remain unchanged).
+       *       This is an atomic operation - if wallet generation fails, unique name is not set.
      *     tags: [Unique Name]
      *     security:
        *       - bearerAuth: []
@@ -73,11 +78,33 @@ router.get('/check/:uniqueName', asyncHandler(UniqueNameController.checkAvailabi
                      *     responses:
                        *       200:
                          *         description: Unique name set/updated successfully
-                         *       400:
-                           *         description: Bad request (validation error or name already taken)
-                           *       401:
-                             *         description: Unauthorized
-                             */
+                         *         content:
+                           *           application/json:
+                             *             schema:
+                               *               type: object
+                               *               properties:
+                                 *                 ok:
+                                   *                   type: boolean
+                                   *                 message:
+                                     *                   type: string
+                                     *                 data:
+                                       *                   type: object
+                                       *                   properties:
+                                         *                     uniqueName:
+                                           *                       type: string
+                                           *                     isUpdate:
+                                             *                       type: boolean
+                                             *                       description: True if updating existing name, false if setting for first time
+                                             *                     walletsGenerated:
+                                               *                       type: boolean
+                                               *                       description: True if wallets were generated (only on first set)
+                                               *       400:
+                                                 *         description: Bad request (validation error or name already taken)
+                                                 *       401:
+                                                   *         description: Unauthorized
+                                                   *       500:
+                                                     *         description: Wallet generation failed (unique name rolled back)
+                                                     */
 router.post('/set', 
   validate(z.object({
     uniqueName: z.string()

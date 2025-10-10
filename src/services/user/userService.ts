@@ -3,6 +3,8 @@ import { userRepository } from '../../repositories/database/user/userRepository'
 import { DatabaseOperations } from '../../db/databaseOperations';
 import { Prisma } from '@prisma/client';
 import { isUniqueNameAvailable } from './helpers/uniqueNameValidation';
+import { WalletService } from '../wallet/walletService';
+import { DEFAULT_CHAINS } from '../../providers/blockradar/walletIdAndTokenManagement/chainsAndTokensHelpers';
 
 /**
  * User Service - Thin wrapper for user operations
@@ -126,6 +128,40 @@ export class UserService {
       
       logger.info({ clerkUserId, uniqueName, isUpdate }, isUpdate ? 'Unique name updated successfully' : 'Unique name set successfully');
       
+      // NEW: Generate wallets on first set only (not on updates)
+      if (!isUpdate) {
+        logger.info({ clerkUserId, uniqueName }, 'First-time unique name set - generating multi-chain wallets synchronously');
+
+        try {
+          const wallets = await WalletService.generateMultiChainWallets(
+            clerkUserId,
+            clerkUserId,
+            DEFAULT_CHAINS
+          );
+
+          logger.info({
+            clerkUserId,
+            uniqueName,
+            walletsGenerated: wallets.length,
+            chains: wallets.map(w => w.chain)
+          }, 'Multi-chain wallets generated successfully during unique name set');
+
+        } catch (walletError: any) {
+          // ATOMIC OPERATION: Rollback unique name if wallet generation fails
+          logger.error({ clerkUserId, uniqueName, error: walletError.message }, 'Wallet generation failed - rolling back unique name');
+
+          try {
+            await DatabaseOperations.update('user', { id: user.id }, { uniqueName: null });
+            logger.info({ clerkUserId }, 'Unique name rolled back successfully');
+          } catch (rollbackError: any) {
+            logger.error({ clerkUserId, error: rollbackError.message }, 'Failed to rollback unique name');
+          }
+
+          // Return error to user - unique name was not set
+          throw walletError;
+        }
+      }
+
       return { success: true, isUpdate };
     } catch (error: any) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {

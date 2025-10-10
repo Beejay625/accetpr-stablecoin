@@ -3,6 +3,7 @@ import { walletRepository } from '../../repositories/database/wallet';
 import { getAddressTransactions } from '../../providers/blockradar/transactions/walletTransactions';
 import { TransactionsResponse, SimplifiedTransaction } from '../../providers/blockradar/transactions/transactions.interface';
 import { DEFAULT_CHAINS, isChainSupported } from '../../providers/blockradar/walletIdAndTokenManagement/chainsAndTokensHelpers';
+import { Err } from '../../errors';
 
 /**
  * Transactions Service
@@ -29,7 +30,7 @@ export class TransactionsService {
       // Fail fast: Validate chain is supported
       if (!isChainSupported(chain)) {
         const envType = process.env['NODE_ENV'] === 'development' || process.env['NODE_ENV'] === 'dev' ? 'development' : 'production';
-        throw new Error(
+        throw Err.validation(
           `Invalid chain: ${chain}. Supported chains in ${envType}: ${DEFAULT_CHAINS.join(', ')}`
         );
       }

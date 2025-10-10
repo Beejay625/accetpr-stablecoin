@@ -57,6 +57,9 @@ const envSchema = {
   CACHE_CONNECT_TIMEOUT: { type: Number, default: 10000, required: false },
   CACHE_TIMEOUT: { type: Number, default: 5000, required: false },
   CACHE_DEFAULT_TTL: { type: Number, default: 3600, required: false },
+  
+  // Admin configuration
+  ADMIN_EMAILS: { type: String, default: '', required: false },
 };
 
 // Validate environment variables on startup

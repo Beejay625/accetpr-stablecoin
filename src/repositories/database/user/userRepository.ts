@@ -1,6 +1,5 @@
 import { createLoggerWithFunction } from '../../../logger';
 import { DatabaseOperations } from '../../../db/databaseOperations';
-import { eventManager } from '../../../events';
 
 /**
  * User Repository
@@ -146,13 +145,9 @@ export class UserRepository {
     logger.info({ clerkUserId, email }, 'Creating new user in database');
     const newUser = await this.createWithRaceProtection({ clerkUserId, ...(email && { email }) });
     
-    // Emit wallet generation event for new user (asynchronous)
-    logger.info({ clerkUserId, userId: newUser.id }, 'Emitting multi-chain wallet generation event for new user');
-    eventManager.emit('user:wallet:generate', {
-      userId: newUser.id
-    }).catch((error: any) => {
-      logger.error({ clerkUserId, userId: newUser.id, error: error.message }, 'Failed to emit wallet generation event');
-    });
+    // NOTE: Wallet generation now happens when user sets their unique name
+    // This ensures wallets are generated synchronously and atomically
+    logger.info({ clerkUserId, userId: newUser.id }, 'New user created - wallets will be generated when unique name is set');
     
     return newUser;
   }

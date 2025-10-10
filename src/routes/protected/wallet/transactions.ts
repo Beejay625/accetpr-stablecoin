@@ -10,10 +10,10 @@ const router = Router();
 
 /**
  * @swagger
- * /protected/wallet/transactions/{chain}:
+ * /protected/wallet/payouttransactions/{chain}:
  *   get:
- *     summary: Get wallet transactions for a specific chain
- *     description: Retrieve all transactions for the authenticated user's wallet on the specified blockchain chain
+ *     summary: Get wallet payout transactions for a specific chain
+ *     description: Retrieve all payout transactions for the authenticated user's wallet on the specified blockchain chain
  *     tags: [Wallet]
  *     security:
  *       - bearerAuth: []
@@ -119,7 +119,7 @@ const router = Router();
  *       500:
  *         description: Internal server error
  */
-router.get('/transactions/:chain', 
+router.get('/payouttransactions/:chain', 
   validate(chainParamSchema, 'params'),
   asyncHandler(TransactionsController.getUserTransactions)
 );

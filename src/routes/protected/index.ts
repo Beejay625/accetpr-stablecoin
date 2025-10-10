@@ -3,6 +3,8 @@ import { requireAuthWithUserId } from '../../middleware/auth';
 import walletRouter from './wallet';
 import productRouter from './product';
 import uniqueNameRouter from './user/uniqueName';
+import paymentRouter from './payment';
+import { adminRouter } from '../../../admin/routes';
 
 export const protectedRouter = Router();
 
@@ -17,5 +19,11 @@ protectedRouter.use('/product', productRouter);
 
 // User endpoints
 protectedRouter.use('/unique-name', uniqueNameRouter);
+
+// Payment endpoints
+protectedRouter.use('/payment', paymentRouter);
+
+// Admin endpoints (additional admin-only authorization applied within)
+protectedRouter.use('/admin', adminRouter);
 
 export default protectedRouter;

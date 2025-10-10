@@ -2,11 +2,11 @@
   "name": "stablestack-backend",
   "version": "1.0.0",
   "description": "Production-ready Express.js backend with TypeScript, Clerk authentication, BlockRadar integration, and caching system",
-  "main": "dist/server.js",
+  "main": "dist/src/server.js",
   "scripts": {
     "dev": "nodemon --config nodemon.json",
     "build": "rimraf dist && tsc",
-    "start": "node dist/server.js",
+    "start": "node dist/src/server.js",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
     "test:blockradar": "node test-blockradar.js",
@@ -21,7 +21,13 @@
     "commit:watch": "node auto-commit.js --watch",
     "commit:simple": "./auto-commit.sh",
     "commit:simple:interactive": "./auto-commit.sh -i",
-    "commit:simple:watch": "./auto-commit.sh -w"
+    "commit:simple:watch": "./auto-commit.sh -w",
+    "db:clear": "ts-node scripts/clear-database.ts",
+    "db:reset": "npm run db:clear && npx prisma db push",
+    "test:routes": "ts-node scripts/test-protected-routes.ts",
+    "test:blockradar": "ts-node scripts/test-blockradar-services.ts",
+    "check:wallets": "ts-node scripts/check-wallet-status.ts",
+    "generate:wallets": "ts-node scripts/generate-wallets-for-user.ts"
   },
   "keywords": [
     "express",

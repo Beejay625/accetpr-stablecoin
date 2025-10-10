@@ -264,4 +264,26 @@ export class DatabaseOperations {
       throw error;
     }
   }
+
+  /**
+   * Count records
+   */
+  static async count(
+    model: keyof PrismaClient,
+    where?: any
+  ): Promise<number> {
+    const logger = createLoggerWithFunction('count', { module: 'database-ops' });
+
+    try {
+      const result = await (prisma[model] as any).count({
+        where,
+      });
+
+      logger.debug({ model, where, count: result }, 'Count operation');
+      return result;
+    } catch (error: any) {
+      logger.error({ model, where, error: error.message }, 'Failed to count records');
+      throw error;
+    }
+  }
 }

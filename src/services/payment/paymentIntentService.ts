@@ -114,14 +114,31 @@ export class PaymentIntentService {
         return null;
       }
 
+      // Map Stripe status to database status
+      const dbStatus = this.mapStripeStatusToDbStatus(stripeIntent.status);
+
+      // Only return payment intent if status is in the initial created state
+      // We should only reuse payment intents that haven't started the payment process yet
+      // If it's processing, requires_action, or requires_capture, user is already in payment flow
+      const validStatus = 'requires_payment_method'; // Initial state only
+
+      if (stripeIntent.status !== validStatus) {
+        this.logger.warn('retrievePaymentIntentByClientSecret', {
+          paymentIntentId,
+          productId: product.id,
+          status: stripeIntent.status,
+          dbStatus,
+          validStatus
+        }, 'Payment intent is not in initial created state, will create new one');
+        return null;
+      }
+
       this.logger.info('retrievePaymentIntentByClientSecret', {
         paymentIntentId,
         productId: product.id,
-        status: stripeIntent.status
-      }, 'Existing payment intent retrieved');
-
-      // Map Stripe status to database status
-      const dbStatus = this.mapStripeStatusToDbStatus(stripeIntent.status);
+        status: stripeIntent.status,
+        dbStatus
+      }, 'Existing payment intent retrieved with valid status');
 
       return {
         paymentIntentId,

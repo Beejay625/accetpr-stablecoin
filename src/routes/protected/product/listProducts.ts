@@ -10,8 +10,8 @@ const router = Router();
  * @swagger
  * /protected/product:
  *   get:
- *     summary: Get all products for authenticated user
- *     description: Retrieve all products created by the authenticated user with optional status filtering (basic info only, use separate endpoints for payment statistics)
+ *     summary: Get all products for authenticated user with pagination
+ *     description: Retrieve products created by the authenticated user with optional status filtering and pagination support (basic info only, use separate endpoints for payment statistics)
  *     tags: [Product]
  *     security:
  *       - bearerAuth: []
@@ -23,6 +23,23 @@ const router = Router();
  *           enum: [active, expired, cancelled]
  *         description: Filter products by status
  *         example: active
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
+ *         description: Page number
+ *         example: 1
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           maximum: 100
+ *           default: 15
+ *         description: Number of items per page (max 100)
+ *         example: 15
  *     responses:
  *       200:
  *         description: Products retrieved successfully
@@ -38,23 +55,45 @@ const router = Router();
  *                   type: string
  *                   example: "Products retrieved successfully"
  *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                       productName:
+ *                         type: string
+ *                       amount:
+ *                         type: string
+ *                       status:
+ *                         type: string
+ *                       slug:
+ *                         type: string
+ *                       paymentLink:
+ *                         type: string
+ *                       createdAt:
+ *                         type: string
+ *                 pagination:
  *                   type: object
  *                   properties:
- *                     products:
- *                       type: array
- *                       items:
- *                         type: object
- *                         properties:
- *                           id:
- *                             type: string
- *                           productName:
- *                             type: string
- *                           amount:
- *                             type: string
- *                           status:
- *                             type: string
- *                     count:
- *                       type: number
+ *                     page:
+ *                       type: integer
+ *                       example: 1
+ *                     limit:
+ *                       type: integer
+ *                       example: 15
+ *                     total:
+ *                       type: integer
+ *                       example: 25
+ *                     totalPages:
+ *                       type: integer
+ *                       example: 3
+ *                     hasNextPage:
+ *                       type: boolean
+ *                       example: true
+ *                     hasPrevPage:
+ *                       type: boolean
+ *                       example: false
  *       401:
  *         description: Unauthorized - Authentication required
  *         content:

@@ -10,4 +10,11 @@ dist/
 .vscode/
 .DS_Store
 **/*.log
+test-logs/
 .nodemonignore
+
+# Compiled TypeScript files in source directories
+admin/**/*.js
+admin/**/*.d.ts
+admin/**/*.js.map
+admin/**/*.d.ts.map

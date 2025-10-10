@@ -45,11 +45,12 @@ export class UniqueNameController {
     
     const message = result.isUpdate 
       ? 'Unique name updated successfully' 
-      : 'Unique name set successfully';
+      : 'Unique name set successfully. Multi-chain wallets generated.';
     
     sendSuccess(res, message, {
       uniqueName,
-      isUpdate: result.isUpdate
+      isUpdate: result.isUpdate,
+      walletsGenerated: !result.isUpdate  // Indicate wallets were created on first set
     });
   }
 

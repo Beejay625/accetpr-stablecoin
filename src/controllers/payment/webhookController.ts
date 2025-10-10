@@ -65,27 +65,51 @@ export class WebhookController {
     // Handle different event types
     switch (event.type) {
       case 'payment_intent.created':
-        await WebhookService.handlePaymentIntentCreated(event.data.object as Stripe.PaymentIntent);
+        await WebhookService.handlePaymentIntentCreated(
+          event.data.object as Stripe.PaymentIntent,
+          event,
+          this.stripe
+        );
         break;
 
       case 'payment_intent.processing':
-        await WebhookService.handlePaymentIntentProcessing(event.data.object as Stripe.PaymentIntent);
+        await WebhookService.handlePaymentIntentProcessing(
+          event.data.object as Stripe.PaymentIntent,
+          event,
+          this.stripe
+        );
         break;
 
       case 'payment_intent.requires_action':
-        await WebhookService.handlePaymentIntentRequiresAction(event.data.object as Stripe.PaymentIntent);
+        await WebhookService.handlePaymentIntentRequiresAction(
+          event.data.object as Stripe.PaymentIntent,
+          event,
+          this.stripe
+        );
         break;
 
       case 'payment_intent.succeeded':
-        await WebhookService.handlePaymentIntentSucceeded(event.data.object as Stripe.PaymentIntent);
+        await WebhookService.handlePaymentIntentSucceeded(
+          event.data.object as Stripe.PaymentIntent,
+          event,
+          this.stripe
+        );
         break;
 
       case 'payment_intent.payment_failed':
-        await WebhookService.handlePaymentIntentFailed(event.data.object as Stripe.PaymentIntent);
+        await WebhookService.handlePaymentIntentFailed(
+          event.data.object as Stripe.PaymentIntent,
+          event,
+          this.stripe
+        );
         break;
 
       case 'payment_intent.canceled':
-        await WebhookService.handlePaymentIntentCanceled(event.data.object as Stripe.PaymentIntent);
+        await WebhookService.handlePaymentIntentCanceled(
+          event.data.object as Stripe.PaymentIntent,
+          event,
+          this.stripe
+        );
         break;
 
       default:

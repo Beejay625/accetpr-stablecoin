@@ -14,6 +14,28 @@ export interface SuccessResponse<T = any> {
 }
 
 /**
+ * Pagination Metadata
+ */
+export interface PaginationMeta {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+}
+
+/**
+ * Paginated Success Response
+ */
+export interface PaginatedSuccessResponse<T = any> {
+  ok: true;
+  message: string;
+  data: T[];
+  pagination: PaginationMeta;
+}
+
+/**
  * Send a standardized success response
  * 
  * @param res - Express response object
@@ -32,7 +54,33 @@ export function sendSuccess<T = any>(
     message,
     data,
   };
-  
+
+  res.status(statusCode).json(response);
+}
+
+/**
+ * Send a standardized paginated success response
+ * 
+ * @param res - Express response object
+ * @param message - Success message
+ * @param data - Array of response data
+ * @param pagination - Pagination metadata
+ * @param statusCode - HTTP status code (default: 200)
+ */
+export function sendPaginatedSuccess<T = any>(
+  res: Response,
+  message: string,
+  data: T[],
+  pagination: PaginationMeta,
+  statusCode: number = 200
+): void {
+  const response: PaginatedSuccessResponse<T> = {
+    ok: true,
+    message,
+    data,
+    pagination,
+  };
+
   res.status(statusCode).json(response);
 }
 

@@ -96,35 +96,46 @@ export class ProductService {
   }
 
   /**
-   * Get all products for a user with optional status filter (basic info only)
+   * Get all products for a user with optional status filter and pagination (basic info only)
    * 
    * @param userId - The user ID
    * @param status - Optional status filter ('active', 'expired', 'cancelled')
-   * @returns Promise<Product[]> - Array of products
+   * @param page - Page number (default: 1)
+   * @param limit - Items per page (default: 15)
+   * @returns Promise<{ products: Product[], total: number }> - Paginated products
    */
   static async getUserProducts(
-    userId: string, 
-    status?: 'active' | 'expired' | 'cancelled'
-  ): Promise<Product[]> {
+    userId: string,
+    status?: 'active' | 'expired' | 'cancelled',
+    page: number = 1,
+    limit: number = 15
+  ): Promise<{ products: Product[], total: number }> {
     this.logger.info('getUserProducts', { 
       userId, 
-      status: status || 'all'
+      status: status || 'all',
+      page,
+      limit
     }, 'Fetching user products');
 
     try {
-      const products = await ProductRepository.getUserProducts(userId, status);
+      const result = await ProductRepository.getUserProducts(userId, status, page, limit);
 
       this.logger.info('getUserProducts', {
         userId,
         status: status || 'all',
-        count: products.length
+        page,
+        limit,
+        count: result.products.length,
+        total: result.total
       }, 'Products retrieved successfully');
 
-      return products;
+      return result;
     } catch (error: any) {
       this.logger.error('getUserProducts', { 
         userId, 
         status,
+        page,
+        limit,
         error: error.message 
       }, 'Failed to get user products');
       throw error;
@@ -216,17 +227,17 @@ export class ProductService {
     try {
       // Run parallel queries for efficiency
       const [allProducts, activeProducts, expiredProducts, cancelledProducts] = await Promise.all([
-        ProductRepository.getUserProducts(userId),
-        ProductRepository.getUserProducts(userId, 'active'),
-        ProductRepository.getUserProducts(userId, 'expired'),
-        ProductRepository.getUserProducts(userId, 'cancelled')
+        ProductRepository.getUserProducts(userId, undefined, 1, 1000),
+        ProductRepository.getUserProducts(userId, 'active', 1, 1000),
+        ProductRepository.getUserProducts(userId, 'expired', 1, 1000),
+        ProductRepository.getUserProducts(userId, 'cancelled', 1, 1000)
       ]);
 
       const stats = {
-        total: allProducts.length,
-        active: activeProducts.length,
-        expired: expiredProducts.length,
-        cancelled: cancelledProducts.length
+        total: allProducts.total,
+        active: activeProducts.total,
+        expired: expiredProducts.total,
+        cancelled: cancelledProducts.total
       };
 
       this.logger.info('getUserProductStats', {

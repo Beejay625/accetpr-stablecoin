@@ -4,6 +4,8 @@ import { getAddressBalance } from '../../providers/blockradar/balance/walletBala
 import { walletRepository } from '../../repositories/database/wallet';
 import { cacheService } from '../../services/cache';
 import { DEFAULT_CHAINS, EVM_CHAINS, validateChains, isChainSupported } from '../../providers/blockradar/walletIdAndTokenManagement/chainsAndTokensHelpers';
+import { userRepository } from '../../repositories/database/user/userRepository';
+import { Err } from '../../errors';
 
 /**
  * Wallet Service
@@ -66,6 +68,16 @@ export class WalletService {
     try {
       this.logger.info('generateMultiChainWallets', { userId, addressName, chains }, 'Generating multi-chain wallets');
       
+      // IMPORTANT: Validate user exists before generating wallets
+      // Wallet addresses have foreign key constraint to users table
+      const user = await userRepository.findByClerkId(userId);
+      if (!user) {
+        this.logger.error('generateMultiChainWallets', { userId }, 'User not found - cannot generate wallets');
+        throw Err.notFound(`User with ID ${userId} not found. User must exist before generating wallets.`);
+      }
+
+      this.logger.debug('generateMultiChainWallets', { userId, userDbId: user.id }, 'User validation passed');
+
       // Fail fast: Validate all chains are supported before making any API calls
       validateChains(chains);
       

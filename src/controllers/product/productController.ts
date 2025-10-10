@@ -71,27 +71,45 @@ export class ProductController {
    */
   static async getUserProducts(req: any, res: Response): Promise<void> {
     const clerkUserId = req.authUserId!;
-    const { status } = req.query;
+    const { status, page = '1', limit = '15' } = req.query;
+
+    // Parse pagination parameters
+    const pageNum = Math.max(1, parseInt(page as string, 10) || 1);
+    const limitNum = Math.min(100, Math.max(1, parseInt(limit as string, 10) || 15)); // Max 100 items per page
 
     logger.info('getUserProducts', { 
       clerkUserId, 
-      status: status || 'all'
+      status: status || 'all',
+      page: pageNum,
+      limit: limitNum
     }, 'Processing get user products request');
 
-    const products = await ProductService.getUserProducts(
+    const result = await ProductService.getUserProducts(
       clerkUserId, 
-      status as 'active' | 'expired' | 'cancelled' | undefined
+      status as 'active' | 'expired' | 'cancelled' | undefined,
+      pageNum,
+      limitNum
     );
+
+    const totalPages = Math.ceil(result.total / limitNum);
 
     logger.info('getUserProducts', {
       clerkUserId,
-      count: products.length,
+      count: result.products.length,
+      total: result.total,
+      page: pageNum,
+      limit: limitNum,
       status: status || 'all'
     }, 'User products retrieved successfully');
 
-    sendSuccess(res, 'Products retrieved successfully', {
-      products,
-      count: products.length
+    const { sendPaginatedSuccess } = require('../../utils/successResponse');
+    sendPaginatedSuccess(res, 'Products retrieved successfully', result.products, {
+      page: pageNum,
+      limit: limitNum,
+      total: result.total,
+      totalPages,
+      hasNextPage: pageNum < totalPages,
+      hasPrevPage: pageNum > 1
     });
   }
 

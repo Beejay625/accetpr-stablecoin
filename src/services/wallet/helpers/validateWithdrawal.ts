@@ -1,4 +1,5 @@
 import { SingleWithdrawRequest, BatchWithdrawRequest } from '../../../providers/blockradar/withdraw/withdraw.interface';
+import { Err } from '../../../errors';
 
 /**
  * Withdrawal Validation Helpers
@@ -11,24 +12,24 @@ import { SingleWithdrawRequest, BatchWithdrawRequest } from '../../../providers/
  */
 export function validateSingleWithdrawRequest(request: SingleWithdrawRequest): void {
   if (!request.chain || typeof request.chain !== 'string') {
-    throw new Error('Chain is required and must be a string');
+    throw Err.validation('Chain is required and must be a string');
   }
 
   if (!request.asset || typeof request.asset !== 'string') {
-    throw new Error('Asset is required and must be a string');
+    throw Err.validation('Asset is required and must be a string');
   }
 
   if (!request.amount || typeof request.amount !== 'string') {
-    throw new Error('Amount is required and must be a string');
+    throw Err.validation('Amount is required and must be a string');
   }
 
   if (!request.address || typeof request.address !== 'string') {
-    throw new Error('Address is required and must be a string');
+    throw Err.validation('Address is required and must be a string');
   }
 
   const amount = parseFloat(request.amount);
   if (isNaN(amount) || amount <= 0) {
-    throw new Error('Amount must be a positive number');
+    throw Err.validation('Amount must be a positive number');
   }
 }
 

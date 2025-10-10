@@ -1,6 +1,7 @@
 import { createLoggerWithFunction } from '../../../logger';
 import { DatabaseOperations } from '../../../db/databaseOperations';
 import { cacheService } from '../../../services/cache';
+import { Err } from '../../../errors';
 import { CachedAssetRepository } from '../../cached/cachedAssetRepository';
 
 /**
@@ -28,7 +29,7 @@ export class WalletRepository {
         // Get address from database by chain
         const walletAddress = await this.findByChain(userId, chain);
         if (!walletAddress) {
-          throw new Error(`No wallet address found for user ${userId} on chain ${chain}`);
+          throw Err.notFound(`No wallet address found for user on chain ${chain}. Please ensure your wallet is connected.`);
         }
         
         addressId = walletAddress.addressId;

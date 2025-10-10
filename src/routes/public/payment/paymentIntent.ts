@@ -13,8 +13,23 @@ const router = Router();
  * @swagger
  * /public/payment/intent:
  *   post:
- *     summary: Create payment intent from payment link
- *     description: Creates a Stripe payment intent from a product payment link. This is a public endpoint that uses the payment link to identify the product.
+ *     summary: Create or retrieve payment intent from payment link
+ *     description: |
+ *       Creates a new Stripe payment intent or retrieves an existing one from a product payment link.
+ *       This is a public endpoint that uses the payment link to identify the product.
+ *
+ *       **Key Features:**
+ *       - If `clientSecret` is provided, retrieves the existing payment intent (only if in initial created state)
+ *       - Valid status: requires_payment_method (initial created state only)
+ *       - Any other status (processing, canceled, succeeded, failed, etc.) will create a new payment intent
+ *       - If `clientSecret` is not provided, creates a new payment intent
+ *       - Store the returned `clientSecret` in your local storage for reuse
+ *
+ *       **Usage Pattern:**
+ *       1. First time: Call without `clientSecret` to create new payment intent
+ *       2. Save the returned `clientSecret` in local storage
+ *       3. Next time: Call with saved `clientSecret` to retrieve the same payment intent (if still in initial state)
+ *       4. Creates new intent if clientSecret not found, invalid, or payment already started/completed
  *     tags:
  *       - Payment
  *     requestBody:
@@ -30,9 +45,29 @@ const router = Router();
  *                 type: string
  *                 description: The payment link (e.g., https://pay.stablestack.com/johndoe/premium-subscription)
  *                 example: "https://pay.stablestack.com/johndoe/premium-subscription"
+ *               clientSecret:
+ *                 type: string
+ *                 description: |
+ *                   **Optional:** Existing client secret from a previous payment intent.
+ *                   - Pass this if you have stored one in local storage from a previous call
+ *                   - Will only be returned if payment intent is in **initial created state** (requires_payment_method)
+ *                   - Any other status (processing, canceled, succeeded, failed, etc.) will create a new payment intent
+ *                   - If not found or product mismatch, a new payment intent will be created
+ *                   - This prevents creating duplicate payment intents for the same user/product
+ *                 example: "pi_3OjKjqLkdIwHu7ix1K8x2YzQ_secret_abc123def456"
+ *           examples:
+ *             new_payment:
+ *               summary: Create new payment intent (first time)
+ *               value:
+ *                 paymentLink: "https://pay.stablestack.com/johndoe/premium-subscription"
+ *             reuse_existing:
+ *               summary: Retrieve existing payment intent (with saved clientSecret)
+ *               value:
+ *                 paymentLink: "https://pay.stablestack.com/johndoe/premium-subscription"
+ *                 clientSecret: "pi_3OjKjqLkdIwHu7ix1K8x2YzQ_secret_abc123def456"
  *     responses:
  *       200:
- *         description: Payment intent created successfully
+ *         description: Payment intent created or retrieved successfully
  *         content:
  *           application/json:
  *             schema:
@@ -43,13 +78,21 @@ const router = Router();
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Payment intent created successfully"
+ *                   examples:
+ *                     created:
+ *                       value: "Payment intent created successfully"
+ *                     retrieved:
+ *                       value: "Payment intent retrieved successfully"
  *                 data:
  *                   type: object
  *                   properties:
+ *                     paymentIntentId:
+ *                       type: string
+ *                       description: Stripe payment intent ID
+ *                       example: "pi_3OjKjqLkdIwHu7ix1K8x2YzQ"
  *                     clientSecret:
  *                       type: string
- *                       description: Stripe client secret for payment confirmation
+ *                       description: Stripe client secret for payment confirmation (store this in local storage!)
  *                       example: "pi_3OjKjqLkdIwHu7ix1K8x2YzQ_secret_abc123def456"
  *                     productId:
  *                       type: string
@@ -57,12 +100,20 @@ const router = Router();
  *                       example: "pr_abc123def"
  *                     amount:
  *                       type: number
- *                       description: Amount in cents
- *                       example: 2999
+ *                       description: Amount in dollars
+ *                       example: 29.99
  *                     currency:
  *                       type: string
  *                       description: Currency code
- *                       example: "USD"
+ *                       example: "usd"
+ *                     status:
+ *                       type: string
+ *                       description: Payment intent status
+ *                       example: "initiated"
+ *                     paymentLink:
+ *                       type: string
+ *                       description: The payment link used
+ *                       example: "https://pay.stablestack.com/johndoe/premium-subscription"
  *       400:
  *         description: Bad request - Invalid payment link format or product issues
  *         content:

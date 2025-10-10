@@ -94,6 +94,8 @@ model PaymentIntent {
   currency           String                // Currency code (USD, EUR, etc.)
   paymentMethodTypes String[]              @default([])          // Payment method types from Stripe (e.g., ["card", "link"] or ["us_bank_account"])
   status             PaymentIntentStatus   @default(INITIATED)   // Payment intent status
+  customerName       String?               // Customer billing name from Stripe
+  customerEmail      String?               // Customer billing email from Stripe
   createdAt          DateTime              @default(now())
   updatedAt          DateTime              @updatedAt
 
