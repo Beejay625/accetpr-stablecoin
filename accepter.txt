@@ -1,4 +1,3 @@
-ci: add automated testing pipeline
 ci: implement deployment automation
 ci: add code quality checks
 ci: implement security scanning
