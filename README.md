@@ -759,7 +759,11 @@ frontend/
     ├── gas.ts                    # Gas optimization utilities
     ├── transactionQueue.ts       # Transaction queue system
     ├── analytics.ts              # Analytics and event tracking
-    └── walletSession.ts          # Wallet session management
+    ├── walletSession.ts          # Wallet session management
+    ├── addressValidation.ts      # Address and amount validation
+    ├── transactionTemplates.ts   # Transaction template management
+    ├── notifications.ts          # Notification system
+    └── portfolio.ts              # Portfolio management utilities
 ├── hooks/                        # Custom React hooks
     ├── useTokenBalance.ts        # ERC20 token balance hook
     ├── useGasPrice.ts            # Gas price estimation hook
