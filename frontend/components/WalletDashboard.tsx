@@ -7,6 +7,8 @@ import { walletApi } from '@/lib/api'
 import BalanceDisplay from './BalanceDisplay'
 import TransactionsList from './TransactionsList'
 import WithdrawForm from './WithdrawForm'
+import BatchWithdrawForm from './BatchWithdrawForm'
+import ChainSwitcher from './ChainSwitcher'
 
 export default function WalletDashboard() {
   const { getToken } = useAuth()
