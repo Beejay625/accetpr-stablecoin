@@ -1,4 +1,3 @@
-refactor: optimize network configuration
 docs: document network import patterns
 feat: add appkit-button web component
 feat: implement appkit-button in ConnectButton
