@@ -1,4 +1,3 @@
-perf: configure React Query retry logic
 perf: add viem wallet clients
 chore: add React Query error handling
 feat: add wagmi hooks for wallet connection
