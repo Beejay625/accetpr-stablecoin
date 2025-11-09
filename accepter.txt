@@ -1,4 +1,3 @@
-chore: add wagmi hooks for wallet connection
 feat: configure Base chain gas estimation
 perf: setup Reown AppKit configuration
 fix: configure wagmi providers
