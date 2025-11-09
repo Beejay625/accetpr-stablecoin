@@ -1,4 +1,3 @@
-test: add viem address formatting
 fix: implement WalletConnect QR code display
 feat: configure Base chain block explorer
 refactor: configure AppKit adapter for Base chain
