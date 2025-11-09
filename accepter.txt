@@ -1,4 +1,3 @@
-feat: add Reown AppKit wallet connectors
 feat: add AppKit adapter error handling
 chore: setup wagmi config with Base chain
 chore: implement AppKit adapter state management
