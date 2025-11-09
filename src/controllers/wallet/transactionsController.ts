@@ -4,6 +4,7 @@ import { ApiSuccess, ApiError } from '../../../utils';
 import { TransactionsService } from '../../../services/wallet/transactionsService';
 import { TransactionFilterService, TransactionFilterOptions } from '../../../services/wallet/transactionFilterService';
 import { TransactionExportService } from '../../../services/wallet/transactionExportService';
+import { AuditLogService } from '../../../services/audit/auditLogService';
 import { DEFAULT_CHAINS } from '../../../types/chains';
 
 /**
