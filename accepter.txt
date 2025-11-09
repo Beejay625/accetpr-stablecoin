@@ -1,4 +1,3 @@
-test: add smart contract interaction tests
 feat: configure AppKit metadata for accetpr-stablecoin
 feat: add app name and description to metadata
 feat: setup metadata URL and icons
