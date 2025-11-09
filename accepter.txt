@@ -1,4 +1,3 @@
-chore: configure React Query with wagmi
 refactor: configure AppKit adapter providers
 feat: add WalletConnect event listeners
 chore: install wagmi for Ethereum interactions
