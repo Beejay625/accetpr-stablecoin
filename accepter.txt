@@ -1,4 +1,3 @@
-docs: setup viem with Base chain
 docs: configure Base mainnet chain for accetpr-stablecoin
 docs: integrate AppKit adapter with React Query
 fix: configure wagmi providers

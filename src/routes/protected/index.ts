@@ -8,6 +8,11 @@ import addressesRouter from './wallet/addresses';
 import searchRouter from './wallet/search';
 import balanceRouter from './wallet/balance';
 import activityRouter from './wallet/activity';
+import webhooksRouter from './webhooks';
+import transactionsReplayRouter from './transactions-replay';
+import tokensRouter from './tokens';
+import notificationsRouter from './notifications';
+import feesRouter from './fees';
 
 export const protectedRouter = Router();
 
@@ -40,5 +45,20 @@ protectedRouter.use('/wallet', balanceRouter);
 
 // Activity timeline endpoints
 protectedRouter.use('/wallet', activityRouter);
+
+// Webhook management endpoints
+protectedRouter.use('/webhooks', webhooksRouter);
+
+// Transaction replay endpoints
+protectedRouter.use('/transactions', transactionsReplayRouter);
+
+// Token metadata endpoints
+protectedRouter.use('/tokens', tokensRouter);
+
+// Notification preferences endpoints
+protectedRouter.use('/notifications', notificationsRouter);
+
+// Fee calculator endpoints
+protectedRouter.use('/fees', feesRouter);
 
 export default protectedRouter;
