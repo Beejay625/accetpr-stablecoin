@@ -1,4 +1,3 @@
-docs: add WalletConnect session management
 refactor: install @reown/appkit-adapter-wagmi
 feat: add Reown AppKit wallet connectors
 feat: add AppKit adapter error handling
