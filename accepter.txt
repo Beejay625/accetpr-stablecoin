@@ -1,4 +1,3 @@
-perf: add wagmi chain configuration
 feat: configure AppKit adapter for Base chain
 refactor: configure AppKit adapter providers
 perf: implement wagmi connector configuration

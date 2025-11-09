@@ -721,9 +721,15 @@ src/
 │   ├── webhook/     # Webhook management service
 │   ├── transaction/ # Transaction services
 │   │   ├── transactionReplayService.ts
-│   │   └── feeCalculatorService.ts
+│   │   ├── feeCalculatorService.ts
+│   │   ├── transactionNotesService.ts
+│   │   └── transactionMonitoringService.ts
 │   ├── token/       # Token metadata service
-│   └── notification/ # Notification preferences service
+│   ├── notification/ # Notification preferences service
+│   ├── gas/         # Gas price oracle service
+│   └── security/    # Security services
+│       ├── addressWhitelistService.ts
+│       └── transactionLimitsService.ts
 │       ├── transactionExportService.ts
 │       └── transactionDetailsService.ts
 ├── types/           # TypeScript types
