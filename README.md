@@ -149,6 +149,35 @@ Production-ready Express.js backend with TypeScript, Clerk authentication, Block
 - Percentage distribution
 - `PortfolioOverview` component
 
+**Price Tracking** (`frontend/lib/priceTracking.ts`):
+- Token price tracking and display
+- 24h price change percentage
+- Auto-refresh every 30 seconds
+- Price formatting utilities
+- `PriceDisplay` component for UI integration
+
+**Keyboard Shortcuts** (`frontend/lib/keyboardShortcuts.ts`):
+- Power user keyboard shortcuts
+- Default shortcuts (Ctrl+K for search, Ctrl+R for refresh, etc.)
+- Customizable shortcut system
+- Shortcut display modal
+- `KeyboardShortcutsModal` component
+
+**Transaction Notes** (`frontend/lib/transactionNotes.ts`):
+- Add notes to transactions
+- Edit and delete notes
+- Notes displayed in transaction modal
+- Notes indicator in transaction list
+- LocalStorage persistence
+- `TransactionNoteModal` component
+
+**Backup & Restore** (`frontend/lib/backupRestore.ts`):
+- Export all user data to JSON
+- Import backup files
+- Backup includes: address book, templates, notes, settings
+- Clear all data option
+- `BackupRestorePanel` component
+
 #### User Experience
 - **Responsive Design**: Mobile and desktop optimized
 - **Dark Mode**: Full dark mode support
