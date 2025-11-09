@@ -1,4 +1,3 @@
-refactor: setup Base chain network switching
 refactor: implement viem encoding/decoding utilities
 perf: configure Reown AppKit metadata
 chore: configure viem public clients
