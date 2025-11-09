@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { walletApi } from '@/lib/api'
 
 interface BalanceDisplayProps {
@@ -14,7 +14,7 @@ export default function BalanceDisplay({ chain, getToken }: BalanceDisplayProps)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const fetchBalance = async () => {
+  const fetchBalance = useCallback(async () => {
     setLoading(true)
     setError(null)
     try {
@@ -35,13 +35,13 @@ export default function BalanceDisplay({ chain, getToken }: BalanceDisplayProps)
     } finally {
       setLoading(false)
     }
-  }
+  }, [chain, getToken])
 
   useEffect(() => {
     if (chain) {
       fetchBalance()
     }
-  }, [chain])
+  }, [chain, fetchBalance])
 
   return (
     <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
