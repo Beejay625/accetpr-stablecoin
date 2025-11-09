@@ -1,4 +1,3 @@
-perf: optimize re-renders
 fix: improve error messages
 fix: add error recovery mechanisms
 fix: implement error boundaries
