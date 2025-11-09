@@ -1,4 +1,3 @@
-docs: setup AppKit adapter TypeScript types
 docs: configure Base chain gas estimation
 perf: implement viem encoding/decoding utilities
 fix: add viem address formatting
