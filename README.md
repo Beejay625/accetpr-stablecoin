@@ -9,8 +9,13 @@ Production-ready Express.js backend with TypeScript, Clerk authentication, Block
 ### Backend Features
 
 #### Core Features
-- **Multi-Chain Support**: Base, Arbitrum, Optimism, Polygon, Scroll, and more
+- **Multi-Chain Support**: Base, Arbitrum, Optimism, Polygon, Scroll, BSC, Fantom, Linea, Mantle, Celo, zkSync, Avalanche, Ethereum
 - **Wallet Management**: Connect, view balances, and manage transactions
+- **Smart Contract Interactions**: ERC20 token support with read/write operations
+- **Gas Optimization**: Dynamic gas price estimation with multiple strategies
+- **Transaction Queue**: Batch processing with retry logic and status tracking
+- **Analytics & Monitoring**: Real-time event tracking and statistics
+- **Session Management**: Wallet session persistence and auto-reconnect
 - **Authentication**: Clerk integration for secure user authentication
 - **Caching**: Redis and memory-based caching for optimal performance
 - **API Documentation**: Swagger/OpenAPI documentation
