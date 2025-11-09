@@ -1,4 +1,3 @@
-refactor: implement WalletConnect QR code display
 test: configure AppKit adapter providers
 test: install @reown/appkit for wallet integration
 docs: add Base chain transaction broadcasting
