@@ -1,4 +1,3 @@
-perf: setup Reown AppKit configuration
 feat: implement wagmi hooks for balance fetching
 fix: configure Reown AppKit metadata
 chore: implement React Query cache configuration
