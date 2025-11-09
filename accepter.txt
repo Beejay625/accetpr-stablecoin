@@ -1,4 +1,3 @@
-fix: implement viem encoding/decoding utilities
 test: configure viem public clients
 feat: add viem contract interaction helpers
 test: add viem contract interaction helpers
