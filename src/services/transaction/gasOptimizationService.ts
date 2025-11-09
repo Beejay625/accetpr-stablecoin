@@ -1,5 +1,6 @@
 import { createLoggerWithFunction } from '../../logger';
-import { GasPriceOracleService, GasPriceData } from './gasPriceOracleService';
+import { GasPriceOracleService } from '../gas/gasPriceOracleService';
+import type { GasPriceData } from '../gas/gasPriceOracleService';
 
 /**
  * Gas Optimization Recommendations Service
