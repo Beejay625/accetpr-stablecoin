@@ -1,4 +1,3 @@
-chore: setup Reown AppKit with Base chain
 test: configure viem public clients
 docs: implement WalletConnect error handling
 fix: configure Reown AppKit theme
