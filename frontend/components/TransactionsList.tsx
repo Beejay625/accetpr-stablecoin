@@ -48,7 +48,9 @@ export default function TransactionsList({ chain, getToken }: TransactionsListPr
 
       const response = await walletApi.getTransactions(chain, token)
       if (response.success && response.data) {
-        setTransactions(response.data.transactions)
+        const txs = response.data.transactions
+        setTransactions(txs)
+        applyFilters(txs, filters)
       } else {
         throw new Error(response.message || 'Failed to fetch transactions')
       }
