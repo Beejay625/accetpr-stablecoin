@@ -1,4 +1,3 @@
-fix: add wagmi chain configuration
 refactor: configure viem RPC providers
 fix: add AppKit adapter hooks
 feat: configure AppKit adapter for Base chain
