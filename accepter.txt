@@ -1,4 +1,3 @@
-docs: configure WalletConnect project ID
 docs: configure AppKit adapter providers
 refactor: add wagmi hooks for transaction sending
 perf: add wagmi hooks for transaction sending
