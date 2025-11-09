@@ -70,15 +70,17 @@ export default function BatchWithdrawForm({ chain, getToken }: BatchWithdrawForm
       const response = await walletApi.withdrawBatch(assets, token)
 
       if (response.success && response.data) {
-        setSuccess(
-          `Batch withdrawal initiated! Transaction ID: ${response.data.transactionId}. Total: ${response.data.totalAmount} across ${response.data.assetCount} assets.`
-        )
+        const message = `Batch withdrawal initiated! Transaction ID: ${response.data.transactionId}. Total: ${response.data.totalAmount} across ${response.data.assetCount} assets.`
+        setSuccess(message)
+        showToast(message, 'success')
         setAssets([{ chain, asset: 'USDC', amount: '', address: '' }])
       } else {
         throw new Error(response.message || 'Batch withdrawal failed')
       }
     } catch (err: any) {
-      setError(err.message || 'Failed to process batch withdrawal')
+      const errorMessage = err.message || 'Failed to process batch withdrawal'
+      setError(errorMessage)
+      showToast(errorMessage, 'error')
     } finally {
       setLoading(false)
     }
