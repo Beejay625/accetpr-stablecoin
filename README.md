@@ -682,9 +682,21 @@ src/
 
 ### Protected Endpoints (Require Authentication)
 
-- `GET /api/wallet/balance` - Get wallet balance
-- `GET /api/wallet/transactions` - Get transaction history
-- `POST /api/wallet/withdraw` - Execute withdrawal
+| Endpoint | Method | Description | Auth Required |
+|----------|--------|-------------|---------------|
+| `GET /api/v1/protected/wallet/balance` | GET | Get wallet balance for a chain | ✅ |
+| `GET /api/v1/protected/wallet/balance/aggregated` | GET | Get aggregated balance across all chains | ✅ |
+| `GET /api/v1/protected/wallet/transactions/{chain}` | GET | Get transaction history with filtering | ✅ |
+| `GET /api/v1/protected/wallet/transactions/{chain}/export` | GET | Export transactions (CSV/JSON) | ✅ |
+| `GET /api/v1/protected/wallet/transactions/search` | GET | Search for a transaction by hash/ID/reference | ✅ |
+| `GET /api/v1/protected/wallet/transactions/search/all` | GET | Search for multiple transactions | ✅ |
+| `GET /api/v1/protected/wallet/statistics` | GET | Get comprehensive wallet statistics | ✅ |
+| `GET /api/v1/protected/wallet/addresses` | GET | Get all wallet addresses | ✅ |
+| `GET /api/v1/protected/wallet/addresses/{chain}` | GET | Get wallet address for a specific chain | ✅ |
+| `GET /api/v1/protected/wallet/activity` | GET | Get activity timeline across all chains | ✅ |
+| `GET /api/v1/protected/wallet/activity/recent` | GET | Get recent activity | ✅ |
+| `POST /api/v1/protected/wallet/withdraw/single` | POST | Execute single withdrawal | ✅ |
+| `POST /api/v1/protected/wallet/withdraw/batch` | POST | Execute batch withdrawal | ✅ |
 
 ### API Documentation
 
