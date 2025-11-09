@@ -1,4 +1,3 @@
-chore: configure React Query retry logic
 test: install wagmi for Ethereum interactions
 perf: setup AppKit adapter TypeScript types
 docs: setup Reown AppKit with Base chain
