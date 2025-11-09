@@ -27,10 +27,13 @@ A comprehensive Next.js frontend application with Reown AppKit integration for a
 - **Activity Feed**: Recent activity summary widget
 
 ### 💸 Withdrawal Operations
-- **Single Withdrawal**: Withdraw individual assets
+- **Single Withdrawal**: Withdraw individual assets with validation
 - **Batch Withdrawal**: Withdraw up to 10 assets in one transaction
 - **Multi-Asset Support**: USDC, USDT, ETH
 - **Transaction Tracking**: Real-time status updates
+- **Address Validation**: Real-time address format validation
+- **Amount Validation**: Amount range and format validation
+- **Transaction Templates**: Save and reuse common withdrawal configurations
 
 ### 📈 Analytics & Statistics
 - **Statistics Dashboard**: Overview of transaction metrics
