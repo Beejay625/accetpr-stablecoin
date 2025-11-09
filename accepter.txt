@@ -1,4 +1,3 @@
-test: configure WalletConnect metadata
 docs: install @tanstack/react-query
 docs: configure Reown AppKit metadata
 fix: add React Query hooks for wallet data
