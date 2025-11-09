@@ -1,4 +1,3 @@
-perf: integrate WalletConnect with Reown AppKit
 chore: configure Base chain block explorer
 test: add wagmi chain configuration
 refactor: setup WalletConnect with Base chain
