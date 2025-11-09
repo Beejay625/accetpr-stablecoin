@@ -1,111 +1,131 @@
-/**
- * Wallet Session Management
- * Handles wallet session persistence, auto-reconnect, and state management
- */
-
-import { type Address } from 'viem'
-
 export interface WalletSession {
-  address: Address
+  address: string
   chainId: number
-  walletType: string
   connectedAt: number
   lastActivity: number
+  expiresAt: number
 }
 
 const SESSION_STORAGE_KEY = 'wallet_session'
-const SESSION_TIMEOUT = 1000 * 60 * 60 * 24 // 24 hours
+const SESSION_DURATION = 24 * 60 * 60 * 1000 // 24 hours
 
 class WalletSessionManager {
   /**
-   * Save session to localStorage
+   * Create a new session
    */
-  saveSession(session: WalletSession): void {
-    if (typeof window === 'undefined') return
-    
-    try {
-      localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(session))
-    } catch (error) {
-      console.error('Failed to save wallet session:', error)
+  createSession(address: string, chainId: number): WalletSession {
+    const now = Date.now()
+    const session: WalletSession = {
+      address,
+      chainId,
+      connectedAt: now,
+      lastActivity: now,
+      expiresAt: now + SESSION_DURATION,
     }
+
+    this.saveSession(session)
+    return session
   }
 
   /**
-   * Get session from localStorage
+   * Get current session
    */
   getSession(): WalletSession | null {
-    if (typeof window === 'undefined') return null
-    
     try {
       const stored = localStorage.getItem(SESSION_STORAGE_KEY)
       if (!stored) return null
-      
+
       const session: WalletSession = JSON.parse(stored)
-      
+
       // Check if session is expired
-      const now = Date.now()
-      if (now - session.lastActivity > SESSION_TIMEOUT) {
+      if (Date.now() > session.expiresAt) {
         this.clearSession()
         return null
       }
-      
+
       return session
     } catch (error) {
-      console.error('Failed to get wallet session:', error)
+      console.error('Failed to get session:', error)
       return null
     }
   }
 
   /**
-   * Update session activity timestamp
+   * Update session activity
    */
   updateActivity(): void {
     const session = this.getSession()
     if (session) {
+      session.lastActivity = Date.now()
+      // Extend session on activity
+      session.expiresAt = Date.now() + SESSION_DURATION
+      this.saveSession(session)
+    }
+  }
+
+  /**
+   * Update chain ID
+   */
+  updateChainId(chainId: number): void {
+    const session = this.getSession()
+    if (session) {
+      session.chainId = chainId
       session.lastActivity = Date.now()
       this.saveSession(session)
     }
   }
 
   /**
+   * Check if session is valid
+   */
+  isValid(): boolean {
+    const session = this.getSession()
+    return session !== null
+  }
+
+  /**
+   * Check if session is expired
+   */
+  isExpired(): boolean {
+    const session = this.getSession()
+    if (!session) return true
+    return Date.now() > session.expiresAt
+  }
+
+  /**
+   * Get time until expiration
+   */
+  getTimeUntilExpiration(): number {
+    const session = this.getSession()
+    if (!session) return 0
+    return Math.max(0, session.expiresAt - Date.now())
+  }
+
+  /**
    * Clear session
    */
   clearSession(): void {
-    if (typeof window === 'undefined') return
-    
+    localStorage.removeItem(SESSION_STORAGE_KEY)
+  }
+
+  /**
+   * Save session to localStorage
+   */
+  private saveSession(session: WalletSession): void {
     try {
-      localStorage.removeItem(SESSION_STORAGE_KEY)
+      localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(session))
     } catch (error) {
-      console.error('Failed to clear wallet session:', error)
+      console.error('Failed to save session:', error)
     }
   }
 
   /**
-   * Check if session exists and is valid
+   * Auto-reconnect if session exists
    */
-  hasValidSession(): boolean {
-    return this.getSession() !== null
-  }
-
-  /**
-   * Auto-reconnect logic
-   * Returns session if valid, null otherwise
-   */
-  shouldAutoReconnect(): WalletSession | null {
-    const session = this.getSession()
-    if (!session) return null
-    
-    // Check if session is still valid
-    const now = Date.now()
-    if (now - session.lastActivity > SESSION_TIMEOUT) {
-      this.clearSession()
-      return null
-    }
-    
-    return session
+  shouldAutoReconnect(): boolean {
+    return this.isValid() && !this.isExpired()
   }
 }
 
 // Singleton instance
-export const walletSessionManager = new WalletSessionManager()
-
+export const walletSession = new WalletSessionManager()
