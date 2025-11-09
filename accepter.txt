@@ -1,4 +1,3 @@
-feat: setup viem type generation
 docs: add AppKit adapter hooks
 refactor: setup viem type generation
 docs: add Reown AppKit feature flags
