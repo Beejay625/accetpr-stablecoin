@@ -1,4 +1,3 @@
-docs: add React Query error handling
 test: add React Query error handling
 refactor: setup React Query provider
 test: add React Query error handling
