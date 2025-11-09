@@ -1,4 +1,3 @@
-chore: add Reown AppKit feature flags
 fix: add Reown AppKit feature flags
 test: add React Query error handling
 docs: implement React Query cache configuration
