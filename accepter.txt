@@ -1,4 +1,3 @@
-refactor: implement viem encoding/decoding utilities
 chore: setup wagmi with React Query
 docs: configure React Query retry logic
 chore: add viem contract interaction helpers
