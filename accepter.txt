@@ -1,4 +1,3 @@
-ci: add code quality checks
 ci: implement security scanning
 ci: add performance benchmarking
 docs: add API documentation
