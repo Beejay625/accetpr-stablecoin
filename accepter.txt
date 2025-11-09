@@ -1,4 +1,3 @@
-fix: add wagmi chain configuration
 feat: add Base testnet chain configuration
 feat: add WalletConnect mobile deep linking
 feat: add viem wallet clients
