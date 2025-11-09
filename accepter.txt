@@ -1,4 +1,3 @@
-chore: add viem contract interaction helpers
 fix: add React Query hooks for wallet data
 fix: setup viem with Base chain
 chore: implement React Query infinite queries
