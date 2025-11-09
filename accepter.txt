@@ -1,4 +1,3 @@
-chore: update Next.js configuration
 chore: update Wagmi dependencies
 chore: update React Query dependencies
 feat: add Optimism network support
