@@ -3,6 +3,7 @@ import { WalletService } from '../../services/wallet/walletService';
 import { ApiSuccess } from '../../utils/apiSuccess';
 import { ApiError } from '../../utils/apiError';
 import { createLoggerWithFunction } from '../../logger';
+import { AuditLogService } from '../../services/audit/auditLogService';
 import { DEFAULT_CHAINS, EVM_CHAINS } from '../../types/chains';
 
 /**
