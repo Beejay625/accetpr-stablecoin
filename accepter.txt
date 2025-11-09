@@ -1,4 +1,3 @@
-test: add ContextProvider tests
 test: add network switching tests
 test: add smart contract interaction tests
 test: add SSR hydration tests
