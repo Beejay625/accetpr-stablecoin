@@ -1,4 +1,3 @@
-feat: implement responsive design
 feat: add mobile wallet deep linking
 feat: implement accessibility improvements
 feat: add GraphQL API support
