@@ -1,4 +1,3 @@
-test: install viem for Ethereum utilities
 feat: add Reown AppKit wallet connectors
 refactor: integrate WalletConnect with Reown AppKit
 feat: configure WalletConnect project ID
