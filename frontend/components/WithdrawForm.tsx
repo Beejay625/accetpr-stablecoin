@@ -143,11 +143,29 @@ export default function WithdrawForm({ chain, getToken }: WithdrawFormProps) {
           <input
             type="text"
             value={recipientAddress}
-            onChange={(e) => setRecipientAddress(e.target.value)}
+            onChange={(e) => {
+              setRecipientAddress(e.target.value)
+              setAddressError(null)
+            }}
+            onBlur={() => {
+              if (recipientAddress) {
+                const validation = validateAddress(recipientAddress)
+                if (!validation.isValid) {
+                  setAddressError(validation.error || 'Invalid address')
+                } else {
+                  setAddressError(null)
+                }
+              }
+            }}
             placeholder="0x..."
-            className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600"
+            className={`w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 ${
+              addressError ? 'border-red-500' : ''
+            }`}
             required
           />
+          {addressError && (
+            <p className="text-xs text-red-600 dark:text-red-400 mt-1">{addressError}</p>
+          )}
         </div>
 
         <div>
