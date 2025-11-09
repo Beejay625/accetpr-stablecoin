@@ -1,4 +1,3 @@
-refactor: configure React Query with wagmi
 docs: setup React Query devtools
 test: implement Reown AppKit modal customization
 test: configure React Query with wagmi
