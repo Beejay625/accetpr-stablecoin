@@ -1,4 +1,3 @@
-refactor: implement WalletConnect QR code display
 refactor: implement viem encoding/decoding utilities
 chore: install wagmi for Ethereum interactions
 feat: install viem for Ethereum utilities
