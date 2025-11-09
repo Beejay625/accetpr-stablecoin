@@ -1,4 +1,3 @@
-feat: setup React Query provider
 chore: add Base chain transaction broadcasting
 docs: configure WalletConnect metadata
 perf: install viem for Ethereum utilities
