@@ -218,6 +218,21 @@ This project uses **Reown AppKit** (formerly WalletConnect) for seamless wallet 
 - **Performance Metrics**: Request timing and performance metrics
 - **Error Stack Traces**: Full stack traces in development mode
 
+#### Wallet Statistics & Analytics
+- **Cross-Chain Statistics**: Aggregate statistics across all user wallets
+- **Balance Aggregation**: Total balances across all chains
+- **Transaction Analytics**: Transaction counts by chain and status
+- **Recent Transactions**: Last 10 transactions across all chains
+- **Wallet Overview**: Complete overview of all wallet addresses
+
+#### Enhanced Health Monitoring
+- **Database Health**: Connection status and response time
+- **Cache Health**: Cache provider status and response time
+- **Memory Monitoring**: Heap usage and memory statistics
+- **Uptime Tracking**: Server uptime information
+- **Environment Info**: Current environment configuration
+- **Comprehensive Status**: Overall health status determination
+
 ## 📦 Installation
 
 ### Prerequisites

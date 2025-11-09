@@ -28,6 +28,8 @@ export default function WalletDashboard() {
   const { getToken } = useAuth()
   const { isConnected, address } = useAccount()
   const chainId = useChainId()
+  const { track } = useAnalytics()
+  const { session, isValid: sessionValid } = useWalletSession()
   const [selectedChain, setSelectedChain] = useState<string>('base')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -35,6 +37,15 @@ export default function WalletDashboard() {
   const [selectedTab, setSelectedTab] = useState<'dashboard' | 'addressbook'>('dashboard')
   const [showSettings, setShowSettings] = useState(false)
   const [showHelp, setShowHelp] = useState(false)
+
+  // Track wallet connection
+  useEffect(() => {
+    if (isConnected && address) {
+      track('wallet_connected', { chain: selectedChain })
+    } else {
+      track('wallet_disconnected')
+    }
+  }, [isConnected, address, selectedChain, track])
 
   // Map chainId to chain name
   const getChainName = (chainId: number): string => {
