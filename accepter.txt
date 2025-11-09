@@ -1,4 +1,3 @@
-fix: setup Reown AppKit with Base chain
 refactor: add WalletConnect event listeners
 docs: add WalletConnect reconnection logic
 perf: add Reown AppKit project ID configuration
