@@ -1,4 +1,3 @@
-feat: add performance monitoring
 feat: implement error tracking
 feat: add user behavior analytics
 feat: implement real-time metrics
