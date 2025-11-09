@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { walletApi } from '@/lib/api'
 
 interface TransactionsListProps {
@@ -24,7 +24,7 @@ export default function TransactionsList({ chain, getToken }: TransactionsListPr
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const fetchTransactions = async () => {
+  const fetchTransactions = useCallback(async () => {
     setLoading(true)
     setError(null)
     try {
@@ -44,13 +44,13 @@ export default function TransactionsList({ chain, getToken }: TransactionsListPr
     } finally {
       setLoading(false)
     }
-  }
+  }, [chain, getToken])
 
   useEffect(() => {
     if (chain) {
       fetchTransactions()
     }
-  }, [chain])
+  }, [chain, fetchTransactions])
 
   return (
     <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
