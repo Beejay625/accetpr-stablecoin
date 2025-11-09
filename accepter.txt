@@ -1,4 +1,3 @@
-perf: setup React Query provider
 docs: add React Query hooks for wallet data
 fix: configure React Query retry logic
 test: configure WalletConnect project ID
