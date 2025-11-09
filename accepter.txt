@@ -1,4 +1,3 @@
-chore: install wagmi for Ethereum interactions
 perf: integrate WalletConnect with Reown AppKit
 chore: configure Base chain block explorer
 test: add wagmi chain configuration
