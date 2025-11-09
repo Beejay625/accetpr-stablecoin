@@ -1,4 +1,3 @@
-refactor: integrate Base chain with wallet connect
 feat: configure Base chain gas estimation
 refactor: setup Reown AppKit configuration
 fix: configure Base chain gas estimation
