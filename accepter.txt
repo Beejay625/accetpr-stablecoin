@@ -1,4 +1,3 @@
-docs: document SSR configuration
 docs: add smart contract interaction examples
 docs: document network configuration
 docs: add troubleshooting guide
