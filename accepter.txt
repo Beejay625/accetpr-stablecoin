@@ -1,4 +1,3 @@
-test: configure WalletConnect project ID
 refactor: implement WalletConnect QR code display
 test: configure AppKit adapter providers
 test: install @reown/appkit for wallet integration
