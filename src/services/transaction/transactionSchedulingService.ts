@@ -75,7 +75,7 @@ export class TransactionSchedulingService {
       await this.addToScheduledList(userId, scheduledId);
 
       // Add to execution queue
-      await this.addToExecutionQueue(scheduledId, scheduledFor);
+      await this.addToExecutionQueue(scheduledId, scheduledFor, userId);
 
       // Start execution interval if not already running
       this.startExecutionInterval();
@@ -260,7 +260,7 @@ export class TransactionSchedulingService {
             // Reschedule for retry (5 minutes later)
             scheduled.status = 'scheduled';
             scheduled.scheduledFor = new Date(Date.now() + 5 * 60 * 1000);
-            await this.addToExecutionQueue(scheduled.id, scheduled.scheduledFor);
+            await this.addToExecutionQueue(scheduled.id, scheduled.scheduledFor, scheduled.userId);
           }
         } finally {
           scheduled.updatedAt = new Date();
@@ -329,26 +329,21 @@ export class TransactionSchedulingService {
   /**
    * Add to execution queue
    */
-  private static async addToExecutionQueue(scheduledId: string, scheduledFor: Date): Promise<void> {
+  private static async addToExecutionQueue(scheduledId: string, scheduledFor: Date, userId: string): Promise<void> {
     const queueKey = 'scheduled:execution:queue';
     const existing = await cacheService.get(queueKey);
     const queue: Array<{ scheduledId: string; userId: string; scheduledFor: string }> = existing ? JSON.parse(existing) : [];
     
-    // Get userId from scheduled transaction (we need to store it)
-    // For now, we'll need to get it from the scheduled transaction
-    const scheduled = await this.getScheduledTransaction('', scheduledId);
-    if (scheduled) {
-      queue.push({
-        scheduledId,
-        userId: scheduled.userId,
-        scheduledFor: scheduledFor.toISOString()
-      });
-      
-      // Sort by scheduledFor date
-      queue.sort((a, b) => new Date(a.scheduledFor).getTime() - new Date(b.scheduledFor).getTime());
-      
-      await cacheService.set(queueKey, JSON.stringify(queue), 86400 * 365);
-    }
+    queue.push({
+      scheduledId,
+      userId,
+      scheduledFor: scheduledFor.toISOString()
+    });
+    
+    // Sort by scheduledFor date
+    queue.sort((a, b) => new Date(a.scheduledFor).getTime() - new Date(b.scheduledFor).getTime());
+    
+    await cacheService.set(queueKey, JSON.stringify(queue), 86400 * 365);
   }
 
   /**

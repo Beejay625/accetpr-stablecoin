@@ -1,4 +1,3 @@
-feat: setup WagmiAdapter configuration
 feat: add Ethers v5 adapter support
 feat: add Ethers v6 adapter support
 feat: add Solana adapter with @solana/web3.js
