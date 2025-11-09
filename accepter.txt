@@ -1,4 +1,3 @@
-chore: implement viem transaction utilities
 feat: initialize Reown AppKit provider
 perf: add AppKit adapter hooks
 test: install @reown/appkit for wallet integration
