@@ -23,6 +23,8 @@ export class WalletController {
     try {
       const userId = req.authUserId!; // Guaranteed by requireAuthWithUserId middleware
       const chain = req.query.chain as string;
+      const ipAddress = req.ip || req.connection.remoteAddress;
+      const userAgent = req.get('user-agent');
       
       this.logger.info({ userId, chain }, 'Getting wallet balance');
 
@@ -41,6 +43,9 @@ export class WalletController {
 
       // Get wallet balance using WalletService
       const balanceData = await WalletService.getWalletBalance(userId, chain);
+
+      // Log audit event
+      AuditLogService.logBalanceCheck(userId, chain, ipAddress, userAgent);
 
       this.logger.info({ 
         userId, 
