@@ -1,0 +1,1017 @@
+perf: configure viem public clients
+test: setup wagmi with React Query
+fix: setup AppKit adapter with wagmi
+refactor: add viem wallet clients
+perf: implement React Query cache configuration
+docs: configure wagmi with viem
+test: setup AppKit adapter TypeScript types
+fix: configure viem RPC providers
+test: setup viem with Base chain
+chore: configure React Query retry logic
+fix: add wagmi hooks for transaction sending
+docs: configure WalletConnect project ID
+refactor: configure React Query with wagmi
+docs: add WalletConnect event listeners
+refactor: configure viem RPC providers
+refactor: add viem wallet clients
+perf: add viem address formatting
+chore: configure WalletConnect project ID
+feat: install @reown/appkit-adapter-wagmi
+docs: integrate AppKit adapter with React Query
+feat: setup AppKit adapter with wagmi
+test: configure React Query retry logic
+refactor: add Base chain native token support
+docs: install wagmi for Ethereum interactions
+fix: setup WalletConnect with Base chain
+fix: implement viem encoding/decoding utilities
+test: configure viem public clients
+feat: add viem contract interaction helpers
+test: add viem contract interaction helpers
+fix: add wagmi hooks for transaction sending
+fix: implement wagmi hooks for balance fetching
+feat: configure viem public clients
+perf: add Base chain transaction broadcasting
+chore: setup Reown AppKit with Base chain
+test: configure viem public clients
+docs: implement WalletConnect error handling
+fix: configure Reown AppKit theme
+chore: setup React Query devtools
+perf: implement viem transaction utilities
+perf: configure WalletConnect project ID
+docs: implement React Query infinite queries
+feat: implement React Query cache configuration
+feat: install @reown/appkit-adapter-wagmi
+refactor: implement Reown AppKit modal customization
+fix: configure Reown AppKit theme
+chore: configure WalletConnect metadata
+perf: add React Query error handling
+feat: configure Base chain block explorer
+docs: configure WalletConnect metadata
+chore: implement Reown AppKit modal customization
+refactor: add Base chain RPC endpoints
+perf: add Base chain RPC endpoints
+refactor: install viem for Ethereum utilities
+feat: add Reown AppKit wallet connectors
+refactor: add Base testnet chain configuration
+perf: setup Reown AppKit configuration
+test: install wagmi for Ethereum interactions
+chore: setup AppKit adapter TypeScript types
+perf: integrate Base chain with wallet connect
+refactor: add Reown AppKit wallet connectors
+test: configure WalletConnect metadata
+docs: install @tanstack/react-query
+docs: configure Reown AppKit metadata
+fix: add React Query hooks for wallet data
+test: configure AppKit adapter providers
+test: install viem for Ethereum utilities
+test: add viem address formatting
+refactor: configure wagmi with viem
+feat: setup AppKit adapter with wagmi
+chore: configure viem RPC providers
+fix: configure viem RPC providers
+feat: add WalletConnect event listeners
+perf: configure wagmi with viem
+refactor: add React Query optimistic updates
+fix: implement Reown AppKit modal customization
+feat: integrate Base chain with wallet connect
+perf: add wagmi chain configuration
+test: configure Base chain block explorer
+refactor: setup AppKit adapter with wagmi
+test: implement WalletConnect error handling
+fix: configure wagmi with viem
+perf: configure AppKit adapter providers
+fix: integrate WalletConnect with Reown AppKit
+fix: configure WalletConnect metadata
+refactor: setup AppKit adapter with wagmi
+perf: add React Query hooks for wallet data
+refactor: setup AppKit adapter TypeScript types
+refactor: implement Base chain transaction signing
+perf: setup React Query devtools
+perf: add Base chain native token support
+docs: setup wagmi with React Query
+docs: implement viem transaction utilities
+docs: implement wagmi connector configuration
+docs: add Reown AppKit project ID configuration
+fix: setup Reown AppKit with Base chain
+refactor: add WalletConnect event listeners
+docs: add WalletConnect reconnection logic
+perf: add Reown AppKit project ID configuration
+docs: implement React Query cache configuration
+fix: setup Reown AppKit with Base chain
+refactor: configure Base chain gas estimation
+test: add AppKit adapter hooks
+docs: setup WalletConnect with Base chain
+feat: add wagmi hooks for wallet connection
+refactor: configure WalletConnect metadata
+test: add viem contract interaction helpers
+fix: install wagmi for Ethereum interactions
+fix: configure Base chain gas estimation
+perf: add viem wallet clients
+feat: configure Base mainnet chain for accetpr-stablecoin
+test: add viem wallet clients
+docs: configure Reown AppKit metadata
+docs: implement AppKit adapter utilities
+perf: configure React Query retry logic
+perf: add viem wallet clients
+chore: add React Query error handling
+feat: add wagmi hooks for wallet connection
+test: add WalletConnect session management
+chore: setup viem type generation
+chore: setup WalletConnect with Base chain
+chore: add WalletConnect mobile deep linking
+docs: setup viem type generation
+fix: add WalletConnect session management
+perf: implement WalletConnect QR code display
+refactor: setup Reown AppKit configuration
+refactor: setup wagmi with React Query
+perf: implement AppKit adapter utilities
+chore: implement AppKit adapter utilities
+refactor: setup viem with Base chain
+perf: setup React Query provider
+docs: add React Query hooks for wallet data
+fix: configure React Query retry logic
+test: configure WalletConnect project ID
+refactor: install @reown/appkit for wallet integration
+test: configure Base mainnet chain for accetpr-stablecoin
+refactor: implement AppKit adapter utilities
+test: configure AppKit adapter for Base chain
+feat: add React Query optimistic updates
+docs: implement Reown AppKit modal customization
+perf: setup AppKit adapter TypeScript types
+fix: add WalletConnect event listeners
+feat: setup viem with Base chain
+fix: configure Base chain block explorer
+feat: setup AppKit adapter with wagmi
+fix: setup AppKit adapter with wagmi
+chore: add viem wallet clients
+docs: configure WalletConnect metadata
+fix: setup Reown AppKit with Base chain
+feat: add wagmi chain configuration
+feat: configure WalletConnect metadata
+chore: configure wagmi providers
+perf: add viem contract interaction helpers
+chore: add React Query optimistic updates
+refactor: integrate WalletConnect with Reown AppKit
+refactor: add Base chain native token support
+chore: implement React Query cache configuration
+perf: configure wagmi providers
+feat: configure Base mainnet chain for accetpr-stablecoin
+chore: implement AppKit adapter utilities
+test: setup AppKit adapter TypeScript types
+fix: implement WalletConnect QR code display
+feat: configure Reown AppKit theme
+feat: add Reown AppKit project ID configuration
+chore: configure WalletConnect metadata
+chore: configure WalletConnect project ID
+fix: configure AppKit adapter providers
+test: configure React Query retry logic
+fix: add wagmi chain configuration
+refactor: configure viem RPC providers
+fix: add AppKit adapter hooks
+feat: configure AppKit adapter for Base chain
+chore: add Base chain RPC endpoints
+test: configure Reown AppKit theme
+perf: install @reown/appkit for wallet integration
+perf: implement Reown AppKit modal customization
+fix: add wagmi hooks for wallet connection
+perf: add wagmi chain configuration
+fix: setup React Query devtools
+feat: setup AppKit adapter TypeScript types
+test: add viem contract interaction helpers
+perf: configure Reown AppKit theme
+test: configure React Query with wagmi
+chore: setup AppKit adapter with wagmi
+refactor: add Reown AppKit feature flags
+feat: add wagmi hooks for transaction sending
+chore: add Reown AppKit project ID configuration
+feat: add WalletConnect session management
+chore: add viem contract interaction helpers
+fix: add React Query hooks for wallet data
+fix: setup viem with Base chain
+chore: implement React Query infinite queries
+fix: configure Base chain gas estimation
+feat: setup Base chain network switching
+perf: implement Reown AppKit modal customization
+perf: add wagmi hooks for wallet connection
+perf: add wagmi hooks for transaction sending
+test: setup Base chain network switching
+refactor: configure wagmi providers
+fix: configure Base mainnet chain for accetpr-stablecoin
+fix: add wagmi hooks for wallet connection
+refactor: configure wagmi providers
+refactor: setup viem type generation
+test: setup WalletConnect with Base chain
+feat: integrate Base chain with wallet connect
+feat: add React Query optimistic updates
+perf: implement WalletConnect QR code display
+perf: add viem address formatting
+fix: implement viem encoding/decoding utilities
+test: install viem for Ethereum utilities
+feat: add Reown AppKit wallet connectors
+refactor: integrate WalletConnect with Reown AppKit
+feat: configure WalletConnect project ID
+chore: install wagmi for Ethereum interactions
+docs: setup viem with Base chain
+refactor: add Base chain RPC endpoints
+feat: setup viem type generation
+docs: add AppKit adapter hooks
+refactor: setup viem type generation
+docs: add Reown AppKit feature flags
+chore: install @reown/appkit for wallet integration
+docs: setup WalletConnect with Base chain
+chore: implement viem transaction utilities
+feat: initialize Reown AppKit provider
+perf: add AppKit adapter hooks
+test: install @reown/appkit for wallet integration
+docs: implement WalletConnect error handling
+feat: implement AppKit adapter state management
+fix: add wagmi chain configuration
+feat: add Base testnet chain configuration
+feat: add WalletConnect mobile deep linking
+feat: add viem wallet clients
+docs: add WalletConnect session management
+refactor: install @reown/appkit-adapter-wagmi
+feat: add Reown AppKit wallet connectors
+feat: add AppKit adapter error handling
+chore: setup wagmi config with Base chain
+chore: implement AppKit adapter state management
+fix: add Base testnet chain configuration
+test: configure AppKit adapter for Base chain
+refactor: add viem address formatting
+refactor: implement wagmi connector configuration
+fix: setup viem type generation
+feat: implement React Query cache configuration
+perf: add Base testnet chain configuration
+test: implement Base chain transaction signing
+docs: install wagmi for Ethereum interactions
+fix: integrate WalletConnect with Reown AppKit
+feat: integrate AppKit adapter with React Query
+test: add React Query hooks for wallet data
+feat: configure React Query with wagmi
+perf: integrate AppKit adapter with React Query
+test: configure React Query with wagmi
+perf: configure WalletConnect project ID
+perf: setup AppKit adapter TypeScript types
+feat: setup AppKit adapter with wagmi
+refactor: setup wagmi with React Query
+refactor: setup AppKit adapter with wagmi
+test: implement WalletConnect error handling
+refactor: install @reown/appkit for wallet integration
+docs: setup viem with Base chain
+docs: configure Base mainnet chain for accetpr-stablecoin
+docs: integrate AppKit adapter with React Query
+fix: configure wagmi providers
+perf: add wagmi chain configuration
+refactor: setup viem type generation
+feat: setup AppKit adapter TypeScript types
+fix: setup viem type generation
+fix: add wagmi hooks for wallet connection
+chore: setup wagmi config with Base chain
+docs: add Base chain native token support
+test: configure wagmi providers
+perf: configure wagmi providers
+docs: configure React Query retry logic
+fix: integrate AppKit adapter with React Query
+test: setup Reown AppKit configuration
+fix: setup AppKit adapter with wagmi
+refactor: implement wagmi connector configuration
+test: implement viem encoding/decoding utilities
+test: configure AppKit adapter providers
+feat: configure React Query with wagmi
+docs: integrate Base chain with wallet connect
+docs: install @tanstack/react-query
+test: configure Reown AppKit metadata
+perf: implement WalletConnect error handling
+refactor: implement Reown AppKit modal customization
+test: setup WalletConnect with Base chain
+refactor: setup WalletConnect with Base chain
+feat: setup viem with Base chain
+chore: implement wagmi connector configuration
+perf: install wagmi for Ethereum interactions
+fix: setup WalletConnect with Base chain
+feat: add wagmi chain configuration
+docs: implement Base chain transaction signing
+fix: add WalletConnect reconnection logic
+perf: add WalletConnect event listeners
+fix: setup wagmi config with Base chain
+feat: configure WalletConnect project ID
+refactor: implement wagmi hooks for balance fetching
+refactor: setup Base chain network switching
+docs: implement WalletConnect error handling
+chore: implement AppKit adapter state management
+refactor: add viem contract interaction helpers
+fix: add wagmi hooks for wallet connection
+fix: add wagmi chain configuration
+refactor: implement AppKit adapter state management
+docs: implement WalletConnect error handling
+refactor: add AppKit adapter error handling
+chore: implement AppKit adapter utilities
+docs: implement WalletConnect error handling
+docs: configure viem RPC providers
+refactor: setup wagmi with React Query
+feat: add Reown AppKit wallet connectors
+fix: add React Query optimistic updates
+perf: install viem for Ethereum utilities
+perf: integrate Base chain with wallet connect
+chore: implement viem encoding/decoding utilities
+perf: configure viem RPC providers
+chore: add wagmi chain configuration
+fix: setup Reown AppKit with Base chain
+perf: configure WalletConnect project ID
+chore: install @tanstack/react-query
+fix: configure viem public clients
+chore: add viem contract interaction helpers
+refactor: implement viem transaction utilities
+refactor: setup wagmi config with Base chain
+chore: add Base chain RPC endpoints
+test: setup React Query devtools
+test: add viem address formatting
+perf: configure Base mainnet chain for accetpr-stablecoin
+docs: implement WalletConnect error handling
+fix: configure Base chain block explorer
+docs: add Reown AppKit wallet connectors
+chore: install wagmi for Ethereum interactions
+refactor: setup AppKit adapter TypeScript types
+feat: add viem wallet clients
+perf: setup Reown AppKit with Base chain
+test: configure Base chain block explorer
+chore: add viem contract interaction helpers
+fix: setup wagmi config with Base chain
+feat: add Reown AppKit feature flags
+perf: add React Query hooks for wallet data
+perf: setup wagmi with React Query
+refactor: setup AppKit adapter with wagmi
+feat: implement Reown AppKit modal customization
+refactor: install @tanstack/react-query
+docs: add viem contract interaction helpers
+test: integrate Base chain with wallet connect
+chore: add WalletConnect reconnection logic
+chore: implement viem transaction utilities
+perf: add Base chain transaction broadcasting
+chore: add Base chain RPC endpoints
+refactor: setup wagmi config with Base chain
+refactor: integrate AppKit adapter with React Query
+docs: implement viem transaction utilities
+fix: add React Query optimistic updates
+chore: configure viem public clients
+refactor: setup Base chain network switching
+refactor: implement viem encoding/decoding utilities
+perf: configure Reown AppKit metadata
+chore: configure viem public clients
+refactor: setup WalletConnect with Base chain
+perf: add WalletConnect mobile deep linking
+docs: configure React Query retry logic
+feat: setup Base chain network switching
+fix: configure WalletConnect project ID
+feat: install wagmi for Ethereum interactions
+fix: add WalletConnect session management
+feat: setup Reown AppKit with Base chain
+docs: configure Base chain block explorer
+chore: configure wagmi with viem
+feat: implement WalletConnect QR code display
+docs: add Base chain RPC endpoints
+chore: add wagmi chain configuration
+feat: add AppKit adapter error handling
+fix: install viem for Ethereum utilities
+refactor: implement React Query cache configuration
+docs: setup React Query provider
+test: setup Reown AppKit with Base chain
+fix: implement viem encoding/decoding utilities
+chore: add Base testnet chain configuration
+perf: configure WalletConnect project ID
+docs: implement AppKit adapter utilities
+docs: configure WalletConnect project ID
+perf: configure React Query retry logic
+fix: configure viem public clients
+fix: initialize Reown AppKit provider
+chore: configure viem RPC providers
+fix: add WalletConnect session management
+test: configure wagmi with viem
+feat: configure React Query retry logic
+refactor: configure wagmi providers
+chore: setup Reown AppKit with Base chain
+feat: setup viem type generation
+chore: integrate Base chain with wallet connect
+test: add Base chain RPC endpoints
+test: add WalletConnect session management
+perf: add wagmi hooks for transaction sending
+test: implement React Query infinite queries
+feat: install @reown/appkit-adapter-wagmi
+fix: implement wagmi connector configuration
+fix: implement Reown AppKit modal customization
+perf: add Base chain RPC endpoints
+fix: configure React Query retry logic
+docs: add Reown AppKit feature flags
+perf: integrate WalletConnect with Reown AppKit
+docs: add AppKit adapter error handling
+test: configure Reown AppKit theme
+feat: add Base testnet chain configuration
+refactor: setup AppKit adapter with wagmi
+refactor: setup AppKit adapter TypeScript types
+fix: implement Base chain transaction signing
+refactor: initialize Reown AppKit provider
+chore: add wagmi chain configuration
+docs: configure Base mainnet chain for accetpr-stablecoin
+docs: initialize Reown AppKit provider
+feat: setup AppKit adapter TypeScript types
+feat: add React Query error handling
+feat: add React Query hooks for wallet data
+perf: add AppKit adapter error handling
+feat: setup wagmi config with Base chain
+perf: implement Base chain transaction signing
+feat: configure Base mainnet chain for accetpr-stablecoin
+refactor: implement React Query cache configuration
+perf: add WalletConnect mobile deep linking
+test: setup wagmi config with Base chain
+test: configure Base chain block explorer
+docs: configure viem RPC providers
+perf: integrate Base chain with wallet connect
+perf: configure Base chain block explorer
+docs: setup AppKit adapter TypeScript types
+docs: configure Base chain gas estimation
+perf: implement viem encoding/decoding utilities
+fix: add viem address formatting
+docs: configure viem RPC providers
+feat: add WalletConnect mobile deep linking
+perf: setup wagmi with React Query
+fix: add React Query error handling
+feat: implement WalletConnect QR code display
+test: implement WalletConnect error handling
+refactor: implement Base chain transaction signing
+refactor: integrate Base chain with wallet connect
+feat: configure Base chain gas estimation
+refactor: setup Reown AppKit configuration
+fix: configure Base chain gas estimation
+perf: configure React Query with wagmi
+chore: add Reown AppKit feature flags
+fix: add Reown AppKit feature flags
+test: add React Query error handling
+docs: implement React Query cache configuration
+docs: add Reown AppKit wallet connectors
+fix: configure WalletConnect metadata
+refactor: integrate AppKit adapter with React Query
+docs: add AppKit adapter error handling
+fix: configure Reown AppKit theme
+chore: add wagmi hooks for wallet connection
+test: integrate Base chain with wallet connect
+test: install @tanstack/react-query
+refactor: add Reown AppKit feature flags
+feat: add WalletConnect mobile deep linking
+refactor: add viem contract interaction helpers
+refactor: setup wagmi config with Base chain
+test: setup Reown AppKit with Base chain
+refactor: configure Reown AppKit theme
+perf: implement viem encoding/decoding utilities
+fix: implement wagmi hooks for balance fetching
+chore: install @reown/appkit-adapter-wagmi
+test: integrate WalletConnect with Reown AppKit
+chore: implement WalletConnect QR code display
+fix: add wagmi hooks for wallet connection
+chore: implement viem encoding/decoding utilities
+test: install viem for Ethereum utilities
+test: implement viem encoding/decoding utilities
+perf: implement AppKit adapter state management
+chore: setup AppKit adapter with wagmi
+refactor: setup AppKit adapter TypeScript types
+perf: add WalletConnect mobile deep linking
+docs: implement AppKit adapter state management
+refactor: configure WalletConnect metadata
+chore: add Reown AppKit feature flags
+chore: implement WalletConnect QR code display
+perf: implement React Query cache configuration
+perf: integrate AppKit adapter with React Query
+perf: configure wagmi with viem
+test: implement React Query infinite queries
+perf: add AppKit adapter hooks
+test: configure WalletConnect project ID
+refactor: implement WalletConnect QR code display
+test: configure AppKit adapter providers
+test: install @reown/appkit for wallet integration
+docs: add Base chain transaction broadcasting
+test: add viem address formatting
+fix: implement WalletConnect QR code display
+feat: configure Base chain block explorer
+refactor: configure AppKit adapter for Base chain
+test: integrate AppKit adapter with React Query
+perf: integrate AppKit adapter with React Query
+docs: install @reown/appkit-adapter-wagmi
+feat: configure Reown AppKit theme
+perf: setup React Query provider
+chore: initialize Reown AppKit provider
+fix: configure Reown AppKit metadata
+test: add React Query optimistic updates
+fix: add Base chain transaction broadcasting
+refactor: configure Base chain gas estimation
+refactor: integrate AppKit adapter with React Query
+feat: add Reown AppKit feature flags
+refactor: setup Reown AppKit configuration
+refactor: configure AppKit adapter providers
+feat: configure wagmi with viem
+test: integrate AppKit adapter with React Query
+test: add WalletConnect reconnection logic
+refactor: setup wagmi config with Base chain
+feat: install @reown/appkit for wallet integration
+chore: implement WalletConnect error handling
+fix: setup viem with Base chain
+perf: setup AppKit adapter with wagmi
+perf: implement wagmi hooks for balance fetching
+refactor: add WalletConnect session management
+chore: setup React Query devtools
+refactor: install @reown/appkit-adapter-wagmi
+refactor: setup wagmi config with Base chain
+feat: initialize Reown AppKit provider
+feat: add React Query hooks for wallet data
+fix: configure Reown AppKit theme
+refactor: setup Base chain network switching
+perf: install @reown/appkit for wallet integration
+chore: configure WalletConnect project ID
+test: setup wagmi config with Base chain
+perf: configure Base chain block explorer
+feat: implement Reown AppKit modal customization
+fix: add WalletConnect mobile deep linking
+docs: configure AppKit adapter providers
+chore: add AppKit adapter hooks
+refactor: add wagmi chain configuration
+fix: add React Query optimistic updates
+fix: add Reown AppKit wallet connectors
+test: add Base chain transaction broadcasting
+perf: implement AppKit adapter state management
+perf: setup AppKit adapter with wagmi
+docs: add React Query error handling
+test: add React Query error handling
+refactor: setup React Query provider
+test: add React Query error handling
+feat: setup Reown AppKit with Base chain
+test: configure Base chain block explorer
+docs: add viem contract interaction helpers
+refactor: add Base chain transaction broadcasting
+feat: setup Reown AppKit configuration
+feat: setup WalletConnect with Base chain
+chore: configure React Query retry logic
+test: install wagmi for Ethereum interactions
+perf: setup AppKit adapter TypeScript types
+docs: setup Reown AppKit with Base chain
+chore: add Base chain transaction broadcasting
+feat: configure Reown AppKit metadata
+feat: add React Query optimistic updates
+feat: setup WalletConnect with Base chain
+refactor: setup Reown AppKit with Base chain
+perf: configure Reown AppKit metadata
+feat: implement AppKit adapter state management
+fix: setup React Query devtools
+fix: setup wagmi with React Query
+perf: configure Reown AppKit theme
+chore: configure React Query retry logic
+chore: setup viem with Base chain
+feat: setup WalletConnect with Base chain
+test: install wagmi for Ethereum interactions
+docs: implement AppKit adapter state management
+perf: configure viem RPC providers
+docs: setup wagmi with React Query
+refactor: implement viem encoding/decoding utilities
+chore: setup WalletConnect with Base chain
+fix: configure wagmi with viem
+perf: integrate WalletConnect with Reown AppKit
+test: implement React Query cache configuration
+fix: initialize Reown AppKit provider
+test: configure React Query retry logic
+fix: install @reown/appkit for wallet integration
+chore: add React Query hooks for wallet data
+refactor: add Base testnet chain configuration
+fix: implement React Query infinite queries
+perf: setup wagmi config with Base chain
+feat: add Reown AppKit wallet connectors
+chore: setup Base chain network switching
+refactor: configure React Query with wagmi
+docs: setup React Query devtools
+test: implement Reown AppKit modal customization
+test: configure React Query with wagmi
+refactor: configure Base chain gas estimation
+chore: add viem wallet clients
+chore: implement wagmi hooks for balance fetching
+docs: configure wagmi providers
+docs: setup Reown AppKit configuration
+refactor: implement WalletConnect QR code display
+refactor: implement viem encoding/decoding utilities
+chore: install wagmi for Ethereum interactions
+feat: install viem for Ethereum utilities
+docs: setup AppKit adapter TypeScript types
+docs: implement WalletConnect QR code display
+test: configure wagmi with viem
+test: configure Reown AppKit metadata
+chore: add React Query optimistic updates
+chore: initialize Reown AppKit provider
+chore: add WalletConnect event listeners
+test: implement AppKit adapter utilities
+test: implement React Query cache configuration
+test: configure Base chain block explorer
+fix: implement AppKit adapter state management
+perf: configure wagmi providers
+feat: add viem address formatting
+fix: setup viem with Base chain
+docs: add Base testnet chain configuration
+feat: add Base chain native token support
+fix: configure WalletConnect project ID
+feat: add Reown AppKit feature flags
+docs: add WalletConnect reconnection logic
+feat: implement AppKit adapter state management
+fix: configure wagmi providers
+feat: add Base chain native token support
+docs: setup wagmi config with Base chain
+refactor: setup AppKit adapter TypeScript types
+refactor: setup wagmi config with Base chain
+chore: add WalletConnect session management
+perf: implement viem transaction utilities
+refactor: configure Base mainnet chain for accetpr-stablecoin
+refactor: add Base testnet chain configuration
+chore: add wagmi hooks for wallet connection
+feat: configure Base chain gas estimation
+perf: setup Reown AppKit configuration
+fix: configure wagmi providers
+perf: configure viem public clients
+test: add wagmi hooks for wallet connection
+docs: configure WalletConnect project ID
+docs: configure AppKit adapter providers
+refactor: add wagmi hooks for transaction sending
+perf: add wagmi hooks for transaction sending
+chore: implement viem encoding/decoding utilities
+docs: configure WalletConnect metadata
+perf: add Reown AppKit wallet connectors
+test: install viem for Ethereum utilities
+docs: implement Base chain transaction signing
+chore: implement viem transaction utilities
+chore: add React Query error handling
+test: add Base chain native token support
+feat: implement AppKit adapter state management
+refactor: setup wagmi config with Base chain
+docs: initialize Reown AppKit provider
+docs: configure AppKit adapter providers
+feat: add viem address formatting
+chore: add Base chain native token support
+test: setup WalletConnect with Base chain
+perf: setup Reown AppKit configuration
+test: install @reown/appkit for wallet integration
+refactor: add Base testnet chain configuration
+chore: configure WalletConnect project ID
+test: setup wagmi with React Query
+docs: add AppKit adapter hooks
+feat: setup React Query devtools
+chore: configure Base chain block explorer
+docs: integrate AppKit adapter with React Query
+fix: setup React Query devtools
+fix: add WalletConnect event listeners
+chore: install @tanstack/react-query
+chore: setup AppKit adapter TypeScript types
+perf: add wagmi chain configuration
+feat: configure AppKit adapter for Base chain
+refactor: configure AppKit adapter providers
+perf: implement wagmi connector configuration
+fix: implement Base chain transaction signing
+feat: add AppKit adapter hooks
+fix: setup React Query provider
+docs: add WalletConnect reconnection logic
+refactor: configure AppKit adapter for Base chain
+test: setup Reown AppKit with Base chain
+docs: implement viem transaction utilities
+fix: integrate Base chain with wallet connect
+chore: integrate AppKit adapter with React Query
+chore: add WalletConnect mobile deep linking
+docs: add React Query error handling
+chore: configure viem public clients
+test: initialize Reown AppKit provider
+refactor: install viem for Ethereum utilities
+docs: add Base testnet chain configuration
+test: configure Reown AppKit theme
+docs: add WalletConnect session management
+refactor: setup Base chain network switching
+perf: configure Base chain gas estimation
+chore: configure React Query with wagmi
+refactor: configure AppKit adapter providers
+feat: add WalletConnect event listeners
+chore: install wagmi for Ethereum interactions
+perf: integrate WalletConnect with Reown AppKit
+chore: configure Base chain block explorer
+test: add wagmi chain configuration
+refactor: setup WalletConnect with Base chain
+docs: implement React Query infinite queries
+fix: setup React Query devtools
+perf: setup viem with Base chain
+chore: add WalletConnect event listeners
+chore: add viem wallet clients
+perf: configure viem RPC providers
+chore: configure viem public clients
+chore: setup viem with Base chain
+feat: implement Base chain transaction signing
+docs: initialize Reown AppKit provider
+docs: add wagmi hooks for wallet connection
+test: add React Query hooks for wallet data
+refactor: add wagmi hooks for wallet connection
+chore: integrate WalletConnect with Reown AppKit
+fix: implement wagmi connector configuration
+fix: add React Query hooks for wallet data
+refactor: implement Base chain transaction signing
+docs: add Reown AppKit wallet connectors
+feat: configure React Query retry logic
+refactor: add viem address formatting
+fix: add viem contract interaction helpers
+chore: add WalletConnect mobile deep linking
+feat: add Reown AppKit feature flags
+perf: add Base testnet chain configuration
+perf: setup Reown AppKit configuration
+feat: implement wagmi hooks for balance fetching
+fix: configure Reown AppKit metadata
+chore: implement React Query cache configuration
+perf: add wagmi hooks for wallet connection
+perf: add AppKit adapter error handling
+fix: add wagmi hooks for wallet connection
+perf: add WalletConnect session management
+chore: configure Base mainnet chain for accetpr-stablecoin
+perf: setup Base chain network switching
+feat: add Reown AppKit project ID configuration
+chore: implement AppKit adapter state management
+feat: add WalletConnect event listeners
+refactor: add Base chain native token support
+refactor: configure WalletConnect metadata
+refactor: add Reown AppKit wallet connectors
+fix: configure React Query with wagmi
+feat: add viem address formatting
+refactor: setup AppKit adapter with wagmi
+fix: implement viem transaction utilities
+test: configure wagmi with viem
+feat: integrate AppKit adapter with React Query
+fix: configure Base chain block explorer
+chore: add Base chain RPC endpoints
+feat: setup React Query provider
+chore: add Base chain transaction broadcasting
+docs: configure WalletConnect metadata
+perf: install viem for Ethereum utilities
+docs: add wagmi hooks for transaction sending
+refactor: configure wagmi providers
+refactor: configure wagmi providers
+fix: setup AppKit adapter with wagmi
+perf: implement React Query cache configuration
+refactor: implement viem encoding/decoding utilities
+chore: setup wagmi with React Query
+docs: configure React Query retry logic
+chore: add viem contract interaction helpers
+feat: implement viem encoding/decoding utilities
+test: setup wagmi config with Base chain
+chore: add WalletConnect event listeners
+refactor: integrate AppKit adapter with React Query
+refactor: configure Base mainnet chain for accetpr-stablecoin
+feat: implement AppKit adapter state management
+feat: configure Base mainnet chain for accetpr-stablecoin
+feat: setup WalletConnect with Base chain
+feat: integrate AppKit adapter with React Query
+refactor: setup wagmi with React Query
+fix: setup viem type generation
+perf: add React Query hooks for wallet data
+feat: integrate WalletConnect with Reown AppKit
+feat: setup Next.js app router with AppKit
+feat: configure Next.js SSR for AppKit
+feat: add Next.js layout with ContextProvider
+feat: implement cookie storage for Wagmi SSR
+feat: setup cookieToInitialState for Wagmi hydration
+feat: configure Next.js headers for cookie handling
+feat: add Next.js webpack config for AppKit
+feat: setup Next.js externals for pino-pretty and lokijs
+feat: configure Next.js encoding externals
+fix: resolve Next.js SSR hydration mismatch
+fix: handle Next.js cookie parsing for Wagmi
+refactor: improve Next.js AppKit integration
+docs: add Next.js AppKit setup guide
+test: add Next.js AppKit integration tests
+feat: create AppKit ContextProvider component
+feat: setup QueryClientProvider in ContextProvider
+feat: integrate WagmiProvider with ContextProvider
+feat: add cookie state management in ContextProvider
+feat: implement AppKit modal initialization in ContextProvider
+refactor: optimize ContextProvider performance
+fix: resolve ContextProvider hydration issues
+docs: document ContextProvider usage
+feat: initialize createAppKit with unified config
+feat: configure createAppKit with Wagmi adapter
+feat: setup createAppKit with metadata
+feat: add createAppKit defaultNetwork configuration
+feat: enable AppKit analytics feature
+feat: configure createAppKit with multiple networks
+refactor: simplify createAppKit configuration
+fix: resolve createAppKit initialization errors
+feat: import networks from @reown/appkit/networks
+feat: add Arbitrum network support
+feat: add Scroll network support
+feat: add Polygon network support
+feat: configure custom network for accetpr-stablecoin
+feat: setup multiple EVM networks
+feat: add Solana network support
+feat: add Bitcoin network support
+feat: configure network switching between chains
+refactor: optimize network configuration
+docs: document network import patterns
+feat: add appkit-button web component
+feat: implement appkit-button in ConnectButton
+feat: configure appkit-button styling
+feat: add appkit-button event handlers
+refactor: improve appkit-button accessibility
+docs: document appkit-button usage
+test: add appkit-button component tests
+feat: add useReadContract hook for smart contracts
+feat: implement smart contract ABI integration
+feat: add USDT contract interaction example
+feat: setup contract address configuration
+feat: implement contract function calls
+feat: add contract event listeners
+feat: implement contract write operations
+feat: add contract transaction handling
+refactor: optimize contract interaction hooks
+docs: document smart contract integration
+test: add smart contract interaction tests
+feat: configure AppKit metadata for accetpr-stablecoin
+feat: add app name and description to metadata
+feat: setup metadata URL and icons
+feat: configure metadata origin matching
+refactor: improve metadata structure
+docs: document metadata configuration
+feat: implement cookieStorage for Wagmi
+feat: setup createStorage with cookieStorage
+feat: add localStorage fallback for Wagmi
+feat: configure storage persistence
+refactor: optimize storage implementation
+fix: resolve storage hydration issues
+feat: setup QueryClient for React Query
+feat: configure QueryClient options
+feat: add QueryClient cache configuration
+feat: implement QueryClient error handling
+refactor: optimize QueryClient setup
+feat: create Wagmi config file outside app directory
+feat: setup Wagmi adapter configuration
+feat: configure Wagmi SSR support
+feat: add Wagmi storage configuration
+feat: setup Wagmi project ID from env
+refactor: improve Wagmi config structure
+docs: document Wagmi configuration
+feat: add NEXT_PUBLIC_PROJECT_ID environment variable
+feat: setup environment variable validation
+feat: configure project ID from Reown Dashboard
+docs: document environment setup
+feat: setup AppKit Core with Universal Provider
+feat: configure Universal Provider for multi-chain
+feat: add Universal Provider compatibility layer
+docs: document Universal Provider usage
+feat: setup WagmiAdapter configuration
+feat: add Ethers v5 adapter support
+feat: add Ethers v6 adapter support
+feat: add Solana adapter with @solana/web3.js
+feat: configure multiple adapters in createAppKit
+refactor: improve adapter configuration
+feat: add WalletConnect connector
+feat: add Coinbase connector
+feat: add Injected connector
+feat: configure Blockchain API transport
+refactor: optimize connector setup
+feat: enable AppKit analytics feature
+feat: configure AppKit feature flags
+feat: add custom AppKit features
+refactor: improve feature configuration
+feat: add AppKit error handling
+feat: implement error boundaries for AppKit
+feat: add error logging for AppKit
+refactor: improve error handling
+perf: optimize AppKit bundle size
+perf: improve AppKit loading performance
+perf: optimize network switching
+perf: improve modal rendering
+test: add AppKit integration tests
+test: add ContextProvider tests
+test: add network switching tests
+test: add smart contract interaction tests
+test: add SSR hydration tests
+docs: add Next.js AppKit integration guide
+docs: document SSR configuration
+docs: add smart contract interaction examples
+docs: document network configuration
+docs: add troubleshooting guide
+fix: resolve SSR hydration mismatch
+fix: handle cookie parsing errors
+fix: resolve network switching issues
+fix: fix modal not opening on mobile
+fix: resolve contract interaction errors
+refactor: improve AppKit integration structure
+refactor: optimize ContextProvider
+refactor: simplify network configuration
+refactor: improve error handling
+chore: update AppKit dependencies
+chore: update Next.js configuration
+chore: update Wagmi dependencies
+chore: update React Query dependencies
+feat: add Optimism network support
+feat: add Avalanche network support
+feat: add BSC (Binance Smart Chain) support
+feat: add Fantom network support
+feat: add zkSync Era network support
+feat: add Linea network support
+feat: add Mantle network support
+feat: add Celo network support
+feat: configure network priority order
+feat: add network health checking
+feat: implement network fallback mechanism
+feat: add multi-sig wallet support
+feat: implement wallet session persistence
+feat: add wallet connection timeout handling
+feat: implement wallet auto-reconnect
+feat: add wallet connection retry logic
+feat: implement wallet connection queue
+feat: add wallet connection analytics
+feat: implement wallet connection logging
+feat: add wallet connection error recovery
+feat: implement wallet connection state machine
+feat: add batch transaction support
+feat: implement transaction queuing
+feat: add transaction retry mechanism
+feat: implement transaction gas optimization
+feat: add transaction fee estimation
+feat: implement transaction speed control
+feat: add transaction nonce management
+feat: implement transaction signing flow
+feat: add transaction status tracking
+feat: implement transaction history caching
+feat: add transaction signature verification
+feat: implement rate limiting for transactions
+feat: add transaction amount validation
+feat: implement address whitelist/blacklist
+feat: add transaction approval workflow
+feat: implement multi-factor authentication
+feat: add transaction monitoring alerts
+feat: implement security audit logging
+feat: add phishing protection
+feat: implement secure key management
+feat: implement dynamic gas price estimation
+feat: add gas price oracle integration
+feat: implement gas price caching
+feat: add gas optimization strategies
+feat: implement EIP-1559 gas fee handling
+feat: add gas price prediction
+feat: implement gas price alerts
+feat: add wallet connection analytics
+feat: implement transaction analytics
+feat: add performance monitoring
+feat: implement error tracking
+feat: add user behavior analytics
+feat: implement real-time metrics
+feat: add dashboard for analytics
+feat: implement alerting system
+feat: add dark mode support for AppKit
+feat: implement custom AppKit theme
+feat: add loading states for transactions
+feat: implement transaction progress indicators
+feat: add success/error notifications
+feat: implement toast notifications
+feat: add transaction confirmation modals
+feat: implement responsive design
+feat: add mobile wallet deep linking
+feat: implement accessibility improvements
+feat: add GraphQL API support
+feat: implement WebSocket for real-time updates
+feat: add REST API versioning
+feat: implement API rate limiting
+feat: add API authentication middleware
+feat: implement API request validation
+feat: add API response caching
+feat: implement API error handling
+test: add E2E tests for wallet connection
+test: add integration tests for transactions
+test: add unit tests for hooks
+test: add performance tests
+test: add security tests
+test: add accessibility tests
+test: add cross-browser tests
+test: add mobile device tests
+ci: setup GitHub Actions workflow
+ci: add automated testing pipeline
+ci: implement deployment automation
+ci: add code quality checks
+ci: implement security scanning
+ci: add performance benchmarking
+docs: add API documentation
+docs: add integration examples
+docs: add troubleshooting guide
+docs: add architecture documentation
+docs: add deployment guide
+docs: add contributing guidelines
+perf: optimize bundle size
+perf: implement code splitting
+perf: add lazy loading
+perf: optimize network requests
+perf: implement request batching
+perf: add caching strategies
+perf: optimize re-renders
+fix: improve error messages
+fix: add error recovery mechanisms
+fix: implement error boundaries
+fix: add error logging
+fix: improve error user feedback
+refactor: improve code organization
+refactor: optimize component structure
+refactor: improve type safety
+refactor: simplify complex logic
+refactor: improve code reusability
