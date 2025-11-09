@@ -688,9 +688,15 @@ src/
 │   ├── webhook/     # Webhook controllers
 │   ├── transaction/ # Transaction controllers
 │   │   ├── replayController.ts
-│   │   └── feeCalculatorController.ts
+│   │   ├── feeCalculatorController.ts
+│   │   ├── transactionNotesController.ts
+│   │   └── transactionMonitoringController.ts
 │   ├── token/       # Token metadata controllers
 │   ├── notification/ # Notification controllers
+│   ├── gas/         # Gas price oracle controllers
+│   ├── security/    # Security controllers
+│   │   ├── addressWhitelistController.ts
+│   │   └── transactionLimitsController.ts
 │   └── test/        # Test controllers
 ├── db/              # Database operations (Prisma)
 ├── events/          # Event handlers
