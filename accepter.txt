@@ -1,4 +1,3 @@
-chore: add Base chain RPC endpoints
 test: setup React Query devtools
 test: add viem address formatting
 perf: configure Base mainnet chain for accetpr-stablecoin
