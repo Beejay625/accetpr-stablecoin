@@ -1,4 +1,3 @@
-refactor: improve feature configuration
 feat: add AppKit error handling
 feat: implement error boundaries for AppKit
 feat: add error logging for AppKit
