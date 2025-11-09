@@ -1,4 +1,3 @@
-chore: setup React Query devtools
 refactor: install @reown/appkit-adapter-wagmi
 refactor: setup wagmi config with Base chain
 feat: initialize Reown AppKit provider
