@@ -1,4 +1,3 @@
-test: setup viem with Base chain
 chore: configure React Query retry logic
 fix: add wagmi hooks for transaction sending
 docs: configure WalletConnect project ID
