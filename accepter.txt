@@ -1,4 +1,3 @@
-fix: configure Base chain gas estimation
 perf: add viem wallet clients
 feat: configure Base mainnet chain for accetpr-stablecoin
 test: add viem wallet clients
