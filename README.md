@@ -52,6 +52,11 @@ Production-ready Express.js backend with TypeScript, Clerk authentication, Block
 - **Token Metadata Service**: Enhanced token information, price data, and popular tokens per chain
 - **Notification Preferences**: Customize notification settings per channel with quiet hours support
 - **Transaction Fee Calculator**: Advanced fee estimation with priority levels and USD conversion
+- **Transaction Notes & Tags**: Add notes and tags to transactions for better organization
+- **Transaction Monitoring**: Monitor pending transactions with automatic alerts and status updates
+- **Gas Price Oracle**: Real-time gas price tracking with alerts and historical data
+- **Address Whitelist**: Enhanced security with address whitelisting and usage tracking
+- **Transaction Limits**: Set and enforce daily, weekly, and monthly transaction limits
 
 #### API Features
 - **Wallet Operations**:
