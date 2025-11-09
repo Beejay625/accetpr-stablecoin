@@ -1,4 +1,3 @@
-chore: configure React Query retry logic
 chore: setup viem with Base chain
 feat: setup WalletConnect with Base chain
 test: install wagmi for Ethereum interactions
