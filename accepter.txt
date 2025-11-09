@@ -1,4 +1,3 @@
-refactor: add WalletConnect event listeners
 docs: add WalletConnect reconnection logic
 perf: add Reown AppKit project ID configuration
 docs: implement React Query cache configuration
