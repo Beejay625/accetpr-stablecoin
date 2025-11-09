@@ -867,6 +867,12 @@ For detailed information about all newly implemented features, see [NEW_FEATURES
 - **Transaction Simulator** (`frontend/lib/transactionSimulator.ts`): Transaction preview and validation
 - **Security Manager** (`frontend/lib/security.ts`): Security policies and limits
 - **Network Health** (`frontend/lib/networkHealth.ts`): Network monitoring and status
+- **Transaction Templates** (`frontend/lib/transactionTemplates.ts`): Pre-configured transaction presets
+- **Scheduled Transactions** (`frontend/lib/scheduledTransactions.ts`): Recurring transaction scheduling
+- **Portfolio Tracker** (`frontend/lib/portfolio.ts`): Portfolio tracking and analytics
+- **Price Alerts** (`frontend/lib/priceAlerts.ts`): Price alert and notification system
+- **DEX Swap** (`frontend/lib/dexSwap.ts`): Decentralized exchange integration
+- **Batch Builder** (`frontend/lib/batchBuilder.ts`): Batch transaction builder and executor
 
 #### React Hooks
 - **useSmartContract** (`frontend/hooks/useSmartContract.ts`): Contract interaction hooks
