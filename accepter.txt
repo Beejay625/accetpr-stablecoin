@@ -1,4 +1,3 @@
-docs: document network configuration
 docs: add troubleshooting guide
 fix: resolve SSR hydration mismatch
 fix: handle cookie parsing errors
