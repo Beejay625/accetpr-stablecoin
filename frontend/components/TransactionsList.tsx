@@ -140,7 +140,7 @@ export default function TransactionsList({ chain, getToken }: TransactionsListPr
               </tr>
             </thead>
             <tbody>
-              {transactions.map((tx) => (
+              {displayTransactions.map((tx) => (
                 <tr
                   key={tx.transactionId}
                   className="border-b hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
