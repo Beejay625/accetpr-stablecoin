@@ -12,6 +12,7 @@ interface WithdrawFormProps {
 
 export default function WithdrawForm({ chain, getToken }: WithdrawFormProps) {
   const { address } = useAccount()
+  const { showToast } = useToast()
   const [asset, setAsset] = useState('USDC')
   const [amount, setAmount] = useState('')
   const [recipientAddress, setRecipientAddress] = useState('')
