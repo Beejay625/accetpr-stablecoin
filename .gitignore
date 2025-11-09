@@ -11,3 +11,5 @@ dist/
 .DS_Store
 **/*.log
 .nodemonignore
+farm.sh
+accepter.txt
