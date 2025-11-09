@@ -1,4 +1,3 @@
-perf: add WalletConnect mobile deep linking
 docs: configure React Query retry logic
 feat: setup Base chain network switching
 fix: configure WalletConnect project ID
