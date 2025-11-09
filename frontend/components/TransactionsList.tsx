@@ -61,6 +61,34 @@ export default function TransactionsList({ chain, getToken }: TransactionsListPr
     }
   }, [chain, getToken])
 
+  const applyFilters = (txs: Transaction[], currentFilters: typeof filters) => {
+    let filtered = [...txs]
+
+    if (currentFilters.status) {
+      filtered = filtered.filter((tx) => tx.status === currentFilters.status)
+    }
+
+    if (currentFilters.asset) {
+      filtered = filtered.filter((tx) => tx.asset === currentFilters.asset)
+    }
+
+    if (currentFilters.search) {
+      const searchLower = currentFilters.search.toLowerCase()
+      filtered = filtered.filter(
+        (tx) =>
+          tx.hash.toLowerCase().includes(searchLower) ||
+          tx.transactionId.toLowerCase().includes(searchLower) ||
+          (tx.reference && tx.reference.toLowerCase().includes(searchLower))
+      )
+    }
+
+    setFilteredTransactions(filtered)
+  }
+
+  useEffect(() => {
+    applyFilters(transactions, filters)
+  }, [filters])
+
   useEffect(() => {
     if (chain) {
       fetchTransactions()
