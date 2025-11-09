@@ -1,4 +1,3 @@
-perf: configure wagmi with viem
 refactor: add React Query optimistic updates
 fix: implement Reown AppKit modal customization
 feat: integrate Base chain with wallet connect
