@@ -16,6 +16,8 @@ export default function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
     refreshInterval: 30,
     notifications: true,
   })
+  const [activeTab, setActiveTab] = useState<'general' | 'backup' | 'shortcuts'>('general')
+  const [showShortcuts, setShowShortcuts] = useState(false)
 
   useEffect(() => {
     const saved = localStorage.getItem('wallet_settings')
