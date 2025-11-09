@@ -1,4 +1,3 @@
-refactor: improve Next.js AppKit integration
 docs: add Next.js AppKit setup guide
 test: add Next.js AppKit integration tests
 feat: create AppKit ContextProvider component
