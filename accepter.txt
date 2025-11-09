@@ -1,4 +1,3 @@
-refactor: setup wagmi with React Query
 fix: setup viem type generation
 perf: add React Query hooks for wallet data
 feat: integrate WalletConnect with Reown AppKit
