@@ -34,19 +34,52 @@ export default function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6">
-        <div className="flex justify-between items-start mb-6">
-          <h2 className="text-2xl font-bold">Settings</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-2xl"
-          >
-            ×
-          </button>
-        </div>
+    <>
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
+          <div className="flex justify-between items-start mb-6">
+            <h2 className="text-2xl font-bold">Settings</h2>
+            <button
+              onClick={onClose}
+              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-2xl"
+            >
+              ×
+            </button>
+          </div>
 
-        <div className="space-y-6">
+          <div className="border-b dark:border-gray-700 mb-6">
+            <div className="flex gap-4">
+              <button
+                onClick={() => setActiveTab('general')}
+                className={`pb-2 px-1 border-b-2 ${
+                  activeTab === 'general'
+                    ? 'border-blue-600 text-blue-600'
+                    : 'border-transparent text-gray-500'
+                }`}
+              >
+                General
+              </button>
+              <button
+                onClick={() => setActiveTab('backup')}
+                className={`pb-2 px-1 border-b-2 ${
+                  activeTab === 'backup'
+                    ? 'border-blue-600 text-blue-600'
+                    : 'border-transparent text-gray-500'
+                }`}
+              >
+                Backup & Restore
+              </button>
+              <button
+                onClick={() => setShowShortcuts(true)}
+                className="pb-2 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700"
+              >
+                Keyboard Shortcuts
+              </button>
+            </div>
+          </div>
+
+          {activeTab === 'general' && (
+            <div className="space-y-6">
           <div>
             <label className="block text-sm font-medium mb-2">Theme</label>
             <select
