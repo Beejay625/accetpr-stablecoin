@@ -1,4 +1,3 @@
-docs: implement AppKit adapter state management
 refactor: configure WalletConnect metadata
 chore: add Reown AppKit feature flags
 chore: implement WalletConnect QR code display
