@@ -1,4 +1,3 @@
-refactor: setup Base chain network switching
 perf: install @reown/appkit for wallet integration
 chore: configure WalletConnect project ID
 test: setup wagmi config with Base chain
