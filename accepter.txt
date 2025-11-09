@@ -1,4 +1,3 @@
-chore: add Base chain RPC endpoints
 feat: setup React Query provider
 chore: add Base chain transaction broadcasting
 docs: configure WalletConnect metadata
