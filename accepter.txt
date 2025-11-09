@@ -1,4 +1,3 @@
-fix: configure Reown AppKit theme
 refactor: setup Base chain network switching
 perf: install @reown/appkit for wallet integration
 chore: configure WalletConnect project ID
