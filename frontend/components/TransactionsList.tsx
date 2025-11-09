@@ -99,6 +99,17 @@ export default function TransactionsList({ chain, getToken }: TransactionsListPr
   }, [chain, fetchTransactions])
 
   const displayTransactions = filteredTransactions.length > 0 ? filteredTransactions : transactions
+  
+  // Pagination
+  const totalPages = Math.ceil(displayTransactions.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const paginatedTransactions = displayTransactions.slice(startIndex, endIndex)
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [filters])
 
   return (
     <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
