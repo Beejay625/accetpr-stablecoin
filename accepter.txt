@@ -1,4 +1,3 @@
-test: add SSR hydration tests
 docs: add Next.js AppKit integration guide
 docs: document SSR configuration
 docs: add smart contract interaction examples
