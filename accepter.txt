@@ -1,4 +1,3 @@
-refactor: add React Query optimistic updates
 fix: implement Reown AppKit modal customization
 feat: integrate Base chain with wallet connect
 perf: add wagmi chain configuration
