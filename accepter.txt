@@ -1,4 +1,3 @@
-fix: configure wagmi providers
 perf: configure viem public clients
 test: add wagmi hooks for wallet connection
 docs: configure WalletConnect project ID
