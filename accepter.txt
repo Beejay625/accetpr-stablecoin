@@ -1,4 +1,3 @@
-docs: setup wagmi config with Base chain
 refactor: setup AppKit adapter TypeScript types
 refactor: setup wagmi config with Base chain
 chore: add WalletConnect session management
