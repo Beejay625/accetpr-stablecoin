@@ -57,12 +57,55 @@ Production-ready Express.js backend with TypeScript, Clerk authentication, Block
 - **Settings**: User preferences and configuration panel
 - **Help System**: Built-in documentation and troubleshooting guide
 
+#### Advanced Frontend Features
+
+**Smart Contract Interactions** (`frontend/lib/contracts.ts`):
+- ERC20 token balance reading via `useTokenBalance` hook
+- Token address management for USDC, USDT, DAI across chains
+- Token metadata retrieval (symbol, decimals, name, total supply)
+- Token amount formatting and parsing utilities
+- Pre-configured token addresses for Base, Arbitrum, Ethereum
+
+**Gas Optimization** (`frontend/lib/gas.ts`):
+- Real-time gas price estimation with EIP-1559 support
+- Multiple gas strategies (Conservative, Standard, Aggressive)
+- Gas cost calculation with USD conversion
+- Auto-refresh every 30 seconds
+- `useGasPrice` hook for easy integration
+- `GasPriceDisplay` component showing current gas prices
+
+**Transaction Queue** (`frontend/lib/transactionQueue.ts`):
+- Batch processing system (up to 3 concurrent transactions)
+- Automatic retry with exponential backoff (max 3 retries)
+- Transaction status tracking (pending, processing, success, failed)
+- Queue management with cancel functionality
+- `useTransactionQueue` hook for React integration
+- `TransactionQueuePanel` component for UI display
+
+**Analytics & Monitoring** (`frontend/lib/analytics.ts`):
+- Event tracking for all user actions
+- Statistics calculation (connections, transactions, volume, success rate)
+- LocalStorage persistence for analytics data
+- Event filtering and querying
+- `useAnalytics` hook for tracking events
+- Tracks: wallet connections, transactions, withdrawals, chain switches, exports
+
+**Session Management** (`frontend/lib/walletSession.ts`):
+- 24-hour wallet session persistence
+- Auto-reconnect on page load
+- Activity tracking with auto-extension
+- Session validation and expiration checking
+- `useWalletSession` hook for session management
+- Automatic session cleanup on expiration
+
 #### User Experience
 - **Responsive Design**: Mobile and desktop optimized
 - **Dark Mode**: Full dark mode support
 - **Toast Notifications**: Non-intrusive user feedback
 - **Loading States**: Skeleton screens and loading indicators
 - **Error Handling**: User-friendly error messages with retry options
+- **Transaction Queue UI**: Visual queue management panel
+- **Gas Price Display**: Real-time gas price information
 
 ### Reown AppKit Integration
 
@@ -726,9 +769,7 @@ ISC
 
 ## 📖 New Features Documentation
 
-For detailed information about all newly implemented features, see:
-- [NEW_FEATURES.md](./NEW_FEATURES.md) - Initial feature set
-- [FEATURES_V2.md](./FEATURES_V2.md) - Advanced features (Multi-sig, Security, Address Book, etc.)
+For detailed information about all newly implemented features, see [NEW_FEATURES.md](./NEW_FEATURES.md)
 
 ### Quick Feature Overview
 
