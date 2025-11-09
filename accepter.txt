@@ -1,4 +1,3 @@
-fix: add wagmi hooks for wallet connection
 chore: implement viem encoding/decoding utilities
 test: install viem for Ethereum utilities
 test: implement viem encoding/decoding utilities
