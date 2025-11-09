@@ -1,4 +1,3 @@
-docs: add viem contract interaction helpers
 test: integrate Base chain with wallet connect
 chore: add WalletConnect reconnection logic
 chore: implement viem transaction utilities
