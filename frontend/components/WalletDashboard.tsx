@@ -55,9 +55,12 @@ export default function WalletDashboard() {
           <h2 className="text-2xl font-bold">Wallet Dashboard</h2>
           <ChainSwitcher />
         </div>
-        <p className="text-gray-600 dark:text-gray-400">
-          Connected: {address?.slice(0, 6)}...{address?.slice(-4)}
-        </p>
+        <div className="flex items-center gap-2">
+          <p className="text-gray-600 dark:text-gray-400">
+            Connected: {address ? formatAddress(address) : 'N/A'}
+          </p>
+          {address && <CopyButton text={address} label="Copy Address" />}
+        </div>
         <p className="text-sm text-gray-500 dark:text-gray-500">
           Chain: {selectedChain}
         </p>
