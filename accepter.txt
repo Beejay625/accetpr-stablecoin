@@ -1,4 +1,3 @@
-fix: add AppKit adapter hooks
 feat: configure AppKit adapter for Base chain
 chore: add Base chain RPC endpoints
 test: configure Reown AppKit theme
