@@ -1,4 +1,3 @@
-docs: initialize Reown AppKit provider
 docs: configure AppKit adapter providers
 feat: add viem address formatting
 chore: add Base chain native token support
