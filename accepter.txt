@@ -1,4 +1,3 @@
-docs: initialize Reown AppKit provider
 docs: add wagmi hooks for wallet connection
 test: add React Query hooks for wallet data
 refactor: add wagmi hooks for wallet connection
