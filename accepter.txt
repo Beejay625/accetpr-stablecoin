@@ -1,4 +1,3 @@
-refactor: integrate AppKit adapter with React Query
 feat: add Reown AppKit feature flags
 refactor: setup Reown AppKit configuration
 refactor: configure AppKit adapter providers
