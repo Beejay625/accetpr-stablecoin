@@ -726,7 +726,9 @@ ISC
 
 ## 📖 New Features Documentation
 
-For detailed information about all newly implemented features, see [NEW_FEATURES.md](./NEW_FEATURES.md)
+For detailed information about all newly implemented features, see:
+- [NEW_FEATURES.md](./NEW_FEATURES.md) - Initial feature set
+- [FEATURES_V2.md](./FEATURES_V2.md) - Advanced features (Multi-sig, Security, Address Book, etc.)
 
 ### Quick Feature Overview
 
