@@ -7,6 +7,7 @@ import TransactionModal from './TransactionModal'
 import CopyButton from './CopyButton'
 import TransactionFilter from './TransactionFilter'
 import ExportButton from './ExportButton'
+import Pagination from './Pagination'
 
 interface TransactionsListProps {
   chain: string
@@ -36,6 +37,8 @@ export default function TransactionsList({ chain, getToken }: TransactionsListPr
     asset?: string
     search?: string
   }>({})
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 10
 
   const fetchTransactions = useCallback(async () => {
     setLoading(true)
