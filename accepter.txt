@@ -1,4 +1,3 @@
-refactor: optimize ContextProvider performance
 fix: resolve ContextProvider hydration issues
 docs: document ContextProvider usage
 feat: initialize createAppKit with unified config
