@@ -1,4 +1,3 @@
-test: setup AppKit adapter TypeScript types
 fix: implement WalletConnect QR code display
 feat: configure Reown AppKit theme
 feat: add Reown AppKit project ID configuration
