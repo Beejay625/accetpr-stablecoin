@@ -1,4 +1,3 @@
-docs: add WalletConnect event listeners
 refactor: configure viem RPC providers
 refactor: add viem wallet clients
 perf: add viem address formatting
