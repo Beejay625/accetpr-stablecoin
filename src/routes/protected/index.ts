@@ -23,6 +23,11 @@ import recurringPaymentsRouter from './recurring-payments';
 import apiKeysRouter from './api-keys';
 import unsignedTransactionsRouter from './unsigned-transactions';
 import portfolioRouter from './portfolio';
+import transactionBatchRouter from './transaction-batch';
+import transactionSchedulingRouter from './transaction-scheduling';
+import transactionValidationRouter from './transaction-validation';
+import gasOptimizationRouter from './gas-optimization';
+import enhancedAnalyticsRouter from './enhanced-analytics';
 
 export const protectedRouter = Router();
 
