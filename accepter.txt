@@ -1,4 +1,3 @@
-test: install @reown/appkit for wallet integration
 docs: add Base chain transaction broadcasting
 test: add viem address formatting
 fix: implement WalletConnect QR code display
