@@ -410,6 +410,27 @@ This project uses **Reown AppKit** (formerly WalletConnect) for seamless wallet 
 - **Environment Info**: Current environment configuration
 - **Comprehensive Status**: Overall health status determination
 
+#### Transaction Details & Search
+- **Transaction Details**: Get detailed information about a specific transaction by ID
+- **Transaction Search**: Search transactions by hash, reference, address, or transaction ID
+- **Full Transaction Data**: Complete transaction information including gas fees, block numbers, confirmations
+- **Search Across Fields**: Search in hash, reference, sender/recipient addresses, asset symbols
+- **Case-Insensitive Search**: Flexible search matching
+
+#### Wallet Address Management
+- **Address Listing**: List all wallet addresses across all chains for a user
+- **Address Details**: Get address information including chain, creation date
+- **Multi-Chain Overview**: View all addresses in a single request
+
+#### Audit Logging & Security
+- **Comprehensive Audit Logging**: Log all sensitive operations (withdrawals, balance checks, exports)
+- **Operation Tracking**: Track user actions with timestamps, IP addresses, and user agents
+- **Success/Failure Logging**: Log both successful and failed operations
+- **Structured Audit Logs**: JSON-structured audit logs for easy analysis
+- **Withdrawal Auditing**: Complete audit trail for all withdrawal operations
+- **Export Auditing**: Track all data export operations
+- **Transaction View Auditing**: Log all transaction access attempts
+
 ## 📦 Installation
 
 ### Prerequisites
