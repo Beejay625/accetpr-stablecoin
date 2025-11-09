@@ -1,4 +1,3 @@
-refactor: configure AppKit adapter for Base chain
 test: integrate AppKit adapter with React Query
 perf: integrate AppKit adapter with React Query
 docs: install @reown/appkit-adapter-wagmi
