@@ -57,6 +57,11 @@ Production-ready Express.js backend with TypeScript, Clerk authentication, Block
 - **Gas Price Oracle**: Real-time gas price tracking with alerts and historical data
 - **Address Whitelist**: Enhanced security with address whitelisting and usage tracking
 - **Transaction Limits**: Set and enforce daily, weekly, and monthly transaction limits
+- **Transaction Templates**: Save and reuse transaction configurations for faster execution
+- **Recurring Payments**: Schedule recurring transactions with flexible frequency options
+- **API Key Management**: Generate and manage API keys for programmatic access
+- **Transaction Signing**: Prepare transactions for off-chain signing workflow
+- **Portfolio Analytics**: Advanced portfolio tracking with metrics and historical data
 
 #### API Features
 - **Wallet Operations**:

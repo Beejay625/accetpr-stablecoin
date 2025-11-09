@@ -1,4 +1,3 @@
-fix: handle Next.js cookie parsing for Wagmi
 refactor: improve Next.js AppKit integration
 docs: add Next.js AppKit setup guide
 test: add Next.js AppKit integration tests
