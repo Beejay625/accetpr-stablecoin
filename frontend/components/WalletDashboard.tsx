@@ -90,18 +90,72 @@ export default function WalletDashboard() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <BalanceDisplay chain={selectedChain} getToken={getToken} />
-        <WithdrawForm chain={selectedChain} getToken={getToken} />
+      {/* Tab Navigation */}
+      <div className="mb-6 border-b dark:border-gray-700">
+        <div className="flex gap-4">
+          <button
+            onClick={() => setSelectedTab('dashboard')}
+            className={`pb-2 px-1 border-b-2 ${
+              selectedTab === 'dashboard'
+                ? 'border-blue-600 text-blue-600'
+                : 'border-transparent text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            Dashboard
+          </button>
+          <button
+            onClick={() => setSelectedTab('addressbook')}
+            className={`pb-2 px-1 border-b-2 ${
+              selectedTab === 'addressbook'
+                ? 'border-blue-600 text-blue-600'
+                : 'border-transparent text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            Address Book
+          </button>
+        </div>
       </div>
 
-      <div className="mt-6">
-        <BatchWithdrawForm chain={selectedChain} getToken={getToken} />
-      </div>
+      {selectedTab === 'dashboard' ? (
+        <>
+          <div className="mb-6">
+            <StatisticsDashboard chain={selectedChain} getToken={getToken} />
+          </div>
 
-      <div className="mt-6">
-        <TransactionsList chain={selectedChain} getToken={getToken} />
-      </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <div className="lg:col-span-2">
+              <ActivityFeed chain={selectedChain} getToken={getToken} />
+            </div>
+            <div>
+              <BalanceDisplay chain={selectedChain} getToken={getToken} />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <WithdrawForm chain={selectedChain} getToken={getToken} />
+            <BatchWithdrawForm chain={selectedChain} getToken={getToken} />
+          </div>
+
+          <div className="mt-6">
+            <TransactionsList chain={selectedChain} getToken={getToken} />
+          </div>
+        </>
+      ) : (
+        <AddressBook
+          onSelectAddress={(address) => {
+            // Could be used to populate withdrawal form
+            console.log('Selected address:', address)
+          }}
+        />
+      )}
+
+      {address && (
+        <QRCodeModal
+          address={address}
+          isOpen={showQRCode}
+          onClose={() => setShowQRCode(false)}
+        />
+      )}
     </div>
   )
 }
