@@ -1,4 +1,3 @@
-docs: add Reown AppKit wallet connectors
 chore: install wagmi for Ethereum interactions
 refactor: setup AppKit adapter TypeScript types
 feat: add viem wallet clients
