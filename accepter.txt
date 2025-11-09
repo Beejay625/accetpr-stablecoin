@@ -1,4 +1,3 @@
-docs: document metadata configuration
 feat: implement cookieStorage for Wagmi
 feat: setup createStorage with cookieStorage
 feat: add localStorage fallback for Wagmi
