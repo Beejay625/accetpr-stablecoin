@@ -702,6 +702,12 @@ src/
 │   ├── security/    # Security controllers
 │   │   ├── addressWhitelistController.ts
 │   │   └── transactionLimitsController.ts
+│   ├── payment/     # Payment controllers
+│   │   └── recurringPaymentsController.ts
+│   ├── auth/        # Authentication controllers
+│   │   └── apiKeyController.ts
+│   ├── portfolio/   # Portfolio controllers
+│   │   └── portfolioAnalyticsController.ts
 │   └── test/        # Test controllers
 ├── db/              # Database operations (Prisma)
 ├── events/          # Event handlers
@@ -723,7 +729,12 @@ src/
 │       ├── transaction-monitoring.ts
 │       ├── gas.ts
 │       ├── whitelist.ts
-│       └── limits.ts
+│       ├── limits.ts
+│       ├── templates.ts
+│       ├── recurring-payments.ts
+│       ├── api-keys.ts
+│       ├── unsigned-transactions.ts
+│       └── portfolio.ts
 ├── services/        # Business logic
 │   ├── audit/       # Audit logging service
 │   ├── cache/       # Caching service
@@ -743,9 +754,15 @@ src/
 │   ├── token/       # Token metadata service
 │   ├── notification/ # Notification preferences service
 │   ├── gas/         # Gas price oracle service
-│   └── security/    # Security services
-│       ├── addressWhitelistService.ts
-│       └── transactionLimitsService.ts
+│   ├── security/    # Security services
+│   │   ├── addressWhitelistService.ts
+│   │   └── transactionLimitsService.ts
+│   ├── payment/     # Payment services
+│   │   └── recurringPaymentsService.ts
+│   ├── auth/        # Authentication services
+│   │   └── apiKeyService.ts
+│   └── portfolio/   # Portfolio services
+│       └── portfolioAnalyticsService.ts
 ├── types/           # TypeScript types
 └── utils/           # Utility functions
 ```
