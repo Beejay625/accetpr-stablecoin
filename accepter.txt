@@ -1,4 +1,3 @@
-chore: add WalletConnect reconnection logic
 chore: implement viem transaction utilities
 perf: add Base chain transaction broadcasting
 chore: add Base chain RPC endpoints
