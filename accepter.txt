@@ -1,4 +1,3 @@
-refactor: configure Base chain gas estimation
 chore: add viem wallet clients
 chore: implement wagmi hooks for balance fetching
 docs: configure wagmi providers
