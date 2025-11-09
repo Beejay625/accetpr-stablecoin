@@ -47,6 +47,11 @@ Production-ready Express.js backend with TypeScript, Clerk authentication, Block
 - **Transaction Filtering**: Advanced filtering by status, asset, date range, amount, with pagination
 - **Transaction Export**: Export filtered transactions as CSV or JSON format
 - **Enhanced Health Monitoring**: Comprehensive health checks with database, cache, and memory status
+- **Webhook Management**: Configure webhooks for transaction event notifications with signature verification
+- **Transaction Replay**: Retry failed transactions with updated gas prices and replay history tracking
+- **Token Metadata Service**: Enhanced token information, price data, and popular tokens per chain
+- **Notification Preferences**: Customize notification settings per channel with quiet hours support
+- **Transaction Fee Calculator**: Advanced fee estimation with priority levels and USD conversion
 
 #### API Features
 - **Wallet Operations**:

@@ -1,4 +1,3 @@
-refactor: setup wagmi with React Query
 feat: add Reown AppKit wallet connectors
 fix: add React Query optimistic updates
 perf: install viem for Ethereum utilities
