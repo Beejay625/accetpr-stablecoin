@@ -66,4 +66,19 @@ protectedRouter.use('/notifications', notificationsRouter);
 // Fee calculator endpoints
 protectedRouter.use('/fees', feesRouter);
 
+// Transaction notes endpoints
+protectedRouter.use('/transactions', transactionNotesRouter);
+
+// Transaction monitoring endpoints
+protectedRouter.use('/transactions', transactionMonitoringRouter);
+
+// Gas price oracle endpoints
+protectedRouter.use('/gas', gasRouter);
+
+// Address whitelist endpoints
+protectedRouter.use('/whitelist', whitelistRouter);
+
+// Transaction limits endpoints
+protectedRouter.use('/limits', limitsRouter);
+
 export default protectedRouter;

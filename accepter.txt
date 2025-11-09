@@ -1,4 +1,3 @@
-test: install @reown/appkit for wallet integration
 refactor: add Base testnet chain configuration
 chore: configure WalletConnect project ID
 test: setup wagmi with React Query
