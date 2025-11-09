@@ -1,4 +1,3 @@
-refactor: setup Reown AppKit with Base chain
 perf: configure Reown AppKit metadata
 feat: implement AppKit adapter state management
 fix: setup React Query devtools
