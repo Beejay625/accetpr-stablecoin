@@ -164,7 +164,7 @@ export default function TransactionsList({ chain, getToken }: TransactionsListPr
               </tr>
             </thead>
             <tbody>
-              {displayTransactions.map((tx) => (
+              {paginatedTransactions.map((tx) => (
                 <tr
                   key={tx.transactionId}
                   className="border-b hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
@@ -204,6 +204,15 @@ export default function TransactionsList({ chain, getToken }: TransactionsListPr
             </tbody>
           </table>
         </div>
+      )}
+
+      {displayTransactions.length > itemsPerPage && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          itemsPerPage={itemsPerPage}
+        />
       )}
 
       <TransactionModal
