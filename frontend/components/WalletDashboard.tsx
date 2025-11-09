@@ -99,9 +99,12 @@ export default function WalletDashboard() {
             </>
           )}
         </div>
-        <p className="text-sm text-gray-500 dark:text-gray-500">
-          Chain: {selectedChain}
-        </p>
+        <div className="flex items-center gap-4 mt-2">
+          <NetworkStatus />
+          <p className="text-sm text-gray-500 dark:text-gray-500">
+            Chain: {selectedChain}
+          </p>
+        </div>
       </div>
 
       {error && (
