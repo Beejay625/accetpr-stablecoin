@@ -1,4 +1,3 @@
-refactor: add Reown AppKit wallet connectors
 fix: configure React Query with wagmi
 feat: add viem address formatting
 refactor: setup AppKit adapter with wagmi
