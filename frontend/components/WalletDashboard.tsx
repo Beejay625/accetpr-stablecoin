@@ -18,6 +18,11 @@ import QRCodeModal from './QRCodeModal'
 import NetworkStatus from './NetworkStatus'
 import SettingsPanel from './SettingsPanel'
 import HelpModal from './HelpModal'
+import TransactionQueuePanel from './TransactionQueuePanel'
+import GasPriceDisplay from './GasPriceDisplay'
+import { useAnalytics } from '@/hooks/useAnalytics'
+import { useWalletSession } from '@/hooks/useWalletSession'
+import { useEffect } from 'react'
 
 export default function WalletDashboard() {
   const { getToken } = useAuth()
