@@ -203,6 +203,54 @@ This project uses **Reown AppKit** (formerly WalletConnect) for seamless wallet 
   - Network recommendations
   - Health check history
 
+- **Transaction Templates**:
+  - Pre-configured transaction presets
+  - Categorize templates (payment, swap, interaction, etc.)
+  - Favorite templates for quick access
+  - Template search and filtering
+  - Usage tracking and statistics
+  - Export/import templates
+
+- **Scheduled Transactions**:
+  - Schedule one-time transactions
+  - Recurring transactions (daily, weekly, monthly, custom intervals)
+  - Automatic execution at scheduled times
+  - Execution history tracking
+  - Active/inactive status management
+  - Start and end date configuration
+
+- **Portfolio Tracking**:
+  - Multi-chain portfolio snapshots
+  - Total portfolio value calculation
+  - Asset distribution by chain and token
+  - Portfolio statistics (24h change, top assets, top chains)
+  - Historical data for charting
+  - Value tracking over time
+
+- **Price Alerts**:
+  - Set alerts for price above/below thresholds
+  - Percentage change alerts (up/down)
+  - Browser notification support
+  - Alert trigger history
+  - Active/inactive alert management
+  - Multi-token alert support
+
+- **DEX Swap Integration**:
+  - Get swap quotes from DEX aggregators
+  - Price impact calculation
+  - Gas estimation for swaps
+  - Swap execution with slippage protection
+  - Swap history tracking
+  - Swap statistics and analytics
+
+- **Batch Transaction Builder**:
+  - Build batches of multiple transactions
+  - Validate batches before execution
+  - Execute batches atomically
+  - Track batch execution status
+  - Batch execution history
+  - Calculate total batch value
+
 #### Wallet Connectors
 
 - WalletConnect
