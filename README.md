@@ -32,11 +32,21 @@ Production-ready Express.js backend with TypeScript, Clerk authentication, Block
 - **API Documentation**: Swagger/OpenAPI documentation
 - **Type Safety**: Full TypeScript implementation
 - **Error Handling**: Comprehensive error handling and logging
+- **Audit Logging**: Complete audit trail for all sensitive operations
+- **Transaction Search**: Search transactions by hash, reference, or address
+- **Transaction Details**: Detailed transaction information with gas fees and block data
+- **Wallet Statistics**: Cross-chain statistics and analytics
+- **Address Management**: List and manage wallet addresses across chains
 
 #### API Features
 - **Wallet Operations**:
   - Get wallet balance by chain
-  - View transaction history
+  - List all wallet addresses across chains
+  - View transaction history with advanced filtering
+  - Get detailed transaction information by ID
+  - Search transactions by hash, reference, or address
+  - Export transactions as CSV or JSON
+  - Get comprehensive wallet statistics
   - Execute single asset withdrawals
   - Execute batch withdrawals (up to 10 assets)
   - Transaction status tracking
