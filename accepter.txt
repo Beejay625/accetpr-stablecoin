@@ -1,4 +1,3 @@
-refactor: improve metadata structure
 docs: document metadata configuration
 feat: implement cookieStorage for Wagmi
 feat: setup createStorage with cookieStorage
