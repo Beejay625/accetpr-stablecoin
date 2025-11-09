@@ -1,4 +1,3 @@
-refactor: setup Base chain network switching
 docs: implement WalletConnect error handling
 chore: implement AppKit adapter state management
 refactor: add viem contract interaction helpers
