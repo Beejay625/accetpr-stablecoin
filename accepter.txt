@@ -1,4 +1,3 @@
-fix: setup viem with Base chain
 docs: add Base testnet chain configuration
 feat: add Base chain native token support
 fix: configure WalletConnect project ID
