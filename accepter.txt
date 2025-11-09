@@ -1,4 +1,3 @@
-fix: setup React Query devtools
 perf: setup viem with Base chain
 chore: add WalletConnect event listeners
 chore: add viem wallet clients
