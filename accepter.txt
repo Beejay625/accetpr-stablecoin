@@ -1,4 +1,3 @@
-fix: add wagmi hooks for wallet connection
 perf: add WalletConnect session management
 chore: configure Base mainnet chain for accetpr-stablecoin
 perf: setup Base chain network switching
