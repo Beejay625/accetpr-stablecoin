@@ -15,7 +15,6 @@ import StatisticsDashboard from './StatisticsDashboard'
 import ActivityFeed from './ActivityFeed'
 import AddressBook from './AddressBook'
 import QRCodeModal from './QRCodeModal'
-import { useState } from 'react'
 
 export default function WalletDashboard() {
   const { getToken } = useAuth()
