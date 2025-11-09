@@ -1,4 +1,3 @@
-docs: install @tanstack/react-query
 test: configure Reown AppKit metadata
 perf: implement WalletConnect error handling
 refactor: implement Reown AppKit modal customization
