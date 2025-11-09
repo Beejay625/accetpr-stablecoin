@@ -1,4 +1,3 @@
-chore: setup viem type generation
 chore: setup WalletConnect with Base chain
 chore: add WalletConnect mobile deep linking
 docs: setup viem type generation
