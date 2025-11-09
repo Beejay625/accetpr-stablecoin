@@ -38,10 +38,15 @@ Production-ready Express.js backend with TypeScript, Clerk authentication, Block
 - **Type Safety**: Full TypeScript implementation
 - **Error Handling**: Comprehensive error handling and logging
 - **Audit Logging**: Complete audit trail for all sensitive operations
-- **Transaction Search**: Search transactions by hash, reference, or address
+- **Transaction Search**: Search transactions by hash, transaction ID, reference, or asset across all chains
 - **Transaction Details**: Detailed transaction information with gas fees and block data
-- **Wallet Statistics**: Cross-chain statistics and analytics
-- **Address Management**: List and manage wallet addresses across chains
+- **Wallet Statistics**: Cross-chain statistics and analytics with balance aggregation
+- **Address Management**: List and manage wallet addresses across chains with detailed information
+- **Balance Aggregation**: Get total balances across all chains with primary asset calculation
+- **Activity Timeline**: Unified activity feed showing all transactions across chains chronologically
+- **Transaction Filtering**: Advanced filtering by status, asset, date range, amount, with pagination
+- **Transaction Export**: Export filtered transactions as CSV or JSON format
+- **Enhanced Health Monitoring**: Comprehensive health checks with database, cache, and memory status
 
 #### API Features
 - **Wallet Operations**:
