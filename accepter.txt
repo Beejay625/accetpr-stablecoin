@@ -1,4 +1,3 @@
-refactor: optimize connector setup
 feat: enable AppKit analytics feature
 feat: configure AppKit feature flags
 feat: add custom AppKit features
