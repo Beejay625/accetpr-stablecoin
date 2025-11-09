@@ -42,24 +42,100 @@ This project uses **Reown AppKit** (formerly WalletConnect) for seamless wallet 
 
 ### Backend API Features
 
-- **Wallet Operations**:
-  - Get wallet balance
-  - View transaction history
-  - Execute withdrawals (single and batch)
-  - Transaction status tracking
+#### Wallet Management
+- **Multi-Chain Wallet Generation**: Automatically generate wallet addresses for multiple chains (Base, Arbitrum, Solana, Tron)
+- **EVM Chain Optimization**: Single wallet address shared across all EVM-compatible chains (Base, Arbitrum) for cost efficiency
+- **Auto-Wallet Creation**: Wallets are automatically created when users first access wallet endpoints
+- **Balance Checking**: Real-time balance queries across all supported chains with asset conversion
+- **Transaction History**: View complete transaction history with detailed status tracking
+- **Address Caching**: Intelligent caching of address IDs for faster lookups
 
-- **Security**:
-  - Rate limiting
-  - CORS protection
-  - Helmet security headers
-  - Input validation with Zod
-  - Clerk authentication middleware
+#### Withdrawal Operations
+- **Single Withdrawals**: Execute individual asset withdrawals with full validation and error handling
+- **Batch Withdrawals**: Process up to 10 assets in a single batch transaction
+- **Multi-Chain Support**: Withdraw from any supported blockchain network
+- **Transaction Tracking**: Full transaction status tracking (PENDING, CONFIRMED, FAILED, CANCELLED)
+- **Metadata Support**: Attach custom metadata and reference notes to withdrawals
+- **Asset Validation**: Automatic asset validation against cached asset registry
+- **Amount Validation**: Positive number validation with precision handling
 
-- **Performance**:
-  - Redis caching
-  - Memory caching fallback
-  - Database connection pooling
-  - Request compression
+#### Asset Management
+- **Asset Registry**: Cached asset registry loaded on server startup for fast lookups
+- **Multi-Chain Assets**: Support for assets across different blockchain networks
+- **Asset Discovery**: Automatic asset discovery via BlockRadar API
+- **Asset Caching**: Persistent caching of asset data without expiration
+- **Asset Validation**: Real-time asset validation before withdrawal operations
+
+#### Caching System
+- **Multi-Provider Support**: Redis, Memory, or Disabled caching with easy switching
+- **Automatic Fallback**: Graceful fallback to memory cache if Redis fails
+- **TTL Management**: Configurable time-to-live for cached entries
+- **Batch Operations**: Efficient multi-get and multi-set operations for performance
+- **Cache Invalidation**: Smart cache invalidation strategies
+- **Health Monitoring**: Ping endpoints to check cache health
+- **Non-Blocking Cache**: Cache failures don't block critical operations
+
+#### Error Handling & Monitoring
+- **Smart Error Detection**: Automatic error type detection (authentication, database, network, etc.)
+- **Structured Error Responses**: Consistent error response format with error codes
+- **Error Logging**: Comprehensive error logging with context and stack traces
+- **Graceful Degradation**: Application continues operating even when non-critical services fail
+- **Request Logging**: Automatic HTTP request/response logging with Pino
+- **Custom Log Levels**: Dynamic log levels based on response status codes
+- **Error Context**: Rich error context for debugging and monitoring
+
+#### Performance Optimizations
+- **Database Connection Pooling**: Configurable connection pool with min/max settings
+- **Request Compression**: Gzip compression for API responses
+- **Batch Database Operations**: Efficient batch operations for wallet creation
+- **Race Condition Protection**: Protection against concurrent wallet creation
+- **Lazy Loading**: Assets and data loaded on-demand when cache misses
+- **Parallel Processing**: Parallel execution of independent operations
+
+#### Startup & Shutdown
+- **Graceful Shutdown**: Clean shutdown handling for SIGTERM, SIGINT, SIGUSR2
+- **Service Initialization**: Ordered service initialization (database, cache, events)
+- **Asset Preloading**: Assets cached on startup for immediate availability
+- **Health Checks**: Database and service health verification on startup
+- **Uncaught Exception Handling**: Proper handling of uncaught exceptions and unhandled rejections
+- **Port Retry Logic**: Automatic port retry in development mode
+
+#### Event System
+- **Event-Driven Architecture**: Decoupled event handling system
+- **Wallet Events**: Automatic wallet generation on user login events
+- **Extensible Handlers**: Easy to add new event handlers
+- **Event Registration**: Centralized event handler registration
+
+#### Validation & Security
+- **Zod Schema Validation**: Type-safe request validation with Zod
+- **Chain Validation**: Environment-based chain validation
+- **Address Validation**: Ethereum address format validation
+- **Amount Validation**: Positive number and precision validation
+- **Rate Limiting**: Configurable rate limiting to prevent abuse
+- **CORS Protection**: Configurable CORS policies
+- **Security Headers**: Helmet.js for security headers (XSS protection, CSP, etc.)
+- **Input Sanitization**: Protection against injection attacks
+
+#### Transaction Features
+- **Transaction Status Tracking**: Real-time status updates (PENDING, CONFIRMED, FAILED, CANCELLED)
+- **Transaction History**: Complete transaction history with pagination support
+- **Transaction Details**: Detailed transaction information including hash, amount, chain, reference
+- **Multi-Asset Transactions**: Support for transactions involving multiple assets
+- **Transaction Metadata**: Custom metadata attached to transactions
+
+#### Repository Pattern
+- **Cached Repositories**: Performance-optimized repositories with caching layer
+- **Database Repositories**: Direct database access repositories
+- **Repository Abstraction**: Clean separation between data access and business logic
+- **Address ID Caching**: Cached address ID lookups for performance
+
+#### Logging & Observability
+- **Structured Logging**: JSON-structured logs with Pino
+- **Request/Response Logging**: Automatic HTTP request/response logging
+- **Custom Log Levels**: Dynamic log levels (fatal, error, warn, info, debug, trace)
+- **Context Logging**: Rich context in logs (userId, chain, transactionId, etc.)
+- **Performance Metrics**: Request timing and performance metrics
+- **Error Stack Traces**: Full stack traces in development mode
 
 ## 📦 Installation
 
