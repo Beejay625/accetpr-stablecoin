@@ -1,4 +1,3 @@
-fix: configure wagmi with viem
 perf: configure AppKit adapter providers
 fix: integrate WalletConnect with Reown AppKit
 fix: configure WalletConnect metadata
