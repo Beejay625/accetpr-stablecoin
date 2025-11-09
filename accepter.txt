@@ -1,4 +1,3 @@
-fix: setup viem type generation
 fix: add wagmi hooks for wallet connection
 chore: setup wagmi config with Base chain
 docs: add Base chain native token support
