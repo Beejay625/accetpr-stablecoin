@@ -112,13 +112,50 @@ export class EnhancedAnalyticsService {
     const logger = createLoggerWithFunction('getAnalytics', { module: 'analytics' });
     
     try {
-      // Get all transactions for the user
-      const transactions = await transactionsService.getTransactions(userId, {
-        chain: options?.chain,
-        startDate: options?.startDate,
-        endDate: options?.endDate,
-        limit: options?.limit || 1000
-      });
+      // Get all transactions for the user across all chains
+      const allTransactions: any[] = [];
+      
+      const chainsToQuery = options?.chain ? [options.chain] : DEFAULT_CHAINS;
+      
+      for (const chain of chainsToQuery) {
+        try {
+          const chainTransactions = await TransactionsService.getUserTransactions(userId, chain);
+          // Transform to common format
+          const transformed = chainTransactions.map(tx => ({
+            id: tx.transactionId,
+            transactionId: tx.transactionId,
+            hash: tx.hash,
+            asset: tx.asset,
+            chain: tx.chain,
+            amount: tx.amountPaid,
+            status: tx.status,
+            createdAt: tx.transactionTime,
+            timestamp: tx.transactionTime,
+            recipientAddress: tx.hash, // Would need actual recipient from API
+            senderAddress: tx.hash // Would need actual sender from API
+          }));
+          
+          allTransactions.push(...transformed);
+        } catch (error: any) {
+          logger.warn({ userId, chain, error: error.message }, 'Failed to fetch transactions for chain');
+        }
+      }
+      
+      // Filter by date range if provided
+      let transactions = allTransactions;
+      if (options?.startDate || options?.endDate) {
+        transactions = allTransactions.filter(tx => {
+          const txDate = new Date(tx.createdAt || tx.timestamp);
+          if (options?.startDate && txDate < options.startDate) return false;
+          if (options?.endDate && txDate > options.endDate) return false;
+          return true;
+        });
+      }
+      
+      // Limit results
+      if (options?.limit) {
+        transactions = transactions.slice(0, options.limit);
+      }
 
       // Calculate overview metrics
       const overview = this.calculateOverviewMetrics(transactions);
