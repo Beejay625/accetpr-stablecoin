@@ -1,4 +1,3 @@
-fix: add React Query hooks for wallet data
 refactor: implement Base chain transaction signing
 docs: add Reown AppKit wallet connectors
 feat: configure React Query retry logic
