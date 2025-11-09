@@ -60,6 +60,32 @@ Production-ready Express.js backend with TypeScript, Clerk authentication, Block
   - Execute single asset withdrawals
   - Execute batch withdrawals (up to 10 assets)
   - Transaction status tracking
+  - Replay failed transactions with updated gas
+- **Webhook Management**:
+  - Create and manage webhook configurations
+  - Subscribe to transaction events
+  - Test webhook delivery
+  - Webhook signature verification
+- **Transaction Replay**:
+  - Retry failed transactions automatically
+  - Adjust gas prices for replay
+  - Track replay history
+  - Check replay eligibility
+- **Token Metadata**:
+  - Get token information and metadata
+  - Fetch token prices and market data
+  - Search tokens by symbol or name
+  - Get popular tokens per chain
+- **Notification Preferences**:
+  - Configure email, push, SMS, and in-app notifications
+  - Set quiet hours for non-critical alerts
+  - Customize event subscriptions per channel
+  - Manage notification preferences
+- **Fee Calculator**:
+  - Calculate transaction fees with multiple priority levels
+  - Compare fee estimates across priorities
+  - Get USD fee estimates
+  - Network congestion detection
 - **Security**:
   - Rate limiting
   - CORS protection
