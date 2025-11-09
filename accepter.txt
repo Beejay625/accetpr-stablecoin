@@ -1,4 +1,3 @@
-refactor: implement AppKit adapter utilities
 test: configure AppKit adapter for Base chain
 feat: add React Query optimistic updates
 docs: implement Reown AppKit modal customization
