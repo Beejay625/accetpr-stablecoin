@@ -11,6 +11,11 @@ import BatchWithdrawForm from './BatchWithdrawForm'
 import ChainSwitcher from './ChainSwitcher'
 import CopyButton from './CopyButton'
 import { formatAddress } from '@/lib/utils'
+import StatisticsDashboard from './StatisticsDashboard'
+import ActivityFeed from './ActivityFeed'
+import AddressBook from './AddressBook'
+import QRCodeModal from './QRCodeModal'
+import { useState } from 'react'
 
 export default function WalletDashboard() {
   const { getToken } = useAuth()
@@ -19,6 +24,8 @@ export default function WalletDashboard() {
   const [selectedChain, setSelectedChain] = useState<string>('base')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [showQRCode, setShowQRCode] = useState(false)
+  const [selectedTab, setSelectedTab] = useState<'dashboard' | 'addressbook'>('dashboard')
 
   // Map chainId to chain name
   const getChainName = (chainId: number): string => {
