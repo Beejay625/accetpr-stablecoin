@@ -715,6 +715,36 @@ A comprehensive Next.js frontend application is included in the `frontend/` dire
   - Supported networks and assets
   - Tips and troubleshooting
 
+#### 🔔 Notification System
+- **Browser Notifications**: Native browser notifications for transactions and errors
+- **Notification Center**: In-app notification center with unread count badge
+- **Notification Types**: Success, error, info, warning, transaction notifications
+- **Mark as Read**: Individual and bulk mark-as-read functionality
+- **Action Links**: Notifications can include action URLs (e.g., explorer links)
+- **Persistence**: Notifications saved in LocalStorage
+
+#### 📋 Transaction Templates
+- **Template Management**: Create, save, and manage transaction templates
+- **Quick Selection**: One-click template application
+- **Template Fields**: Save chain, asset, amount, recipient, and reference
+- **LocalStorage Persistence**: Templates saved locally
+- **Template Tab**: Dedicated tab for template management
+
+#### 💼 Portfolio Overview
+- **Multi-Chain Portfolio**: View assets across all connected chains
+- **Portfolio Value**: Total portfolio value calculation
+- **Top Assets**: Display top 5 assets by value
+- **Chain Distribution**: Visual distribution charts by chain
+- **Percentage Breakdown**: Asset and chain percentage calculations
+- **Auto-Refresh**: Automatic portfolio updates
+
+#### ✅ Address & Amount Validation
+- **Real-time Validation**: Validate addresses and amounts as user types
+- **Error Messages**: Clear, specific error messages
+- **Address Formatting**: Checksum address support
+- **Amount Range Checking**: Validate amount ranges and formats
+- **Visual Feedback**: Red borders and error text for invalid inputs
+
 #### 🎨 UI/UX Features
 - **Dark Mode Support**: Full dark mode compatibility
 - **Responsive Design**: Mobile and desktop optimized
