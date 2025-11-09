@@ -1,4 +1,3 @@
-refactor: implement React Query cache configuration
 perf: add WalletConnect mobile deep linking
 test: setup wagmi config with Base chain
 test: configure Base chain block explorer
