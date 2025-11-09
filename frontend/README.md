@@ -57,6 +57,35 @@ A comprehensive Next.js frontend application with Reown AppKit integration for a
 - **Troubleshooting**: Common issues and solutions
 - **Feature Documentation**: Detailed feature descriptions
 
+### 🔔 Notification System
+- **Browser Notifications**: Native browser notifications for important events
+- **Notification Center**: In-app notification management with unread badge
+- **Notification Types**: Success, error, info, warning, transaction
+- **Mark as Read**: Individual and bulk mark-as-read
+- **Action Links**: Notifications can include clickable action URLs
+- **Persistence**: Notifications saved in LocalStorage
+
+### 📋 Transaction Templates
+- **Template Management**: Create, save, and manage transaction templates
+- **Quick Selection**: One-click template application
+- **Template Fields**: Save chain, asset, amount, recipient, reference
+- **LocalStorage Persistence**: Templates saved locally
+- **Dedicated Tab**: Templates tab in dashboard
+
+### 💼 Portfolio Overview
+- **Multi-Chain Portfolio**: View assets across all chains
+- **Portfolio Value**: Total value calculation
+- **Top Assets**: Top 5 assets by value
+- **Chain Distribution**: Visual distribution charts
+- **Percentage Breakdown**: Asset and chain percentages
+- **Portfolio Tab**: Dedicated portfolio tab
+
+### ✅ Validation & Utilities
+- **Address Validation**: Real-time Ethereum address validation
+- **Amount Validation**: Amount format and range validation
+- **Checksum Support**: Address checksum formatting
+- **Visual Feedback**: Error messages and visual indicators
+
 ### 🎨 UI/UX Features
 - **Dark Mode Support**: Full dark mode compatibility
 - **Responsive Design**: Mobile and desktop optimized
