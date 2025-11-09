@@ -1,4 +1,3 @@
-chore: configure Base chain block explorer
 test: add wagmi chain configuration
 refactor: setup WalletConnect with Base chain
 docs: implement React Query infinite queries
