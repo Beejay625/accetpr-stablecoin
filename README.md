@@ -989,7 +989,11 @@ frontend/
 │   ├── NotificationCenter.tsx  # Notification center component
 │   ├── TransactionTemplates.tsx # Transaction templates UI
 │   ├── AddressValidator.tsx     # Address validation component
-│   └── PortfolioOverview.tsx    # Portfolio overview component
+│   ├── PortfolioOverview.tsx    # Portfolio overview component
+│   ├── PriceDisplay.tsx          # Token price display component
+│   ├── KeyboardShortcutsModal.tsx # Keyboard shortcuts modal
+│   ├── TransactionNoteModal.tsx   # Transaction note modal
+│   └── BackupRestorePanel.tsx    # Backup and restore panel
 ├── config/                       # Configuration files
 │   └── index.tsx                 # Wagmi/AppKit config
 ├── context/                      # React context providers
