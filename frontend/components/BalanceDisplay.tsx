@@ -68,7 +68,10 @@ export default function BalanceDisplay({ chain, getToken }: BalanceDisplayProps)
           <p className="text-3xl font-bold">
             {balance} {asset}
           </p>
-          <p className="text-sm text-gray-500 mt-2">Chain: {chain}</p>
+          <div className="flex items-center gap-2 mt-2">
+            <p className="text-sm text-gray-500">Chain: {chain}</p>
+            {asset && <PriceDisplay symbol={asset} />}
+          </div>
           <button
             onClick={fetchBalance}
             className="mt-4 px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600"
