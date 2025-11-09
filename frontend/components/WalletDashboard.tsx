@@ -179,6 +179,9 @@ export default function WalletDashboard() {
           onClose={() => setShowQRCode(false)}
         />
       )}
+
+      <SettingsPanel isOpen={showSettings} onClose={() => setShowSettings(false)} />
+      <HelpModal isOpen={showHelp} onClose={() => setShowHelp(false)} />
     </div>
   )
 }
