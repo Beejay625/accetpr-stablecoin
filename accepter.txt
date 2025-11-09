@@ -1,4 +1,3 @@
-test: setup Reown AppKit with Base chain
 docs: implement viem transaction utilities
 fix: integrate Base chain with wallet connect
 chore: integrate AppKit adapter with React Query
