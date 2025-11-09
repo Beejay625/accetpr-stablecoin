@@ -1,4 +1,3 @@
-test: implement React Query cache configuration
 test: configure Base chain block explorer
 fix: implement AppKit adapter state management
 perf: configure wagmi providers
