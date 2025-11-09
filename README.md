@@ -16,6 +16,11 @@ Production-ready Express.js backend with TypeScript, Clerk authentication, Block
 - **Transaction Queue**: Batch processing with retry logic and status tracking
 - **Analytics & Monitoring**: Real-time event tracking and statistics
 - **Session Management**: Wallet session persistence and auto-reconnect
+- **Multi-Signature Wallets**: Full multi-sig support with proposal and approval workflow
+- **Address Book**: Save, label, and manage addresses with whitelisting
+- **Transaction Simulation**: Preview transactions before execution
+- **Security Features**: Transaction limits, 2FA, and security policies
+- **Network Health Monitoring**: Real-time network status and latency tracking
 - **Authentication**: Clerk integration for secure user authentication
 - **Caching**: Redis and memory-based caching for optimal performance
 - **API Documentation**: Swagger/OpenAPI documentation
