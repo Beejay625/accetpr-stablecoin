@@ -1,4 +1,3 @@
-refactor: setup wagmi with React Query
 perf: implement AppKit adapter utilities
 chore: implement AppKit adapter utilities
 refactor: setup viem with Base chain
