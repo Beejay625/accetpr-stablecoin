@@ -1,4 +1,3 @@
-chore: configure Base mainnet chain for accetpr-stablecoin
 perf: setup Base chain network switching
 feat: add Reown AppKit project ID configuration
 chore: implement AppKit adapter state management
