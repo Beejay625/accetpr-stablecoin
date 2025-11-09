@@ -1,6 +1,7 @@
 import { createLoggerWithFunction } from '../../logger';
 import { cacheService } from '../cache';
 import axios from 'axios';
+import { WebhookService } from '../webhook/webhookService';
 
 /**
  * Gas Price Oracle Service

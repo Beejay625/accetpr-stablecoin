@@ -1,4 +1,3 @@
-refactor: optimize QueryClient setup
 feat: create Wagmi config file outside app directory
 feat: setup Wagmi adapter configuration
 feat: configure Wagmi SSR support
