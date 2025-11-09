@@ -1,156 +1,194 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import CopyButton from './CopyButton'
-import { formatAddress } from '@/lib/utils'
+import { addressBook, type AddressEntry } from '@/lib/addressBook'
+import { type Address } from 'viem'
 
-interface SavedAddress {
-  id: string
-  name: string
-  address: string
-  chain: string
-}
-
-const STORAGE_KEY = 'wallet_address_book'
-
-export default function AddressBook({ onSelectAddress }: { onSelectAddress?: (address: string) => void }) {
-  const [addresses, setAddresses] = useState<SavedAddress[]>([])
-  const [showForm, setShowForm] = useState(false)
-  const [formData, setFormData] = useState({
-    name: '',
-    address: '',
-    chain: 'base',
-  })
+export default function AddressBookComponent() {
+  const [addresses, setAddresses] = useState<AddressEntry[]>([])
+  const [searchQuery, setSearchQuery] = useState('')
+  const [showAddForm, setShowAddForm] = useState(false)
+  const [newAddress, setNewAddress] = useState('')
+  const [newLabel, setNewLabel] = useState('')
+  const [newTags, setNewTags] = useState('')
 
   useEffect(() => {
     loadAddresses()
   }, [])
 
   const loadAddresses = () => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY)
-      if (stored) {
-        setAddresses(JSON.parse(stored))
-      }
-    } catch (err) {
-      console.error('Failed to load addresses:', err)
+    if (searchQuery) {
+      setAddresses(addressBook.searchAddresses(searchQuery))
+    } else {
+      setAddresses(Array.from(addressBook['addresses'].values()))
     }
   }
 
-  const saveAddresses = (newAddresses: SavedAddress[]) => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(newAddresses))
-      setAddresses(newAddresses)
-    } catch (err) {
-      console.error('Failed to save addresses:', err)
-    }
-  }
+  useEffect(() => {
+    loadAddresses()
+  }, [searchQuery])
 
   const handleAdd = () => {
-    if (!formData.name || !formData.address) return
+    if (!newAddress || !newLabel) return
 
-    const newAddress: SavedAddress = {
-      id: Math.random().toString(36).substring(7),
-      ...formData,
-    }
+    addressBook.addAddress({
+      address: newAddress as Address,
+      label: newLabel,
+      isWhitelisted: false,
+      tags: newTags.split(',').map(t => t.trim()).filter(Boolean),
+    })
 
-    saveAddresses([...addresses, newAddress])
-    setFormData({ name: '', address: '', chain: 'base' })
-    setShowForm(false)
+    setNewAddress('')
+    setNewLabel('')
+    setNewTags('')
+    setShowAddForm(false)
+    loadAddresses()
   }
 
-  const handleDelete = (id: string) => {
-    saveAddresses(addresses.filter((addr) => addr.id !== id))
+  const handleWhitelist = (address: Address) => {
+    addressBook.whitelistAddress(address)
+    loadAddresses()
+  }
+
+  const handleRemove = (address: Address) => {
+    addressBook.deleteAddress(address)
+    loadAddresses()
+  }
+
+  const handleExport = () => {
+    const json = addressBook.exportAddresses()
+    const blob = new Blob([json], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'address-book.json'
+    a.click()
   }
 
   return (
-    <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+    <div className="p-6 bg-white border rounded-lg shadow-sm">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold">Address Book</h3>
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          {showForm ? 'Cancel' : '+ Add Address'}
-        </button>
+        <h2 className="text-2xl font-bold">Address Book</h2>
+        <div className="space-x-2">
+          <button
+            onClick={() => setShowAddForm(!showAddForm)}
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            Add Address
+          </button>
+          <button
+            onClick={handleExport}
+            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+          >
+            Export
+          </button>
+        </div>
       </div>
 
-      {showForm && (
-        <div className="mb-4 p-4 border rounded-lg dark:border-gray-700">
-          <div className="space-y-3">
+      <div className="mb-4">
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search addresses..."
+          className="w-full p-2 border rounded-md"
+        />
+      </div>
+
+      {showAddForm && (
+        <div className="p-4 bg-gray-50 rounded-lg mb-4">
+          <h3 className="font-semibold mb-2">Add New Address</h3>
+          <div className="space-y-2">
             <input
               type="text"
-              placeholder="Name (e.g., My Wallet)"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600"
+              value={newAddress}
+              onChange={(e) => setNewAddress(e.target.value)}
+              placeholder="0x..."
+              className="w-full p-2 border rounded-md"
             />
             <input
               type="text"
-              placeholder="Address (0x...)"
-              value={formData.address}
-              onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-              className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600"
+              value={newLabel}
+              onChange={(e) => setNewLabel(e.target.value)}
+              placeholder="Label"
+              className="w-full p-2 border rounded-md"
             />
-            <select
-              value={formData.chain}
-              onChange={(e) => setFormData({ ...formData, chain: e.target.value })}
-              className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600"
-            >
-              <option value="base">Base</option>
-              <option value="arbitrum">Arbitrum</option>
-              <option value="ethereum">Ethereum</option>
-            </select>
-            <button
-              onClick={handleAdd}
-              className="w-full px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-            >
-              Save Address
-            </button>
+            <input
+              type="text"
+              value={newTags}
+              onChange={(e) => setNewTags(e.target.value)}
+              placeholder="Tags (comma-separated)"
+              className="w-full p-2 border rounded-md"
+            />
+            <div className="flex space-x-2">
+              <button
+                onClick={handleAdd}
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              >
+                Add
+              </button>
+              <button
+                onClick={() => setShowAddForm(false)}
+                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       )}
 
-      {addresses.length === 0 ? (
-        <p className="text-gray-500 dark:text-gray-400 text-center py-4">
-          No saved addresses. Add one to get started.
-        </p>
-      ) : (
-        <div className="space-y-2">
-          {addresses.map((addr) => (
+      <div className="space-y-2">
+        {addresses.length === 0 ? (
+          <p className="text-gray-500 text-center py-8">No addresses found</p>
+        ) : (
+          addresses.map((entry) => (
             <div
-              key={addr.id}
-              className="p-3 border rounded-lg dark:border-gray-700 flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700"
+              key={entry.address}
+              className="p-4 border rounded-lg flex justify-between items-center"
             >
-              <div className="flex-1">
-                <p className="font-medium">{addr.name}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {formatAddress(addr.address)}
-                </p>
-                <p className="text-xs text-gray-400 dark:text-gray-500">{addr.chain}</p>
+              <div>
+                <div className="font-medium">{entry.label}</div>
+                <div className="text-sm text-gray-600 font-mono">
+                  {entry.address}
+                </div>
+                {entry.tags.length > 0 && (
+                  <div className="flex gap-2 mt-2">
+                    {entry.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
-              <div className="flex gap-2">
-                {onSelectAddress && (
+              <div className="flex space-x-2">
+                {entry.isWhitelisted ? (
+                  <span className="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">
+                    Whitelisted
+                  </span>
+                ) : (
                   <button
-                    onClick={() => onSelectAddress(addr.address)}
-                    className="px-2 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700"
+                    onClick={() => handleWhitelist(entry.address)}
+                    className="px-3 py-1 bg-green-500 text-white rounded text-xs hover:bg-green-600"
                   >
-                    Use
+                    Whitelist
                   </button>
                 )}
-                <CopyButton text={addr.address} label="Copy" />
                 <button
-                  onClick={() => handleDelete(addr.id)}
-                  className="px-2 py-1 text-xs bg-red-600 text-white rounded hover:bg-red-700"
+                  onClick={() => handleRemove(entry.address)}
+                  className="px-3 py-1 bg-red-500 text-white rounded text-xs hover:bg-red-600"
                 >
-                  Delete
+                  Remove
                 </button>
               </div>
             </div>
-          ))}
-        </div>
-      )}
+          ))
+        )}
+      </div>
     </div>
   )
 }
-
