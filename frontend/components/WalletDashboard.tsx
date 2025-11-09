@@ -196,6 +196,11 @@ export default function WalletDashboard() {
             <div className="space-y-4">
               <BalanceDisplay chain={selectedChain} getToken={getToken} />
               <GasPriceDisplay />
+              <AddressValidator
+                onValidAddress={(address) => {
+                  // Could auto-populate withdrawal form
+                }}
+              />
             </div>
           </div>
 
@@ -208,12 +213,25 @@ export default function WalletDashboard() {
             <TransactionsList chain={selectedChain} getToken={getToken} />
           </div>
         </>
-      ) : (
+      ) : selectedTab === 'addressbook' ? (
         <AddressBook
           onSelectAddress={(address) => {
             // Could be used to populate withdrawal form
             console.log('Selected address:', address)
           }}
+        />
+      ) : selectedTab === 'templates' ? (
+        <TransactionTemplates
+          onSelectTemplate={(template) => {
+            setSelectedTemplate(template)
+            setSelectedTab('dashboard')
+            // Could populate withdrawal form with template data
+          }}
+        />
+      ) : (
+        <PortfolioOverview
+          chains={['base', 'arbitrum', 'ethereum']}
+          getToken={getToken}
         />
       )}
 
