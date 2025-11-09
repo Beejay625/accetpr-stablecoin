@@ -1,4 +1,3 @@
-test: implement viem encoding/decoding utilities
 test: configure AppKit adapter providers
 feat: configure React Query with wagmi
 docs: integrate Base chain with wallet connect
