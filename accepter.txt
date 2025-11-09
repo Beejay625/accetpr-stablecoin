@@ -1,4 +1,3 @@
-test: configure Base chain block explorer
 fix: implement AppKit adapter state management
 perf: configure wagmi providers
 feat: add viem address formatting
