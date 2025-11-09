@@ -1,4 +1,3 @@
-test: install viem for Ethereum utilities
 test: implement viem encoding/decoding utilities
 perf: implement AppKit adapter state management
 chore: setup AppKit adapter with wagmi
