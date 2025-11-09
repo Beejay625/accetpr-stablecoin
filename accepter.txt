@@ -1,4 +1,3 @@
-perf: add WalletConnect mobile deep linking
 docs: implement AppKit adapter state management
 refactor: configure WalletConnect metadata
 chore: add Reown AppKit feature flags
