@@ -1,4 +1,3 @@
-docs: add API documentation
 docs: add integration examples
 docs: add troubleshooting guide
 docs: add architecture documentation
