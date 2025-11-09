@@ -26,10 +26,16 @@ interface Transaction {
 
 export default function TransactionsList({ chain, getToken }: TransactionsListProps) {
   const [transactions, setTransactions] = useState<Transaction[]>([])
+  const [filteredTransactions, setFilteredTransactions] = useState<Transaction[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [filters, setFilters] = useState<{
+    status?: string
+    asset?: string
+    search?: string
+  }>({})
 
   const fetchTransactions = useCallback(async () => {
     setLoading(true)
