@@ -1,98 +1,316 @@
-# Stablestack Backend (Express + TypeScript)
+# Accetpr Stablecoin Backend (Express + TypeScript)
 
 ## Overview
 
-Production-ready Express.js backend with TypeScript, Clerk authentication, BlockRadar integration, and caching system. The backend provides wallet management APIs for stablecoin operations, supporting multiple chains (Base, Arbitrum) and enabling users to view balances, check transactions, and execute withdrawals.
+Production-ready Express.js backend with TypeScript, Clerk authentication, BlockRadar integration, and caching system. The backend provides wallet management APIs for stablecoin operations, supporting multiple chains (Base, Arbitrum, Optimism, and more) and enabling users to view balances, check transactions, and execute withdrawals.
 
-## Reown AppKit Integration
+## 🚀 Features
 
-This project uses **Reown AppKit** (formerly WalletConnect) for wallet connection and management. Reown AppKit provides a seamless wallet connection experience for users, supporting multiple wallet providers and chains.
+### Core Features
+- **Multi-Chain Support**: Base, Arbitrum, Optimism, Polygon, Scroll, and more
+- **Wallet Management**: Connect, view balances, and manage transactions
+- **Authentication**: Clerk integration for secure user authentication
+- **Caching**: Redis and memory-based caching for optimal performance
+- **API Documentation**: Swagger/OpenAPI documentation
+- **Type Safety**: Full TypeScript implementation
+- **Error Handling**: Comprehensive error handling and logging
 
-### Backend Integration
+### Reown AppKit Integration
 
-The backend includes Reown AppKit dependencies for potential server-side wallet operations:
+This project uses **Reown AppKit** (formerly WalletConnect) for seamless wallet connection and management. Reown AppKit provides a unified interface for connecting wallets across multiple blockchain networks.
 
-- `@reown/appkit` - Core AppKit library
-- `@reown/appkit-adapter-wagmi` - Wagmi adapter for AppKit
-- `wagmi` - React Hooks for Ethereum
+#### Installed Dependencies
+
+- `@reown/appkit` - Core AppKit library for wallet connections
+- `@reown/appkit-adapter-wagmi` - Wagmi adapter for AppKit integration
+- `wagmi` - React Hooks for Ethereum interactions
 - `viem` - TypeScript Ethereum library
+- `@tanstack/react-query` - Data fetching and caching
 
-These dependencies are currently installed and ready for use in the backend for any server-side wallet operations or future integrations.
+#### Supported Networks
 
-### Frontend Integration Plan
+- **EVM Chains**: Base, Arbitrum, Optimism, Polygon, Scroll, BSC, Fantom, Linea, Mantle, Celo
+- **Other Networks**: Solana, Bitcoin (via AppKit Core)
+- **Custom Networks**: Easy configuration for any EVM-compatible chain
 
-A Next.js frontend application with Reown AppKit integration is planned. The frontend will enable users to:
+#### Wallet Connectors
 
-- **Connect Wallets**: Use Reown AppKit modal to connect various wallet providers (MetaMask, Coinbase Wallet, WalletConnect, etc.)
-- **View Balances**: Display wallet balances across supported chains (Base, Arbitrum)
-- **Check Transactions**: View transaction history for connected wallets
-- **Execute Withdrawals**: Perform single and batch withdrawals through the backend API
+- WalletConnect
+- Coinbase Wallet
+- Injected Wallets (MetaMask, etc.)
+- Blockchain API Transport
 
-#### Planned Frontend Architecture
+### Backend API Features
 
-The frontend will be built with:
+- **Wallet Operations**:
+  - Get wallet balance
+  - View transaction history
+  - Execute withdrawals (single and batch)
+  - Transaction status tracking
 
-- **Next.js 14+** with App Router
-- **Reown AppKit** for wallet connection UI
-- **Wagmi** + **Viem** for Ethereum interactions
-- **Clerk** for authentication (matching backend)
-- **React Query** for API state management
+- **Security**:
+  - Rate limiting
+  - CORS protection
+  - Helmet security headers
+  - Input validation with Zod
+  - Clerk authentication middleware
 
-#### Key Features
+- **Performance**:
+  - Redis caching
+  - Memory caching fallback
+  - Database connection pooling
+  - Request compression
 
-1. **Wallet Connection**: AppKit modal provides a unified interface for connecting wallets
-2. **Multi-Chain Support**: Switch between Base and Arbitrum networks
-3. **SSR Compatibility**: Cookie-based storage for server-side rendering
+## 📦 Installation
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm, yarn, pnpm, or bun
+- PostgreSQL database
+- Redis (optional, for caching)
+- Reown Dashboard account (for Project ID)
+
+### Setup Steps
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd accetpr-stablecoin
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
+
+3. **Configure environment variables**
+   ```bash
+   cp .env.example .env
+   ```
+   
+   Update `.env` with your configuration:
+   ```env
+   # Server
+   PORT=3000
+   NODE_ENV=development
+   
+   # Database
+   DATABASE_URL=postgresql://user:password@localhost:5432/dbname
+   DB_POOL_MIN=0
+   DB_POOL_MAX=10
+   
+   # Clerk Authentication
+   CLERK_SECRET_KEY=sk_test_...
+   CLERK_PUBLISHABLE_KEY=pk_test_...
+   
+   # Reown AppKit
+   NEXT_PUBLIC_PROJECT_ID=your_reown_project_id
+   
+   # Redis (optional)
+   REDIS_URL=redis://localhost:6379
+   
+   # Logging
+   LOG_LEVEL=info
+   
+   # CORS
+   CORS_ORIGIN=http://localhost:3000
+   
+   # Rate Limiting
+   RATE_LIMIT_WINDOW_MS=60000
+   RATE_LIMIT_MAX=100
+   ```
+
+4. **Setup database**
+   ```bash
+   npx prisma migrate dev
+   npx prisma generate
+   ```
+
+5. **Get Reown Project ID**
+   - Visit [Reown Dashboard](https://dashboard.reown.com)
+   - Create a new project
+   - Copy your Project ID to `.env`
+
+6. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+## 🛠️ Development
+
+### Available Scripts
+
+- `npm run dev` - Start development server with hot reload
+- `npm run build` - Build TypeScript to JavaScript
+- `npm start` - Run production server
+- `npm run lint` - Run ESLint
+- `npm run format` - Format code with Prettier
+
+### Project Structure
+
+```
+src/
+├── config/          # Configuration files
+├── controllers/     # Route controllers
+├── db/             # Database operations
+├── events/          # Event handlers
+├── middleware/      # Express middleware
+├── providers/       # External service providers (BlockRadar)
+├── repositories/    # Data access layer
+├── routes/          # API routes
+├── services/        # Business logic
+├── types/           # TypeScript types
+└── utils/           # Utility functions
+```
+
+## 📡 API Endpoints
+
+### Public Endpoints
+
+- `GET /` - Health check
+- `GET /api/health` - Detailed health status
+- `GET /api/status` - Service status
+
+### Protected Endpoints (Require Authentication)
+
+- `GET /api/wallet/balance` - Get wallet balance
+- `GET /api/wallet/transactions` - Get transaction history
+- `POST /api/wallet/withdraw` - Execute withdrawal
+
+### API Documentation
+
+Interactive API documentation available at `/docs` (Swagger UI)
+
+## 🔧 Configuration
+
+### Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `PORT` | Server port | `3000` |
+| `NODE_ENV` | Environment | `development` |
+| `DATABASE_URL` | PostgreSQL connection string | Required |
+| `CLERK_SECRET_KEY` | Clerk secret key | Required |
+| `NEXT_PUBLIC_PROJECT_ID` | Reown Project ID | Required |
+| `LOG_LEVEL` | Logging level | `info` |
+| `CORS_ORIGIN` | Allowed CORS origins | `*` |
+| `RATE_LIMIT_WINDOW_MS` | Rate limit window | `60000` |
+| `RATE_LIMIT_MAX` | Max requests per window | `100` |
+
+### Network Configuration
+
+Configure supported networks in your AppKit setup:
+
+```typescript
+import { mainnet, arbitrum, base, polygon, scroll } from '@reown/appkit/networks'
+
+export const networks = [mainnet, arbitrum, base, polygon, scroll]
+```
+
+## 🐳 Docker
+
+### Build Image
+```bash
+docker build -t accetpr-stablecoin-backend .
+```
+
+### Run Container
+```bash
+docker run -p 3000:3000 --env-file .env accetpr-stablecoin-backend
+```
+
+## 🧪 Testing
+
+### Run Tests
+```bash
+npm test
+```
+
+### Test Coverage
+```bash
+npm run test:coverage
+```
+
+## 📚 Frontend Integration
+
+### Next.js Setup
+
+For frontend integration with Next.js, see the planned architecture:
+
+- **Framework**: Next.js 14+ with App Router
+- **Wallet Connection**: Reown AppKit with Wagmi adapter
+- **State Management**: React Query for API state
+- **Authentication**: Clerk (matching backend)
+- **Styling**: Custom AppKit theme support
+
+### Key Frontend Features
+
+1. **Wallet Connection Modal**: Unified interface via AppKit
+2. **Multi-Chain Switching**: Seamless network switching
+3. **SSR Support**: Cookie-based storage for server-side rendering
 4. **Protected Routes**: Clerk authentication integration
-5. **API Integration**: Seamless connection to backend wallet APIs
+5. **Real-time Updates**: WebSocket support for transaction status
 
-For detailed implementation plan, see `appkit-next-js-integration.plan.md`.
+## 🔒 Security
+
+- **Authentication**: Clerk-based JWT authentication
+- **Rate Limiting**: Configurable request rate limits
+- **CORS**: Configurable cross-origin resource sharing
+- **Helmet**: Security headers middleware
+- **Input Validation**: Zod schema validation
+- **SQL Injection Protection**: Prisma ORM
+- **XSS Protection**: Input sanitization
+
+## 📊 Monitoring & Logging
+
+- **Logging**: Pino logger with HTTP middleware
+- **Error Tracking**: Comprehensive error logging
+- **Performance Monitoring**: Request timing and metrics
+- **Health Checks**: Database and service health endpoints
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### Commit Message Format
+
+This project follows conventional commits:
+- `feat:` - New feature
+- `fix:` - Bug fix
+- `docs:` - Documentation
+- `refactor:` - Code refactoring
+- `test:` - Tests
+- `chore:` - Maintenance tasks
+- `perf:` - Performance improvements
+
+## 📝 License
+
+ISC
+
+## 🔗 Links
+
+- [Reown Dashboard](https://dashboard.reown.com)
+- [Reown AppKit Documentation](https://docs.reown.com/appkit)
+- [Wagmi Documentation](https://wagmi.sh)
+- [Viem Documentation](https://viem.sh)
+- [Clerk Documentation](https://clerk.com/docs)
+
+## 🆘 Support
+
+For issues and questions:
+- Check the [API Documentation](/docs)
+- Review the [Troubleshooting Guide](./docs/troubleshooting.md)
+- Open an issue on GitHub
 
 ---
 
-## Backend Setup
-
-### Scripts
-- **dev**: Local development with Nodemon and ts-node
-- **build**: Compile TypeScript to `dist`
-- **start**: Run compiled app
-- **lint**: Lint with ESLint
-- **format**: Format with Prettier
-
-### Getting started
-1. Copy `.env.example` to `.env` and adjust values
-2. Install deps: `npm ci`
-3. Run locally: `npm run dev`
-4. Build: `npm run build`
-5. Start: `npm start`
-
-### Environment
-- **PORT**: default 3000
-- **LOG_LEVEL**: fatal|error|warn|info|debug|trace
-- **CORS_ORIGIN**: `*` or comma-separated origins
-- **JWT_SECRET**: long random string (required for auth)
-- **RATE_LIMIT_WINDOW_MS**: default 60000
-- **RATE_LIMIT_MAX**: default 100
-
-### Docker
-- Build: `docker build -t stablestack-backend .`
-- Run: `docker run -p 3000:3000 --env-file .env stablestack-backend`
-
-### Endpoints
-- Docs: `/docs`
-- `GET /` -> `{ status: "ok" }`
-- `GET /api/health` -> `{ ok: true, uptime }`
-
-### Notes
-- Security: `helmet`, `cors`, `compression`
-- Logging: `pino` + `pino-http`
-- Validation: `zod` + middleware
-
-### Database
-- **DATABASE_URL**: Postgres connection string
-- **DB_POOL_MIN**: default 0
-- **DB_POOL_MAX**: default 10
-- **DB_IDLE_TIMEOUT_MS**: default 30000
-- **DB_CONNECTION_TIMEOUT_MS**: default 2000
-
-Health includes DB status when configured.
+**Built with ❤️ using Express, TypeScript, Reown AppKit, and Clerk**
