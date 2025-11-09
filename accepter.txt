@@ -1,4 +1,3 @@
-perf: add Reown AppKit project ID configuration
 docs: implement React Query cache configuration
 fix: setup Reown AppKit with Base chain
 refactor: configure Base chain gas estimation
