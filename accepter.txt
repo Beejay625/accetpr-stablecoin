@@ -1,4 +1,3 @@
-chore: integrate Base chain with wallet connect
 test: add Base chain RPC endpoints
 test: add WalletConnect session management
 perf: add wagmi hooks for transaction sending
