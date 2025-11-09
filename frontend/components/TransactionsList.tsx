@@ -125,6 +125,16 @@ export default function TransactionsList({ chain, getToken }: TransactionsListPr
         <div className="text-center py-4">
           <p className="text-gray-500">Loading transactions...</p>
         </div>
+      ) : displayTransactions.length === 0 ? (
+        <div>
+          <p className="text-gray-500">No transactions match your filters.</p>
+          <button
+            onClick={() => setFilters({})}
+            className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          >
+            Clear Filters
+          </button>
+        </div>
       ) : transactions.length === 0 ? (
         <p className="text-gray-500">No transactions found</p>
       ) : (
