@@ -122,6 +122,25 @@ export default function TransactionModal({ transaction, isOpen, onClose }: Trans
               <label className="text-sm font-medium text-gray-500 dark:text-gray-400">Time</label>
               <p className="mt-1">{new Date(transaction.transactionTime).toLocaleString()}</p>
             </div>
+
+            <div>
+              <div className="flex justify-between items-center mb-2">
+                <label className="text-sm font-medium text-gray-500 dark:text-gray-400">Note</label>
+                <button
+                  onClick={() => setShowNoteModal(true)}
+                  className="text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400"
+                >
+                  {hasNote ? 'Edit Note' : 'Add Note'}
+                </button>
+              </div>
+              {hasNote && (
+                <div className="mt-1 p-3 bg-gray-100 dark:bg-gray-700 rounded">
+                  <p className="text-sm">
+                    {transactionNotes.getNote(transaction.transactionId)?.note}
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="mt-6 flex justify-end">
@@ -132,6 +151,17 @@ export default function TransactionModal({ transaction, isOpen, onClose }: Trans
               Close
             </button>
           </div>
+
+          <TransactionNoteModal
+            transactionId={transaction.transactionId}
+            hash={transaction.hash}
+            isOpen={showNoteModal}
+            onClose={() => {
+              setShowNoteModal(false)
+              const note = transactionNotes.getNote(transaction.transactionId)
+              setHasNote(!!note)
+            }}
+          />
         </div>
       </div>
     </div>
