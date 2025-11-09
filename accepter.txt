@@ -1,4 +1,3 @@
-test: configure Reown AppKit theme
 perf: install @reown/appkit for wallet integration
 perf: implement Reown AppKit modal customization
 fix: add wagmi hooks for wallet connection
