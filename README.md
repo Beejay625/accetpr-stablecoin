@@ -741,8 +741,6 @@ src/
 │   └── security/    # Security services
 │       ├── addressWhitelistService.ts
 │       └── transactionLimitsService.ts
-│       ├── transactionExportService.ts
-│       └── transactionDetailsService.ts
 ├── types/           # TypeScript types
 └── utils/           # Utility functions
 ```
