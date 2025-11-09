@@ -15,6 +15,9 @@ import StatisticsDashboard from './StatisticsDashboard'
 import ActivityFeed from './ActivityFeed'
 import AddressBook from './AddressBook'
 import QRCodeModal from './QRCodeModal'
+import NetworkStatus from './NetworkStatus'
+import SettingsPanel from './SettingsPanel'
+import HelpModal from './HelpModal'
 
 export default function WalletDashboard() {
   const { getToken } = useAuth()
@@ -25,6 +28,8 @@ export default function WalletDashboard() {
   const [error, setError] = useState<string | null>(null)
   const [showQRCode, setShowQRCode] = useState(false)
   const [selectedTab, setSelectedTab] = useState<'dashboard' | 'addressbook'>('dashboard')
+  const [showSettings, setShowSettings] = useState(false)
+  const [showHelp, setShowHelp] = useState(false)
 
   // Map chainId to chain name
   const getChainName = (chainId: number): string => {
