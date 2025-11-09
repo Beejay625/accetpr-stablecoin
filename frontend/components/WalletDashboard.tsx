@@ -9,6 +9,8 @@ import TransactionsList from './TransactionsList'
 import WithdrawForm from './WithdrawForm'
 import BatchWithdrawForm from './BatchWithdrawForm'
 import ChainSwitcher from './ChainSwitcher'
+import CopyButton from './CopyButton'
+import { formatAddress } from '@/lib/utils'
 
 export default function WalletDashboard() {
   const { getToken } = useAuth()

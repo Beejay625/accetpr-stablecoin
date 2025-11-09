@@ -48,8 +48,9 @@ export default function BalanceDisplay({ chain, getToken }: BalanceDisplayProps)
       <h3 className="text-xl font-semibold mb-4">Balance</h3>
       
       {loading ? (
-        <div className="text-center py-4">
-          <p className="text-gray-500">Loading...</p>
+        <div className="space-y-3">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-32 animate-pulse"></div>
+          <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-24 animate-pulse"></div>
         </div>
       ) : error ? (
         <div className="text-red-600 dark:text-red-400">
