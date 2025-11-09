@@ -1,4 +1,3 @@
-feat: add Polygon network support
 feat: configure custom network for accetpr-stablecoin
 feat: setup multiple EVM networks
 feat: add Solana network support
