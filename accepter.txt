@@ -1,4 +1,3 @@
-chore: implement viem encoding/decoding utilities
 test: install viem for Ethereum utilities
 test: implement viem encoding/decoding utilities
 perf: implement AppKit adapter state management
