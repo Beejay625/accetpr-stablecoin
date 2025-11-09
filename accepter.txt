@@ -1,4 +1,3 @@
-test: implement Reown AppKit modal customization
 test: configure React Query with wagmi
 refactor: configure Base chain gas estimation
 chore: add viem wallet clients
