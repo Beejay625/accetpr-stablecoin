@@ -1,4 +1,3 @@
-chore: setup React Query devtools
 perf: implement viem transaction utilities
 perf: configure WalletConnect project ID
 docs: implement React Query infinite queries
