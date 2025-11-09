@@ -1,4 +1,3 @@
-fix: add React Query optimistic updates
 perf: install viem for Ethereum utilities
 perf: integrate Base chain with wallet connect
 chore: implement viem encoding/decoding utilities
