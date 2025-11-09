@@ -1,4 +1,3 @@
-chore: add WalletConnect mobile deep linking
 docs: add React Query error handling
 chore: configure viem public clients
 test: initialize Reown AppKit provider
