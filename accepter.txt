@@ -1,4 +1,3 @@
-refactor: setup wagmi config with Base chain
 feat: initialize Reown AppKit provider
 feat: add React Query hooks for wallet data
 fix: configure Reown AppKit theme
