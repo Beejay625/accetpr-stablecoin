@@ -1,4 +1,3 @@
-chore: setup AppKit adapter TypeScript types
 perf: integrate Base chain with wallet connect
 refactor: add Reown AppKit wallet connectors
 test: configure WalletConnect metadata
