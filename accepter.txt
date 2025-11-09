@@ -1,4 +1,3 @@
-fix: configure WalletConnect project ID
 feat: install wagmi for Ethereum interactions
 fix: add WalletConnect session management
 feat: setup Reown AppKit with Base chain
