@@ -1,4 +1,3 @@
-perf: add React Query error handling
 feat: configure Base chain block explorer
 docs: configure WalletConnect metadata
 chore: implement Reown AppKit modal customization
