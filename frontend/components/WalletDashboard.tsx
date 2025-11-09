@@ -49,7 +49,10 @@ export default function WalletDashboard() {
   return (
     <div className="mt-8 w-full max-w-4xl">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-2">Wallet Dashboard</h2>
+        <div className="flex justify-between items-start mb-2">
+          <h2 className="text-2xl font-bold">Wallet Dashboard</h2>
+          <ChainSwitcher />
+        </div>
         <p className="text-gray-600 dark:text-gray-400">
           Connected: {address?.slice(0, 6)}...{address?.slice(-4)}
         </p>
@@ -67,6 +70,10 @@ export default function WalletDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <BalanceDisplay chain={selectedChain} getToken={getToken} />
         <WithdrawForm chain={selectedChain} getToken={getToken} />
+      </div>
+
+      <div className="mt-6">
+        <BatchWithdrawForm chain={selectedChain} getToken={getToken} />
       </div>
 
       <div className="mt-6">
