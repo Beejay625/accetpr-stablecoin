@@ -1,4 +1,3 @@
-refactor: add viem contract interaction helpers
 fix: add wagmi hooks for wallet connection
 fix: add wagmi chain configuration
 refactor: implement AppKit adapter state management
