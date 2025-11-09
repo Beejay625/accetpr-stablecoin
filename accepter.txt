@@ -1,4 +1,3 @@
-fix: install viem for Ethereum utilities
 refactor: implement React Query cache configuration
 docs: setup React Query provider
 test: setup Reown AppKit with Base chain
