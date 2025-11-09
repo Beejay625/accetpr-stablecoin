@@ -1,4 +1,3 @@
-test: install @tanstack/react-query
 refactor: add Reown AppKit feature flags
 feat: add WalletConnect mobile deep linking
 refactor: add viem contract interaction helpers
