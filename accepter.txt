@@ -1,4 +1,3 @@
-perf: implement viem transaction utilities
 refactor: configure Base mainnet chain for accetpr-stablecoin
 refactor: add Base testnet chain configuration
 chore: add wagmi hooks for wallet connection
