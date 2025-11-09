@@ -1,4 +1,3 @@
-docs: implement WalletConnect error handling
 refactor: add AppKit adapter error handling
 chore: implement AppKit adapter utilities
 docs: implement WalletConnect error handling
