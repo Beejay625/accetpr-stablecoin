@@ -1,4 +1,3 @@
-perf: add AppKit adapter hooks
 test: install @reown/appkit for wallet integration
 docs: implement WalletConnect error handling
 feat: implement AppKit adapter state management
