@@ -670,7 +670,18 @@ frontend/
 │   └── index.tsx                 # AppKit context provider
 └── lib/                          # Utility libraries
     ├── api.ts                    # API client
-    └── utils.ts                  # Utility functions
+    ├── utils.ts                  # Utility functions
+    ├── contracts.ts              # Smart contract utilities (ERC20)
+    ├── gas.ts                    # Gas optimization utilities
+    ├── transactionQueue.ts       # Transaction queue system
+    ├── analytics.ts              # Analytics and event tracking
+    └── walletSession.ts          # Wallet session management
+├── hooks/                        # Custom React hooks
+    ├── useTokenBalance.ts        # ERC20 token balance hook
+    ├── useGasPrice.ts            # Gas price estimation hook
+    ├── useTransactionQueue.ts    # Transaction queue hook
+    ├── useAnalytics.ts           # Analytics tracking hook
+    └── useWalletSession.ts       # Wallet session hook
 ```
 
 ### Frontend Setup
