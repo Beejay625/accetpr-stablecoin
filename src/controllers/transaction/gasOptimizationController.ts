@@ -29,7 +29,7 @@ export class GasOptimizationController {
     try {
       const { chain } = req.params;
 
-      const validation = this.getRecommendationSchema.safeParse(req.query);
+      const validation = this.getRecommendationSchema.safeParse(req.body);
       if (!validation.success) {
         ApiError.validation(res, validation.error.errors[0].message);
         return;
