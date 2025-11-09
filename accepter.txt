@@ -1,4 +1,3 @@
-chore: add Base testnet chain configuration
 perf: configure WalletConnect project ID
 docs: implement AppKit adapter utilities
 docs: configure WalletConnect project ID
