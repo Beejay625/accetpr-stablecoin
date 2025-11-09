@@ -1,4 +1,3 @@
-ci: setup GitHub Actions workflow
 ci: add automated testing pipeline
 ci: implement deployment automation
 ci: add code quality checks
