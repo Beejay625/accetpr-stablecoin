@@ -1,4 +1,3 @@
-fix: setup wagmi config with Base chain
 feat: configure WalletConnect project ID
 refactor: implement wagmi hooks for balance fetching
 refactor: setup Base chain network switching
