@@ -15,6 +15,7 @@ interface WithdrawFormProps {
 export default function WithdrawForm({ chain, getToken }: WithdrawFormProps) {
   const { address } = useAccount()
   const { showToast } = useToast()
+  const { add: addNotification } = useNotifications()
   const [asset, setAsset] = useState('USDC')
   const [amount, setAmount] = useState('')
   const [recipientAddress, setRecipientAddress] = useState('')
@@ -22,6 +23,8 @@ export default function WithdrawForm({ chain, getToken }: WithdrawFormProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
+  const [addressError, setAddressError] = useState<string | null>(null)
+  const [amountError, setAmountError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
