@@ -1,4 +1,3 @@
-refactor: add Base testnet chain configuration
 fix: implement React Query infinite queries
 perf: setup wagmi config with Base chain
 feat: add Reown AppKit wallet connectors
