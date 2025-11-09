@@ -1,4 +1,3 @@
-docs: setup Reown AppKit with Base chain
 chore: add Base chain transaction broadcasting
 feat: configure Reown AppKit metadata
 feat: add React Query optimistic updates
