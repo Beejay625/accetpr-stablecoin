@@ -1,4 +1,3 @@
-test: add performance tests
 test: add security tests
 test: add accessibility tests
 test: add cross-browser tests
