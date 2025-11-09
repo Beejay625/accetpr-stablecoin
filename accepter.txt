@@ -1,4 +1,3 @@
-test: implement React Query cache configuration
 fix: initialize Reown AppKit provider
 test: configure React Query retry logic
 fix: install @reown/appkit for wallet integration
