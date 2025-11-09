@@ -1,4 +1,3 @@
-refactor: configure AppKit adapter providers
 feat: add WalletConnect event listeners
 chore: install wagmi for Ethereum interactions
 perf: integrate WalletConnect with Reown AppKit
