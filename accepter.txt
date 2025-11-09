@@ -1,4 +1,3 @@
-test: implement WalletConnect error handling
 fix: configure wagmi with viem
 perf: configure AppKit adapter providers
 fix: integrate WalletConnect with Reown AppKit
