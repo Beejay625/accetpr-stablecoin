@@ -1,4 +1,3 @@
-fix: configure Reown AppKit metadata
 test: add React Query optimistic updates
 fix: add Base chain transaction broadcasting
 refactor: configure Base chain gas estimation
