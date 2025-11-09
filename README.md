@@ -713,7 +713,12 @@ src/
 │       ├── transactions-replay.ts
 │       ├── tokens.ts
 │       ├── notifications.ts
-│       └── fees.ts
+│       ├── fees.ts
+│       ├── transaction-notes.ts
+│       ├── transaction-monitoring.ts
+│       ├── gas.ts
+│       ├── whitelist.ts
+│       └── limits.ts
 ├── services/        # Business logic
 │   ├── audit/       # Audit logging service
 │   ├── cache/       # Caching service
