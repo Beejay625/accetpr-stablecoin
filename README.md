@@ -822,6 +822,21 @@ src/
 | `GET /api/v1/protected/wallet/activity/recent` | GET | Get recent activity | ✅ |
 | `POST /api/v1/protected/wallet/withdraw/single` | POST | Execute single withdrawal | ✅ |
 | `POST /api/v1/protected/wallet/withdraw/batch` | POST | Execute batch withdrawal | ✅ |
+| `POST /api/v1/protected/transactions/batch` | POST | Create batch transaction | ✅ |
+| `POST /api/v1/protected/transactions/batch/{batchId}/execute` | POST | Execute batch transaction | ✅ |
+| `GET /api/v1/protected/transactions/batch` | GET | Get all user batches | ✅ |
+| `GET /api/v1/protected/transactions/batch/{batchId}` | GET | Get batch transaction | ✅ |
+| `POST /api/v1/protected/transactions/batch/{batchId}/cancel` | POST | Cancel batch transaction | ✅ |
+| `POST /api/v1/protected/transactions/schedule` | POST | Schedule transaction | ✅ |
+| `GET /api/v1/protected/transactions/schedule` | GET | Get all scheduled transactions | ✅ |
+| `GET /api/v1/protected/transactions/schedule/{scheduledId}` | GET | Get scheduled transaction | ✅ |
+| `POST /api/v1/protected/transactions/schedule/{scheduledId}/cancel` | POST | Cancel scheduled transaction | ✅ |
+| `POST /api/v1/protected/transactions/validate` | POST | Validate transaction | ✅ |
+| `POST /api/v1/protected/transactions/validate/batch` | POST | Validate batch transactions | ✅ |
+| `POST /api/v1/protected/gas/optimization/{chain}/recommendation` | POST | Get gas price recommendation | ✅ |
+| `GET /api/v1/protected/gas/optimization/{chain}/strategies` | GET | Get all optimization strategies | ✅ |
+| `POST /api/v1/protected/gas/optimization/{chain}/optimal` | POST | Get optimal gas price for target time | ✅ |
+| `GET /api/v1/protected/analytics/enhanced` | GET | Get enhanced analytics | ✅ |
 
 ### API Documentation
 
