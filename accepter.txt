@@ -1,4 +1,3 @@
-perf: add viem contract interaction helpers
 chore: add React Query optimistic updates
 refactor: integrate WalletConnect with Reown AppKit
 refactor: add Base chain native token support
