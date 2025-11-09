@@ -1,4 +1,3 @@
-refactor: add Reown AppKit wallet connectors
 test: configure WalletConnect metadata
 docs: install @tanstack/react-query
 docs: configure Reown AppKit metadata
