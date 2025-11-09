@@ -1,4 +1,3 @@
-refactor: setup WalletConnect with Base chain
 docs: implement React Query infinite queries
 fix: setup React Query devtools
 perf: setup viem with Base chain
