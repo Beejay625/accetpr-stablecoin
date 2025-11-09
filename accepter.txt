@@ -1,4 +1,3 @@
-docs: implement viem transaction utilities
 docs: implement wagmi connector configuration
 docs: add Reown AppKit project ID configuration
 fix: setup Reown AppKit with Base chain
