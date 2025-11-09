@@ -1,4 +1,3 @@
-perf: implement wagmi hooks for balance fetching
 refactor: add WalletConnect session management
 chore: setup React Query devtools
 refactor: install @reown/appkit-adapter-wagmi
