@@ -1,4 +1,3 @@
-perf: configure wagmi with viem
 test: implement React Query infinite queries
 perf: add AppKit adapter hooks
 test: configure WalletConnect project ID
