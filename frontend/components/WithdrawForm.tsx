@@ -131,11 +131,29 @@ export default function WithdrawForm({ chain, getToken }: WithdrawFormProps) {
           <input
             type="text"
             value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={(e) => {
+              setAmount(e.target.value)
+              setAmountError(null)
+            }}
+            onBlur={() => {
+              if (amount) {
+                const validation = validateAmount(amount)
+                if (!validation.isValid) {
+                  setAmountError(validation.error || 'Invalid amount')
+                } else {
+                  setAmountError(null)
+                }
+              }
+            }}
             placeholder="0.0"
-            className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600"
+            className={`w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 ${
+              amountError ? 'border-red-500' : ''
+            }`}
             required
           />
+          {amountError && (
+            <p className="text-xs text-red-600 dark:text-red-400 mt-1">{amountError}</p>
+          )}
         </div>
 
         <div>
