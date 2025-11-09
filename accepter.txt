@@ -1,4 +1,3 @@
-chore: initialize Reown AppKit provider
 fix: configure Reown AppKit metadata
 test: add React Query optimistic updates
 fix: add Base chain transaction broadcasting
