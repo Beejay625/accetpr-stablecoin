@@ -1,4 +1,3 @@
-refactor: setup Reown AppKit configuration
 refactor: configure AppKit adapter providers
 feat: configure wagmi with viem
 test: integrate AppKit adapter with React Query
