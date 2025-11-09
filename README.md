@@ -692,7 +692,12 @@ src/
 ├── routes/          # API routes
 │   ├── public/      # Public routes
 │   └── protected/   # Protected routes
-│       └── wallet/  # Wallet routes
+│       ├── wallet/  # Wallet routes
+│       ├── webhooks.ts
+│       ├── transactions-replay.ts
+│       ├── tokens.ts
+│       ├── notifications.ts
+│       └── fees.ts
 ├── services/        # Business logic
 │   ├── audit/       # Audit logging service
 │   ├── cache/       # Caching service
