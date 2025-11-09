@@ -732,11 +732,27 @@ All requests include Clerk authentication tokens in the Authorization header.
 - **Next.js 15** - React framework with App Router
 - **Reown AppKit** - Wallet connection UI and management
 - **Wagmi** - Ethereum React hooks
-- **Viem** - TypeScript Ethereum library
+- **Viem** - TypeScript Ethereum library (includes ERC20 ABI)
 - **Clerk** - Authentication and user management
 - **Tailwind CSS** - Utility-first CSS framework
 - **TypeScript** - Type safety
 - **React Query** - Data fetching and caching
+
+### Frontend Advanced Libraries
+
+- **Smart Contracts** (`lib/contracts.ts`): ERC20 token interactions, token address management
+- **Gas Optimization** (`lib/gas.ts`): Gas price estimation, cost calculation, strategy management
+- **Transaction Queue** (`lib/transactionQueue.ts`): Batch processing, retry logic, status tracking
+- **Analytics** (`lib/analytics.ts`): Event tracking, statistics, persistence
+- **Session Management** (`lib/walletSession.ts`): Wallet session persistence, auto-reconnect
+
+### Frontend Custom Hooks
+
+- **useTokenBalance**: Read ERC20 token balances
+- **useGasPrice**: Get real-time gas prices with strategies
+- **useTransactionQueue**: Manage transaction queue
+- **useAnalytics**: Track events and get statistics
+- **useWalletSession**: Manage wallet sessions
 
 ## 🔒 Security
 
