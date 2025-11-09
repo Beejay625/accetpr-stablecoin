@@ -1,4 +1,3 @@
-docs: configure Base chain gas estimation
 perf: implement viem encoding/decoding utilities
 fix: add viem address formatting
 docs: configure viem RPC providers
