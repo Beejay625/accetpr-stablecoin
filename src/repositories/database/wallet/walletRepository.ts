@@ -138,6 +138,23 @@ export class WalletRepository {
   }
 
   /**
+   * Get user wallet addresses (alias for findByUserId for statistics service)
+   */
+  async getUserWalletAddresses(userId: string): Promise<Array<{ chain: string; address: string }>> {
+    const logger = createLoggerWithFunction('getUserWalletAddresses', { module: 'repository' });
+    try {
+      const walletAddresses = await this.findByUserId(userId);
+      return walletAddresses.map(w => ({
+        chain: w.chain,
+        address: w.address
+      }));
+    } catch (error: any) {
+      logger.error({ userId, error: error.message }, 'Failed to get user wallet addresses');
+      throw error;
+    }
+  }
+
+  /**
    * Find wallet address by chain (returns single address due to unique constraint)
    */
   async findByChain(userId: string, chain: string): Promise<{ id: string; userId: string; address: string; addressId: string; addressName: string; chain: string; createdAt: Date } | null> {
