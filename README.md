@@ -2088,6 +2088,47 @@ For detailed information about all newly implemented features, see:
 - **Automatic Reset**: Limits automatically reset at period boundaries
 - **Limit Checking**: Pre-transaction limit validation
 
+### Transaction Templates System
+- **Template Management**: Create, update, and delete transaction templates
+- **Template Organization**: Organize templates with categories and tags
+- **Favorite Templates**: Mark frequently used templates as favorites
+- **Template Search**: Search templates by name, description, category, or tags
+- **Usage Tracking**: Track how often templates are used
+- **Quick Access**: Fast access to saved transaction configurations
+
+### Recurring Payments System
+- **Flexible Scheduling**: Schedule payments with daily, weekly, monthly, or custom intervals
+- **Date Management**: Set start and end dates for recurring payments
+- **Execution Limits**: Set maximum number of executions
+- **Automatic Execution**: Track and manage automatic payment execution
+- **Status Management**: Activate or deactivate recurring payments
+- **Execution History**: Track all payment executions with status
+
+### API Key Management
+- **Secure Key Generation**: Generate cryptographically secure API keys
+- **Key Hashing**: Store only hashed keys for security
+- **Permission Management**: Set granular permissions per API key
+- **Expiration Dates**: Set optional expiration dates for keys
+- **Usage Tracking**: Track when and how API keys are used
+- **Key Prefix Display**: Show key prefix for identification without exposing full key
+
+### Transaction Signing Service
+- **Off-Chain Preparation**: Prepare transactions for signing without broadcasting
+- **Signing Workflow**: Track transaction through signing process (pending → signed → broadcast)
+- **Transaction Serialization**: Get transactions in format ready for signing
+- **Status Management**: Update transaction status as it moves through workflow
+- **Cancellation Support**: Cancel unsigned transactions
+- **EIP-1559 Support**: Support for modern transaction types
+
+### Portfolio Analytics Service
+- **Portfolio Snapshots**: Create point-in-time portfolio snapshots
+- **Value Tracking**: Track total portfolio value over time
+- **24h Changes**: Calculate 24-hour value changes and percentages
+- **Top Assets**: Identify top assets by value
+- **Top Chains**: Identify top chains by value
+- **Historical Data**: Access portfolio history for charting and analysis
+- **Distribution Analysis**: Calculate distribution by chain and asset
+
 ### Transaction Management Enhancements
 - **Transaction Details Endpoint**: Get comprehensive details about any transaction including gas fees, block numbers, confirmations, and metadata
 - **Transaction Search**: Search transactions by hash, reference, sender/recipient addresses, or transaction ID with case-insensitive matching
