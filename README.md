@@ -765,7 +765,8 @@ frontend/
     ├── useGasPrice.ts            # Gas price estimation hook
     ├── useTransactionQueue.ts    # Transaction queue hook
     ├── useAnalytics.ts           # Analytics tracking hook
-    └── useWalletSession.ts       # Wallet session hook
+    ├── useWalletSession.ts       # Wallet session hook
+    └── useNotifications.ts       # Notifications hook
 ```
 
 ### Frontend Setup
