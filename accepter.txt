@@ -1,4 +1,3 @@
-perf: add React Query hooks for wallet data
 feat: integrate WalletConnect with Reown AppKit
 feat: setup Next.js app router with AppKit
 feat: configure Next.js SSR for AppKit
