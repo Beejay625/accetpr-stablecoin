@@ -1,4 +1,3 @@
-fix: fix modal not opening on mobile
 fix: resolve contract interaction errors
 refactor: improve AppKit integration structure
 refactor: optimize ContextProvider
