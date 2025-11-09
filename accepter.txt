@@ -1,4 +1,3 @@
-perf: optimize network requests
 perf: implement request batching
 perf: add caching strategies
 perf: optimize re-renders
