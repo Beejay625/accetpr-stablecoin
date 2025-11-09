@@ -134,6 +134,15 @@ export default function TransactionsList({ chain, getToken }: TransactionsListPr
           </table>
         </div>
       )}
+
+      <TransactionModal
+        transaction={selectedTransaction}
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false)
+          setSelectedTransaction(null)
+        }}
+      />
     </div>
   )
 }
