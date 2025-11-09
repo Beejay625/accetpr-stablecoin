@@ -1,4 +1,3 @@
-fix: improve error user feedback
 refactor: improve code organization
 refactor: optimize component structure
 refactor: improve type safety
