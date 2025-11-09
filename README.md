@@ -1005,7 +1005,11 @@ frontend/
     ├── addressValidation.ts      # Address and amount validation
     ├── transactionTemplates.ts   # Transaction template management
     ├── notifications.ts          # Notification system
-    └── portfolio.ts              # Portfolio management utilities
+    ├── portfolio.ts              # Portfolio management utilities
+    ├── priceTracking.ts           # Token price tracking
+    ├── keyboardShortcuts.ts       # Keyboard shortcuts system
+    ├── transactionNotes.ts        # Transaction notes management
+    └── backupRestore.ts           # Backup and restore utilities
 ├── hooks/                        # Custom React hooks
     ├── useTokenBalance.ts        # ERC20 token balance hook
     ├── useGasPrice.ts            # Gas price estimation hook
