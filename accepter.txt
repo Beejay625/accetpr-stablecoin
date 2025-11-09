@@ -1,4 +1,3 @@
-refactor: simplify network configuration
 refactor: improve error handling
 chore: update AppKit dependencies
 chore: update Next.js configuration
