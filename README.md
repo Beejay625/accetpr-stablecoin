@@ -344,15 +344,22 @@ src/
 
 ### Public Endpoints
 
-- `GET /` - Health check
-- `GET /api/health` - Detailed health status
-- `GET /api/status` - Service status
+| Endpoint | Method | Description | Auth Required |
+|----------|--------|-------------|---------------|
+| `GET /api/v1/public/health` | GET | Enhanced health check with database, cache, and memory status | ❌ |
+| `GET /api/v1/public/status` | GET | Simple service status | ❌ |
+| `GET /docs` | GET | Swagger API documentation | ❌ |
 
 ### Protected Endpoints (Require Authentication)
 
-- `GET /api/wallet/balance` - Get wallet balance
-- `GET /api/wallet/transactions` - Get transaction history
-- `POST /api/wallet/withdraw` - Execute withdrawal
+| Endpoint | Method | Description | Auth Required |
+|----------|--------|-------------|---------------|
+| `GET /api/v1/protected/wallet/balance` | GET | Get wallet balance for a chain | ✅ |
+| `GET /api/v1/protected/wallet/transactions/{chain}` | GET | Get transaction history with filtering | ✅ |
+| `GET /api/v1/protected/wallet/transactions/{chain}/export` | GET | Export transactions (CSV/JSON) | ✅ |
+| `GET /api/v1/protected/wallet/statistics` | GET | Get comprehensive wallet statistics | ✅ |
+| `POST /api/v1/protected/wallet/withdraw/single` | POST | Execute single withdrawal | ✅ |
+| `POST /api/v1/protected/wallet/withdraw/batch` | POST | Execute batch withdrawal | ✅ |
 
 ### API Documentation
 
