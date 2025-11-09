@@ -156,6 +156,11 @@ Production-ready Express.js backend with TypeScript, Clerk authentication, Block
 - **Price Alerts**: Set up alerts for token price movements with notifications
 - **DEX Integration**: Swap tokens via decentralized exchanges with quote and execution
 - **Batch Transaction Builder**: Build and execute multiple transactions in a single batch
+- **Transaction Export**: Export transaction history with advanced filtering (CSV, JSON)
+- **Wallet Backup**: Secure wallet backup and recovery with encryption
+- **Token Approvals**: Manage ERC20 token approvals for DEX and DeFi protocols
+- **Transaction Analytics**: Comprehensive analytics and insights from transaction history
+- **RPC Management**: Custom RPC endpoint management with health monitoring
 - **Authentication**: Clerk integration for secure user authentication
 - **Caching**: Redis and memory-based caching for optimal performance
 - **API Documentation**: Swagger/OpenAPI documentation

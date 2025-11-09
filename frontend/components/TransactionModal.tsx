@@ -24,6 +24,16 @@ interface TransactionModalProps {
 }
 
 export default function TransactionModal({ transaction, isOpen, onClose }: TransactionModalProps) {
+  const [showNoteModal, setShowNoteModal] = useState(false)
+  const [hasNote, setHasNote] = useState(false)
+
+  useEffect(() => {
+    if (transaction) {
+      const note = transactionNotes.getNote(transaction.transactionId)
+      setHasNote(!!note)
+    }
+  }, [transaction, isOpen])
+
   if (!isOpen || !transaction) return null
 
   const statusColors = {
