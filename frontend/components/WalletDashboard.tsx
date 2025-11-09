@@ -157,6 +157,8 @@ export default function WalletDashboard() {
 
       {selectedTab === 'dashboard' ? (
         <>
+          <TransactionQueuePanel />
+
           <div className="mb-6">
             <StatisticsDashboard chain={selectedChain} getToken={getToken} />
           </div>
@@ -165,8 +167,9 @@ export default function WalletDashboard() {
             <div className="lg:col-span-2">
               <ActivityFeed chain={selectedChain} getToken={getToken} />
             </div>
-            <div>
+            <div className="space-y-4">
               <BalanceDisplay chain={selectedChain} getToken={getToken} />
+              <GasPriceDisplay />
             </div>
           </div>
 
