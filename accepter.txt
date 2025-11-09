@@ -1,4 +1,3 @@
-fix: setup wagmi config with Base chain
 feat: add Reown AppKit feature flags
 perf: add React Query hooks for wallet data
 perf: setup wagmi with React Query
