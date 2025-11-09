@@ -1,4 +1,3 @@
-docs: add Reown AppKit feature flags
 perf: integrate WalletConnect with Reown AppKit
 docs: add AppKit adapter error handling
 test: configure Reown AppKit theme
