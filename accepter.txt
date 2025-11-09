@@ -1,4 +1,3 @@
-fix: add WalletConnect reconnection logic
 perf: add WalletConnect event listeners
 fix: setup wagmi config with Base chain
 feat: configure WalletConnect project ID
