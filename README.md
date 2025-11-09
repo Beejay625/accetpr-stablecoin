@@ -101,6 +101,31 @@ Production-ready Express.js backend with TypeScript, Clerk authentication, Block
   - Compare fee estimates across priorities
   - Get USD fee estimates
   - Network congestion detection
+- **Transaction Templates**:
+  - Create and manage transaction templates
+  - Search templates by name, category, or tags
+  - Favorite templates for quick access
+  - Template usage tracking
+- **Recurring Payments**:
+  - Create recurring payment schedules
+  - Manage payment frequency and dates
+  - Track payment execution history
+  - Activate/deactivate recurring payments
+- **API Key Management**:
+  - Generate secure API keys
+  - Manage API key permissions
+  - Set expiration dates
+  - Track API key usage
+- **Transaction Signing**:
+  - Create unsigned transactions
+  - Get transactions ready for signing
+  - Track signing workflow
+  - Cancel unsigned transactions
+- **Portfolio Analytics**:
+  - Create portfolio snapshots
+  - Get portfolio metrics and analytics
+  - Track portfolio value over time
+  - Historical portfolio data
 - **Security**:
   - Rate limiting
   - CORS protection

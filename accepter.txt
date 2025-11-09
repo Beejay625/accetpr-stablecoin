@@ -1,4 +1,3 @@
-feat: configure createAppKit with multiple networks
 refactor: simplify createAppKit configuration
 fix: resolve createAppKit initialization errors
 feat: import networks from @reown/appkit/networks
