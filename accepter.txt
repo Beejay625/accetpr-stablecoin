@@ -1,4 +1,3 @@
-perf: setup React Query devtools
 perf: add Base chain native token support
 docs: setup wagmi with React Query
 docs: implement viem transaction utilities
