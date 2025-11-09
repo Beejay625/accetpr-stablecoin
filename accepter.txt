@@ -1,4 +1,3 @@
-feat: setup metadata URL and icons
 feat: configure metadata origin matching
 refactor: improve metadata structure
 docs: document metadata configuration
