@@ -1,4 +1,3 @@
-fix: setup WalletConnect with Base chain
 fix: implement viem encoding/decoding utilities
 test: configure viem public clients
 feat: add viem contract interaction helpers
