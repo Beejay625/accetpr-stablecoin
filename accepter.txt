@@ -1,4 +1,3 @@
-perf: add Base testnet chain configuration
 test: implement Base chain transaction signing
 docs: install wagmi for Ethereum interactions
 fix: integrate WalletConnect with Reown AppKit
