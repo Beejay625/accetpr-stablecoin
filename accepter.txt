@@ -1,4 +1,3 @@
-feat: implement gas price alerts
 feat: add wallet connection analytics
 feat: implement transaction analytics
 feat: add performance monitoring
