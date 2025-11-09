@@ -1,4 +1,3 @@
-docs: configure wagmi with viem
 test: setup AppKit adapter TypeScript types
 fix: configure viem RPC providers
 test: setup viem with Base chain
