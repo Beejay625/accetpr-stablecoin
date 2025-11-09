@@ -1,4 +1,3 @@
-fix: setup React Query devtools
 fix: setup wagmi with React Query
 perf: configure Reown AppKit theme
 chore: configure React Query retry logic
