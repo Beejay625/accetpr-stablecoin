@@ -1,6 +1,7 @@
 import { createLoggerWithFunction } from '../../logger';
 import { cacheService } from '../cache';
-import { transactionsService } from '../wallet/transactionsService';
+import { TransactionsService } from '../wallet/transactionsService';
+import { DEFAULT_CHAINS } from '../../types/chains';
 
 /**
  * Enhanced Analytics Service
