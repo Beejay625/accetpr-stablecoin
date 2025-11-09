@@ -1,4 +1,3 @@
-fix: add Base chain transaction broadcasting
 refactor: configure Base chain gas estimation
 refactor: integrate AppKit adapter with React Query
 feat: add Reown AppKit feature flags
