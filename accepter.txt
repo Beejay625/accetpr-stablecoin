@@ -1,4 +1,3 @@
-chore: implement AppKit adapter utilities
 test: setup AppKit adapter TypeScript types
 fix: implement WalletConnect QR code display
 feat: configure Reown AppKit theme
