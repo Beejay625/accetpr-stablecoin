@@ -27,6 +27,7 @@ import PortfolioOverview from './PortfolioOverview'
 import { useAnalytics } from '@/hooks/useAnalytics'
 import { useWalletSession } from '@/hooks/useWalletSession'
 import { useEffect } from 'react'
+import { keyboardShortcuts } from '@/lib/keyboardShortcuts'
 
 export default function WalletDashboard() {
   const { getToken } = useAuth()

@@ -1,4 +1,3 @@
-refactor: add Base chain RPC endpoints
 perf: add Base chain RPC endpoints
 refactor: install viem for Ethereum utilities
 feat: add Reown AppKit wallet connectors
