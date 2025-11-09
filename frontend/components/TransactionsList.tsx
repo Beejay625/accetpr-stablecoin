@@ -5,6 +5,8 @@ import { walletApi } from '@/lib/api'
 import { formatAddress, getExplorerUrl } from '@/lib/utils'
 import TransactionModal from './TransactionModal'
 import CopyButton from './CopyButton'
+import TransactionFilter from './TransactionFilter'
+import ExportButton from './ExportButton'
 
 interface TransactionsListProps {
   chain: string
