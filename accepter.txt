@@ -1,4 +1,3 @@
-docs: install wagmi for Ethereum interactions
 fix: integrate WalletConnect with Reown AppKit
 feat: integrate AppKit adapter with React Query
 test: add React Query hooks for wallet data
