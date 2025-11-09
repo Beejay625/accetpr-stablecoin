@@ -1,4 +1,3 @@
-docs: add deployment guide
 docs: add contributing guidelines
 perf: optimize bundle size
 perf: implement code splitting
