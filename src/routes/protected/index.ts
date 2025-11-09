@@ -5,7 +5,9 @@ import withdrawRouter from './wallet/withdraw';
 import transactionsRouter from './wallet/transactions';
 import statisticsRouter from './wallet/statistics';
 import addressesRouter from './wallet/addresses';
-import transactionDetailsRouter from './wallet/transactionDetails';
+import searchRouter from './wallet/search';
+import balanceRouter from './wallet/balance';
+import activityRouter from './wallet/activity';
 
 export const protectedRouter = Router();
 
@@ -24,13 +26,19 @@ protectedRouter.use('/wallet', withdrawRouter);
 // Transactions endpoints
 protectedRouter.use('/wallet', transactionsRouter);
 
-// Transaction details and search endpoints
-protectedRouter.use('/wallet', transactionDetailsRouter);
-
 // Statistics endpoints
 protectedRouter.use('/wallet', statisticsRouter);
 
 // Addresses endpoints
 protectedRouter.use('/wallet', addressesRouter);
+
+// Search endpoints
+protectedRouter.use('/wallet', searchRouter);
+
+// Balance aggregation endpoints
+protectedRouter.use('/wallet', balanceRouter);
+
+// Activity timeline endpoints
+protectedRouter.use('/wallet', activityRouter);
 
 export default protectedRouter;
