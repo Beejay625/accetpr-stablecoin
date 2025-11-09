@@ -13,6 +13,11 @@ import transactionsReplayRouter from './transactions-replay';
 import tokensRouter from './tokens';
 import notificationsRouter from './notifications';
 import feesRouter from './fees';
+import transactionNotesRouter from './transaction-notes';
+import transactionMonitoringRouter from './transaction-monitoring';
+import gasRouter from './gas';
+import whitelistRouter from './whitelist';
+import limitsRouter from './limits';
 
 export const protectedRouter = Router();
 
