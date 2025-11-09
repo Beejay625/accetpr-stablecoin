@@ -1,4 +1,3 @@
-fix: implement React Query infinite queries
 perf: setup wagmi config with Base chain
 feat: add Reown AppKit wallet connectors
 chore: setup Base chain network switching
