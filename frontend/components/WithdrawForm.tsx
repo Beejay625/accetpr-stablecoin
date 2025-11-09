@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { walletApi } from '@/lib/api'
 import { useAccount } from 'wagmi'
 import { useToast } from './ToastProvider'
+import { validateAddress, validateAmount } from '@/lib/addressValidation'
+import { useNotifications } from '@/hooks/useNotifications'
 
 interface WithdrawFormProps {
   chain: string
