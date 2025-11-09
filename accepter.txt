@@ -1,4 +1,3 @@
-chore: configure wagmi with viem
 feat: implement WalletConnect QR code display
 docs: add Base chain RPC endpoints
 chore: add wagmi chain configuration
