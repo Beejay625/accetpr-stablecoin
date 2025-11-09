@@ -1,4 +1,3 @@
-test: add viem wallet clients
 docs: configure Reown AppKit metadata
 docs: implement AppKit adapter utilities
 perf: configure React Query retry logic
