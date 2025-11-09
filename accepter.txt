@@ -1,4 +1,3 @@
-refactor: add Base testnet chain configuration
 chore: configure WalletConnect project ID
 test: setup wagmi with React Query
 docs: add AppKit adapter hooks
