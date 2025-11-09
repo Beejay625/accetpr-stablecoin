@@ -1,4 +1,3 @@
-fix: install @reown/appkit for wallet integration
 chore: add React Query hooks for wallet data
 refactor: add Base testnet chain configuration
 fix: implement React Query infinite queries
