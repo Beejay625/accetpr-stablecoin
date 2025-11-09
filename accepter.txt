@@ -1,4 +1,3 @@
-fix: integrate Base chain with wallet connect
 chore: integrate AppKit adapter with React Query
 chore: add WalletConnect mobile deep linking
 docs: add React Query error handling
