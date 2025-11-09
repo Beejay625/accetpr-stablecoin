@@ -1,4 +1,3 @@
-perf: add Base chain transaction broadcasting
 chore: add Base chain RPC endpoints
 refactor: setup wagmi config with Base chain
 refactor: integrate AppKit adapter with React Query
