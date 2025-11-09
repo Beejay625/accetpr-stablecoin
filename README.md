@@ -758,6 +758,100 @@ Response:
 }
 ```
 
+#### Transaction Search
+```bash
+# Search for a single transaction
+GET /api/v1/protected/wallet/transactions/search?q=0x1234...
+Authorization: Bearer <clerk_token>
+
+# Search for multiple transactions
+GET /api/v1/protected/wallet/transactions/search/all?q=USDC&limit=20
+Authorization: Bearer <clerk_token>
+
+Query Parameters:
+- q or query: Search term (hash, transaction ID, reference, or asset)
+- limit: Maximum results (1-100, default: 10 for /search/all)
+```
+
+#### Wallet Address Management
+```bash
+# Get all wallet addresses
+GET /api/v1/protected/wallet/addresses
+Authorization: Bearer <clerk_token>
+
+# Get address for specific chain
+GET /api/v1/protected/wallet/addresses/base
+Authorization: Bearer <clerk_token>
+
+Response:
+{
+  "success": true,
+  "data": {
+    "addresses": [
+      {
+        "id": "wallet-id",
+        "chain": "base",
+        "address": "0x1234...",
+        "addressName": "user123-base",
+        "createdAt": "2024-01-01T00:00:00.000Z"
+      }
+    ],
+    "count": 1
+  }
+}
+```
+
+#### Aggregated Balance
+```bash
+GET /api/v1/protected/wallet/balance/aggregated
+Authorization: Bearer <clerk_token>
+
+Response:
+{
+  "success": true,
+  "data": {
+    "totalChains": 2,
+    "balances": [
+      { "chain": "base", "balance": "100.5", "asset": "USDC" },
+      { "chain": "arbitrum", "balance": "50.2", "asset": "USDC" }
+    ],
+    "totalBalance": "150.7",
+    "primaryAsset": "USDC"
+  }
+}
+```
+
+#### Activity Timeline
+```bash
+# Get activity timeline
+GET /api/v1/protected/wallet/activity?limit=50
+Authorization: Bearer <clerk_token>
+
+# Get recent activity
+GET /api/v1/protected/wallet/activity/recent?count=10
+Authorization: Bearer <clerk_token>
+
+Query Parameters:
+- limit: Number of activities (1-100, default: 50)
+- count: Number of recent activities (1-50, default: 10)
+
+Response:
+{
+  "success": true,
+  "data": {
+    "activities": [
+      {
+        "transaction": { ... },
+        "chain": "base",
+        "type": "transaction",
+        "timestamp": "2024-01-01T00:00:00.000Z"
+      }
+    ],
+    "count": 10
+  }
+}
+```
+
 #### Transaction Details
 ```bash
 GET /api/v1/protected/wallet/transactions/base/{transactionId}
