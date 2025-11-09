@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { walletApi } from '@/lib/api'
+import PriceDisplay from './PriceDisplay'
 
 interface BalanceDisplayProps {
   chain: string
