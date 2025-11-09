@@ -1,4 +1,3 @@
-refactor: install viem for Ethereum utilities
 docs: add Base testnet chain configuration
 test: configure Reown AppKit theme
 docs: add WalletConnect session management
