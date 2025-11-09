@@ -1,4 +1,3 @@
-refactor: configure WalletConnect metadata
 refactor: add Reown AppKit wallet connectors
 fix: configure React Query with wagmi
 feat: add viem address formatting
