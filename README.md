@@ -1527,6 +1527,40 @@ For detailed information about all newly implemented features, see:
 
 ## 🆕 Latest Features Added
 
+### Webhook Management System
+- **Webhook Configuration**: Create and manage webhooks for transaction events
+- **Event Subscriptions**: Subscribe to specific events (transaction.created, transaction.confirmed, etc.)
+- **Webhook Delivery**: Automatic webhook delivery with retry logic and signature verification
+- **Webhook Testing**: Test webhook delivery before going live
+- **Security**: Optional webhook secret for signature verification
+
+### Transaction Replay Service
+- **Failed Transaction Retry**: Automatically retry failed transactions with updated gas prices
+- **Gas Price Adjustment**: Configurable gas multiplier and maximum gas price limits
+- **Replay History**: Track all replay attempts for a transaction
+- **Eligibility Checking**: Verify if a transaction can be replayed before attempting
+
+### Token Metadata Service
+- **Token Information**: Get comprehensive token metadata (symbol, name, decimals, logo)
+- **Price Data**: Fetch real-time token prices with 24h change percentage
+- **Popular Tokens**: Get list of popular tokens for each supported chain
+- **Token Search**: Search tokens by symbol or name across chains
+- **Batch Metadata**: Get metadata for multiple tokens in a single request
+
+### Notification Preferences
+- **Multi-Channel Support**: Configure notifications for email, push, SMS, in-app, and webhooks
+- **Event Customization**: Choose which events trigger notifications per channel
+- **Quiet Hours**: Set quiet hours to suppress non-critical notifications
+- **Timezone Support**: Configure quiet hours with timezone awareness
+
+### Transaction Fee Calculator
+- **Advanced Fee Estimation**: Calculate transaction fees with multiple priority levels
+- **Fee Comparison**: Compare fee estimates across different priority levels (low, standard, high, urgent)
+- **USD Conversion**: Get fee estimates in USD for better cost understanding
+- **Network Congestion**: Detect network congestion levels (low, medium, high)
+- **Confirmation Time**: Estimate transaction confirmation time based on priority
+- **Gas Optimization**: Support for EIP-1559 fee structure
+
 ### Transaction Management Enhancements
 - **Transaction Details Endpoint**: Get comprehensive details about any transaction including gas fees, block numbers, confirmations, and metadata
 - **Transaction Search**: Search transactions by hash, reference, sender/recipient addresses, or transaction ID with case-insensitive matching

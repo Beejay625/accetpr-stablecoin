@@ -1,4 +1,3 @@
-refactor: implement wagmi hooks for balance fetching
 refactor: setup Base chain network switching
 docs: implement WalletConnect error handling
 chore: implement AppKit adapter state management
