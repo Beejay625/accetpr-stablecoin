@@ -1,4 +1,3 @@
-refactor: implement viem transaction utilities
 refactor: setup wagmi config with Base chain
 chore: add Base chain RPC endpoints
 test: setup React Query devtools
