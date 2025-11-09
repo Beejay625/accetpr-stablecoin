@@ -1,4 +1,3 @@
-refactor: add viem address formatting
 refactor: implement wagmi connector configuration
 fix: setup viem type generation
 feat: implement React Query cache configuration
