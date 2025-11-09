@@ -162,6 +162,9 @@ export class TransactionsController {
       const exportData = TransactionExportService.export(transactions, format);
       const filename = TransactionExportService.getFilename(format, `transactions-${chain}`);
 
+      // Log audit event
+      AuditLogService.logExport(userId, chain, format, transactions.length, ipAddress, userAgent);
+
       this.logger.info({
         userId,
         chain,
