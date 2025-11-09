@@ -109,6 +109,22 @@ export class WithdrawController {
       });
 
     } catch (error: any) {
+      // Log audit event for failure
+      const ipAddress = req.ip || req.connection.remoteAddress;
+      const userAgent = req.get('user-agent');
+      AuditLogService.logWithdrawal(
+        req.authUserId,
+        req.body.chain,
+        req.body.asset,
+        req.body.amount,
+        req.body.address,
+        '',
+        'FAILURE',
+        error.message,
+        ipAddress,
+        userAgent
+      );
+
       this.logger.error({
         userId: req.authUserId,
         chain: req.body.chain,
