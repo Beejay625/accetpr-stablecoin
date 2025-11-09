@@ -1,4 +1,3 @@
-fix: configure wagmi providers
 perf: add wagmi chain configuration
 refactor: setup viem type generation
 feat: setup AppKit adapter TypeScript types
