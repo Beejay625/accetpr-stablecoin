@@ -1,4 +1,3 @@
-docs: install @reown/appkit-adapter-wagmi
 feat: configure Reown AppKit theme
 perf: setup React Query provider
 chore: initialize Reown AppKit provider
