@@ -1,4 +1,3 @@
-refactor: install viem for Ethereum utilities
 feat: add Reown AppKit wallet connectors
 refactor: add Base testnet chain configuration
 perf: setup Reown AppKit configuration
