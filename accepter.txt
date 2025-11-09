@@ -1,4 +1,3 @@
-perf: implement code splitting
 perf: add lazy loading
 perf: optimize network requests
 perf: implement request batching
