@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { walletApi } from '@/lib/api'
+import { useToast } from './ToastProvider'
 
 interface WithdrawAsset {
   chain: string

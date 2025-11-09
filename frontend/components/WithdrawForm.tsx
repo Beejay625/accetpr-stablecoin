@@ -48,7 +48,9 @@ export default function WithdrawForm({ chain, getToken }: WithdrawFormProps) {
       )
 
       if (response.success && response.data) {
-        setSuccess(`Withdrawal initiated! Transaction ID: ${response.data.transactionId}`)
+        const message = `Withdrawal initiated! Transaction ID: ${response.data.transactionId}`
+        setSuccess(message)
+        showToast(message, 'success')
         setAmount('')
         setRecipientAddress('')
         setReference('')
@@ -56,7 +58,9 @@ export default function WithdrawForm({ chain, getToken }: WithdrawFormProps) {
         throw new Error(response.message || 'Withdrawal failed')
       }
     } catch (err: any) {
-      setError(err.message || 'Failed to process withdrawal')
+      const errorMessage = err.message || 'Failed to process withdrawal'
+      setError(errorMessage)
+      showToast(errorMessage, 'error')
     } finally {
       setLoading(false)
     }
