@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import BackupRestorePanel from './BackupRestorePanel'
+import KeyboardShortcutsModal from './KeyboardShortcutsModal'
 
 interface SettingsPanelProps {
   isOpen: boolean
