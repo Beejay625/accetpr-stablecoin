@@ -1,4 +1,3 @@
-refactor: initialize Reown AppKit provider
 chore: add wagmi chain configuration
 docs: configure Base mainnet chain for accetpr-stablecoin
 docs: initialize Reown AppKit provider
