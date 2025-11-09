@@ -1,4 +1,3 @@
-refactor: add wagmi hooks for wallet connection
 chore: integrate WalletConnect with Reown AppKit
 fix: implement wagmi connector configuration
 fix: add React Query hooks for wallet data
