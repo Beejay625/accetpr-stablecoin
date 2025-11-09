@@ -1,4 +1,3 @@
-feat: configure storage persistence
 refactor: optimize storage implementation
 fix: resolve storage hydration issues
 feat: setup QueryClient for React Query
