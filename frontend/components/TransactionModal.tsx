@@ -1,7 +1,10 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { formatAddress, getExplorerUrl, formatAmount } from '@/lib/utils'
 import CopyButton from './CopyButton'
+import TransactionNoteModal from './TransactionNoteModal'
+import { transactionNotes } from '@/lib/transactionNotes'
 
 interface Transaction {
   transactionId: string
