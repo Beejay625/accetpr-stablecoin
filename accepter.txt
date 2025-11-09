@@ -1,4 +1,3 @@
-refactor: implement Base chain transaction signing
 docs: add Reown AppKit wallet connectors
 feat: configure React Query retry logic
 refactor: add viem address formatting
