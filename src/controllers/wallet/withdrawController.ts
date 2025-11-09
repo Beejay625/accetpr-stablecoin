@@ -24,6 +24,8 @@ export class WithdrawController {
     try {
       const userId = req.authUserId!; // Guaranteed by requireAuthWithUserId middleware
       const { chain, asset, amount, address, metadata, reference } = req.body;
+      const ipAddress = req.ip || req.connection.remoteAddress;
+      const userAgent = req.get('user-agent');
 
       this.logger.info({ userId, chain, asset, amount, address }, 'Processing single withdraw request');
 
