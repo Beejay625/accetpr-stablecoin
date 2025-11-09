@@ -1134,6 +1134,235 @@ Response:
 }
 ```
 
+#### Transaction Notes & Tags
+```bash
+# Add note to transaction
+POST /api/v1/protected/transactions/{transactionId}/notes
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "note": "Payment for invoice #123",
+  "tags": ["payment", "invoice"]
+}
+
+# Get transaction note
+GET /api/v1/protected/transactions/{transactionId}/notes
+Authorization: Bearer <clerk_token>
+
+# Delete transaction note
+DELETE /api/v1/protected/transactions/{transactionId}/notes
+Authorization: Bearer <clerk_token>
+
+# Get all user notes
+GET /api/v1/protected/transactions/notes?tag=payment
+Authorization: Bearer <clerk_token>
+
+# Create tag
+POST /api/v1/protected/transactions/tags
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "name": "payment",
+  "color": "#3B82F6"
+}
+
+# Get all tags
+GET /api/v1/protected/transactions/tags
+Authorization: Bearer <clerk_token>
+```
+
+#### Transaction Monitoring
+```bash
+# Start monitoring transaction
+POST /api/v1/protected/transactions/{transactionId}/monitor
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "chain": "base",
+  "hash": "0x...",
+  "requiredConfirmations": 1
+}
+
+# Get monitored transaction
+GET /api/v1/protected/transactions/{transactionId}/monitor
+Authorization: Bearer <clerk_token>
+
+# Get all monitored transactions
+GET /api/v1/protected/transactions/monitor?pending=true
+Authorization: Bearer <clerk_token>
+
+# Stop monitoring
+DELETE /api/v1/protected/transactions/{transactionId}/monitor
+Authorization: Bearer <clerk_token>
+
+# Configure monitoring
+PUT /api/v1/protected/transactions/monitor/config
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "checkInterval": 30,
+  "requiredConfirmations": 1,
+  "alertOnConfirmation": true,
+  "alertOnFailure": true,
+  "alertOnStuck": true,
+  "stuckThreshold": 3600
+}
+```
+
+#### Gas Price Oracle
+```bash
+# Get current gas prices
+GET /api/v1/protected/gas/prices/{chain}
+Authorization: Bearer <clerk_token>
+
+Response:
+{
+  "success": true,
+  "data": {
+    "chain": "base",
+    "slow": "0.1",
+    "standard": "0.2",
+    "fast": "0.5",
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+
+# Get gas price history
+GET /api/v1/protected/gas/prices/{chain}/history?hours=24
+Authorization: Bearer <clerk_token>
+
+# Create gas price alert
+POST /api/v1/protected/gas/alerts
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "chain": "base",
+  "threshold": "0.5",
+  "condition": "above"
+}
+
+# Get user's gas price alerts
+GET /api/v1/protected/gas/alerts
+Authorization: Bearer <clerk_token>
+
+# Delete gas price alert
+DELETE /api/v1/protected/gas/alerts/{alertId}
+Authorization: Bearer <clerk_token>
+```
+
+#### Address Whitelist
+```bash
+# Add address to whitelist
+POST /api/v1/protected/whitelist/addresses
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+  "label": "Exchange Wallet",
+  "chain": "base"
+}
+
+# Get all whitelisted addresses
+GET /api/v1/protected/whitelist/addresses
+Authorization: Bearer <clerk_token>
+
+# Check if address is whitelisted
+GET /api/v1/protected/whitelist/addresses/check?address=0x...&chain=base
+Authorization: Bearer <clerk_token>
+
+# Remove address from whitelist
+DELETE /api/v1/protected/whitelist/addresses/{addressId}
+Authorization: Bearer <clerk_token>
+
+# Configure whitelist settings
+PUT /api/v1/protected/whitelist/config
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "whitelistOnly": false,
+  "requireApproval": false,
+  "maxAddresses": 100
+}
+```
+
+#### Transaction Limits
+```bash
+# Set transaction limits
+PUT /api/v1/protected/limits
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "dailyLimit": "1000000000000000000",
+  "weeklyLimit": "5000000000000000000",
+  "monthlyLimit": "20000000000000000000",
+  "perTransactionLimit": "100000000000000000",
+  "dailyCount": 10,
+  "weeklyCount": 50,
+  "monthlyCount": 200
+}
+
+# Get transaction limits
+GET /api/v1/protected/limits
+Authorization: Bearer <clerk_token>
+
+# Check if transaction is within limits
+POST /api/v1/protected/limits/check
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "amount": "50000000000000000"
+}
+
+Response:
+{
+  "success": true,
+  "data": {
+    "allowed": true
+  }
+}
+
+# Get usage statistics
+GET /api/v1/protected/limits/usage
+Authorization: Bearer <clerk_token>
+
+Response:
+{
+  "success": true,
+  "data": {
+    "daily": {
+      "amount": "50000000000000000",
+      "count": 3,
+      "limit": "1000000000000000000",
+      "remaining": "950000000000000000"
+    },
+    "weekly": {
+      "amount": "200000000000000000",
+      "count": 12,
+      "limit": "5000000000000000000",
+      "remaining": "4800000000000000000"
+    },
+    "monthly": {
+      "amount": "1000000000000000000",
+      "count": 45,
+      "limit": "20000000000000000000",
+      "remaining": "19000000000000000000"
+    },
+    "perTransaction": {
+      "limit": "100000000000000000"
+    }
+  }
+}
+```
+
 ## 🔧 Configuration
 
 ### Environment Variables
