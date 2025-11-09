@@ -1,4 +1,3 @@
-refactor: add Reown AppKit feature flags
 feat: add wagmi hooks for transaction sending
 chore: add Reown AppKit project ID configuration
 feat: add WalletConnect session management
