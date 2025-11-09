@@ -1,4 +1,3 @@
-refactor: install @tanstack/react-query
 docs: add viem contract interaction helpers
 test: integrate Base chain with wallet connect
 chore: add WalletConnect reconnection logic
