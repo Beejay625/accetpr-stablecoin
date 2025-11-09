@@ -1,4 +1,3 @@
-test: add viem address formatting
 perf: configure Base mainnet chain for accetpr-stablecoin
 docs: implement WalletConnect error handling
 fix: configure Base chain block explorer
