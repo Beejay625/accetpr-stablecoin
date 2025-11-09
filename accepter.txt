@@ -1,4 +1,3 @@
-test: configure Base chain block explorer
 docs: configure viem RPC providers
 perf: integrate Base chain with wallet connect
 perf: configure Base chain block explorer
