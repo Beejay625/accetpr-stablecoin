@@ -1,4 +1,3 @@
-fix: resolve SSR hydration mismatch
 fix: handle cookie parsing errors
 fix: resolve network switching issues
 fix: fix modal not opening on mobile

@@ -106,4 +106,19 @@ protectedRouter.use('/transactions/unsigned', unsignedTransactionsRouter);
 // Portfolio analytics endpoints
 protectedRouter.use('/portfolio', portfolioRouter);
 
+// Transaction batch endpoints
+protectedRouter.use('/transactions/batch', transactionBatchRouter);
+
+// Transaction scheduling endpoints
+protectedRouter.use('/transactions/schedule', transactionSchedulingRouter);
+
+// Transaction validation endpoints
+protectedRouter.use('/transactions/validate', transactionValidationRouter);
+
+// Gas optimization endpoints
+protectedRouter.use('/gas/optimization', gasOptimizationRouter);
+
+// Enhanced analytics endpoints
+protectedRouter.use('/analytics/enhanced', enhancedAnalyticsRouter);
+
 export default protectedRouter;
