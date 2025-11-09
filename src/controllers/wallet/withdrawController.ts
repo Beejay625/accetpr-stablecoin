@@ -74,6 +74,20 @@ export class WithdrawController {
       // Execute withdraw using SingleWithdrawService
       const withdrawResponse = await SingleWithdrawService.executeSingleWithdraw(userId, singleRequest);
 
+      // Log audit event
+      AuditLogService.logWithdrawal(
+        userId,
+        chain,
+        asset,
+        amount,
+        address,
+        withdrawResponse.data.id,
+        'SUCCESS',
+        undefined,
+        ipAddress,
+        userAgent
+      );
+
       this.logger.info({
         userId,
         chain,
