@@ -358,6 +358,74 @@ src/
 
 Interactive API documentation available at `/docs` (Swagger UI)
 
+### New Features Examples
+
+#### Wallet Statistics
+```bash
+GET /api/v1/protected/wallet/statistics
+Authorization: Bearer <clerk_token>
+
+Response:
+{
+  "success": true,
+  "data": {
+    "totalChains": 2,
+    "totalBalance": {
+      "base": { "balance": "100.5", "asset": "USDC", "chain": "base" },
+      "arbitrum": { "balance": "50.2", "asset": "USDC", "chain": "arbitrum" }
+    },
+    "totalTransactions": 25,
+    "transactionsByChain": { "base": 15, "arbitrum": 10 },
+    "transactionsByStatus": { "SUCCESS": 20, "PENDING": 3, "FAILED": 2 },
+    "recentTransactions": [...],
+    "walletAddresses": [...]
+  }
+}
+```
+
+#### Transaction Filtering
+```bash
+GET /api/v1/protected/wallet/transactions/base?status=SUCCESS&asset=USDC&startDate=2024-01-01&limit=10
+Authorization: Bearer <clerk_token>
+
+Query Parameters:
+- status: PENDING | SUCCESS | FAILED | CANCELLED
+- asset: Asset symbol (e.g., USDC)
+- startDate: ISO date string
+- endDate: ISO date string
+- minAmount: Minimum amount filter
+- maxAmount: Maximum amount filter
+- limit: Number of results (default: all)
+- offset: Pagination offset (default: 0)
+```
+
+#### Transaction Export
+```bash
+GET /api/v1/protected/wallet/transactions/base/export?format=csv&status=SUCCESS
+Authorization: Bearer <clerk_token>
+
+Formats: csv, json
+Supports all transaction filtering parameters
+```
+
+#### Enhanced Health Check
+```bash
+GET /api/v1/public/health
+
+Response:
+{
+  "success": true,
+  "data": {
+    "database": { "status": "connected", "responseTime": 5 },
+    "cache": { "status": "connected", "provider": "redis", "responseTime": 2 },
+    "memory": { "used": 150, "total": 512, "percentage": 29 },
+    "uptime": 3600,
+    "environment": "production",
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
 ## 🔧 Configuration
 
 ### Environment Variables
