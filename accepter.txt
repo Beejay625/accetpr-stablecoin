@@ -1,5 +1,4 @@
 refactor: configure wagmi providers
-refactor: configure wagmi providers
 fix: setup AppKit adapter with wagmi
 perf: implement React Query cache configuration
 refactor: implement viem encoding/decoding utilities
