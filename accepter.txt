@@ -1,4 +1,3 @@
-perf: setup wagmi config with Base chain
 feat: add Reown AppKit wallet connectors
 chore: setup Base chain network switching
 refactor: configure React Query with wagmi
