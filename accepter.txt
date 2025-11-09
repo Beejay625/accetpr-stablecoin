@@ -1,4 +1,3 @@
-perf: implement AppKit adapter utilities
 chore: implement AppKit adapter utilities
 refactor: setup viem with Base chain
 perf: setup React Query provider
