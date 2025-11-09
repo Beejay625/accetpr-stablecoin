@@ -1,4 +1,3 @@
-refactor: optimize component structure
 refactor: improve type safety
 refactor: simplify complex logic
 refactor: improve code reusability
