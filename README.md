@@ -535,15 +535,39 @@ This project uses **Reown AppKit** (formerly WalletConnect) for seamless wallet 
 
 ```
 src/
-├── config/          # Configuration files
+├── config/          # Configuration files (env, swagger)
 ├── controllers/     # Route controllers
-├── db/             # Database operations
+│   ├── wallet/      # Wallet operation controllers
+│   │   ├── getBalance.ts
+│   │   ├── transactionsController.ts
+│   │   ├── withdrawController.ts
+│   │   ├── walletStatisticsController.ts
+│   │   ├── walletAddressesController.ts
+│   │   └── transactionDetailsController.ts
+│   └── test/        # Test controllers
+├── db/              # Database operations (Prisma)
 ├── events/          # Event handlers
-├── middleware/      # Express middleware
+├── middleware/      # Express middleware (auth, cors, rate limit)
 ├── providers/       # External service providers (BlockRadar)
 ├── repositories/    # Data access layer
+│   ├── cached/      # Cached repositories
+│   └── database/    # Database repositories
 ├── routes/          # API routes
+│   ├── public/      # Public routes
+│   └── protected/   # Protected routes
+│       └── wallet/  # Wallet routes
 ├── services/        # Business logic
+│   ├── audit/       # Audit logging service
+│   ├── cache/       # Caching service
+│   ├── user/        # User service
+│   └── wallet/      # Wallet services
+│       ├── walletService.ts
+│       ├── transactionsService.ts
+│       ├── withdrawService.ts
+│       ├── walletStatisticsService.ts
+│       ├── transactionFilterService.ts
+│       ├── transactionExportService.ts
+│       └── transactionDetailsService.ts
 ├── types/           # TypeScript types
 └── utils/           # Utility functions
 ```
