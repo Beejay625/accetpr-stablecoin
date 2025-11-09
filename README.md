@@ -6,7 +6,9 @@ Production-ready Express.js backend with TypeScript, Clerk authentication, Block
 
 ## 🚀 Features
 
-### Core Features
+### Backend Features
+
+#### Core Features
 - **Multi-Chain Support**: Base, Arbitrum, Optimism, Polygon, Scroll, and more
 - **Wallet Management**: Connect, view balances, and manage transactions
 - **Authentication**: Clerk integration for secure user authentication
@@ -14,6 +16,43 @@ Production-ready Express.js backend with TypeScript, Clerk authentication, Block
 - **API Documentation**: Swagger/OpenAPI documentation
 - **Type Safety**: Full TypeScript implementation
 - **Error Handling**: Comprehensive error handling and logging
+
+#### API Features
+- **Wallet Operations**:
+  - Get wallet balance by chain
+  - View transaction history
+  - Execute single asset withdrawals
+  - Execute batch withdrawals (up to 10 assets)
+  - Transaction status tracking
+- **Security**:
+  - Rate limiting
+  - CORS protection
+  - Helmet security headers
+  - Input validation with Zod
+  - Clerk authentication middleware
+- **Performance**:
+  - Redis caching
+  - Memory caching fallback
+  - Database connection pooling
+  - Request compression
+
+### Frontend Features
+
+#### Complete Wallet Management UI
+- **Dashboard**: Comprehensive wallet dashboard with statistics, activity feed, and quick actions
+- **Transaction Management**: Advanced filtering, search, pagination, and export capabilities
+- **Withdrawal Interface**: Both single and batch withdrawal forms with validation
+- **Address Management**: Save and manage frequently used addresses
+- **Analytics**: Real-time statistics and transaction metrics
+- **Settings**: User preferences and configuration panel
+- **Help System**: Built-in documentation and troubleshooting guide
+
+#### User Experience
+- **Responsive Design**: Mobile and desktop optimized
+- **Dark Mode**: Full dark mode support
+- **Toast Notifications**: Non-intrusive user feedback
+- **Loading States**: Skeleton screens and loading indicators
+- **Error Handling**: User-friendly error messages with retry options
 
 ### Reown AppKit Integration
 
