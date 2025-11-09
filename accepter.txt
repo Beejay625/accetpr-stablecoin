@@ -1,4 +1,3 @@
-fix: initialize Reown AppKit provider
 chore: configure viem RPC providers
 fix: add WalletConnect session management
 test: configure wagmi with viem
