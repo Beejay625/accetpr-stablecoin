@@ -1,4 +1,3 @@
-chore: implement WalletConnect QR code display
 fix: add wagmi hooks for wallet connection
 chore: implement viem encoding/decoding utilities
 test: install viem for Ethereum utilities
