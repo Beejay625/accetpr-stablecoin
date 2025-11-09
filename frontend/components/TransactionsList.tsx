@@ -26,6 +26,8 @@ export default function TransactionsList({ chain, getToken }: TransactionsListPr
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const fetchTransactions = useCallback(async () => {
     setLoading(true)
@@ -92,16 +94,21 @@ export default function TransactionsList({ chain, getToken }: TransactionsListPr
             </thead>
             <tbody>
               {transactions.map((tx) => (
-                <tr key={tx.transactionId} className="border-b">
+                <tr
+                  key={tx.transactionId}
+                  className="border-b hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
+                  onClick={() => {
+                    setSelectedTransaction(tx)
+                    setIsModalOpen(true)
+                  }}
+                >
                   <td className="p-2">
-                    <a
-                      href={`https://basescan.org/tx/${tx.hash}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 hover:underline"
-                    >
-                      {tx.hash.slice(0, 10)}...{tx.hash.slice(-8)}
-                    </a>
+                    <div className="flex items-center gap-2">
+                      <span className="text-blue-600 hover:underline">
+                        {formatAddress(tx.hash, 10, 8)}
+                      </span>
+                      <CopyButton text={tx.hash} label="Copy" />
+                    </div>
                   </td>
                   <td className="p-2">{tx.asset}</td>
                   <td className="p-2">{tx.amountPaid}</td>
@@ -109,10 +116,10 @@ export default function TransactionsList({ chain, getToken }: TransactionsListPr
                     <span
                       className={`px-2 py-1 rounded text-xs ${
                         tx.status === 'SUCCESS'
-                          ? 'bg-green-100 text-green-800'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
                           : tx.status === 'PENDING'
-                          ? 'bg-yellow-100 text-yellow-800'
-                          : 'bg-red-100 text-red-800'
+                          ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
+                          : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
                       }`}
                     >
                       {tx.status}
