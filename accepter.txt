@@ -1,4 +1,3 @@
-test: implement React Query infinite queries
 feat: install @reown/appkit-adapter-wagmi
 fix: implement wagmi connector configuration
 fix: implement Reown AppKit modal customization
