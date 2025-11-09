@@ -1,4 +1,3 @@
-refactor: setup wagmi config with Base chain
 refactor: integrate AppKit adapter with React Query
 docs: implement viem transaction utilities
 fix: add React Query optimistic updates
