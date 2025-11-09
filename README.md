@@ -962,6 +962,151 @@ Response:
 }
 ```
 
+#### Webhook Management
+```bash
+# Create webhook
+POST /api/v1/protected/webhooks
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "url": "https://example.com/webhook",
+  "events": ["transaction.confirmed", "transaction.failed"],
+  "secret": "optional-secret-key"
+}
+
+# Get all webhooks
+GET /api/v1/protected/webhooks
+Authorization: Bearer <clerk_token>
+
+# Update webhook
+PUT /api/v1/protected/webhooks/{webhookId}
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "active": false,
+  "events": ["transaction.confirmed"]
+}
+
+# Test webhook
+POST /api/v1/protected/webhooks/{webhookId}/test
+Authorization: Bearer <clerk_token>
+```
+
+#### Transaction Replay
+```bash
+# Replay failed transaction
+POST /api/v1/protected/transactions/{transactionId}/replay
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "gasMultiplier": 1.2,
+  "maxGasPrice": "100000000000"
+}
+
+# Get replay history
+GET /api/v1/protected/transactions/{transactionId}/replay-history
+Authorization: Bearer <clerk_token>
+
+# Check replay eligibility
+GET /api/v1/protected/transactions/{transactionId}/can-replay
+Authorization: Bearer <clerk_token>
+```
+
+#### Token Metadata
+```bash
+# Get token metadata
+GET /api/v1/protected/tokens/{chain}/{address}/metadata
+Authorization: Bearer <clerk_token>
+
+# Get token price
+GET /api/v1/protected/tokens/{chain}/{address}/price
+Authorization: Bearer <clerk_token>
+
+# Get popular tokens
+GET /api/v1/protected/tokens/{chain}/popular
+Authorization: Bearer <clerk_token>
+
+# Search tokens
+GET /api/v1/protected/tokens/search?q=USDC&chain=base
+Authorization: Bearer <clerk_token>
+```
+
+#### Notification Preferences
+```bash
+# Get preferences
+GET /api/v1/protected/notifications/preferences
+Authorization: Bearer <clerk_token>
+
+# Update preferences
+PUT /api/v1/protected/notifications/preferences
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "email": {
+    "enabled": true,
+    "address": "user@example.com",
+    "events": ["transaction.confirmed", "transaction.failed"]
+  },
+  "quietHours": {
+    "enabled": true,
+    "start": "22:00",
+    "end": "08:00",
+    "timezone": "UTC"
+  }
+}
+```
+
+#### Transaction Fee Calculator
+```bash
+# Calculate fee
+POST /api/v1/protected/fees/calculate/{chain}
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "transactionType": "transfer",
+  "priority": "standard",
+  "gasMultiplier": 1.2
+}
+
+Response:
+{
+  "success": true,
+  "data": {
+    "gasLimit": "21000",
+    "gasPrice": "30000000000",
+    "totalFee": "630000000000000",
+    "totalFeeUsd": 0.0015,
+    "estimatedConfirmationTime": 36,
+    "networkCongestion": "medium"
+  }
+}
+
+# Compare fee estimates
+POST /api/v1/protected/fees/compare/{chain}
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "transactionType": "transfer"
+}
+
+Response:
+{
+  "success": true,
+  "data": {
+    "low": { "totalFee": "...", "estimatedConfirmationTime": 120 },
+    "standard": { "totalFee": "...", "estimatedConfirmationTime": 36 },
+    "high": { "totalFee": "...", "estimatedConfirmationTime": 12 },
+    "urgent": { "totalFee": "...", "estimatedConfirmationTime": 2 }
+  }
+}
+```
+
 ## 🔧 Configuration
 
 ### Environment Variables
