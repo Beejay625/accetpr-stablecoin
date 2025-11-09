@@ -1,4 +1,3 @@
-test: implement WalletConnect error handling
 refactor: install @reown/appkit for wallet integration
 docs: setup viem with Base chain
 docs: configure Base mainnet chain for accetpr-stablecoin
