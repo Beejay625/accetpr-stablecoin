@@ -1,4 +1,3 @@
-feat: add Ethers v6 adapter support
 feat: add Solana adapter with @solana/web3.js
 feat: configure multiple adapters in createAppKit
 refactor: improve adapter configuration
