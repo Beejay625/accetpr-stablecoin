@@ -16,3 +16,20 @@ The backend includes Reown AppKit dependencies for potential server-side wallet 
 - `@reown/appkit-adapter-wagmi` - Wagmi adapter for AppKit
 - `wagmi` - React Hooks for Ethereum
 - `viem` - TypeScript Ethereum library
+Install dependencies
+npm install -g turbo
+pnpm install
+Set up environment variables
+For the wallet-health app, create apps/wallet-health/.env.local:
+
+# Reown (WalletConnect) Project ID
+NEXT_PUBLIC_REOWN_PROJECT_ID=your_reown_project_id
+
+# GoldRush (Covalent) API Key
+GOLDRUSH_API_KEY=your_goldrush_api_key
+
+# MongoDB Connection String
+MONGODB_URI=your_mongodb_connection_string
+Note: Get your API keys from:
+
+Reown (WalletConnect): https://cloud.reown.com/
