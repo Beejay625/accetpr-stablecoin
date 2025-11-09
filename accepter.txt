@@ -1,4 +1,3 @@
-docs: initialize Reown AppKit provider
 feat: setup AppKit adapter TypeScript types
 feat: add React Query error handling
 feat: add React Query hooks for wallet data
