@@ -72,6 +72,13 @@ export default function WithdrawForm({ chain, getToken }: WithdrawFormProps) {
         const message = `Withdrawal initiated! Transaction ID: ${response.data.transactionId}`
         setSuccess(message)
         showToast(message, 'success')
+        
+        // Add notification
+        addNotification('transaction', 'Withdrawal Initiated', message, {
+          actionUrl: `https://basescan.org/tx/${response.data.hash}`,
+          actionLabel: 'View on Explorer',
+        })
+        
         setAmount('')
         setRecipientAddress('')
         setReference('')
@@ -82,6 +89,7 @@ export default function WithdrawForm({ chain, getToken }: WithdrawFormProps) {
       const errorMessage = err.message || 'Failed to process withdrawal'
       setError(errorMessage)
       showToast(errorMessage, 'error')
+      addNotification('error', 'Withdrawal Failed', errorMessage)
     } finally {
       setLoading(false)
     }
