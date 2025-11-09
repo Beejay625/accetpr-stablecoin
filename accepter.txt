@@ -1,4 +1,3 @@
-refactor: configure React Query with wagmi
 docs: add WalletConnect event listeners
 refactor: configure viem RPC providers
 refactor: add viem wallet clients
