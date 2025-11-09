@@ -21,6 +21,12 @@ Production-ready Express.js backend with TypeScript, Clerk authentication, Block
 - **Transaction Simulation**: Preview transactions before execution
 - **Security Features**: Transaction limits, 2FA, and security policies
 - **Network Health Monitoring**: Real-time network status and latency tracking
+- **Transaction Templates**: Pre-configured transaction presets for common operations
+- **Scheduled Transactions**: Schedule one-time or recurring transactions (daily, weekly, monthly)
+- **Portfolio Tracking**: Track balances, assets, and portfolio performance across chains
+- **Price Alerts**: Set up alerts for token price movements with notifications
+- **DEX Integration**: Swap tokens via decentralized exchanges with quote and execution
+- **Batch Transaction Builder**: Build and execute multiple transactions in a single batch
 - **Authentication**: Clerk integration for secure user authentication
 - **Caching**: Redis and memory-based caching for optimal performance
 - **API Documentation**: Swagger/OpenAPI documentation
