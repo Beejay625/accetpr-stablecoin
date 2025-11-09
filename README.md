@@ -314,23 +314,167 @@ npm run test:coverage
 
 ## 📚 Frontend Integration
 
-### Next.js Setup
+### Next.js Frontend Application
 
-For frontend integration with Next.js, see the planned architecture:
+A comprehensive Next.js frontend application is included in the `frontend/` directory with full wallet management capabilities.
 
-- **Framework**: Next.js 14+ with App Router
-- **Wallet Connection**: Reown AppKit with Wagmi adapter
-- **State Management**: React Query for API state
-- **Authentication**: Clerk (matching backend)
-- **Styling**: Custom AppKit theme support
+**Framework**: Next.js 15 with App Router  
+**Location**: `/frontend`  
+**Documentation**: See [Frontend README](./frontend/README.md)
 
-### Key Frontend Features
+### Frontend Features
 
-1. **Wallet Connection Modal**: Unified interface via AppKit
-2. **Multi-Chain Switching**: Seamless network switching
-3. **SSR Support**: Cookie-based storage for server-side rendering
-4. **Protected Routes**: Clerk authentication integration
-5. **Real-time Updates**: WebSocket support for transaction status
+#### 🔐 Authentication & Wallet Connection
+- **Clerk Authentication**: Secure user authentication matching backend
+- **Multi-Wallet Support**: Connect via WalletConnect, Coinbase Wallet, or Injected wallets
+- **Multi-Chain Support**: Base, Arbitrum, Ethereum, Base Sepolia
+- **Network Status Indicator**: Real-time connection status display
+- **Chain Switcher**: Easy dropdown for switching between networks
+- **QR Code Generation**: Generate QR codes for wallet addresses
+
+#### 💰 Wallet Management
+- **Balance Display**: View wallet balance for any supported chain with auto-refresh
+- **Address Book**: Save and manage frequently used addresses with LocalStorage
+- **Copy to Clipboard**: One-click copying of addresses and transaction hashes
+- **Real-time Updates**: Configurable auto-refresh intervals
+
+#### 📊 Transaction Management
+- **Transaction History**: Complete transaction list with detailed information
+- **Advanced Filtering**: Filter by status (Success/Pending/Failed/Cancelled), asset type, or search by hash/ID/reference
+- **Transaction Details Modal**: Click any transaction to view full details
+- **Pagination**: Navigate through large transaction lists (10 items per page)
+- **Export Functionality**: Export transactions as CSV or JSON files
+- **Activity Feed**: Recent activity summary widget showing last 5 transactions
+
+#### 💸 Withdrawal Operations
+- **Single Withdrawal**: Withdraw individual assets with reference notes
+- **Batch Withdrawal**: Withdraw up to 10 assets in one transaction
+- **Multi-Asset Support**: USDC, USDT, ETH
+- **Transaction Tracking**: Real-time status updates with toast notifications
+
+#### 📈 Analytics & Statistics
+- **Statistics Dashboard**: Overview cards showing:
+  - Total transactions count
+  - Total volume across all assets
+  - Success rate percentage
+  - Pending/Failed transaction counts
+- **Visual Cards**: Icons and formatted numbers for quick insights
+
+#### ⚙️ Settings & Preferences
+- **Settings Panel**: Configure application preferences:
+  - Theme selection (System/Light/Dark)
+  - Auto-refresh toggle and interval
+  - Notification preferences
+- **LocalStorage Persistence**: Settings saved locally in browser
+
+#### 🆘 Help & Documentation
+- **Help Modal**: Comprehensive help documentation with:
+  - Getting started guide
+  - Feature descriptions
+  - Supported networks and assets
+  - Tips and troubleshooting
+
+#### 🎨 UI/UX Features
+- **Dark Mode Support**: Full dark mode compatibility
+- **Responsive Design**: Mobile and desktop optimized
+- **Toast Notifications**: Non-intrusive success/error/info notifications
+- **Loading States**: Skeleton screens and loading indicators
+- **Error Handling**: User-friendly error messages with retry options
+- **Tab Navigation**: Organized dashboard with Dashboard/Address Book tabs
+
+### Frontend Project Structure
+
+```
+frontend/
+├── app/                          # Next.js app directory
+│   ├── layout.tsx                # Root layout with providers
+│   ├── page.tsx                  # Home page
+│   └── globals.css               # Global styles
+├── components/                   # React components (20+ components)
+│   ├── WalletConnectButton.tsx   # AppKit connect button
+│   ├── WalletDashboard.tsx       # Main dashboard container
+│   ├── BalanceDisplay.tsx        # Balance viewing component
+│   ├── TransactionsList.tsx      # Transaction history with filters & pagination
+│   ├── TransactionModal.tsx      # Transaction details modal
+│   ├── TransactionFilter.tsx     # Advanced filtering UI
+│   ├── WithdrawForm.tsx          # Single withdrawal form
+│   ├── BatchWithdrawForm.tsx     # Batch withdrawal form
+│   ├── ChainSwitcher.tsx         # Chain selection dropdown
+│   ├── CopyButton.tsx            # Copy to clipboard button
+│   ├── QRCodeModal.tsx           # QR code display modal
+│   ├── AddressBook.tsx           # Address management
+│   ├── StatisticsDashboard.tsx   # Statistics overview
+│   ├── StatisticsCard.tsx        # Statistics card component
+│   ├── ActivityFeed.tsx          # Recent activity widget
+│   ├── NetworkStatus.tsx         # Connection status indicator
+│   ├── SettingsPanel.tsx         # Settings modal
+│   ├── HelpModal.tsx            # Help documentation
+│   ├── Pagination.tsx           # Pagination component
+│   ├── Toast.tsx                # Toast notification
+│   ├── ToastProvider.tsx        # Toast context provider
+│   └── LoadingSkeleton.tsx      # Loading state skeletons
+├── config/                       # Configuration files
+│   └── index.tsx                 # Wagmi/AppKit config
+├── context/                      # React context providers
+│   └── index.tsx                 # AppKit context provider
+└── lib/                          # Utility libraries
+    ├── api.ts                    # API client
+    └── utils.ts                  # Utility functions
+```
+
+### Frontend Setup
+
+1. **Navigate to frontend directory**
+   ```bash
+   cd frontend
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
+   
+   Update `.env.local`:
+   ```env
+   NEXT_PUBLIC_PROJECT_ID=your_reown_project_id
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   CLERK_SECRET_KEY=your_clerk_secret_key
+   NEXT_PUBLIC_API_URL=http://localhost:3000/api/v1
+   ```
+
+4. **Start development server**
+   ```bash
+   npm run dev
+   ```
+   
+   Frontend runs on [http://localhost:3001](http://localhost:3001)
+
+### Frontend API Integration
+
+The frontend communicates with the backend API endpoints:
+
+- `GET /api/v1/protected/wallet/balance?chain={chain}` - Get wallet balance
+- `GET /api/v1/protected/wallet/transactions/{chain}` - Get transactions
+- `POST /api/v1/protected/wallet/withdraw/single` - Single withdrawal
+- `POST /api/v1/protected/wallet/withdraw/batch` - Batch withdrawal
+
+All requests include Clerk authentication tokens in the Authorization header.
+
+### Frontend Technologies
+
+- **Next.js 15** - React framework with App Router
+- **Reown AppKit** - Wallet connection UI and management
+- **Wagmi** - Ethereum React hooks
+- **Viem** - TypeScript Ethereum library
+- **Clerk** - Authentication and user management
+- **Tailwind CSS** - Utility-first CSS framework
+- **TypeScript** - Type safety
+- **React Query** - Data fetching and caching
 
 ## 🔒 Security
 
