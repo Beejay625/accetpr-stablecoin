@@ -73,9 +73,42 @@ This project uses **Reown AppKit** (formerly WalletConnect) for seamless wallet 
 
 #### Supported Networks
 
-- **EVM Chains**: Base, Arbitrum, Optimism, Polygon, Scroll, BSC, Fantom, Linea, Mantle, Celo
+- **EVM Chains**: Base, Arbitrum, Optimism, Polygon, Scroll, BSC, Fantom, Linea, Mantle, Celo, zkSync, Avalanche, Ethereum
+- **Testnets**: Base Sepolia (production environment)
 - **Other Networks**: Solana, Bitcoin (via AppKit Core)
 - **Custom Networks**: Easy configuration for any EVM-compatible chain
+
+#### Advanced Features
+
+- **Smart Contract Interactions**: 
+  - ERC20 token balance reading
+  - Token transfers with transaction tracking
+  - Common token address helpers (USDC, USDT, DAI)
+  - Token metadata (symbol, decimals, total supply)
+
+- **Gas Optimization**:
+  - Real-time gas price estimation
+  - EIP-1559 fee data support
+  - Multiple gas strategies (Conservative, Standard, Aggressive)
+  - Gas cost calculation utilities
+
+- **Transaction Management**:
+  - Transaction queuing system
+  - Batch processing (up to 3 concurrent transactions)
+  - Automatic retry with exponential backoff
+  - Transaction status tracking
+
+- **Analytics & Monitoring**:
+  - Wallet connection/disconnection tracking
+  - Transaction event tracking
+  - Real-time statistics dashboard
+  - Success rate calculations
+
+- **Session Management**:
+  - Wallet session persistence (24-hour timeout)
+  - Auto-reconnect on page load
+  - Activity tracking
+  - Session validation
 
 #### Wallet Connectors
 
