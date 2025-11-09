@@ -1,4 +1,3 @@
-chore: add React Query error handling
 test: add Base chain native token support
 feat: implement AppKit adapter state management
 refactor: setup wagmi config with Base chain
