@@ -1,47 +1,42 @@
-/**
- * Transaction Queue System
- * Manages transaction queuing, batching, and retry logic
- */
-
-import { type Hash, type Address } from 'viem'
-
 export interface QueuedTransaction {
   id: string
-  hash?: Hash
-  to: Address
-  data: `0x${string}`
-  value?: bigint
-  gasLimit?: bigint
-  gasPrice?: bigint
-  status: 'pending' | 'queued' | 'processing' | 'confirmed' | 'failed'
-  retries: number
-  maxRetries: number
-  timestamp: number
+  type: 'withdraw' | 'transfer' | 'approve' | 'custom'
+  params: any
+  status: 'pending' | 'processing' | 'success' | 'failed' | 'cancelled'
+  hash?: string
   error?: string
+  retries: number
+  createdAt: number
+  completedAt?: number
 }
 
-export class TransactionQueue {
+export type TransactionQueueCallback = (transaction: QueuedTransaction) => void
+
+class TransactionQueue {
   private queue: QueuedTransaction[] = []
-  private processing = false
+  private processing: QueuedTransaction[] = []
   private maxConcurrent = 3
-  private currentProcessing: Set<string> = new Set()
+  private maxRetries = 3
+  private retryDelay = 1000 // 1 second
+  private listeners: TransactionQueueCallback[] = []
 
   /**
    * Add transaction to queue
    */
-  enqueue(transaction: Omit<QueuedTransaction, 'id' | 'status' | 'retries' | 'timestamp'>): string {
-    const id = `tx_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+  add(transaction: Omit<QueuedTransaction, 'id' | 'status' | 'retries' | 'createdAt'>): string {
+    const id = `tx_${Date.now()}_${Math.random().toString(36).substring(7)}`
     const queuedTx: QueuedTransaction = {
       ...transaction,
       id,
-      status: 'queued',
+      status: 'pending',
       retries: 0,
-      timestamp: Date.now(),
+      createdAt: Date.now(),
     }
-    
+
     this.queue.push(queuedTx)
+    this.notifyListeners(queuedTx)
     this.processQueue()
-    
+
     return id
   }
 
@@ -49,113 +44,172 @@ export class TransactionQueue {
    * Process queue
    */
   private async processQueue() {
-    if (this.processing || this.currentProcessing.size >= this.maxConcurrent) {
+    if (this.processing.length >= this.maxConcurrent) {
       return
     }
 
-    this.processing = true
-    
-    const pending = this.queue.filter(
-      tx => tx.status === 'queued' || tx.status === 'pending'
-    )
-
-    for (const tx of pending.slice(0, this.maxConcurrent - this.currentProcessing.size)) {
-      if (this.currentProcessing.size >= this.maxConcurrent) break
-      
-      this.currentProcessing.add(tx.id)
-      this.processTransaction(tx)
+    const nextTx = this.queue.shift()
+    if (!nextTx) {
+      return
     }
 
-    this.processing = false
-  }
+    this.processing.push(nextTx)
+    nextTx.status = 'processing'
+    this.notifyListeners(nextTx)
 
-  /**
-   * Process individual transaction
-   */
-  private async processTransaction(tx: QueuedTransaction) {
-    tx.status = 'processing'
-    
     try {
-      // Transaction processing logic would go here
-      // This would integrate with wagmi's useWriteContract
-      await this.executeTransaction(tx)
-      
-      tx.status = 'confirmed'
-    } catch (error) {
-      tx.retries++
-      tx.error = error instanceof Error ? error.message : 'Unknown error'
-      
-      if (tx.retries >= tx.maxRetries) {
-        tx.status = 'failed'
-      } else {
-        tx.status = 'queued'
-        // Retry after delay
-        setTimeout(() => {
-          this.currentProcessing.delete(tx.id)
-          this.processQueue()
-        }, 1000 * tx.retries) // Exponential backoff
-        return
-      }
+      await this.executeTransaction(nextTx)
+    } catch (error: any) {
+      await this.handleTransactionError(nextTx, error)
     }
-    
-    this.currentProcessing.delete(tx.id)
-    this.processQueue()
   }
 
   /**
-   * Execute transaction (placeholder - would integrate with wagmi)
+   * Execute transaction
    */
   private async executeTransaction(tx: QueuedTransaction): Promise<void> {
-    // This would call wagmi's writeContract
-    // For now, just simulate
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(), 1000)
+    // This would be implemented with actual transaction execution
+    // For now, simulate with a promise
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        // Simulate success
+        tx.status = 'success'
+        tx.hash = `0x${Math.random().toString(16).substring(2)}`
+        tx.completedAt = Date.now()
+        this.removeFromProcessing(tx)
+        this.notifyListeners(tx)
+        resolve()
+      }, 2000)
     })
+  }
+
+  /**
+   * Handle transaction error
+   */
+  private async handleTransactionError(tx: QueuedTransaction, error: any) {
+    tx.retries++
+
+    if (tx.retries < this.maxRetries) {
+      // Retry with exponential backoff
+      const delay = this.retryDelay * Math.pow(2, tx.retries - 1)
+      await new Promise((resolve) => setTimeout(resolve, delay))
+      
+      tx.status = 'pending'
+      this.queue.unshift(tx) // Add back to front of queue
+      this.removeFromProcessing(tx)
+      this.notifyListeners(tx)
+      this.processQueue()
+    } else {
+      // Max retries reached
+      tx.status = 'failed'
+      tx.error = error.message || 'Transaction failed'
+      tx.completedAt = Date.now()
+      this.removeFromProcessing(tx)
+      this.notifyListeners(tx)
+    }
+  }
+
+  /**
+   * Remove from processing array
+   */
+  private removeFromProcessing(tx: QueuedTransaction) {
+    const index = this.processing.indexOf(tx)
+    if (index > -1) {
+      this.processing.splice(index, 1)
+    }
+    this.processQueue() // Process next transaction
+  }
+
+  /**
+   * Cancel transaction
+   */
+  cancel(id: string): boolean {
+    const tx = this.queue.find((t) => t.id === id) || this.processing.find((t) => t.id === id)
+    
+    if (tx && tx.status !== 'success' && tx.status !== 'failed') {
+      tx.status = 'cancelled'
+      tx.completedAt = Date.now()
+      
+      const queueIndex = this.queue.indexOf(tx)
+      if (queueIndex > -1) {
+        this.queue.splice(queueIndex, 1)
+      }
+      
+      this.removeFromProcessing(tx)
+      this.notifyListeners(tx)
+      return true
+    }
+    
+    return false
   }
 
   /**
    * Get transaction by ID
    */
-  getTransaction(id: string): QueuedTransaction | undefined {
-    return this.queue.find(tx => tx.id === id)
+  get(id: string): QueuedTransaction | undefined {
+    return [...this.queue, ...this.processing].find((t) => t.id === id)
   }
 
   /**
    * Get all transactions
    */
-  getAllTransactions(): QueuedTransaction[] {
-    return [...this.queue]
+  getAll(): QueuedTransaction[] {
+    return [...this.queue, ...this.processing]
   }
 
   /**
-   * Get transactions by status
+   * Get pending transactions
    */
-  getTransactionsByStatus(status: QueuedTransaction['status']): QueuedTransaction[] {
-    return this.queue.filter(tx => tx.status === status)
+  getPending(): QueuedTransaction[] {
+    return this.queue.filter((t) => t.status === 'pending')
+  }
+
+  /**
+   * Get processing transactions
+   */
+  getProcessing(): QueuedTransaction[] {
+    return this.processing
   }
 
   /**
    * Clear completed transactions
    */
-  clearCompleted() {
-    this.queue = this.queue.filter(
-      tx => tx.status !== 'confirmed' && tx.status !== 'failed'
-    )
+  clearCompleted(): void {
+    this.queue = this.queue.filter((t) => t.status === 'pending' || t.status === 'processing')
+    this.processing = this.processing.filter((t) => t.status === 'processing')
   }
 
   /**
-   * Remove transaction from queue
+   * Subscribe to transaction updates
    */
-  remove(id: string): boolean {
-    const index = this.queue.findIndex(tx => tx.id === id)
-    if (index === -1) return false
-    
-    this.queue.splice(index, 1)
-    this.currentProcessing.delete(id)
-    return true
+  subscribe(callback: TransactionQueueCallback): () => void {
+    this.listeners.push(callback)
+    return () => {
+      const index = this.listeners.indexOf(callback)
+      if (index > -1) {
+        this.listeners.splice(index, 1)
+      }
+    }
+  }
+
+  /**
+   * Notify listeners
+   */
+  private notifyListeners(tx: QueuedTransaction) {
+    this.listeners.forEach((callback) => callback(tx))
+  }
+
+  /**
+   * Get queue statistics
+   */
+  getStats() {
+    return {
+      pending: this.queue.length,
+      processing: this.processing.length,
+      total: this.queue.length + this.processing.length,
+    }
   }
 }
 
 // Singleton instance
 export const transactionQueue = new TransactionQueue()
-
