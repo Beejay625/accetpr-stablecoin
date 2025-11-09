@@ -1,4 +1,3 @@
-chore: implement viem encoding/decoding utilities
 docs: configure WalletConnect metadata
 perf: add Reown AppKit wallet connectors
 test: install viem for Ethereum utilities
