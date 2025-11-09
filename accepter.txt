@@ -1,4 +1,3 @@
-chore: configure WalletConnect metadata
 chore: configure WalletConnect project ID
 fix: configure AppKit adapter providers
 test: configure React Query retry logic
