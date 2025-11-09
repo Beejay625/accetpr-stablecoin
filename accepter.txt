@@ -1,4 +1,3 @@
-chore: add Base chain transaction broadcasting
 feat: configure Reown AppKit metadata
 feat: add React Query optimistic updates
 feat: setup WalletConnect with Base chain
