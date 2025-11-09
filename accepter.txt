@@ -1,4 +1,3 @@
-perf: add AppKit adapter error handling
 feat: setup wagmi config with Base chain
 perf: implement Base chain transaction signing
 feat: configure Base mainnet chain for accetpr-stablecoin
