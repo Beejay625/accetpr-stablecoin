@@ -1,4 +1,3 @@
-refactor: improve appkit-button accessibility
 docs: document appkit-button usage
 test: add appkit-button component tests
 feat: add useReadContract hook for smart contracts
