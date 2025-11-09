@@ -1,4 +1,3 @@
-test: configure Base chain block explorer
 docs: add viem contract interaction helpers
 refactor: add Base chain transaction broadcasting
 feat: setup Reown AppKit configuration
