@@ -1,4 +1,3 @@
-test: add accessibility tests
 test: add cross-browser tests
 test: add mobile device tests
 ci: setup GitHub Actions workflow
