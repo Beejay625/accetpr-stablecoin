@@ -110,6 +110,45 @@ This project uses **Reown AppKit** (formerly WalletConnect) for seamless wallet 
   - Activity tracking
   - Session validation
 
+- **Multi-Signature Wallet Support**:
+  - Register and manage multi-sig wallets
+  - Create transaction proposals
+  - Approve transactions with threshold-based execution
+  - Track pending proposals and approvals
+  - Automatic execution when threshold is met
+
+- **Address Book & Whitelist**:
+  - Save and label frequently used addresses
+  - Address grouping and tagging
+  - Whitelist management for enhanced security
+  - Search and filter addresses
+  - Export/import address book (JSON format)
+  - Last used tracking
+
+- **Transaction Simulation**:
+  - Preview transactions before execution
+  - Gas estimation and cost calculation
+  - Balance impact analysis
+  - Warnings and recommendations
+  - Transaction validation
+
+- **Security Features**:
+  - Daily transaction limits
+  - Per-transaction limits
+  - Whitelist-only mode
+  - Transaction approval workflow
+  - Two-factor authentication (2FA) support
+  - Security event logging
+  - Automatic limit tracking and reset
+
+- **Network Health Monitoring**:
+  - Real-time network status tracking
+  - Latency monitoring
+  - Uptime percentage calculation
+  - Error tracking and reporting
+  - Network recommendations
+  - Health check history
+
 #### Wallet Connectors
 
 - WalletConnect
@@ -344,22 +383,15 @@ src/
 
 ### Public Endpoints
 
-| Endpoint | Method | Description | Auth Required |
-|----------|--------|-------------|---------------|
-| `GET /api/v1/public/health` | GET | Enhanced health check with database, cache, and memory status | ❌ |
-| `GET /api/v1/public/status` | GET | Simple service status | ❌ |
-| `GET /docs` | GET | Swagger API documentation | ❌ |
+- `GET /` - Health check
+- `GET /api/health` - Detailed health status
+- `GET /api/status` - Service status
 
 ### Protected Endpoints (Require Authentication)
 
-| Endpoint | Method | Description | Auth Required |
-|----------|--------|-------------|---------------|
-| `GET /api/v1/protected/wallet/balance` | GET | Get wallet balance for a chain | ✅ |
-| `GET /api/v1/protected/wallet/transactions/{chain}` | GET | Get transaction history with filtering | ✅ |
-| `GET /api/v1/protected/wallet/transactions/{chain}/export` | GET | Export transactions (CSV/JSON) | ✅ |
-| `GET /api/v1/protected/wallet/statistics` | GET | Get comprehensive wallet statistics | ✅ |
-| `POST /api/v1/protected/wallet/withdraw/single` | POST | Execute single withdrawal | ✅ |
-| `POST /api/v1/protected/wallet/withdraw/batch` | POST | Execute batch withdrawal | ✅ |
+- `GET /api/wallet/balance` - Get wallet balance
+- `GET /api/wallet/transactions` - Get transaction history
+- `POST /api/wallet/withdraw` - Execute withdrawal
 
 ### API Documentation
 
