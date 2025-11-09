@@ -1,4 +1,3 @@
-feat: implement AppKit modal initialization in ContextProvider
 refactor: optimize ContextProvider performance
 fix: resolve ContextProvider hydration issues
 docs: document ContextProvider usage
