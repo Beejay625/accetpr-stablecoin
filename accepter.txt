@@ -1,4 +1,3 @@
-fix: setup React Query devtools
 fix: add WalletConnect event listeners
 chore: install @tanstack/react-query
 chore: setup AppKit adapter TypeScript types
