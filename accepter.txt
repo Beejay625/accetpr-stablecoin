@@ -1,4 +1,3 @@
-fix: add React Query hooks for wallet data
 test: configure AppKit adapter providers
 test: install viem for Ethereum utilities
 test: add viem address formatting
