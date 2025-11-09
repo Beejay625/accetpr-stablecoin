@@ -1,4 +1,3 @@
-perf: configure React Query retry logic
 fix: configure viem public clients
 fix: initialize Reown AppKit provider
 chore: configure viem RPC providers
