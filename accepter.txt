@@ -1,4 +1,3 @@
-refactor: add viem address formatting
 fix: add viem contract interaction helpers
 chore: add WalletConnect mobile deep linking
 feat: add Reown AppKit feature flags
