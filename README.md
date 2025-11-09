@@ -747,7 +747,11 @@ frontend/
 │   ├── Pagination.tsx           # Pagination component
 │   ├── Toast.tsx                # Toast notification
 │   ├── ToastProvider.tsx        # Toast context provider
-│   └── LoadingSkeleton.tsx      # Loading state skeletons
+│   ├── LoadingSkeleton.tsx      # Loading state skeletons
+│   ├── NotificationCenter.tsx  # Notification center component
+│   ├── TransactionTemplates.tsx # Transaction templates UI
+│   ├── AddressValidator.tsx     # Address validation component
+│   └── PortfolioOverview.tsx    # Portfolio overview component
 ├── config/                       # Configuration files
 │   └── index.tsx                 # Wagmi/AppKit config
 ├── context/                      # React context providers
