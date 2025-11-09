@@ -624,6 +624,73 @@ Response:
 }
 ```
 
+#### Transaction Details
+```bash
+GET /api/v1/protected/wallet/transactions/base/{transactionId}
+Authorization: Bearer <clerk_token>
+
+Response:
+{
+  "success": true,
+  "data": {
+    "transactionId": "4c2cf0db-3ba3-422d-b973-02eaf1074781",
+    "hash": "0xa8637dbe4614184f91198f907b5266f0d70453974d7167d44b41955277816754",
+    "asset": "USDC",
+    "chain": "base",
+    "amount": "1.0",
+    "amountPaid": "1.0",
+    "type": "WITHDRAW",
+    "status": "SUCCESS",
+    "senderAddress": "0x...",
+    "recipientAddress": "0x...",
+    "blockNumber": 12345678,
+    "blockHash": "0x...",
+    "confirmations": 10,
+    "gasFee": "0.001",
+    "reference": "payment-123",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+#### Transaction Search
+```bash
+GET /api/v1/protected/wallet/transactions/base/search?q=0xa8637dbe
+Authorization: Bearer <clerk_token>
+
+Searches in:
+- Transaction hash
+- Transaction ID
+- Reference
+- Sender address
+- Recipient address
+- Asset symbol
+```
+
+#### Wallet Addresses Listing
+```bash
+GET /api/v1/protected/wallet/addresses
+Authorization: Bearer <clerk_token>
+
+Response:
+{
+  "success": true,
+  "data": {
+    "addresses": [
+      {
+        "id": "clx1234567890",
+        "address": "0x451dEFC27B45808078e875556AF06bCFdC697BA4",
+        "chain": "base",
+        "addressName": "user_123-base",
+        "createdAt": "2024-01-01T00:00:00.000Z"
+      }
+    ],
+    "count": 2
+  }
+}
+```
+
 ## 🔧 Configuration
 
 ### Environment Variables
