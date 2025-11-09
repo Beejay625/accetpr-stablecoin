@@ -1,4 +1,3 @@
-chore: implement viem transaction utilities
 perf: add Base chain transaction broadcasting
 chore: add Base chain RPC endpoints
 refactor: setup wagmi config with Base chain
