@@ -1,4 +1,3 @@
-fix: setup Reown AppKit with Base chain
 perf: configure WalletConnect project ID
 chore: install @tanstack/react-query
 fix: configure viem public clients
