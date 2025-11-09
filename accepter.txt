@@ -1,4 +1,3 @@
-refactor: simplify createAppKit configuration
 fix: resolve createAppKit initialization errors
 feat: import networks from @reown/appkit/networks
 feat: add Arbitrum network support
