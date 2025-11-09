@@ -1,4 +1,3 @@
-refactor: add Base chain native token support
 chore: implement React Query cache configuration
 perf: configure wagmi providers
 feat: configure Base mainnet chain for accetpr-stablecoin
