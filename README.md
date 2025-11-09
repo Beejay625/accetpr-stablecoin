@@ -1383,6 +1383,235 @@ Response:
 }
 ```
 
+#### Transaction Templates
+```bash
+# Create template
+POST /api/v1/protected/templates
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "name": "Monthly Payment",
+  "description": "Monthly payment to vendor",
+  "chain": "base",
+  "asset": "USDC",
+  "to": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+  "amount": "1000000000",
+  "category": "payment",
+  "tags": ["monthly", "vendor"],
+  "isFavorite": true
+}
+
+# Get all templates
+GET /api/v1/protected/templates?favorite=true&search=payment
+Authorization: Bearer <clerk_token>
+
+# Update template
+PUT /api/v1/protected/templates/{templateId}
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "isFavorite": false,
+  "amount": "1500000000"
+}
+
+# Delete template
+DELETE /api/v1/protected/templates/{templateId}
+Authorization: Bearer <clerk_token>
+```
+
+#### Recurring Payments
+```bash
+# Create recurring payment
+POST /api/v1/protected/recurring-payments
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "name": "Monthly Subscription",
+  "description": "Monthly subscription payment",
+  "chain": "base",
+  "asset": "USDC",
+  "to": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+  "amount": "1000000000",
+  "frequency": "monthly",
+  "startDate": "2024-01-01T00:00:00Z",
+  "endDate": "2024-12-31T23:59:59Z",
+  "maxExecutions": 12,
+  "active": true
+}
+
+# Get all recurring payments
+GET /api/v1/protected/recurring-payments?active=true
+Authorization: Bearer <clerk_token>
+
+# Update recurring payment
+PUT /api/v1/protected/recurring-payments/{paymentId}
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "active": false,
+  "amount": "1500000000"
+}
+
+# Delete recurring payment
+DELETE /api/v1/protected/recurring-payments/{paymentId}
+Authorization: Bearer <clerk_token>
+```
+
+#### API Key Management
+```bash
+# Create API key
+POST /api/v1/protected/api-keys
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "name": "Production API Key",
+  "description": "API key for production integration",
+  "permissions": ["read", "write"],
+  "expiresInDays": 365
+}
+
+Response:
+{
+  "success": true,
+  "data": {
+    "id": "key_...",
+    "name": "Production API Key",
+    "keyPrefix": "sk_abc12345",
+    "key": "sk_abc12345...", // Only shown once on creation
+    "permissions": ["read", "write"],
+    "active": true,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  }
+}
+
+# Get all API keys
+GET /api/v1/protected/api-keys
+Authorization: Bearer <clerk_token>
+
+# Update API key
+PUT /api/v1/protected/api-keys/{keyId}
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "active": false,
+  "permissions": ["read"]
+}
+
+# Delete API key
+DELETE /api/v1/protected/api-keys/{keyId}
+Authorization: Bearer <clerk_token>
+```
+
+#### Transaction Signing
+```bash
+# Create unsigned transaction
+POST /api/v1/protected/transactions/unsigned
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "chain": "base",
+  "to": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+  "value": "1000000000000000000",
+  "gasLimit": "21000",
+  "gasPrice": "20000000000"
+}
+
+# Get transaction for signing
+GET /api/v1/protected/transactions/unsigned/{txId}/sign
+Authorization: Bearer <clerk_token>
+
+# Mark as signed
+POST /api/v1/protected/transactions/unsigned/{txId}/signed
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "signedData": "0x..."
+}
+
+# Mark as broadcast
+POST /api/v1/protected/transactions/unsigned/{txId}/broadcast
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "transactionHash": "0x..."
+}
+
+# Cancel transaction
+POST /api/v1/protected/transactions/unsigned/{txId}/cancel
+Authorization: Bearer <clerk_token>
+```
+
+#### Portfolio Analytics
+```bash
+# Create portfolio snapshot
+POST /api/v1/protected/portfolio/snapshot
+Authorization: Bearer <clerk_token>
+Content-Type: application/json
+
+{
+  "assets": [
+    {
+      "chain": "base",
+      "asset": "USDC",
+      "balance": "1000000000",
+      "value": "1000.00",
+      "price": "1.00"
+    },
+    {
+      "chain": "arbitrum",
+      "asset": "USDT",
+      "balance": "500000000",
+      "value": "500.00",
+      "price": "1.00"
+    }
+  ]
+}
+
+# Get portfolio metrics
+GET /api/v1/protected/portfolio/metrics
+Authorization: Bearer <clerk_token>
+
+Response:
+{
+  "success": true,
+  "data": {
+    "totalValue": "1500.00",
+    "totalValueChange24h": "50.00",
+    "totalValueChangePercent24h": 3.45,
+    "topAssets": [
+      {
+        "asset": "USDC",
+        "chain": "base",
+        "value": "1000.00",
+        "percentage": 66.67
+      }
+    ],
+    "topChains": [
+      {
+        "chain": "base",
+        "value": "1000.00",
+        "percentage": 66.67
+      }
+    ],
+    "assetCount": 2,
+    "chainCount": 2
+  }
+}
+
+# Get portfolio history
+GET /api/v1/protected/portfolio/history?days=30
+Authorization: Bearer <clerk_token>
+```
+
 ## 🔧 Configuration
 
 ### Environment Variables
