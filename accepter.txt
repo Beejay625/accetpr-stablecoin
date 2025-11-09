@@ -1,4 +1,3 @@
-refactor: add Base testnet chain configuration
 perf: setup Reown AppKit configuration
 test: install wagmi for Ethereum interactions
 chore: setup AppKit adapter TypeScript types
