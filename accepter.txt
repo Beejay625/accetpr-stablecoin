@@ -1,4 +1,3 @@
-refactor: setup AppKit adapter TypeScript types
 fix: implement Base chain transaction signing
 refactor: initialize Reown AppKit provider
 chore: add wagmi chain configuration
