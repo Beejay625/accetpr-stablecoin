@@ -1,4 +1,3 @@
-refactor: improve error handling
 perf: optimize AppKit bundle size
 perf: improve AppKit loading performance
 perf: optimize network switching
