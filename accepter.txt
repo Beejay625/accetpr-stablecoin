@@ -1,4 +1,3 @@
-test: setup Base chain network switching
 refactor: configure wagmi providers
 fix: configure Base mainnet chain for accetpr-stablecoin
 fix: add wagmi hooks for wallet connection
