@@ -675,6 +675,12 @@ src/
 │   │   ├── walletStatisticsController.ts
 │   │   ├── walletAddressesController.ts
 │   │   └── transactionDetailsController.ts
+│   ├── webhook/     # Webhook controllers
+│   ├── transaction/ # Transaction controllers
+│   │   ├── replayController.ts
+│   │   └── feeCalculatorController.ts
+│   ├── token/       # Token metadata controllers
+│   ├── notification/ # Notification controllers
 │   └── test/        # Test controllers
 ├── db/              # Database operations (Prisma)
 ├── events/          # Event handlers
