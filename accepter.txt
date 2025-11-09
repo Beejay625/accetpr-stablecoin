@@ -1,4 +1,3 @@
-docs: configure Base mainnet chain for accetpr-stablecoin
 docs: initialize Reown AppKit provider
 feat: setup AppKit adapter TypeScript types
 feat: add React Query error handling
