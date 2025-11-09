@@ -1,4 +1,3 @@
-refactor: add viem wallet clients
 perf: add viem address formatting
 chore: configure WalletConnect project ID
 feat: install @reown/appkit-adapter-wagmi

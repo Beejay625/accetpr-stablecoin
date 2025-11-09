@@ -1203,6 +1203,11 @@ For detailed information about all newly implemented features, see:
 - **Price Alerts** (`frontend/lib/priceAlerts.ts`): Price alert and notification system
 - **DEX Swap** (`frontend/lib/dexSwap.ts`): Decentralized exchange integration
 - **Batch Builder** (`frontend/lib/batchBuilder.ts`): Batch transaction builder and executor
+- **Transaction Export** (`frontend/lib/transactionExport.ts`): Export transaction history with advanced filtering
+- **Wallet Backup** (`frontend/lib/walletBackup.ts`): Wallet backup and recovery system
+- **Token Approval** (`frontend/lib/tokenApproval.ts`): ERC20 token approval management
+- **Transaction Analytics** (`frontend/lib/transactionAnalytics.ts`): Transaction history analytics and insights
+- **RPC Manager** (`frontend/lib/rpcManager.ts`): Custom RPC endpoint management
 
 #### React Hooks
 - **useSmartContract** (`frontend/hooks/useSmartContract.ts`): Contract interaction hooks
