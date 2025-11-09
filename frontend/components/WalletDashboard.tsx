@@ -87,6 +87,7 @@ export default function WalletDashboard() {
           <h2 className="text-2xl font-bold">Wallet Dashboard</h2>
           <div className="flex items-center gap-4">
             <ChainSwitcher />
+            <NotificationCenter />
             <button
               onClick={() => setShowSettings(true)}
               className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
