@@ -1,4 +1,3 @@
-chore: configure viem public clients
 chore: setup viem with Base chain
 feat: implement Base chain transaction signing
 docs: initialize Reown AppKit provider
