@@ -1,4 +1,3 @@
-chore: configure React Query retry logic
 fix: add wagmi hooks for transaction sending
 docs: configure WalletConnect project ID
 refactor: configure React Query with wagmi
