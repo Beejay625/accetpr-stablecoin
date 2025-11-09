@@ -1,4 +1,3 @@
-chore: add viem wallet clients
 perf: configure viem RPC providers
 chore: configure viem public clients
 chore: setup viem with Base chain
