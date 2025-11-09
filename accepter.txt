@@ -1,4 +1,3 @@
-feat: integrate AppKit adapter with React Query
 test: add React Query hooks for wallet data
 feat: configure React Query with wagmi
 perf: integrate AppKit adapter with React Query
