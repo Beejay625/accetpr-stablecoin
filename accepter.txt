@@ -1,4 +1,3 @@
-chore: implement React Query infinite queries
 fix: configure Base chain gas estimation
 feat: setup Base chain network switching
 perf: implement Reown AppKit modal customization
