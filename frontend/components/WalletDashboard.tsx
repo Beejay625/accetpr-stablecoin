@@ -53,6 +53,28 @@ export default function WalletDashboard() {
     }
   }, [isConnected, address, selectedChain, track])
 
+  // Register keyboard shortcuts
+  useEffect(() => {
+    const unsubscribeRefresh = keyboardShortcuts.on('refresh_balance', () => {
+      // Trigger balance refresh
+      window.location.reload()
+    })
+
+    const unsubscribeSettings = keyboardShortcuts.on('open_settings', () => {
+      setShowSettings(true)
+    })
+
+    const unsubscribeHelp = keyboardShortcuts.on('open_help', () => {
+      setShowHelp(true)
+    })
+
+    return () => {
+      unsubscribeRefresh()
+      unsubscribeSettings()
+      unsubscribeHelp()
+    }
+  }, [])
+
   // Map chainId to chain name
   const getChainName = (chainId: number): string => {
     const chainMap: Record<number, string> = {
