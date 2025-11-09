@@ -1,4 +1,3 @@
-perf: add wagmi chain configuration
 fix: setup React Query devtools
 feat: setup AppKit adapter TypeScript types
 test: add viem contract interaction helpers
