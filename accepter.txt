@@ -1,4 +1,3 @@
-refactor: setup Reown AppKit configuration
 refactor: setup wagmi with React Query
 perf: implement AppKit adapter utilities
 chore: implement AppKit adapter utilities
