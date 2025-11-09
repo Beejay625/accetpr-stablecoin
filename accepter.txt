@@ -1,4 +1,3 @@
-feat: implement error boundaries for AppKit
 feat: add error logging for AppKit
 refactor: improve error handling
 perf: optimize AppKit bundle size
