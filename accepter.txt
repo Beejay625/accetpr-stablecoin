@@ -1,4 +1,3 @@
-docs: implement WalletConnect error handling
 docs: configure viem RPC providers
 refactor: setup wagmi with React Query
 feat: add Reown AppKit wallet connectors
