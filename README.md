@@ -846,6 +846,7 @@ All requests include Clerk authentication tokens in the Authorization header.
 - **useTransactionQueue**: Manage transaction queue
 - **useAnalytics**: Track events and get statistics
 - **useWalletSession**: Manage wallet sessions
+- **useNotifications**: Manage notifications and browser alerts
 
 ## 🔒 Security
 
