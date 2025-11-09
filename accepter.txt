@@ -1,4 +1,3 @@
-refactor: setup AppKit adapter TypeScript types
 perf: add WalletConnect mobile deep linking
 docs: implement AppKit adapter state management
 refactor: configure WalletConnect metadata
