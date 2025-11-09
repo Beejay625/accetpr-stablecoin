@@ -3,6 +3,7 @@ import { SingleWithdrawService, BatchWithdrawService } from '../../services/wall
 import { ApiSuccess } from '../../utils/apiSuccess';
 import { ApiError } from '../../utils/apiError';
 import { createLoggerWithFunction } from '../../logger';
+import { AuditLogService } from '../../services/audit/auditLogService';
 import { DEFAULT_CHAINS } from '../../types/chains';
 import { SingleWithdrawRequest, BatchWithdrawRequest } from '../../providers/blockradar/withdraw/withdraw.interface';
 import { walletRepository } from '../../repositories/database/wallet';
