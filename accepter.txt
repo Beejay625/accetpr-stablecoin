@@ -1,4 +1,3 @@
-chore: setup wagmi config with Base chain
 docs: add Base chain native token support
 test: configure wagmi providers
 perf: configure wagmi providers
