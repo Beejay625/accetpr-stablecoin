@@ -1,4 +1,3 @@
-test: add WalletConnect session management
 perf: add wagmi hooks for transaction sending
 test: implement React Query infinite queries
 feat: install @reown/appkit-adapter-wagmi
