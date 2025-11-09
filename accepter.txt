@@ -1,4 +1,3 @@
-refactor: setup AppKit adapter TypeScript types
 refactor: implement Base chain transaction signing
 perf: setup React Query devtools
 perf: add Base chain native token support
