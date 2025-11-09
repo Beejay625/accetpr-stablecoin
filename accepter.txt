@@ -1,4 +1,3 @@
-docs: integrate Base chain with wallet connect
 docs: install @tanstack/react-query
 test: configure Reown AppKit metadata
 perf: implement WalletConnect error handling
