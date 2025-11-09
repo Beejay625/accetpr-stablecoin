@@ -1,4 +1,3 @@
-fix: add wagmi chain configuration
 refactor: implement AppKit adapter state management
 docs: implement WalletConnect error handling
 refactor: add AppKit adapter error handling
