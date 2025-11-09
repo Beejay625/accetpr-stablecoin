@@ -1,2 +1,1 @@
-refactor: simplify complex logic
 refactor: improve code reusability
