@@ -1,4 +1,3 @@
-test: configure AppKit adapter for Base chain
 refactor: add viem address formatting
 refactor: implement wagmi connector configuration
 fix: setup viem type generation
