@@ -1,4 +1,3 @@
-refactor: add viem contract interaction helpers
 refactor: setup wagmi config with Base chain
 test: setup Reown AppKit with Base chain
 refactor: configure Reown AppKit theme
