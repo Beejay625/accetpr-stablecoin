@@ -2,6 +2,9 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { walletApi } from '@/lib/api'
+import { formatAddress, getExplorerUrl } from '@/lib/utils'
+import TransactionModal from './TransactionModal'
+import CopyButton from './CopyButton'
 
 interface TransactionsListProps {
   chain: string
