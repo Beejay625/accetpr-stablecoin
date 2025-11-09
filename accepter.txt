@@ -1,4 +1,3 @@
-refactor: configure WalletConnect metadata
 test: add viem contract interaction helpers
 fix: install wagmi for Ethereum interactions
 fix: configure Base chain gas estimation
