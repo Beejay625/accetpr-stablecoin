@@ -1,4 +1,3 @@
-refactor: add AppKit adapter error handling
 chore: implement AppKit adapter utilities
 docs: implement WalletConnect error handling
 docs: configure viem RPC providers
