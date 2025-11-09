@@ -1,4 +1,3 @@
-test: setup Reown AppKit with Base chain
 refactor: configure Reown AppKit theme
 perf: implement viem encoding/decoding utilities
 fix: implement wagmi hooks for balance fetching
