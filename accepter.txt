@@ -1,4 +1,3 @@
-test: add appkit-button component tests
 feat: add useReadContract hook for smart contracts
 feat: implement smart contract ABI integration
 feat: add USDT contract interaction example
