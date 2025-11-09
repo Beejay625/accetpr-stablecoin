@@ -1,4 +1,3 @@
-refactor: integrate WalletConnect with Reown AppKit
 feat: configure WalletConnect project ID
 chore: install wagmi for Ethereum interactions
 docs: setup viem with Base chain
