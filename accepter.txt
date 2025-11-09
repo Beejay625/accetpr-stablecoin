@@ -1,4 +1,3 @@
-test: setup wagmi with React Query
 docs: add AppKit adapter hooks
 feat: setup React Query devtools
 chore: configure Base chain block explorer
