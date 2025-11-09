@@ -24,6 +24,8 @@ export class TransactionsController {
       const userId = req.authUserId!; // Guaranteed by requireAuthWithUserId middleware
       const { chain } = req.params;
       const query = req.query;
+      const ipAddress = req.ip || req.connection.remoteAddress;
+      const userAgent = req.get('user-agent');
 
       this.logger.info({ userId, chain, query }, 'Processing get transactions request');
 
@@ -68,6 +70,9 @@ export class TransactionsController {
 
       // Get statistics
       const stats = TransactionFilterService.getTransactionStats(transactions);
+
+      // Log audit event
+      AuditLogService.logTransactionView(userId, chain, undefined, ipAddress, userAgent);
 
       this.logger.info({
         userId,
