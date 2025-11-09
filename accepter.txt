@@ -1,4 +1,3 @@
-docs: document environment setup
 feat: setup AppKit Core with Universal Provider
 feat: configure Universal Provider for multi-chain
 feat: add Universal Provider compatibility layer
