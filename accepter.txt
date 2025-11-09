@@ -1,4 +1,3 @@
-docs: add Base testnet chain configuration
 test: configure Reown AppKit theme
 docs: add WalletConnect session management
 refactor: setup Base chain network switching
