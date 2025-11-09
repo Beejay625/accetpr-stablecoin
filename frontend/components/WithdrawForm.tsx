@@ -38,6 +38,22 @@ export default function WithdrawForm({ chain, getToken }: WithdrawFormProps) {
         throw new Error('Authentication required')
       }
 
+      // Validate address
+      const addressValidation = validateAddress(recipientAddress)
+      if (!addressValidation.isValid) {
+        setAddressError(addressValidation.error || 'Invalid address')
+        throw new Error(addressValidation.error || 'Invalid address')
+      }
+      setAddressError(null)
+
+      // Validate amount
+      const amountValidation = validateAmount(amount)
+      if (!amountValidation.isValid) {
+        setAmountError(amountValidation.error || 'Invalid amount')
+        throw new Error(amountValidation.error || 'Invalid amount')
+      }
+      setAmountError(null)
+
       if (!recipientAddress || !amount) {
         throw new Error('Please fill in all required fields')
       }
