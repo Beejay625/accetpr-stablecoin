@@ -1,4 +1,3 @@
-fix: configure viem RPC providers
 feat: add WalletConnect event listeners
 perf: configure wagmi with viem
 refactor: add React Query optimistic updates
