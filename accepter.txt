@@ -1,4 +1,3 @@
-test: add viem contract interaction helpers
 fix: add wagmi hooks for transaction sending
 fix: implement wagmi hooks for balance fetching
 feat: configure viem public clients
