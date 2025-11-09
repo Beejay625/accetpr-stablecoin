@@ -1,4 +1,3 @@
-feat: add USDT contract interaction example
 feat: setup contract address configuration
 feat: implement contract function calls
 feat: add contract event listeners
