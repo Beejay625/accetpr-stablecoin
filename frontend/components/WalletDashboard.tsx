@@ -158,6 +158,26 @@ export default function WalletDashboard() {
           >
             Address Book
           </button>
+          <button
+            onClick={() => setSelectedTab('templates')}
+            className={`pb-2 px-1 border-b-2 ${
+              selectedTab === 'templates'
+                ? 'border-blue-600 text-blue-600'
+                : 'border-transparent text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            Templates
+          </button>
+          <button
+            onClick={() => setSelectedTab('portfolio')}
+            className={`pb-2 px-1 border-b-2 ${
+              selectedTab === 'portfolio'
+                ? 'border-blue-600 text-blue-600'
+                : 'border-transparent text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            Portfolio
+          </button>
         </div>
       </div>
 
