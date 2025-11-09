@@ -1,4 +1,3 @@
-test: add React Query error handling
 refactor: setup React Query provider
 test: add React Query error handling
 feat: setup Reown AppKit with Base chain
