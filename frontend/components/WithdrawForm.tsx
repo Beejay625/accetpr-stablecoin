@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { walletApi } from '@/lib/api'
 import { useAccount } from 'wagmi'
+import { useToast } from './ToastProvider'
 
 interface WithdrawFormProps {
   chain: string
