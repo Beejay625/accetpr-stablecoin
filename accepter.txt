@@ -1,4 +1,3 @@
-test: configure Base chain block explorer
 chore: add viem contract interaction helpers
 fix: setup wagmi config with Base chain
 feat: add Reown AppKit feature flags
