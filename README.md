@@ -691,12 +691,18 @@ src/
 │   ├── audit/       # Audit logging service
 │   ├── cache/       # Caching service
 │   ├── user/        # User service
-│   └── wallet/      # Wallet services
-│       ├── walletService.ts
-│       ├── transactionsService.ts
-│       ├── withdrawService.ts
-│       ├── walletStatisticsService.ts
-│       ├── transactionFilterService.ts
+│   ├── wallet/      # Wallet services
+│   │   ├── walletService.ts
+│   │   ├── transactionsService.ts
+│   │   ├── withdrawService.ts
+│   │   ├── walletStatisticsService.ts
+│   │   ├── transactionFilterService.ts
+│   ├── webhook/     # Webhook management service
+│   ├── transaction/ # Transaction services
+│   │   ├── transactionReplayService.ts
+│   │   └── feeCalculatorService.ts
+│   ├── token/       # Token metadata service
+│   └── notification/ # Notification preferences service
 │       ├── transactionExportService.ts
 │       └── transactionDetailsService.ts
 ├── types/           # TypeScript types
