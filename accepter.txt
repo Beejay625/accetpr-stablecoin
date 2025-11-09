@@ -1,4 +1,3 @@
-chore: update React Query dependencies
 feat: add Optimism network support
 feat: add Avalanche network support
 feat: add BSC (Binance Smart Chain) support
