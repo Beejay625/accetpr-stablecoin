@@ -1,4 +1,3 @@
-docs: add AppKit adapter error handling
 fix: configure Reown AppKit theme
 chore: add wagmi hooks for wallet connection
 test: integrate Base chain with wallet connect
