@@ -1185,8 +1185,24 @@ frontend/
 
 The frontend communicates with the backend API endpoints:
 
+**Wallet Operations:**
 - `GET /api/v1/protected/wallet/balance?chain={chain}` - Get wallet balance
-- `GET /api/v1/protected/wallet/transactions/{chain}` - Get transactions
+- `GET /api/v1/protected/wallet/balance/aggregated` - Get aggregated balance across all chains
+- `GET /api/v1/protected/wallet/addresses` - Get all wallet addresses
+- `GET /api/v1/protected/wallet/addresses/{chain}` - Get address for specific chain
+
+**Transaction Operations:**
+- `GET /api/v1/protected/wallet/transactions/{chain}` - Get transactions with filtering
+- `GET /api/v1/protected/wallet/transactions/{chain}/export` - Export transactions (CSV/JSON)
+- `GET /api/v1/protected/wallet/transactions/search` - Search for a transaction
+- `GET /api/v1/protected/wallet/transactions/search/all` - Search for multiple transactions
+
+**Analytics & Activity:**
+- `GET /api/v1/protected/wallet/statistics` - Get comprehensive wallet statistics
+- `GET /api/v1/protected/wallet/activity` - Get activity timeline
+- `GET /api/v1/protected/wallet/activity/recent` - Get recent activity
+
+**Withdrawal Operations:**
 - `POST /api/v1/protected/wallet/withdraw/single` - Single withdrawal
 - `POST /api/v1/protected/wallet/withdraw/batch` - Batch withdrawal
 
