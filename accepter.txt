@@ -1,4 +1,3 @@
-chore: add Reown AppKit project ID configuration
 feat: add WalletConnect session management
 chore: add viem contract interaction helpers
 fix: add React Query hooks for wallet data

@@ -487,10 +487,30 @@ This project uses **Reown AppKit** (formerly WalletConnect) for seamless wallet 
 
 #### Wallet Statistics & Analytics
 - **Cross-Chain Statistics**: Aggregate statistics across all user wallets
-- **Balance Aggregation**: Total balances across all chains
+- **Balance Aggregation**: Total balances across all chains with primary asset calculation
 - **Transaction Analytics**: Transaction counts by chain and status
 - **Recent Transactions**: Last 10 transactions across all chains
 - **Wallet Overview**: Complete overview of all wallet addresses
+
+#### Transaction Search & Discovery
+- **Transaction Search**: Search transactions by hash, transaction ID, or reference across all chains
+- **Multi-Transaction Search**: Find multiple transactions matching a query
+- **Cross-Chain Search**: Search across all user's chains simultaneously
+- **Fuzzy Matching**: Partial matching on hash, ID, reference, and asset symbols
+- **Result Limiting**: Configurable result limits (1-100)
+
+#### Wallet Address Management
+- **Address Listing**: List all wallet addresses across all chains
+- **Chain-Specific Addresses**: Get wallet address for a specific chain
+- **Address Details**: Complete address information including creation date
+- **Address Metadata**: Address names and identifiers
+
+#### Activity Timeline & Feed
+- **Unified Timeline**: Activity feed across all chains in chronological order
+- **Recent Activity**: Quick access to recent transactions
+- **Cross-Chain Activity**: View all activity regardless of chain
+- **Configurable Limits**: Customizable activity feed size (1-100 items)
+- **Timestamp Sorting**: Automatic sorting by transaction time (newest first)
 
 #### Enhanced Health Monitoring
 - **Database Health**: Connection status and response time
