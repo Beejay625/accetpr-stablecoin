@@ -1,4 +1,3 @@
-refactor: improve adapter configuration
 feat: add WalletConnect connector
 feat: add Coinbase connector
 feat: add Injected connector
