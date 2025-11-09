@@ -1,4 +1,3 @@
-refactor: install @reown/appkit for wallet integration
 test: configure Base mainnet chain for accetpr-stablecoin
 refactor: implement AppKit adapter utilities
 test: configure AppKit adapter for Base chain
