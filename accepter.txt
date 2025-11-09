@@ -1,4 +1,3 @@
-feat: add Next.js layout with ContextProvider
 feat: implement cookie storage for Wagmi SSR
 feat: setup cookieToInitialState for Wagmi hydration
 feat: configure Next.js headers for cookie handling
