@@ -1,4 +1,3 @@
-docs: document Wagmi configuration
 feat: add NEXT_PUBLIC_PROJECT_ID environment variable
 feat: setup environment variable validation
 feat: configure project ID from Reown Dashboard
