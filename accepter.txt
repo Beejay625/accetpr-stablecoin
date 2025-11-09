@@ -1,4 +1,3 @@
-chore: add Base chain native token support
 test: setup WalletConnect with Base chain
 perf: setup Reown AppKit configuration
 test: install @reown/appkit for wallet integration
