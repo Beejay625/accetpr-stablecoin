@@ -1,4 +1,3 @@
-refactor: implement Reown AppKit modal customization
 fix: configure Reown AppKit theme
 chore: configure WalletConnect metadata
 perf: add React Query error handling
