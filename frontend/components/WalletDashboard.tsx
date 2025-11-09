@@ -64,7 +64,23 @@ export default function WalletDashboard() {
       <div className="mb-6">
         <div className="flex justify-between items-start mb-2">
           <h2 className="text-2xl font-bold">Wallet Dashboard</h2>
-          <ChainSwitcher />
+          <div className="flex items-center gap-4">
+            <ChainSwitcher />
+            <button
+              onClick={() => setShowSettings(true)}
+              className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+              title="Settings"
+            >
+              ⚙️
+            </button>
+            <button
+              onClick={() => setShowHelp(true)}
+              className="px-3 py-1 text-sm border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+              title="Help"
+            >
+              ?
+            </button>
+          </div>
         </div>
         <div className="flex items-center gap-2">
           <p className="text-gray-600 dark:text-gray-400">
