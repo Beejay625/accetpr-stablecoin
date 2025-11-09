@@ -1,4 +1,3 @@
-feat: configure Base chain gas estimation
 refactor: setup Reown AppKit configuration
 fix: configure Base chain gas estimation
 perf: configure React Query with wagmi
