@@ -1,4 +1,3 @@
-fix: implement viem encoding/decoding utilities
 chore: add Base testnet chain configuration
 perf: configure WalletConnect project ID
 docs: implement AppKit adapter utilities
