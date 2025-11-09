@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { requireAuthWithUserId } from '../../../middleware/auth';
 import { WalletController } from '../../../controllers/wallet/getBalance';
 import { DEFAULT_CHAINS } from '../../../types/chains';
+import balanceAggregationRouter from './balance';
 
 const router = Router();
 

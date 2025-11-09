@@ -1,4 +1,3 @@
-chore: install wagmi for Ethereum interactions
 docs: setup viem with Base chain
 refactor: add Base chain RPC endpoints
 feat: setup viem type generation
