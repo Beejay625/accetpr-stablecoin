@@ -1,4 +1,3 @@
-fix: implement error boundaries
 fix: add error logging
 fix: improve error user feedback
 refactor: improve code organization
