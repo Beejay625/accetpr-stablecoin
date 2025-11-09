@@ -192,6 +192,10 @@ Production-ready Express.js backend with TypeScript, Clerk authentication, Block
 - **Portfolio Overview**: Multi-chain portfolio view with distribution charts
 - **Notification Center**: Centralized notification management with unread counts
 - **Tab Navigation**: Dashboard, Address Book, Templates, Portfolio tabs
+- **Price Tracking**: Real-time token prices with 24h change display
+- **Keyboard Shortcuts**: Power user shortcuts for common actions
+- **Transaction Notes**: Add notes to transactions for reference
+- **Backup & Restore**: Export/import all user data
 
 ### Reown AppKit Integration
 
