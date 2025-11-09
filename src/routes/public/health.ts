@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { checkDatabaseHealth } from '../../db/pool';
+import { PublicController } from '../../controllers/test/publicController';
 
-const router = Router();
+export const healthRouter = Router();
 
 /**
  * @swagger
@@ -28,9 +28,6 @@ const router = Router();
  *                     status:
  *                       type: string
  */
-router.get('/', async (_req, res) => {
-  const db = await checkDatabaseHealth();
-  res.status(200).json({ ok: true, uptime: process.uptime(), db });
-});
+healthRouter.get('/', PublicController.healthCheck);
 
-export default router;
+export default healthRouter;

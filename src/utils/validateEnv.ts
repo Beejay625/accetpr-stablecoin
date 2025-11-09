@@ -14,11 +14,11 @@ export function assertRequiredEnvVars(requiredKeys: string[]): void {
 
 export function validateEnvForStartup(): void {
   const required: string[] = ['CLERK_SECRET_KEY'];
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env['NODE_ENV'] === 'production') {
     required.push('JWT_SECRET');
   }
   // Optional: require DB URL if explicitly requested
-  if (process.env.REQUIRE_DATABASE === 'true') {
+  if (process.env['REQUIRE_DATABASE'] === 'true') {
     required.push('DATABASE_URL');
   }
   if (required.length > 0) {

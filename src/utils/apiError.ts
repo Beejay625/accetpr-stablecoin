@@ -1,19 +1,6 @@
 import { Response } from 'express';
 
 /**
- * Standard API error response structure
- */
-export interface ApiErrorResponse {
-  success: false;
-  message: string;
-  error: {
-    code: string;
-    details?: any;
-  };
-  timestamp: string;
-}
-
-/**
  * Error response helper - Express handles status codes
  * Uses existing HTTP status standard
  */
@@ -23,13 +10,13 @@ export class ApiError {
    * Express will handle the status code
    */
   static error(
-    res: Response, 
-    message: string, 
-    statusCode = 500, 
-    errorCode?: string, 
+    res: Response,
+    message: string,
+    statusCode: number = 500,
+    errorCode?: string,
     details?: any
-  ): Response<any, Record<string, any>> {
-    const response: ApiErrorResponse = {
+  ): Response {
+    const response = {
       success: false,
       message,
       error: {
@@ -38,14 +25,13 @@ export class ApiError {
       },
       timestamp: new Date().toISOString(),
     };
-    
     return res.status(statusCode).json(response);
   }
 
   /**
    * Handle Clerk-specific errors
    */
-  static clerkError(res: Response, error: any): Response<any, Record<string, any>> {
+  static clerkError(res: Response, error: any): Response {
     if (error.status === 401) {
       return this.error(res, 'Invalid authentication token', 401, 'INVALID_TOKEN', {
         clerkError: error.message || 'Unknown Clerk error',
@@ -62,7 +48,7 @@ export class ApiError {
         clerkStatus: error.status,
       });
     } else {
-      return this.error(res, 'Authentication service error', 500, 'CLERKErrorMessage', {
+      return this.error(res, 'Authentication service error', 500, 'CLERK_ERROR', {
         clerkError: error.message || 'Unknown Clerk error',
         clerkStatus: error.status,
       });
@@ -72,7 +58,7 @@ export class ApiError {
   /**
    * Handle validation errors (400 Bad Request)
    */
-  static validation(res: Response, message: string, validationErrors?: any[]): Response<any, Record<string, any>> {
+  static validation(res: Response, message: string, validationErrors?: any): Response {
     return this.error(res, message, 400, 'VALIDATION_ERROR', {
       validationErrors,
     });
@@ -81,35 +67,35 @@ export class ApiError {
   /**
    * Handle unauthorized errors (401 Unauthorized)
    */
-  static unauthorized(res: Response, message: string): Response<any, Record<string, any>> {
+  static unauthorized(res: Response, message: string): Response {
     return this.error(res, message, 401, 'UNAUTHORIZED');
   }
 
   /**
    * Handle forbidden errors (403 Forbidden)
    */
-  static forbidden(res: Response, message: string): Response<any, Record<string, any>> {
+  static forbidden(res: Response, message: string): Response {
     return this.error(res, message, 403, 'FORBIDDEN');
   }
 
   /**
    * Handle not found errors (404 Not Found)
    */
-  static notFound(res: Response, message: string): Response<any, Record<string, any>> {
+  static notFound(res: Response, message: string): Response {
     return this.error(res, message, 404, 'NOT_FOUND');
   }
 
   /**
    * Handle conflict errors (409 Conflict)
    */
-  static conflict(res: Response, message: string): Response<any, Record<string, any>> {
+  static conflict(res: Response, message: string): Response {
     return this.error(res, message, 409, 'CONFLICT');
   }
 
   /**
    * Handle database errors (500 Internal Server Error)
    */
-  static database(res: Response, error: any): Response<any, Record<string, any>> {
+  static database(res: Response, error: any): Response {
     return this.error(res, 'Database operation failed', 500, 'DATABASE_ERROR', {
       error: error.message,
     });
@@ -118,12 +104,10 @@ export class ApiError {
   /**
    * Handle unexpected server errors (500 Internal Server Error)
    */
-  static server(res: Response, error: any): Response<any, Record<string, any>> {
+  static server(res: Response, error: any): Response {
     const errorId = `ERR_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    
     // Log the full error but don't expose it to client
     console.error(`[${errorId}] Server Error:`, error);
-    
     return this.error(res, 'Internal server error', 500, 'INTERNAL_ERROR', {
       errorId,
       message: 'An unexpected error occurred. Please try again later.',
@@ -133,7 +117,7 @@ export class ApiError {
   /**
    * Smart error handler - automatically determines error type
    */
-  static handle(res: Response, error: any): Response<any, Record<string, any>> {
+  static handle(res: Response, error: any): Response {
     // Define error handlers
     const handlers = [
       {
@@ -156,7 +140,6 @@ export class ApiError {
 
     // Find and execute the first matching handler
     const matchedHandler = handlers.find(h => h.condition(error));
-    
     if (matchedHandler) {
       return matchedHandler.handler();
     } else {
@@ -169,7 +152,7 @@ export class ApiError {
    * Get default error code based on HTTP status code
    * Uses standard HTTP status codes
    */
-  private static getDefaultErrorCode(statusCode: number): string {
+  static getDefaultErrorCode(statusCode: number): string {
     const codes: Record<number, string> = {
       400: 'BAD_REQUEST',
       401: 'UNAUTHORIZED',
@@ -186,7 +169,6 @@ export class ApiError {
       503: 'SERVICE_UNAVAILABLE',
       504: 'GATEWAY_TIMEOUT',
     };
-
     return codes[statusCode] || 'UNKNOWN_ERROR';
   }
 }

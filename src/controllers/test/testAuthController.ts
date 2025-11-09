@@ -1,7 +1,7 @@
 import { Response } from 'express';
-import { clerkClient } from '../middleware/auth';
-import { ApiSuccess } from '../utils/apiSuccess';
-import { ApiError } from '../utils/apiError';
+import { clerkClient } from '../../middleware/auth';
+import { ApiSuccess } from '../../utils/apiSuccess';
+import { ApiError } from '../../utils/apiError';
 
 /**
  * Test authentication controller

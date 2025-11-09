@@ -55,7 +55,7 @@ export const createClerkCORS = () => {
   // Parse CORS origins from environment variable
   const origins = env.CORS_ORIGIN === '*' 
     ? ['*'] 
-    : env.CORS_ORIGIN.split(',').map(origin => origin.trim());
+    : env.CORS_ORIGIN.split(',').map((origin: string) => origin.trim());
   
   // For wildcard origin, use default options without origin validation
   if (origins.includes('*')) {
