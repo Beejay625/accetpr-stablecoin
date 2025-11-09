@@ -1,4 +1,3 @@
-chore: implement viem transaction utilities
 chore: add React Query error handling
 test: add Base chain native token support
 feat: implement AppKit adapter state management
