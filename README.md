@@ -1087,6 +1087,31 @@ For detailed information about all newly implemented features, see:
 - **AddressBook**: Address management interface
 - **SecuritySettings**: Security configuration panel
 
+## 🆕 Latest Features Added
+
+### Transaction Management Enhancements
+- **Transaction Details Endpoint**: Get comprehensive details about any transaction including gas fees, block numbers, confirmations, and metadata
+- **Transaction Search**: Search transactions by hash, reference, sender/recipient addresses, or transaction ID with case-insensitive matching
+- **Transaction Export**: Export filtered transactions as CSV or JSON with customizable filename and date stamps
+
+### Wallet Management
+- **Wallet Addresses Listing**: View all wallet addresses across all chains in a single request
+- **Wallet Statistics**: Comprehensive cross-chain statistics including total balances, transaction counts, and recent activity
+
+### Security & Compliance
+- **Audit Logging System**: Complete audit trail for all sensitive operations
+  - Withdrawal operations (success/failure)
+  - Balance checks
+  - Transaction views
+  - Data exports
+  - Includes IP addresses, user agents, and timestamps
+
+### Enhanced Health Monitoring
+- **Comprehensive Health Checks**: Database, cache, and memory status with response times
+- **Service Status**: Detailed service health information for monitoring and alerting
+
+All new features are fully integrated with existing authentication, validation, and error handling systems.
+
 ## 🔗 Links
 
 - [Reown Dashboard](https://dashboard.reown.com)
