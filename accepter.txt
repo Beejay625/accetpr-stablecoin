@@ -1,4 +1,3 @@
-docs: implement WalletConnect error handling
 fix: configure Reown AppKit theme
 chore: setup React Query devtools
 perf: implement viem transaction utilities

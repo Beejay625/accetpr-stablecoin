@@ -1222,7 +1222,8 @@ ISC
 For detailed information about all newly implemented features, see:
 - [NEW_FEATURES.md](./NEW_FEATURES.md) - Initial feature set
 - [FEATURES_V2.md](./FEATURES_V2.md) - Advanced features (Multi-sig, Security, Address Book, etc.)
-- [FEATURES_V3.md](./FEATURES_V3.md) - Latest features (Templates, Scheduled Transactions, Portfolio, DEX, etc.)
+- [FEATURES_V3.md](./FEATURES_V3.md) - Transaction management (Templates, Scheduled Transactions, Portfolio, DEX, etc.)
+- [FEATURES_V4.md](./FEATURES_V4.md) - Advanced management & analytics (Export, Backup, Approvals, Analytics, RPC)
 
 ### Quick Feature Overview
 
