@@ -593,6 +593,19 @@ This project follows conventional commits:
 
 ISC
 
+## 📖 New Features Documentation
+
+For detailed information about all newly implemented features, see [NEW_FEATURES.md](./NEW_FEATURES.md)
+
+### Quick Feature Overview
+
+- **Smart Contract Utilities** (`frontend/lib/contracts.ts`): ERC20 token interactions
+- **Gas Optimization** (`frontend/lib/gas.ts`): Gas price estimation and strategies
+- **Transaction Queue** (`frontend/lib/transactionQueue.ts`): Batch processing system
+- **Analytics** (`frontend/lib/analytics.ts`): Event tracking and statistics
+- **Session Management** (`frontend/lib/walletSession.ts`): Wallet session persistence
+- **React Hooks** (`frontend/hooks/`): Custom hooks for easy integration
+
 ## 🔗 Links
 
 - [Reown Dashboard](https://dashboard.reown.com)
