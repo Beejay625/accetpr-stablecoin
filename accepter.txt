@@ -1,4 +1,3 @@
-feat: add transaction signature verification
 feat: implement rate limiting for transactions
 feat: add transaction amount validation
 feat: implement address whitelist/blacklist
