@@ -1,4 +1,3 @@
-perf: implement wagmi connector configuration
 fix: implement Base chain transaction signing
 feat: add AppKit adapter hooks
 fix: setup React Query provider
