@@ -1,4 +1,3 @@
-docs: setup AppKit adapter TypeScript types
 docs: implement WalletConnect QR code display
 test: configure wagmi with viem
 test: configure Reown AppKit metadata
