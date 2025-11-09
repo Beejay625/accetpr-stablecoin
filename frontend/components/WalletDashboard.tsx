@@ -38,9 +38,10 @@ export default function WalletDashboard() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [showQRCode, setShowQRCode] = useState(false)
-  const [selectedTab, setSelectedTab] = useState<'dashboard' | 'addressbook'>('dashboard')
+  const [selectedTab, setSelectedTab] = useState<'dashboard' | 'addressbook' | 'templates' | 'portfolio'>('dashboard')
   const [showSettings, setShowSettings] = useState(false)
   const [showHelp, setShowHelp] = useState(false)
+  const [selectedTemplate, setSelectedTemplate] = useState<any>(null)
 
   // Track wallet connection
   useEffect(() => {
