@@ -197,15 +197,22 @@ export default function TransactionsList({ chain, getToken }: TransactionsListPr
                       {tx.status}
                     </span>
                   </td>
-                  <td className="p-2 text-sm text-gray-500">
-                    {new Date(tx.transactionTime).toLocaleString()}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+                          <td className="p-2 text-sm text-gray-500">
+                            {new Date(tx.transactionTime).toLocaleString()}
+                          </td>
+                          <td className="p-2">
+                            {transactionNotes.getNote(tx.transactionId) && (
+                              <span className="text-xs text-blue-600" title="Has note">
+                                📝
+                              </span>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
 
       {displayTransactions.length > itemsPerPage && (
         <Pagination
