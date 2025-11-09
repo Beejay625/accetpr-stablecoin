@@ -1,4 +1,3 @@
-fix: add React Query optimistic updates
 fix: add Reown AppKit wallet connectors
 test: add Base chain transaction broadcasting
 perf: implement AppKit adapter state management
