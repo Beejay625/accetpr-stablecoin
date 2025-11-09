@@ -1,4 +1,3 @@
-chore: add WalletConnect mobile deep linking
 docs: setup viem type generation
 fix: add WalletConnect session management
 perf: implement WalletConnect QR code display
