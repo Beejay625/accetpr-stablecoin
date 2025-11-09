@@ -98,4 +98,8 @@ const router = Router();
  */
 router.get('/balance', requireAuthWithUserId, WalletController.getBalance);
 
+// Import balance aggregation route
+import balanceAggregationRouter from './balance';
+router.use('/', balanceAggregationRouter);
+
 export default router;
