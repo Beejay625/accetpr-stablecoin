@@ -1,4 +1,3 @@
-refactor: install @reown/appkit for wallet integration
 docs: setup viem with Base chain
 docs: configure Base mainnet chain for accetpr-stablecoin
 docs: integrate AppKit adapter with React Query
