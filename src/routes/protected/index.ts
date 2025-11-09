@@ -86,4 +86,19 @@ protectedRouter.use('/whitelist', whitelistRouter);
 // Transaction limits endpoints
 protectedRouter.use('/limits', limitsRouter);
 
+// Transaction templates endpoints
+protectedRouter.use('/templates', templatesRouter);
+
+// Recurring payments endpoints
+protectedRouter.use('/recurring-payments', recurringPaymentsRouter);
+
+// API keys endpoints
+protectedRouter.use('/api-keys', apiKeysRouter);
+
+// Unsigned transactions endpoints
+protectedRouter.use('/transactions/unsigned', unsignedTransactionsRouter);
+
+// Portfolio analytics endpoints
+protectedRouter.use('/portfolio', portfolioRouter);
+
 export default protectedRouter;
