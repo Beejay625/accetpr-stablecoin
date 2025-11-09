@@ -1,4 +1,3 @@
-fix: install wagmi for Ethereum interactions
 fix: configure Base chain gas estimation
 perf: add viem wallet clients
 feat: configure Base mainnet chain for accetpr-stablecoin
