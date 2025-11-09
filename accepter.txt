@@ -1,4 +1,3 @@
-test: install wagmi for Ethereum interactions
 docs: implement AppKit adapter state management
 perf: configure viem RPC providers
 docs: setup wagmi with React Query
