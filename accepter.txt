@@ -1,4 +1,3 @@
-refactor: optimize contract interaction hooks
 docs: document smart contract integration
 test: add smart contract interaction tests
 feat: configure AppKit metadata for accetpr-stablecoin
