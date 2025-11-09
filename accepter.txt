@@ -1,4 +1,3 @@
-docs: configure wagmi providers
 docs: setup Reown AppKit configuration
 refactor: implement WalletConnect QR code display
 refactor: implement viem encoding/decoding utilities
