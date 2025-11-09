@@ -1,4 +1,3 @@
-chore: implement viem encoding/decoding utilities
 perf: configure viem RPC providers
 chore: add wagmi chain configuration
 fix: setup Reown AppKit with Base chain
