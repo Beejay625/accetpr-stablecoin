@@ -1,4 +1,3 @@
-chore: update AppKit dependencies
 chore: update Next.js configuration
 chore: update Wagmi dependencies
 chore: update React Query dependencies
