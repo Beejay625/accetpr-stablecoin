@@ -1,4 +1,3 @@
-refactor: integrate AppKit adapter with React Query
 refactor: configure Base mainnet chain for accetpr-stablecoin
 feat: implement AppKit adapter state management
 feat: configure Base mainnet chain for accetpr-stablecoin

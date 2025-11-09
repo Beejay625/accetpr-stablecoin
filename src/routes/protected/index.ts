@@ -18,6 +18,11 @@ import transactionMonitoringRouter from './transaction-monitoring';
 import gasRouter from './gas';
 import whitelistRouter from './whitelist';
 import limitsRouter from './limits';
+import templatesRouter from './templates';
+import recurringPaymentsRouter from './recurring-payments';
+import apiKeysRouter from './api-keys';
+import unsignedTransactionsRouter from './unsigned-transactions';
+import portfolioRouter from './portfolio';
 
 export const protectedRouter = Router();
 
