@@ -725,12 +725,31 @@ For detailed information about all newly implemented features, see [NEW_FEATURES
 
 ### Quick Feature Overview
 
+#### Core Libraries
 - **Smart Contract Utilities** (`frontend/lib/contracts.ts`): ERC20 token interactions
 - **Gas Optimization** (`frontend/lib/gas.ts`): Gas price estimation and strategies
 - **Transaction Queue** (`frontend/lib/transactionQueue.ts`): Batch processing system
 - **Analytics** (`frontend/lib/analytics.ts`): Event tracking and statistics
 - **Session Management** (`frontend/lib/walletSession.ts`): Wallet session persistence
-- **React Hooks** (`frontend/hooks/`): Custom hooks for easy integration
+
+#### Advanced Features
+- **Multi-Signature** (`frontend/lib/multisig.ts`): Multi-sig wallet management
+- **Address Book** (`frontend/lib/addressBook.ts`): Address management and whitelisting
+- **Transaction Simulator** (`frontend/lib/transactionSimulator.ts`): Transaction preview and validation
+- **Security Manager** (`frontend/lib/security.ts`): Security policies and limits
+- **Network Health** (`frontend/lib/networkHealth.ts`): Network monitoring and status
+
+#### React Hooks
+- **useSmartContract** (`frontend/hooks/useSmartContract.ts`): Contract interaction hooks
+- **useGasOptimization** (`frontend/hooks/useGasOptimization.ts`): Gas optimization hooks
+
+#### UI Components
+- **GasOptimizer**: Gas price optimization interface
+- **AnalyticsDashboard**: Real-time analytics display
+- **MultisigProposal**: Multi-sig proposal management
+- **TransactionSimulator**: Transaction preview component
+- **AddressBook**: Address management interface
+- **SecuritySettings**: Security configuration panel
 
 ## 🔗 Links
 
