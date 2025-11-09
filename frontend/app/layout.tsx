@@ -25,7 +25,9 @@ export default async function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <ContextProvider cookies={cookies}>{children}</ContextProvider>
+          <ContextProvider cookies={cookies}>
+            <ToastProvider>{children}</ToastProvider>
+          </ContextProvider>
         </body>
       </html>
     </ClerkProvider>
