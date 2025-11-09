@@ -1,4 +1,3 @@
-docs: add WalletConnect session management
 refactor: setup Base chain network switching
 perf: configure Base chain gas estimation
 chore: configure React Query with wagmi
