@@ -1,4 +1,3 @@
-docs: configure React Query retry logic
 chore: add viem contract interaction helpers
 feat: implement viem encoding/decoding utilities
 test: setup wagmi config with Base chain
