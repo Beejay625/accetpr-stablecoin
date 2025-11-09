@@ -66,7 +66,18 @@ export default function WalletDashboard() {
           <p className="text-gray-600 dark:text-gray-400">
             Connected: {address ? formatAddress(address) : 'N/A'}
           </p>
-          {address && <CopyButton text={address} label="Copy Address" />}
+          {address && (
+            <>
+              <CopyButton text={address} label="Copy Address" />
+              <button
+                onClick={() => setShowQRCode(true)}
+                className="px-2 py-1 text-xs border rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+                title="Show QR Code"
+              >
+                QR
+              </button>
+            </>
+          )}
         </div>
         <p className="text-sm text-gray-500 dark:text-gray-500">
           Chain: {selectedChain}
