@@ -1,4 +1,3 @@
-refactor: setup wagmi config with Base chain
 feat: install @reown/appkit for wallet integration
 chore: implement WalletConnect error handling
 fix: setup viem with Base chain
