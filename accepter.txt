@@ -1,4 +1,3 @@
-chore: implement AppKit adapter state management
 feat: add WalletConnect event listeners
 refactor: add Base chain native token support
 refactor: configure WalletConnect metadata
