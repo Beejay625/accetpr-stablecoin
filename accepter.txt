@@ -1,4 +1,3 @@
-docs: add Base chain native token support
 test: configure wagmi providers
 perf: configure wagmi providers
 docs: configure React Query retry logic
