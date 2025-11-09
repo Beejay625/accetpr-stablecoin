@@ -1,4 +1,3 @@
-refactor: install @reown/appkit-adapter-wagmi
 feat: add Reown AppKit wallet connectors
 feat: add AppKit adapter error handling
 chore: setup wagmi config with Base chain
