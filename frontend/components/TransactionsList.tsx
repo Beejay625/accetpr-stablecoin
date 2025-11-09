@@ -8,6 +8,7 @@ import CopyButton from './CopyButton'
 import TransactionFilter from './TransactionFilter'
 import ExportButton from './ExportButton'
 import Pagination from './Pagination'
+import { transactionNotes } from '@/lib/transactionNotes'
 
 interface TransactionsListProps {
   chain: string
