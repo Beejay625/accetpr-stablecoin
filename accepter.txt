@@ -1,4 +1,3 @@
-feat: add gas price oracle integration
 feat: implement gas price caching
 feat: add gas optimization strategies
 feat: implement EIP-1559 gas fee handling
