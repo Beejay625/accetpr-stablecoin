@@ -1094,6 +1094,15 @@ All requests include Clerk authentication tokens in the Authorization header.
 - **useWalletSession**: Manage wallet sessions
 - **useNotifications**: Manage notifications and browser alerts
 
+### Additional Frontend Features
+
+- **Price Tracking**: Real-time token prices with 24h change indicators
+- **Keyboard Shortcuts**: Power user shortcuts (Ctrl+K, Ctrl+R, Ctrl+N, etc.)
+- **Transaction Notes**: Add, edit, and view notes on transactions
+- **Backup & Restore**: Export/import all user data (addresses, templates, notes, settings)
+- **Enhanced Settings**: Tabbed settings panel with backup/restore and shortcuts
+- **Price Display**: Token prices shown in balance display and throughout UI
+
 ## 🔒 Security
 
 - **Authentication**: Clerk-based JWT authentication
