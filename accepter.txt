@@ -1,4 +1,3 @@
-refactor: optimize ContextProvider
 refactor: simplify network configuration
 refactor: improve error handling
 chore: update AppKit dependencies

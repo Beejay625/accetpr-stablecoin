@@ -62,6 +62,11 @@ Production-ready Express.js backend with TypeScript, Clerk authentication, Block
 - **API Key Management**: Generate and manage API keys for programmatic access
 - **Transaction Signing**: Prepare transactions for off-chain signing workflow
 - **Portfolio Analytics**: Advanced portfolio tracking with metrics and historical data
+- **Transaction Batch Execution**: Execute multiple transactions atomically with rollback support
+- **Transaction Scheduling**: Schedule one-time transactions for future execution dates
+- **Transaction Validation**: Pre-transaction validation with balance checks, gas estimation, and risk assessment
+- **Enhanced Analytics**: Advanced analytics with comprehensive metrics, chain/asset breakdowns, and time-based insights
+- **Gas Optimization Recommendations**: Smart gas price recommendations based on network conditions and urgency
 
 #### API Features
 - **Wallet Operations**:
