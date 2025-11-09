@@ -1,4 +1,3 @@
-refactor: implement AppKit adapter state management
 docs: implement WalletConnect error handling
 refactor: add AppKit adapter error handling
 chore: implement AppKit adapter utilities
