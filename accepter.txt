@@ -1,4 +1,3 @@
-test: configure React Query retry logic
 fix: install @reown/appkit for wallet integration
 chore: add React Query hooks for wallet data
 refactor: add Base testnet chain configuration
