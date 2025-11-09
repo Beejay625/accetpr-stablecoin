@@ -133,19 +133,27 @@ export default function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
               />
               <span>Enable notifications</span>
             </label>
+            </div>
+          )}
+
+          {activeTab === 'backup' && <BackupRestorePanel />}
+
+          <div className="mt-6 flex justify-end">
+            <button
+              onClick={onClose}
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            >
+              Close
+            </button>
           </div>
         </div>
-
-        <div className="mt-6 flex justify-end">
-          <button
-            onClick={onClose}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-          >
-            Close
-          </button>
-        </div>
       </div>
-    </div>
+
+      <KeyboardShortcutsModal
+        isOpen={showShortcuts}
+        onClose={() => setShowShortcuts(false)}
+      />
+    </>
   )
 }
 
