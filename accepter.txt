@@ -1,4 +1,3 @@
-chore: setup wagmi config with Base chain
 chore: implement AppKit adapter state management
 fix: add Base testnet chain configuration
 test: configure AppKit adapter for Base chain
