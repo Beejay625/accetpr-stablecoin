@@ -1,4 +1,3 @@
-refactor: add wagmi hooks for transaction sending
 perf: add wagmi hooks for transaction sending
 chore: implement viem encoding/decoding utilities
 docs: configure WalletConnect metadata
