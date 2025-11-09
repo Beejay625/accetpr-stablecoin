@@ -1800,6 +1800,45 @@ For detailed information about all newly implemented features, see:
 - **Confirmation Time**: Estimate transaction confirmation time based on priority
 - **Gas Optimization**: Support for EIP-1559 fee structure
 
+### Transaction Notes & Tags System
+- **Transaction Notes**: Add custom notes to any transaction for better tracking
+- **Tag Management**: Create and manage custom tags with colors
+- **Tag Organization**: Organize transactions by tags for easy filtering
+- **Note Search**: Search transactions by tags or notes
+- **Tag Statistics**: Track tag usage and transaction counts
+
+### Transaction Monitoring Service
+- **Automatic Monitoring**: Monitor pending transactions with configurable intervals
+- **Status Tracking**: Track transaction status (pending, confirmed, failed)
+- **Confirmation Alerts**: Get notified when transactions are confirmed
+- **Failure Alerts**: Receive alerts when transactions fail
+- **Stuck Detection**: Detect and alert on stuck transactions
+- **Customizable Settings**: Configure check intervals, required confirmations, and alert preferences
+
+### Gas Price Oracle
+- **Real-Time Prices**: Get current gas prices for all supported chains
+- **Price History**: Access historical gas price data
+- **Price Alerts**: Set alerts for when gas prices go above or below thresholds
+- **Multi-Chain Support**: Track gas prices across multiple chains
+- **Alert Cooldown**: Prevent alert spam with configurable cooldown periods
+
+### Address Whitelist Management
+- **Whitelist Management**: Add, remove, and manage whitelisted addresses
+- **Chain-Specific**: Whitelist addresses for specific chains
+- **Usage Tracking**: Track how often whitelisted addresses are used
+- **Whitelist-Only Mode**: Enable whitelist-only mode for enhanced security
+- **Address Labels**: Label whitelisted addresses for easy identification
+- **Maximum Limits**: Set maximum number of whitelisted addresses
+
+### Transaction Limits System
+- **Daily Limits**: Set daily transaction amount and count limits
+- **Weekly Limits**: Configure weekly transaction limits
+- **Monthly Limits**: Set monthly transaction restrictions
+- **Per-Transaction Limits**: Limit individual transaction amounts
+- **Usage Tracking**: Real-time tracking of limit usage
+- **Automatic Reset**: Limits automatically reset at period boundaries
+- **Limit Checking**: Pre-transaction limit validation
+
 ### Transaction Management Enhancements
 - **Transaction Details Endpoint**: Get comprehensive details about any transaction including gas fees, block numbers, confirmations, and metadata
 - **Transaction Search**: Search transactions by hash, reference, sender/recipient addresses, or transaction ID with case-insensitive matching
