@@ -1,4 +1,3 @@
-docs: add Base chain RPC endpoints
 chore: add wagmi chain configuration
 feat: add AppKit adapter error handling
 fix: install viem for Ethereum utilities
