@@ -1,4 +1,3 @@
-test: add Next.js AppKit integration tests
 feat: create AppKit ContextProvider component
 feat: setup QueryClientProvider in ContextProvider
 feat: integrate WagmiProvider with ContextProvider
