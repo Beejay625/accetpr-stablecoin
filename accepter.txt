@@ -1,4 +1,3 @@
-perf: setup wagmi with React Query
 fix: add React Query error handling
 feat: implement WalletConnect QR code display
 test: implement WalletConnect error handling
