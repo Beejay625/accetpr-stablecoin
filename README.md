@@ -194,11 +194,15 @@ This project uses **Reown AppKit** (formerly WalletConnect) for seamless wallet 
 - **Input Sanitization**: Protection against injection attacks
 
 #### Transaction Features
-- **Transaction Status Tracking**: Real-time status updates (PENDING, CONFIRMED, FAILED, CANCELLED)
+- **Transaction Status Tracking**: Real-time status updates (PENDING, SUCCESS, FAILED, CANCELLED)
 - **Transaction History**: Complete transaction history with pagination support
+- **Transaction Filtering**: Filter by status, asset, date range, amount range with query parameters
+- **Transaction Statistics**: Get statistics on filtered transactions (total, by status, by asset, totals)
+- **Transaction Export**: Export transactions as CSV or JSON format
 - **Transaction Details**: Detailed transaction information including hash, amount, chain, reference
 - **Multi-Asset Transactions**: Support for transactions involving multiple assets
 - **Transaction Metadata**: Custom metadata attached to transactions
+- **Pagination Support**: Limit and offset parameters for large transaction lists
 
 #### Repository Pattern
 - **Cached Repositories**: Performance-optimized repositories with caching layer
