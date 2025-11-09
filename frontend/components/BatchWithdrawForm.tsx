@@ -19,6 +19,7 @@ interface BatchWithdrawFormProps {
 }
 
 export default function BatchWithdrawForm({ chain, getToken }: BatchWithdrawFormProps) {
+  const { showToast } = useToast()
   const [assets, setAssets] = useState<WithdrawAsset[]>([
     { chain, asset: 'USDC', amount: '', address: '' },
   ])
