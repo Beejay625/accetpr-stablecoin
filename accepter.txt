@@ -1,4 +1,3 @@
-fix: add WalletConnect mobile deep linking
 docs: configure AppKit adapter providers
 chore: add AppKit adapter hooks
 refactor: add wagmi chain configuration
